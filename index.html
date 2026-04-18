@@ -1143,6 +1143,34 @@
     .cp-action.js-card:not(.open) .cp-orders,
     .cp-action.js-card:not(.open) .cp-evidence-row { display: none; }
 
+    /* ─── Top 3 work-area variant ─── bigger, always expanded, work-dense ─── */
+    .cp-action.js-card.work { margin-bottom: 22px; border-width: 1px; }
+    .cp-action.js-card.work .cp-action-head { grid-template-columns: 36px 1fr auto; gap: 18px; padding: 24px 28px 20px; align-items: baseline; }
+    .cp-action.js-card.work .cp-action-rank { font-size: 15px; padding-top: 3px; color: var(--text-secondary); }
+    .cp-action.js-card.work .cp-action-title { font-size: 20px; line-height: 1.32; letter-spacing: -0.35px; margin-bottom: 6px; font-weight: 510; }
+    .cp-action.js-card.work .cp-action-meta { font-size: 14px; }
+    .cp-action.js-card.work .cp-action-meta-row { gap: 14px; margin-top: 6px; }
+    .cp-action.js-card.work .cp-action-headline { cursor: default; }
+    .cp-action.js-card.work .cp-action-actions { gap: 8px; }
+    .cp-action.js-card.work .cp-action-actions .cp-btn { padding: 9px 16px; font-size: 14px; }
+    .cp-action.js-card.work .cp-action-body { padding: 18px 28px 12px; }
+    .cp-action.js-card.work .cp-row { padding: 16px 0; grid-template-columns: 72px 1fr; gap: 24px; }
+    .cp-action.js-card.work .cp-row-do,
+    .cp-action.js-card.work .cp-row-why,
+    .cp-action.js-card.work .cp-row-goal { font-size: 16px; line-height: 1.55; }
+    .cp-action.js-card.work .cp-row-lbl { font-size: 12px; }
+    .cp-action.js-card.work .cp-orders { padding: 16px 28px 20px; gap: 8px; }
+    .cp-action.js-card.work .cp-order-btn { font-size: 14px; padding: 8px 14px; }
+    .cp-action.js-card.work .cp-evidence-row { padding: 14px 28px 18px; font-size: 12px; }
+
+    @media (max-width: 900px) {
+      .cp-action.js-card.work .cp-action-head { grid-template-columns: 28px 1fr; gap: 14px; padding: 20px 18px; }
+      .cp-action.js-card.work .cp-action-actions { grid-column: 2; margin-top: 8px; }
+      .cp-action.js-card.work .cp-action-body,
+      .cp-action.js-card.work .cp-orders,
+      .cp-action.js-card.work .cp-evidence-row { padding-left: 18px; padding-right: 18px; }
+    }
+
     /* Evidence row inside expanded body */
     .cp-evidence-row { display: flex; align-items: center; flex-wrap: wrap; padding: 12px 22px 14px; border-top: 1px dashed var(--border-subtle); font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
     .cp-evidence-lbl { text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted); font-weight: 500; margin-right: 10px; }
@@ -6752,7 +6780,7 @@ if (sleepBars) {
     if (!root) return;
     root.innerHTML = '';
     state.items.slice(0, 3).forEach((item, i) => {
-      root.appendChild(buildCard(item, i, { readonly: true }));
+      root.appendChild(buildCard(item, i, { readonly: true, work: true }));
     });
   }
 
@@ -6788,8 +6816,10 @@ if (sleepBars) {
   function buildCard(item, index, opts){
     opts = opts || {};
     const readonly = !!opts.readonly;
+    const work = !!opts.work;          // Top 3 work-area mode: bigger, always expanded, triage actions visible
     const el = document.createElement('div');
-    el.className = 'cp-action js-card' + (state.expanded === item.id ? ' open' : '');
+    const alwaysOpen = work || state.expanded === item.id;
+    el.className = 'cp-action js-card' + (alwaysOpen ? ' open' : '') + (work ? ' work' : '');
     el.dataset.id = item.id;
     el.dataset.index = index;
 
@@ -6797,20 +6827,22 @@ if (sleepBars) {
     const head = document.createElement('div');
     head.className = 'cp-action-head';
 
-    // grip (hidden if readonly to preserve layout alignment)
-    const gripBtn = document.createElement('button');
-    gripBtn.type = 'button';
-    gripBtn.className = 'cp-grip';
-    gripBtn.setAttribute('aria-label', 'Reorder: ' + item.title);
-    gripBtn.innerHTML = gripSvg();
-    if (readonly) {
-      gripBtn.setAttribute('aria-hidden', 'true');
-      gripBtn.tabIndex = -1;
-    } else {
-      gripBtn.addEventListener('pointerdown', onGripPointerDown);
-      gripBtn.addEventListener('keydown', onGripKeydown);
+    // grip (hidden in work mode; shown on All tab for reorder)
+    if (!work) {
+      const gripBtn = document.createElement('button');
+      gripBtn.type = 'button';
+      gripBtn.className = 'cp-grip';
+      gripBtn.setAttribute('aria-label', 'Reorder: ' + item.title);
+      gripBtn.innerHTML = gripSvg();
+      if (readonly) {
+        gripBtn.setAttribute('aria-hidden', 'true');
+        gripBtn.tabIndex = -1;
+      } else {
+        gripBtn.addEventListener('pointerdown', onGripPointerDown);
+        gripBtn.addEventListener('keydown', onGripKeydown);
+      }
+      head.appendChild(gripBtn);
     }
-    head.appendChild(gripBtn);
 
     // rank
     const rank = document.createElement('div');
@@ -6841,7 +6873,9 @@ if (sleepBars) {
     metaEl.className = 'cp-action-meta';
     metaEl.textContent = item.severity + ' · ' + item.timing;
     metaRow.appendChild(metaEl);
-    if (!readonly) {
+    // Ask chip: on the All tab (sort + understand) AND on the Top 3 work cards (deliberation).
+    // Skipped only when explicitly readonly without work (e.g. a future static preview).
+    if (!readonly || work) {
       const askChip = document.createElement('button');
       askChip.type = 'button';
       askChip.className = 'cp-ask-chip';
@@ -6854,27 +6888,31 @@ if (sleepBars) {
       metaRow.appendChild(askChip);
     }
     headline.appendChild(metaRow);
-    // click headline to toggle expand
-    headline.addEventListener('click', (e) => {
-      // ignore clicks that originated from the ask chip
-      if (e.target.closest('.cp-ask-chip')) return;
-      toggleExpand(item.id);
-    });
+    // click headline to toggle expand — NOT on work cards (always expanded)
+    if (!work) {
+      headline.addEventListener('click', (e) => {
+        if (e.target.closest('.cp-ask-chip')) return;
+        toggleExpand(item.id);
+      });
+    }
     head.appendChild(headline);
 
-    // actions
-    const actions = document.createElement('div');
-    actions.className = 'cp-action-actions';
-    actions.innerHTML = '<button class="cp-btn cp-btn-primary">Accept</button><button class="cp-btn">Modify</button><button class="cp-btn">Defer</button>';
-    // caret toggle
-    const caret = document.createElement('button');
-    caret.type = 'button';
-    caret.className = 'cp-caret' + (state.expanded === item.id ? ' open' : '');
-    caret.setAttribute('aria-label', state.expanded === item.id ? 'Collapse' : 'Expand');
-    caret.innerHTML = caretSvg();
-    caret.addEventListener('click', (e) => { e.stopPropagation(); toggleExpand(item.id); });
-    actions.appendChild(caret);
-    head.appendChild(actions);
+    // actions: only in work mode (Top 3). All tab is for sort + understand, not commit.
+    if (work) {
+      const actions = document.createElement('div');
+      actions.className = 'cp-action-actions';
+      actions.innerHTML = '<button class="cp-btn cp-btn-primary">Accept</button><button class="cp-btn">Modify</button><button class="cp-btn">Defer</button>';
+      head.appendChild(actions);
+    } else {
+      // caret: only non-work rows toggle expand (work rows are always expanded)
+      const caret = document.createElement('button');
+      caret.type = 'button';
+      caret.className = 'cp-caret' + (state.expanded === item.id ? ' open' : '');
+      caret.setAttribute('aria-label', state.expanded === item.id ? 'Collapse' : 'Expand');
+      caret.innerHTML = caretSvg();
+      caret.addEventListener('click', (e) => { e.stopPropagation(); toggleExpand(item.id); });
+      head.appendChild(caret);
+    }
 
     el.appendChild(head);
 
