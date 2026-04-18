@@ -1196,9 +1196,21 @@
     .cp-add-form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); }
 
     /* === Ask pane (right-docked, flex sibling) === */
-    .cp-ask-pane { flex: 0 0 0; width: 0; overflow: hidden; background: var(--card); border-left: 1px solid var(--border-subtle); transition: flex-basis 200ms ease, width 200ms ease; display: flex; flex-direction: column; }
-    .cp-ask-pane.open { flex: 0 0 400px; width: 400px; }
-    .cp-ask-pane-inner { width: 400px; display: flex; flex-direction: column; height: 100%; min-height: calc(100vh - 120px); }
+    /* Ask pane — fixed to right edge, overlays at body level, works on every section */
+    .cp-ask-pane { position: fixed; top: 0; right: 0; bottom: 0; width: 0; overflow: hidden; background: var(--card); border-left: 1px solid var(--border-subtle); transition: width 200ms ease, box-shadow 200ms ease; display: flex; flex-direction: column; z-index: 60; }
+    .cp-ask-pane.open { width: 420px; box-shadow: -24px 0 48px -12px rgba(0,0,0,0.5); }
+    .cp-ask-pane-inner { width: 420px; display: flex; flex-direction: column; height: 100%; }
+
+    /* Ask rail — always-present CTA docked to right edge */
+    .cp-ask-rail { position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 55; display: inline-flex; align-items: center; gap: 6px; padding: 10px 10px 10px 14px; background: var(--card); border: 1px solid var(--border); border-right: none; border-radius: 10px 0 0 10px; color: var(--text-secondary); font: 500 12px/1 'Inter', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s, padding 0.15s; writing-mode: vertical-rl; }
+    .cp-ask-rail:hover { color: var(--text); border-color: var(--border-strong); background: var(--bg-surface); }
+    .cp-ask-rail svg { transform: rotate(-90deg); display: block; }
+    .cp-ask-rail[aria-hidden="true"] { opacity: 0; pointer-events: none; transform: translate(24px, -50%); }
+
+    @media (max-width: 900px) {
+      .cp-ask-pane.open { width: 100vw; }
+      .cp-ask-pane-inner { width: 100vw; }
+    }
     .cp-ask-head { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; }
     .cp-ask-head-title { font-size: 13px; font-weight: 510; color: var(--text); letter-spacing: -0.1px; flex: 1; display: flex; align-items: center; gap: 8px; }
     .cp-ask-turns { font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 400; }
@@ -1259,20 +1271,14 @@
     }
   </style>
 
-  <div class="cp-main-row">
-  <div class="cp-canvas">
   <div class="cp-wrap">
 
-    <!-- Plan header with plan-level Ask chip -->
+    <!-- Plan header -->
     <div class="cp-plan-header">
       <div class="cp-plan-header-left">
         <div class="cp-plan-header-eyebrow">Run #127 · Framework v2 · 2026-04-17</div>
         <div class="cp-plan-header-title">Care plan. 10 candidates. 3 sustained. 2 new. 0 reversed.</div>
       </div>
-      <button class="cp-ask-chip" id="cpAskPlan" aria-label="Ask about this care plan" style="padding:6px 10px; font-size:12px;">
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1 L7 5 L11 6 L7 7 L6 11 L5 7 L1 6 L5 5 Z"/></svg>
-        Ask about this plan
-      </button>
     </div>
 
     <!-- Care plan nav (underline highlighter) -->
@@ -1327,13 +1333,6 @@
     <div id="cpSrLive" class="cp-sr-live" aria-live="polite" aria-atomic="true"></div>
 
   </div><!-- /.cp-wrap -->
-  </div><!-- /.cp-canvas -->
-
-  <aside class="cp-ask-pane" id="cpAskPane" aria-label="Ask Meridian pane" aria-hidden="true">
-    <div class="cp-ask-pane-inner" id="cpAskPaneInner"></div>
-  </aside>
-
-  </div><!-- /.cp-main-row -->
 
   </div><!-- /section-plan -->
 
@@ -7454,11 +7453,70 @@ if (sleepBars) {
   // Expose minimal hook for switchCp
   window.CarePlan = {
     onTabSwitch: function(id){ /* re-render is idempotent */ renderTop3(); renderAll(); },
-    openPane, closePane, openCmdk
+    openPane, closePane, openCmdk, postToPane
   };
 })();
 </script>
 
+<!-- Global Ask rail + pane (persistent across all sections) -->
+<button class="cp-ask-rail" id="cpAskRail" aria-label="Open Ask Meridian">
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 1 L7 5 L11 6 L7 7 L6 11 L5 7 L1 6 L5 5 Z"/></svg>
+  <span>Ask Meridian</span>
+</button>
+<aside class="cp-ask-pane" id="cpAskPane" aria-label="Ask Meridian pane" aria-hidden="true">
+  <div class="cp-ask-pane-inner" id="cpAskPaneInner"></div>
+</aside>
+
+<script>
+(function(){
+  'use strict';
+  // Wire the rail to the Care Plan module's openPane. Seed query is derived from the current section.
+  function currentSection(){
+    if (document.getElementById('section-plan')     && document.getElementById('section-plan').style.display !== 'none'    ) return 'plan';
+    if (document.getElementById('section-analysis') && document.getElementById('section-analysis').style.display !== 'none') return 'analysis';
+    if (document.getElementById('section-data')     && document.getElementById('section-data').style.display !== 'none'    ) return 'data';
+    return 'plan';
+  }
+  const seedBySection = {
+    plan:     { query: 'Walk me through this care plan and flag anything missing.',                anchor: 'this care plan' },
+    analysis: { query: 'Summarize the highest risk driver across domains for this patient.',       anchor: 'risk models' },
+    data:     { query: 'What in the chart conflicts with or updates the current care plan?',       anchor: 'EMR chart' }
+  };
+  const rail = document.getElementById('cpAskRail');
+  function onRail(){
+    if (!window.CarePlan || !window.CarePlan.openPane) return;
+    const s = currentSection();
+    // If pane already open, just bring focus — no reseed.
+    const pane = document.getElementById('cpAskPane');
+    const alreadyOpen = pane && pane.classList.contains('open');
+    window.CarePlan.openPane();
+    if (!alreadyOpen) {
+      // Post the seed only if thread is empty (avoid stacking seeds on every open)
+      // CarePlan module exposes no thread getter; we rely on a DOM probe.
+      const body = document.getElementById('cpAskBody');
+      const isEmpty = !body || !!body.querySelector('.cp-ask-empty');
+      if (isEmpty && seedBySection[s]) {
+        // Defer so the pane DOM is rendered
+        setTimeout(() => {
+          if (window.CarePlan && typeof window.CarePlan.postToPane === 'function') {
+            window.CarePlan.postToPane(seedBySection[s].query, seedBySection[s].anchor);
+          }
+        }, 50);
+      }
+    }
+  }
+  if (rail) rail.addEventListener('click', onRail);
+
+  // Hide rail when the pane is open (pane has its own close X)
+  const observer = new MutationObserver(() => {
+    const pane = document.getElementById('cpAskPane');
+    if (!pane || !rail) return;
+    rail.setAttribute('aria-hidden', pane.classList.contains('open') ? 'true' : 'false');
+  });
+  const pane = document.getElementById('cpAskPane');
+  if (pane) observer.observe(pane, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
 
 </body>
 </html>
