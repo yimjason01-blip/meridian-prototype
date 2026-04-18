@@ -1201,11 +1201,13 @@
     .cp-ask-pane.open { width: 420px; box-shadow: -24px 0 48px -12px rgba(0,0,0,0.5); }
     .cp-ask-pane-inner { width: 420px; display: flex; flex-direction: column; height: 100%; }
 
-    /* Ask rail — always-present CTA docked to right edge */
-    .cp-ask-rail { position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 55; display: inline-flex; align-items: center; gap: 6px; padding: 10px 10px 10px 14px; background: var(--card); border: 1px solid var(--border); border-right: none; border-radius: 10px 0 0 10px; color: var(--text-secondary); font: 500 12px/1 'Inter', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s, padding 0.15s; writing-mode: vertical-rl; }
-    .cp-ask-rail:hover { color: var(--text); border-color: var(--border-strong); background: var(--bg-surface); }
-    .cp-ask-rail svg { transform: rotate(-90deg); display: block; }
-    .cp-ask-rail[aria-hidden="true"] { opacity: 0; pointer-events: none; transform: translate(24px, -50%); }
+    /* Ask launcher — icon-only FAB, bottom-right, inverted colors (stands out on dark canvas) */
+    .cp-ask-launcher { position: fixed; right: 20px; bottom: 20px; z-index: 55; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: var(--text); color: var(--bg); border: none; border-radius: 10px; padding: 0; cursor: pointer; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.55); transition: transform 200ms ease, opacity 200ms ease, box-shadow 200ms ease; }
+    .cp-ask-launcher:hover { transform: scale(1.04); box-shadow: 0 12px 32px -8px rgba(0,0,0,0.7); }
+    .cp-ask-launcher:active { transform: scale(0.97); }
+    .cp-ask-launcher:focus-visible { outline: 2px solid var(--border-strong); outline-offset: 2px; }
+    .cp-ask-launcher[aria-hidden="true"] { opacity: 0; pointer-events: none; transform: translateX(16px); }
+    .cp-ask-launcher svg { width: 18px; height: 18px; display: block; }
 
     @media (max-width: 900px) {
       .cp-ask-pane.open { width: 100vw; }
@@ -7458,10 +7460,9 @@ if (sleepBars) {
 })();
 </script>
 
-<!-- Global Ask rail + pane (persistent across all sections) -->
-<button class="cp-ask-rail" id="cpAskRail" aria-label="Open Ask Meridian">
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 1 L7 5 L11 6 L7 7 L6 11 L5 7 L1 6 L5 5 Z"/></svg>
-  <span>Ask Meridian</span>
+<!-- Global Ask launcher + pane (persistent across all sections) -->
+<button class="cp-ask-launcher" id="cpAskRail" aria-label="Open Ask Meridian">
+  <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0.75 L7.15 4.85 L11.25 6 L7.15 7.15 L6 11.25 L4.85 7.15 L0.75 6 L4.85 4.85 Z"/></svg>
 </button>
 <aside class="cp-ask-pane" id="cpAskPane" aria-label="Ask Meridian pane" aria-hidden="true">
   <div class="cp-ask-pane-inner" id="cpAskPaneInner"></div>
