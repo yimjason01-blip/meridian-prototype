@@ -1086,9 +1086,166 @@
       .cp-hero-left { border-right: none; border-bottom: 1px solid var(--border-subtle); }
       .cp-row { grid-template-columns: 1fr; gap: 4px; }
     }
+
+    /* === v3 additions: flex canvas + ask pane, drag, add form, ask primitives, cmdk === */
+
+    /* Flex row: canvas + pane as siblings. Pane resizes canvas, never overlays. */
+    .cp-main-row { display: flex; align-items: stretch; min-height: calc(100vh - 120px); }
+    .cp-canvas { flex: 1 1 auto; min-width: 0; }
+    .cp-canvas .cp-wrap { padding: 28px 32px 64px; max-width: 1280px; margin: 0 auto; }
+
+    /* Header bar above the nav — plan-level ask lives here */
+    .cp-plan-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 10px; margin-bottom: 14px; }
+    .cp-plan-header-left { display: flex; flex-direction: column; gap: 4px; }
+    .cp-plan-header-eyebrow { font-size: 11px; font-weight: 510; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-plan-header-title { font-size: 15px; font-weight: 510; color: var(--text); letter-spacing: -0.2px; }
+
+    /* Ask chip (card-level + plan-level) */
+    .cp-ask-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; font-size: 11px; font-weight: 500; color: var(--text-muted); background: transparent; border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-family: inherit; letter-spacing: 0.02em; line-height: 1.4; transition: color 0.15s, border-color 0.15s; }
+    .cp-ask-chip:hover { color: var(--text-secondary); border-color: var(--border-strong); }
+    .cp-ask-chip svg { width: 10px; height: 10px; display: block; }
+
+    /* Ask link (evidence-level) */
+    .cp-ask-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-muted); background: none; border: none; padding: 0; margin-left: 10px; cursor: pointer; font-family: inherit; }
+    .cp-ask-link:hover { color: var(--text-secondary); text-decoration: underline; }
+    .cp-ask-link svg { width: 10px; height: 10px; }
+
+    /* Draggable card row layout. Overrides cp-action-head for dynamic cards. */
+    .cp-action.js-card .cp-action-head { grid-template-columns: 22px 28px 1fr auto; gap: 12px; align-items: center; }
+    .cp-action.js-card.dragging { z-index: 5; box-shadow: 0 8px 24px rgba(0,0,0,0.45); transition: none !important; cursor: grabbing; }
+    .cp-action.js-card.shifting { transition: transform 180ms ease-out; }
+
+    /* Grip — 6-dot handle */
+    .cp-grip { width: 18px; height: 22px; padding: 0; background: transparent; border: none; cursor: grab; color: var(--text-subtle); display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; transition: color 0.15s, background 0.15s; }
+    .cp-grip:hover { color: var(--text-muted); background: rgba(255,255,255,0.03); }
+    .cp-grip:focus-visible { outline: 1px solid var(--border-strong); outline-offset: 1px; }
+    .cp-grip:active { cursor: grabbing; }
+    .cp-grip.lifted { color: var(--text-secondary); background: rgba(255,255,255,0.05); }
+    .cp-grip svg { width: 10px; height: 14px; display: block; pointer-events: none; }
+    .cp-grip[aria-hidden="true"] { visibility: hidden; cursor: default; }
+
+    /* Caret / expand toggle */
+    .cp-caret { width: 22px; height: 22px; padding: 0; background: transparent; border: none; color: var(--text-muted); cursor: pointer; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; transition: color 0.15s, transform 0.15s; margin-left: auto; }
+    .cp-caret:hover { color: var(--text-secondary); }
+    .cp-caret.open { transform: rotate(180deg); }
+    .cp-caret svg { width: 12px; height: 12px; }
+
+    /* Make the title area clickable for expand */
+    .cp-action.js-card .cp-action-headline { cursor: pointer; }
+    .cp-action.js-card .cp-action-headline-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .cp-action.js-card .cp-action-meta-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+
+    /* Physician-added meta tag */
+    .cp-author-tag { font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    /* Collapsed card: hide body + orders */
+    .cp-action.js-card:not(.open) .cp-action-body,
+    .cp-action.js-card:not(.open) .cp-orders,
+    .cp-action.js-card:not(.open) .cp-evidence-row { display: none; }
+
+    /* Evidence row inside expanded body */
+    .cp-evidence-row { display: flex; align-items: center; flex-wrap: wrap; padding: 12px 22px 14px; border-top: 1px dashed var(--border-subtle); font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-evidence-lbl { text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted); font-weight: 500; margin-right: 10px; }
+    .cp-evidence-text { color: var(--text-secondary); }
+
+    /* Add-candidate row (All pane only) */
+    .cp-add-row { margin-top: 8px; padding: 14px; border: 1px dashed var(--border); border-radius: 10px; color: var(--text-muted); font-size: 13px; text-align: center; cursor: pointer; transition: color 0.15s, border-color 0.15s; background: transparent; width: 100%; font-family: inherit; letter-spacing: 0.02em; }
+    .cp-add-row:hover { color: var(--text-secondary); border-color: var(--border-strong); }
+    .cp-add-form { margin-top: 8px; padding: 20px 22px; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--card); }
+    .cp-add-form-head { font-size: 11px; font-weight: 510; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 14px; }
+    .cp-add-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+    .cp-add-field { display: flex; flex-direction: column; gap: 6px; }
+    .cp-add-field.full { grid-column: 1 / -1; }
+    .cp-add-field label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-add-field textarea,
+    .cp-add-field input[type="text"] { background: var(--bg-panel); border: 1px solid var(--border); color: var(--text); font: 400 14px/1.5 'Inter', sans-serif; padding: 8px 10px; border-radius: 6px; resize: vertical; font-feature-settings: 'cv01'; }
+    .cp-add-field textarea:focus,
+    .cp-add-field input[type="text"]:focus { outline: none; border-color: var(--border-strong); }
+    .cp-seg { display: inline-flex; gap: 2px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 2px; width: fit-content; }
+    .cp-seg button { font: 500 12px/1 'Inter', sans-serif; padding: 6px 12px; background: transparent; color: var(--text-muted); border: none; border-radius: 4px; cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em; }
+    .cp-seg button:hover { color: var(--text-secondary); }
+    .cp-seg button.active { color: var(--text); background: rgba(255,255,255,0.06); }
+    .cp-add-form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); }
+
+    /* === Ask pane (right-docked, flex sibling) === */
+    .cp-ask-pane { flex: 0 0 0; width: 0; overflow: hidden; background: var(--card); border-left: 1px solid var(--border-subtle); transition: flex-basis 200ms ease, width 200ms ease; display: flex; flex-direction: column; }
+    .cp-ask-pane.open { flex: 0 0 400px; width: 400px; }
+    .cp-ask-pane-inner { width: 400px; display: flex; flex-direction: column; height: 100%; min-height: calc(100vh - 120px); }
+    .cp-ask-head { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; }
+    .cp-ask-head-title { font-size: 13px; font-weight: 510; color: var(--text); letter-spacing: -0.1px; flex: 1; display: flex; align-items: center; gap: 8px; }
+    .cp-ask-turns { font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 400; }
+    .cp-ask-iconbtn { width: 24px; height: 24px; background: transparent; border: none; color: var(--text-muted); cursor: pointer; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; transition: color 0.15s, background 0.15s; }
+    .cp-ask-iconbtn:hover { color: var(--text-secondary); background: rgba(255,255,255,0.04); }
+    .cp-ask-iconbtn svg { width: 13px; height: 13px; }
+    .cp-ask-body { flex: 1 1 auto; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+    .cp-ask-empty { color: var(--text-muted); font-size: 13px; line-height: 1.55; }
+    .cp-ask-empty p { margin: 0 0 14px; }
+    .cp-ask-suggestions { display: flex; flex-direction: column; gap: 6px; }
+    .cp-ask-sugg { text-align: left; background: var(--bg-panel); border: 1px solid var(--border-subtle); color: var(--text-secondary); font: 400 13px/1.45 'Inter', sans-serif; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.15s; letter-spacing: -0.05px; }
+    .cp-ask-sugg:hover { border-color: var(--border); color: var(--text); background: var(--bg-surface); }
+    .cp-msg { font-size: 13px; line-height: 1.55; }
+    .cp-msg-user { padding-left: 14px; border-left: 2px solid var(--border); color: var(--text); }
+    .cp-msg-user-anchor { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 4px; }
+    .cp-msg-assistant { color: var(--text-secondary); }
+    .cp-msg-source { margin-top: 8px; font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.02em; }
+    .cp-ask-foot { flex-shrink: 0; padding: 12px 14px 14px; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 8px; }
+    .cp-ask-input { background: var(--bg-panel); border: 1px solid var(--border); color: var(--text); font: 400 13px/1.5 'Inter', sans-serif; padding: 8px 10px; border-radius: 6px; resize: none; min-height: 54px; max-height: 160px; }
+    .cp-ask-input:focus { outline: none; border-color: var(--border-strong); }
+    .cp-ask-send { padding: 6px 12px; font: 500 12px/1 'Inter', sans-serif; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; cursor: pointer; align-self: flex-end; letter-spacing: 0.02em; }
+    .cp-ask-send:hover { border-color: var(--border-strong); background: rgba(255,255,255,0.04); }
+
+    /* Inline popover (floating) */
+    .cp-pop { position: fixed; width: 380px; background: var(--card); border: 1px solid var(--border-strong); border-radius: 10px; box-shadow: 0 20px 48px -12px rgba(0,0,0,0.7); z-index: 10000; display: flex; flex-direction: column; overflow: hidden; }
+    .cp-pop-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); }
+    .cp-pop-title { font-size: 11px; font-weight: 510; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-pop-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+    .cp-pop-textarea { background: var(--bg-panel); border: 1px solid var(--border); color: var(--text); font: 400 13px/1.5 'Inter', sans-serif; padding: 8px 10px; border-radius: 6px; resize: none; min-height: 56px; }
+    .cp-pop-textarea:focus { outline: none; border-color: var(--border-strong); }
+    .cp-pop-actions { display: flex; gap: 6px; justify-content: flex-end; }
+    .cp-pop-btn { padding: 6px 12px; font: 500 12px/1 'Inter', sans-serif; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; cursor: pointer; letter-spacing: 0.02em; }
+    .cp-pop-btn:hover { border-color: var(--border-strong); background: rgba(255,255,255,0.04); }
+    .cp-pop-btn.ghost { border-color: transparent; color: var(--text-muted); }
+    .cp-pop-btn.ghost:hover { color: var(--text); border-color: var(--border); }
+    .cp-pop-answer { font-size: 13px; line-height: 1.55; color: var(--text-secondary); border-top: 1px solid var(--border-subtle); padding-top: 10px; }
+    .cp-pop-answer .cp-msg-source { margin-top: 8px; }
+
+    /* Command palette (⌘K) */
+    .cp-cmdk-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); z-index: 10001; display: flex; align-items: flex-start; justify-content: center; padding-top: 18vh; }
+    .cp-cmdk { width: 640px; max-width: calc(100vw - 40px); background: var(--card); border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8); overflow: hidden; }
+    .cp-cmdk-input-wrap { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); }
+    .cp-cmdk-sparkle { color: var(--text-muted); width: 14px; height: 14px; flex-shrink: 0; }
+    .cp-cmdk-input { flex: 1; background: transparent; border: none; color: var(--text); font: 400 15px/1.4 'Inter', sans-serif; outline: none; letter-spacing: -0.1px; }
+    .cp-cmdk-input::placeholder { color: var(--text-subtle); }
+    .cp-cmdk-list { padding: 6px; }
+    .cp-cmdk-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; cursor: pointer; color: var(--text-secondary); font-size: 13px; letter-spacing: -0.05px; transition: background 0.15s, color 0.15s; }
+    .cp-cmdk-item:hover, .cp-cmdk-item.active { background: var(--bg-surface); color: var(--text); }
+    .cp-cmdk-item-glyph { color: var(--text-subtle); width: 12px; height: 12px; flex-shrink: 0; }
+    .cp-cmdk-foot { padding: 10px 18px; border-top: 1px solid var(--border-subtle); font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; display: flex; gap: 14px; }
+
+    /* Aria-live region (visually hidden) */
+    .cp-sr-live { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    @media (max-width: 1100px) {
+      .cp-ask-pane.open { flex: 0 0 340px; width: 340px; }
+      .cp-ask-pane-inner { width: 340px; }
+    }
   </style>
 
+  <div class="cp-main-row">
+  <div class="cp-canvas">
   <div class="cp-wrap">
+
+    <!-- Plan header with plan-level Ask chip -->
+    <div class="cp-plan-header">
+      <div class="cp-plan-header-left">
+        <div class="cp-plan-header-eyebrow">Run #127 · Framework v2 · 2026-04-17</div>
+        <div class="cp-plan-header-title">Care plan. 10 candidates. 3 sustained. 2 new. 0 reversed.</div>
+      </div>
+      <button class="cp-ask-chip" id="cpAskPlan" aria-label="Ask about this care plan" style="padding:6px 10px; font-size:12px;">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1 L7 5 L11 6 L7 7 L6 11 L5 7 L1 6 L5 5 Z"/></svg>
+        Ask about this plan
+      </button>
+    </div>
 
     <!-- Care plan nav (underline highlighter) -->
     <div class="cp-nav" style="display:flex; gap:28px; border-bottom:1px solid var(--border); margin-bottom:22px;">
@@ -1096,306 +1253,13 @@
       <button class="rm-subtab" data-cp="all" onclick="switchCp('all')">All</button>
     </div>
 
-    <!-- === TOP 3 PANE === -->
-    <div class="cp-pane" id="cpPane-top3">
+    <!-- Top 3 pane (rendered by JS from master list, read-only) -->
+    <div class="cp-pane" id="cpPane-top3"></div>
 
-    <!-- Action 01 · systemic pattern (converged) -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">01</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Autonomic load workup: 6-month HRV/RHR trend + hs-CRP rise</div>
-          <div class="cp-action-meta">High · 2 wk</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Sleep extension to ≥7h</strong> + HRV biofeedback 2×/wk × 8 wk. <strong>Defer training intensity block</strong> until cardiac clearance (Action 03).</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">HRV <span class="cp-mono">68→42 ms</span>, RHR <span class="cp-mono">52→61 bpm</span>, hs-CRP <span class="cp-mono">0.8→1.9 mg/L</span> over 6 mo: sustained sympathetic tone amplifying CVD + metabolic + neuro risk simultaneously. Cross-domain driver that no single model captures.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">HRV ≥ 55 ms (4-wk avg) · hs-CRP &lt; 1.0 · RHR ≤ 56 at 12 wk</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Sleep study (HSAT)</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>hs-CRP repeat 12 wk</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Referral: HRV biofeedback</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Follow-up 12 wk</button>
-      </div>
-    </div>
+    <!-- All pane (rendered by JS from master list, reorderable + add form) -->
+    <div class="cp-pane" id="cpPane-all" style="display:none;"></div>
 
-    <!-- Action 02 · CVD domain (converged) -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">02</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Initiate low-dose rosuvastatin: ApoB 96, ATM carrier, baseline Lp(a) elevated</div>
-          <div class="cp-action-meta">High · this visit</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Rosuvastatin 5 mg qd</strong>. Repeat lipid + CK + LFTs at 8 wk. Escalate to 10 mg if ApoB &gt; 80 at 12 wk.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">ApoB <span class="cp-mono">96</span>, Lp(a) <span class="cp-mono">78</span>, LDL-C <span class="cp-mono">142</span>. ATM carrier: impaired vascular DNA repair compounds lipid load. ApoB-driven retention is the rate-limiting step of atherogenesis.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">ApoB &lt; 80 · LDL-C &lt; 100 · tolerability (myalgia, LFTs) at 12 wk</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">℞</span>Rosuvastatin 5 mg qd #90</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Lipid panel + CK + CMP 8wk</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>ApoB 8wk</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Follow-up 12 wk</button>
-      </div>
-    </div>
-
-    <!-- Action 03 · Cardiac workup (gates training escalation) -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">03</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Cardiac workup: resolve sinus bradycardia before training intensification</div>
-          <div class="cp-action-meta">High · 2 wk</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Holter 48h + 12-lead EKG</strong>. Stress test if Holter abnormal. <strong>Hold training intensification</strong> until cleared.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">RHR <span class="cp-mono">52</span> with lightheadedness on standing. No domain model triggers but conduction disease must be ruled out before aerobic prescription is safe to escalate. Distinguishes athletic brady from pathologic sinus node dysfunction.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">Normal sinus rhythm · no 2°+ AV block on Holter · asymptomatic HR response to exercise</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Holter monitor 48h</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>12-lead EKG</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Cardiology consult (conditional)</button>
-      </div>
-    </div>
-
-    </div><!-- /cpPane-top3 -->
-
-    <!-- === ALL ACTION CANDIDATES PANE === -->
-    <div class="cp-pane" id="cpPane-all" style="display:none;">
-
-    <!-- Action 04 · Metabolic -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">04</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Metformin trial: insulin resistance signals without overt T2DM</div>
-          <div class="cp-action-meta">Mod · 30 d</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Metformin 500 mg bid</strong> with food, titrate to 1000 bid over 4 wk. B12 at 6 mo.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">HbA1c <span class="cp-mono">5.8</span>, fasting insulin <span class="cp-mono">14</span> (HOMA-IR <span class="cp-mono">3.1</span>), TG/HDL <span class="cp-mono">2.6</span>. Below T2DM but solidly insulin-resistant. Hepatic insulin sensitization reduces cardiometabolic risk and pancreatic/colorectal cancer risk in carriers.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">HbA1c &lt; 5.5 · HOMA-IR &lt; 2.0 · TG/HDL &lt; 2.0 at 12 wk</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">℞</span>Metformin 500 mg bid #180</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>HbA1c + insulin 12 wk</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>B12 at 6 mo</button>
-      </div>
-    </div>
-
-    <!-- Action 05 · Lp(a) baseline -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">05</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Lp(a) one-time quantification + family cascade counseling</div>
-          <div class="cp-action-meta">Mod · 30 d</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Lp(a) nmol/L (molar assay)</strong> once, nonfasting. If &gt; 125, escalate statin target. Note Senna cascade: Lp(a) check at age 18+.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">No Lp(a) on file. Lifetime-stable, single measurement sufficient. Elevated Lp(a) doubles ASCVD risk independent of LDL. Flags first-degree relatives: Senna at 50% genetic risk as ATM carrier.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">Baseline value documented · cascade counseling noted · no re-test needed</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Lp(a) nmol/L</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✉</span>Family genetic counseling note</button>
-      </div>
-    </div>
-
-    <!-- Action 06 · Neuro -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">06</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Cognitive baseline + APOE-aware sleep architecture protocol</div>
-          <div class="cp-action-meta">Mod · 60 d</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Baseline cognitive battery (CANTAB or ACE-III)</strong> + sleep protocol: fixed wake time, temperature floor, no alcohol after 19:00 × 90 d. Reassess.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">APOE e3/e4 + paternal dementia + wearable deep-sleep <span class="cp-mono">0.8 h/night</span> (target &gt;1.2). Deep sleep drives glymphatic amyloid clearance; e4 carriers have reduced clearance capacity. 15–20 yr latency means intervention leverage is highest now.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">Cognitive battery stable y/y · deep sleep ≥ 1.2 h/night (4-wk avg) at 90 d</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Neurocog battery (CANTAB)</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✉</span>Sleep protocol handout</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Follow-up 90 d</button>
-      </div>
-    </div>
-
-    <!-- Action 07 · Mobility -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">07</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Posterior chain rehab: TLF/glute dysfunction limiting training consistency</div>
-          <div class="cp-action-meta">Low · 90 d</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>PT referral</strong> + 12-wk daily glute activation / TLF mobility protocol. Low-intensity riding at wk 4. Resume BJJ at wk 10 if asymptomatic.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">Training adherence <span class="cp-mono">1.4 sessions/wk</span> (target 3), recurrent stiffness, BJJ hiatus. Mobility deficit is the proximate cause of VO₂ decline: not motivation, not cardiac, not metabolic. Fix the substrate before intensifying load.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">Sessions/wk ≥ 3 sustained 4 wk · stiffness &lt; 2/10 · FMS ≥ 14</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>PT referral (lumbar/glute)</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✉</span>Mobility protocol handout</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Follow-up 90 d</button>
-      </div>
-    </div>
-
-    <!-- Action 08 · Pancreatic MRCP -->
-    <div class="cp-action">
-      <div class="cp-action-head">
-        <div class="cp-action-rank">08</div>
-        <div class="cp-action-headline">
-          <div class="cp-action-title">Pancreatic MRCP: ATM + FDR pancreatic ca, never screened</div>
-          <div class="cp-action-meta">High · 30 d</div>
-        </div>
-        <div class="cp-action-actions">
-          <button class="cp-btn cp-btn-primary">Accept</button>
-          <button class="cp-btn">Modify</button>
-          <button class="cp-btn">Defer</button>
-        </div>
-      </div>
-      <div class="cp-action-body">
-        <div class="cp-row">
-          <div class="cp-row-lbl">Do</div>
-          <div class="cp-row-do"><strong>Pancreas-protocol MRCP</strong> with gadolinium + secretin if available. Establish annual surveillance schedule.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Why</div>
-          <div class="cp-row-why">ATM het <span class="cp-mono">c.8395_8404del</span> + paternal GF pancreatic ca meets CAPS criteria for high-risk surveillance. Zero prior imaging. ATM carriers have 2–4× lifetime pancreatic risk; stage I→IV survival delta is 10×. Cancer domain model cannot close until this gap is filled.</div>
-        </div>
-        <div class="cp-row">
-          <div class="cp-row-lbl">Goal</div>
-          <div class="cp-row-goal">Baseline MRCP complete · annual surveillance scheduled · cancer domain closed</div>
-        </div>
-      </div>
-      <div class="cp-orders">
-        <div class="cp-orders-lbl">Orders</div>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>MRCP pancreas-protocol</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Genetic counseling (if not done)</button>
-        <button class="cp-order-btn"><span class="cp-order-glyph">✚</span>Annual surveillance schedule</button>
-      </div>
-    </div>
-
-    </div><!-- /cpPane-all -->
-
-    <!-- ================== ARCHIVE ================== -->
+    <!-- Archive (kept as-is) -->
     <div class="cp-archive" id="cpArchive">
       <div class="cp-archive-head" onclick="document.getElementById('cpArchive').classList.toggle('open')">
         <div>Deferred · declined · superseded</div>
@@ -1431,7 +1295,17 @@
       Framework v2 · Run #127 · 2026-04-17 · prev #124 (03-08) · 2 new · 0 reversed · 3 sustained
     </div>
 
+    <!-- Aria-live region for reorder announcements -->
+    <div id="cpSrLive" class="cp-sr-live" aria-live="polite" aria-atomic="true"></div>
+
   </div><!-- /.cp-wrap -->
+  </div><!-- /.cp-canvas -->
+
+  <aside class="cp-ask-pane" id="cpAskPane" aria-label="Ask Meridian pane" aria-hidden="true">
+    <div class="cp-ask-pane-inner" id="cpAskPaneInner"></div>
+  </aside>
+
+  </div><!-- /.cp-main-row -->
 
   </div><!-- /section-plan -->
 
@@ -5500,6 +5374,9 @@ function switchCp(id) {
   document.querySelector('.cp-nav .rm-subtab[data-cp="' + id + '"]').classList.add('active');
   document.querySelectorAll('.cp-pane').forEach(p => p.style.display = 'none');
   document.getElementById('cpPane-' + id).style.display = 'block';
+  if (window.CarePlan && typeof window.CarePlan.onTabSwitch === 'function') {
+    window.CarePlan.onTabSwitch(id);
+  }
 }
 
 // === RISK PANEL SWITCHING (always-on) ===
@@ -6646,6 +6523,900 @@ const sleepBars = document.getElementById('sleepBars');
   bar.title = h.toFixed(1) + 'h';
   sleepBars.appendChild(bar);
 });
+
+/* =====================================================================
+   CARE PLAN v3 MODULE
+   Master list · drag reorder · add form · Ask primitives · pane · ⌘K
+   ===================================================================== */
+(function(){
+  'use strict';
+
+  // ---- Master list (ranks derived from index) ----
+  const ITEMS = [
+    {
+      id: 'a01',
+      title: 'Autonomic load workup: 6-month HRV/RHR trend + hs-CRP rise',
+      severity: 'High', timing: '2 wk',
+      do: '<strong>Sleep extension to ≥7h</strong> + HRV biofeedback 2×/wk × 8 wk. <strong>Defer training intensity block</strong> until cardiac clearance (Action 03).',
+      why: 'HRV <span class="cp-mono">68→42 ms</span>, RHR <span class="cp-mono">52→61 bpm</span>, hs-CRP <span class="cp-mono">0.8→1.9 mg/L</span> over 6 mo: sustained sympathetic tone amplifying CVD + metabolic + neuro risk simultaneously. Cross-domain driver that no single model captures.',
+      goal: 'HRV ≥ 55 ms (4-wk avg) · hs-CRP &lt; 1.0 · RHR ≤ 56 at 12 wk',
+      orders: [
+        { glyph: '✚', label: 'Sleep study (HSAT)' },
+        { glyph: '✚', label: 'hs-CRP repeat 12 wk' },
+        { glyph: '✚', label: 'Referral: HRV biofeedback' },
+        { glyph: '✚', label: 'Follow-up 12 wk' }
+      ],
+      evidence: 'Meridian systemic model v2.3 · HRV/CRP composite · Evidence bundle #127',
+      author: 'meridian'
+    },
+    {
+      id: 'a02',
+      title: 'Initiate low-dose rosuvastatin: ApoB 96, ATM carrier, baseline Lp(a) elevated',
+      severity: 'High', timing: 'this visit',
+      do: '<strong>Rosuvastatin 5 mg qd</strong>. Repeat lipid + CK + LFTs at 8 wk. Escalate to 10 mg if ApoB &gt; 80 at 12 wk.',
+      why: 'ApoB <span class="cp-mono">96</span>, Lp(a) <span class="cp-mono">78</span>, LDL-C <span class="cp-mono">142</span>. ATM carrier: impaired vascular DNA repair compounds lipid load. ApoB-driven retention is the rate-limiting step of atherogenesis.',
+      goal: 'ApoB &lt; 80 · LDL-C &lt; 100 · tolerability (myalgia, LFTs) at 12 wk',
+      orders: [
+        { glyph: '℞', label: 'Rosuvastatin 5 mg qd #90' },
+        { glyph: '✚', label: 'Lipid panel + CK + CMP 8wk' },
+        { glyph: '✚', label: 'ApoB 8wk' },
+        { glyph: '✚', label: 'Follow-up 12 wk' }
+      ],
+      evidence: 'PREVENT (AHA 2023) · ACC/AHA 2019 · Meridian CVD model v2.3',
+      author: 'meridian'
+    },
+    {
+      id: 'a03',
+      title: 'Cardiac workup: resolve sinus bradycardia before training intensification',
+      severity: 'High', timing: '2 wk',
+      do: '<strong>Holter 48h + 12-lead EKG</strong>. Stress test if Holter abnormal. <strong>Hold training intensification</strong> until cleared.',
+      why: 'RHR <span class="cp-mono">52</span> with lightheadedness on standing. No domain model triggers but conduction disease must be ruled out before aerobic prescription is safe to escalate. Distinguishes athletic brady from pathologic sinus node dysfunction.',
+      goal: 'Normal sinus rhythm · no 2°+ AV block on Holter · asymptomatic HR response to exercise',
+      orders: [
+        { glyph: '✚', label: 'Holter monitor 48h' },
+        { glyph: '✚', label: '12-lead EKG' },
+        { glyph: '✚', label: 'Cardiology consult (conditional)' }
+      ],
+      evidence: 'ACC/AHA syncope guideline 2017 · Meridian cardiac gate v2.1',
+      author: 'meridian'
+    },
+    {
+      id: 'a04',
+      title: 'Metformin trial: insulin resistance signals without overt T2DM',
+      severity: 'Mod', timing: '30 d',
+      do: '<strong>Metformin 500 mg bid</strong> with food, titrate to 1000 bid over 4 wk. B12 at 6 mo.',
+      why: 'HbA1c <span class="cp-mono">5.8</span>, fasting insulin <span class="cp-mono">14</span> (HOMA-IR <span class="cp-mono">3.1</span>), TG/HDL <span class="cp-mono">2.6</span>. Below T2DM but solidly insulin-resistant. Hepatic insulin sensitization reduces cardiometabolic risk and pancreatic/colorectal cancer risk in carriers.',
+      goal: 'HbA1c &lt; 5.5 · HOMA-IR &lt; 2.0 · TG/HDL &lt; 2.0 at 12 wk',
+      orders: [
+        { glyph: '℞', label: 'Metformin 500 mg bid #180' },
+        { glyph: '✚', label: 'HbA1c + insulin 12 wk' },
+        { glyph: '✚', label: 'B12 at 6 mo' }
+      ],
+      evidence: 'DPP follow-up · ADA 2024 standards · Meridian metabolic model v2.2',
+      author: 'meridian'
+    },
+    {
+      id: 'a05',
+      title: 'Lp(a) one-time quantification + family cascade counseling',
+      severity: 'Mod', timing: '30 d',
+      do: '<strong>Lp(a) nmol/L (molar assay)</strong> once, nonfasting. If &gt; 125, escalate statin target. Note Senna cascade: Lp(a) check at age 18+.',
+      why: 'No Lp(a) on file. Lifetime-stable, single measurement sufficient. Elevated Lp(a) doubles ASCVD risk independent of LDL. Flags first-degree relatives: Senna at 50% genetic risk as ATM carrier.',
+      goal: 'Baseline value documented · cascade counseling noted · no re-test needed',
+      orders: [
+        { glyph: '✚', label: 'Lp(a) nmol/L' },
+        { glyph: '✉', label: 'Family genetic counseling note' }
+      ],
+      evidence: 'NLA Lp(a) statement 2019 · ESC 2021 prevention · Meridian CVD model v2.3',
+      author: 'meridian'
+    },
+    {
+      id: 'a06',
+      title: 'Cognitive baseline + APOE-aware sleep architecture protocol',
+      severity: 'Mod', timing: '60 d',
+      do: '<strong>Baseline cognitive battery (CANTAB or ACE-III)</strong> + sleep protocol: fixed wake time, temperature floor, no alcohol after 19:00 × 90 d. Reassess.',
+      why: 'APOE e3/e4 + paternal dementia + wearable deep-sleep <span class="cp-mono">0.8 h/night</span> (target &gt;1.2). Deep sleep drives glymphatic amyloid clearance; e4 carriers have reduced clearance capacity. 15–20 yr latency means intervention leverage is highest now.',
+      goal: 'Cognitive battery stable y/y · deep sleep ≥ 1.2 h/night (4-wk avg) at 90 d',
+      orders: [
+        { glyph: '✚', label: 'Neurocog battery (CANTAB)' },
+        { glyph: '✉', label: 'Sleep protocol handout' },
+        { glyph: '✚', label: 'Follow-up 90 d' }
+      ],
+      evidence: 'Lancet Commission 2020 · Meridian neuro model v2.1',
+      author: 'meridian'
+    },
+    {
+      id: 'a07',
+      title: 'Posterior chain rehab: TLF/glute dysfunction limiting training consistency',
+      severity: 'Low', timing: '90 d',
+      do: '<strong>PT referral</strong> + 12-wk daily glute activation / TLF mobility protocol. Low-intensity riding at wk 4. Resume BJJ at wk 10 if asymptomatic.',
+      why: 'Training adherence <span class="cp-mono">1.4 sessions/wk</span> (target 3), recurrent stiffness, BJJ hiatus. Mobility deficit is the proximate cause of VO₂ decline: not motivation, not cardiac, not metabolic. Fix the substrate before intensifying load.',
+      goal: 'Sessions/wk ≥ 3 sustained 4 wk · stiffness &lt; 2/10 · FMS ≥ 14',
+      orders: [
+        { glyph: '✚', label: 'PT referral (lumbar/glute)' },
+        { glyph: '✉', label: 'Mobility protocol handout' },
+        { glyph: '✚', label: 'Follow-up 90 d' }
+      ],
+      evidence: 'Meridian mobility model v1.4 · FMS cohort data',
+      author: 'meridian'
+    },
+    {
+      id: 'a08',
+      title: 'Pancreatic MRCP: ATM + FDR pancreatic ca, never screened',
+      severity: 'High', timing: '30 d',
+      do: '<strong>Pancreas-protocol MRCP</strong> with gadolinium + secretin if available. Establish annual surveillance schedule.',
+      why: 'ATM het <span class="cp-mono">c.8395_8404del</span> + paternal GF pancreatic ca meets CAPS criteria for high-risk surveillance. Zero prior imaging. ATM carriers have 2–4× lifetime pancreatic risk; stage I→IV survival delta is 10×. Cancer domain model cannot close until this gap is filled.',
+      goal: 'Baseline MRCP complete · annual surveillance scheduled · cancer domain closed',
+      orders: [
+        { glyph: '✚', label: 'MRCP pancreas-protocol' },
+        { glyph: '✚', label: 'Genetic counseling (if not done)' },
+        { glyph: '✚', label: 'Annual surveillance schedule' }
+      ],
+      evidence: 'CAPS consortium 2020 · NCCN pancreas v1.2024 · Meridian cancer model v2.2',
+      author: 'meridian'
+    },
+    {
+      id: 'a09',
+      title: 'Colonoscopy per NCCN ATM surveillance interval',
+      severity: 'Low', timing: '180 d',
+      do: '<strong>Screening colonoscopy</strong> at age 40 or 10 y before earliest FDR dx, whichever earlier. Repeat every 5 y if normal.',
+      why: 'ATM heterozygotes carry modestly increased colorectal risk. Patient is 52, no prior colonoscopy on file. Low-acuity but audit-visible gap. NCCN recommends standard-interval surveillance with ATM flag.',
+      goal: 'Baseline colonoscopy complete · interval documented · no polyps or managed per pathology',
+      orders: [
+        { glyph: '✚', label: 'GI referral: screening colonoscopy' },
+        { glyph: '✉', label: 'Bowel prep instructions' }
+      ],
+      evidence: 'NCCN genetic/familial high-risk v2.2024 · Meridian cancer model v2.2',
+      author: 'meridian'
+    },
+    {
+      id: 'a10',
+      title: 'Annual breast MRI continuation: ATM-directed surveillance',
+      severity: 'Mod', timing: '90 d',
+      do: '<strong>Breast MRI with contrast</strong>, alternating every 6 mo with mammography + US. Continue indefinitely.',
+      why: 'ATM heterozygote lifetime breast risk <span class="cp-mono">25–40%</span>. Last MRI 14 mo ago. Surveillance cadence must not lapse. MRI adds sensitivity over mammography alone in dense tissue (patient density category C).',
+      goal: 'MRI within 90 d · alternating schedule documented · no interval lapse',
+      orders: [
+        { glyph: '✚', label: 'Breast MRI w/ contrast' },
+        { glyph: '✚', label: 'Breast surgeon follow-up' }
+      ],
+      evidence: 'ACR appropriateness · NCCN breast screening 2024 · Meridian cancer model v2.2',
+      author: 'meridian'
+    }
+  ];
+
+  // ---- State ----
+  const state = {
+    items: ITEMS.slice(),
+    expanded: null,          // item id currently expanded (accordion)
+    drag: null,              // { id, srcIndex, startY, curDy, step, pointerId }
+    kbdLift: null,           // { id, index } keyboard-lifted grip
+    addFormOpen: false,
+    addFormDraft: null,
+    pane: { open: false, thread: [] },
+    pop: null,               // { anchorEl, anchorLabel, answer?, query? }
+    cmdk: { open: false, query: '' }
+  };
+
+  const SUGGESTIONS = [
+    'Re-rank by cost to impact',
+    "What's missing given this patient?",
+    'Draft the patient-facing version of the top 3',
+    'What breaks if I defer action 1 by 60 days?'
+  ];
+
+  // ---- Helpers ----
+  const $ = sel => document.querySelector(sel);
+  const rankLabel = i => String(i + 1).padStart(2, '0');
+  function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function sparkleSvg(size){ size = size || 10; return '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" width="'+size+'" height="'+size+'"><path d="M6 1 L7 5 L11 6 L7 7 L6 11 L5 7 L1 6 L5 5 Z"/></svg>'; }
+  function gripSvg(){
+    return '<svg viewBox="0 0 10 14" fill="currentColor" aria-hidden="true"><circle cx="2" cy="2" r="1"/><circle cx="2" cy="7" r="1"/><circle cx="2" cy="12" r="1"/><circle cx="8" cy="2" r="1"/><circle cx="8" cy="7" r="1"/><circle cx="8" cy="12" r="1"/></svg>';
+  }
+  function caretSvg(){ return '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 4.5 6 8 9 4.5"/></svg>'; }
+  function xSvg(){ return '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg>'; }
+  function trashSvg(){ return '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 3.5h7M5 2h2M3.5 3.5v6.5a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V3.5M5 5v4M7 5v4"/></svg>'; }
+  function announce(msg){
+    const live = document.getElementById('cpSrLive');
+    if (live) { live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 30); }
+  }
+
+  // ---- Mock answer engine ----
+  function mockAnswer(query, anchorLabel){
+    const q = (query || '').toLowerCase();
+    const aLabel = anchorLabel || 'this care plan';
+    let body;
+    if (/why|reason|rationale/.test(q)) {
+      body = 'Rationale: this action sits at the intersection of the highest-leverage risk channels for this patient (ATM carrier, metabolic drift, autonomic load). Deferring it risks losing the gating effect on downstream actions. The composite risk model weights it in the top decile.';
+    } else if (/defer|delay|hold|postpone/.test(q)) {
+      body = 'If deferred 60 days: expected ΔApoB +6 to +9, HRV trajectory unchanged, and the cardiac gate (action 03) remains blocking. Downstream: training intensification cannot safely advance, so the mobility rehab timeline also slips. Net: 1 slip at this node cascades to 3 others.';
+    } else if (/evidence|study|source|confidence/.test(q)) {
+      body = 'Backed by the cited guideline plus internal cohort evidence (n=2,412 matched ATM-het + pre-diabetic). Confidence: moderate-high. Heterogeneity is low on primary endpoints; modest on patient-reported tolerability. See the source bundle for effect sizes, 95% CIs, and the sensitivity analyses.';
+    } else if (/rank|order|re.?rank|cost|impact/.test(q)) {
+      body = 'Re-ranked by cost-to-impact: actions 02 (rosuvastatin, low cost, high ΔApoB), 01 (autonomic, low cost, broad), 05 (Lp(a), one-time), then 08 (MRCP, high cost but closes cancer domain). Actions 07 and 09 move to the lower half on pure leverage per unit effort.';
+    } else if (/missing|gap|what.?else/.test(q)) {
+      body = 'Gaps worth considering: vitamin D and iron studies (never drawn), a 24-hour ambulatory BP given the autonomic picture, and confirming HPV status before the next well-woman visit. None rise to top-3 but they close audit gaps.';
+    } else if (/patient.?facing|plain|explain|simplif/.test(q)) {
+      body = 'Patient-facing draft: we are starting a small-dose cholesterol medicine today, checking your heart rhythm in the next two weeks, and working on sleep and nervous-system recovery for eight weeks. Everything else is scheduled, not urgent. You stay in training; we pause intensity until the cardiac check clears.';
+    } else {
+      body = 'Summary: ' + aLabel + '. The plan prioritizes gated actions (cardiac, MRCP) ahead of intensification, uses lipid lowering as the single highest-yield lever, and sequences the autonomic workup as the cross-domain driver. Nothing in the top 3 is deferrable without slipping another node.';
+    }
+    const source = 'Source: Meridian composite risk models v2.3 · Evidence bundle #127';
+    return { body, source };
+  }
+
+  // ---- Render: TOP 3 (read-only) ----
+  function renderTop3(){
+    const root = document.getElementById('cpPane-top3');
+    if (!root) return;
+    root.innerHTML = '';
+    state.items.slice(0, 3).forEach((item, i) => {
+      root.appendChild(buildCard(item, i, { readonly: true }));
+    });
+  }
+
+  // ---- Render: ALL (reorderable + add form) ----
+  function renderAll(){
+    const root = document.getElementById('cpPane-all');
+    if (!root) return;
+    root.innerHTML = '';
+    state.items.forEach((item, i) => {
+      root.appendChild(buildCard(item, i, { readonly: false }));
+    });
+    // add form / add row
+    if (state.addFormOpen) {
+      root.appendChild(buildAddForm());
+    } else {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cp-add-row';
+      btn.textContent = '+ Add action candidate';
+      btn.addEventListener('click', () => {
+        state.addFormOpen = true;
+        state.addFormDraft = { do: '', why: '', goal: '', evidence: '', severity: 'Mod', timing: 'next visit' };
+        renderAll();
+        const form = document.querySelector('.cp-add-form');
+        const ta = form && form.querySelector('textarea');
+        if (ta) ta.focus();
+      });
+      root.appendChild(btn);
+    }
+  }
+
+  // ---- Build a card element ----
+  function buildCard(item, index, opts){
+    opts = opts || {};
+    const readonly = !!opts.readonly;
+    const el = document.createElement('div');
+    el.className = 'cp-action js-card' + (state.expanded === item.id ? ' open' : '');
+    el.dataset.id = item.id;
+    el.dataset.index = index;
+
+    // Head: grip | rank | headline | actions
+    const head = document.createElement('div');
+    head.className = 'cp-action-head';
+
+    // grip (hidden if readonly to preserve layout alignment)
+    const gripBtn = document.createElement('button');
+    gripBtn.type = 'button';
+    gripBtn.className = 'cp-grip';
+    gripBtn.setAttribute('aria-label', 'Reorder: ' + item.title);
+    gripBtn.innerHTML = gripSvg();
+    if (readonly) {
+      gripBtn.setAttribute('aria-hidden', 'true');
+      gripBtn.tabIndex = -1;
+    } else {
+      gripBtn.addEventListener('pointerdown', onGripPointerDown);
+      gripBtn.addEventListener('keydown', onGripKeydown);
+    }
+    head.appendChild(gripBtn);
+
+    // rank
+    const rank = document.createElement('div');
+    rank.className = 'cp-action-rank';
+    rank.textContent = rankLabel(index);
+    head.appendChild(rank);
+
+    // headline
+    const headline = document.createElement('div');
+    headline.className = 'cp-action-headline';
+    const titleRow = document.createElement('div');
+    titleRow.className = 'cp-action-headline-row';
+    const titleEl = document.createElement('div');
+    titleEl.className = 'cp-action-title';
+    titleEl.textContent = item.title;
+    titleRow.appendChild(titleEl);
+    if (item.author === 'physician') {
+      const tag = document.createElement('span');
+      tag.className = 'cp-author-tag';
+      tag.textContent = 'Added by you';
+      titleRow.appendChild(tag);
+    }
+    headline.appendChild(titleRow);
+
+    const metaRow = document.createElement('div');
+    metaRow.className = 'cp-action-meta-row';
+    const metaEl = document.createElement('div');
+    metaEl.className = 'cp-action-meta';
+    metaEl.textContent = item.severity + ' · ' + item.timing;
+    metaRow.appendChild(metaEl);
+    if (!readonly) {
+      const askChip = document.createElement('button');
+      askChip.type = 'button';
+      askChip.className = 'cp-ask-chip';
+      askChip.setAttribute('aria-label', 'Ask about: ' + item.title);
+      askChip.innerHTML = sparkleSvg(10) + '<span>Ask</span>';
+      askChip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPopover(askChip, 'Action ' + rankLabel(index) + ': ' + item.title, 'Ask why, alternatives, what breaks if deferred…');
+      });
+      metaRow.appendChild(askChip);
+    }
+    headline.appendChild(metaRow);
+    // click headline to toggle expand
+    headline.addEventListener('click', (e) => {
+      // ignore clicks that originated from the ask chip
+      if (e.target.closest('.cp-ask-chip')) return;
+      toggleExpand(item.id);
+    });
+    head.appendChild(headline);
+
+    // actions
+    const actions = document.createElement('div');
+    actions.className = 'cp-action-actions';
+    actions.innerHTML = '<button class="cp-btn cp-btn-primary">Accept</button><button class="cp-btn">Modify</button><button class="cp-btn">Defer</button>';
+    // caret toggle
+    const caret = document.createElement('button');
+    caret.type = 'button';
+    caret.className = 'cp-caret' + (state.expanded === item.id ? ' open' : '');
+    caret.setAttribute('aria-label', state.expanded === item.id ? 'Collapse' : 'Expand');
+    caret.innerHTML = caretSvg();
+    caret.addEventListener('click', (e) => { e.stopPropagation(); toggleExpand(item.id); });
+    actions.appendChild(caret);
+    head.appendChild(actions);
+
+    el.appendChild(head);
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'cp-action-body';
+    body.innerHTML =
+      '<div class="cp-row"><div class="cp-row-lbl">Do</div><div class="cp-row-do">' + item.do + '</div></div>' +
+      '<div class="cp-row"><div class="cp-row-lbl">Why</div><div class="cp-row-why">' + item.why + '</div></div>' +
+      '<div class="cp-row"><div class="cp-row-lbl">Goal</div><div class="cp-row-goal">' + item.goal + '</div></div>';
+    el.appendChild(body);
+
+    // Orders
+    if (item.orders && item.orders.length){
+      const orders = document.createElement('div');
+      orders.className = 'cp-orders';
+      let html = '<div class="cp-orders-lbl">Orders</div>';
+      item.orders.forEach(o => {
+        html += '<button class="cp-order-btn"><span class="cp-order-glyph">' + esc(o.glyph) + '</span>' + esc(o.label) + '</button>';
+      });
+      orders.innerHTML = html;
+      el.appendChild(orders);
+    }
+
+    // Evidence row (only rendered when expanded anyway — hidden by CSS otherwise)
+    if (item.evidence) {
+      const evRow = document.createElement('div');
+      evRow.className = 'cp-evidence-row';
+      evRow.innerHTML = '<span class="cp-evidence-lbl">Evidence</span><span class="cp-evidence-text">' + esc(item.evidence) + '</span>';
+      const askLink = document.createElement('button');
+      askLink.type = 'button';
+      askLink.className = 'cp-ask-link';
+      askLink.innerHTML = sparkleSvg(10) + '<span>Ask</span>';
+      askLink.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPopover(askLink, 'Evidence: ' + item.evidence, 'Ask about the study, population, or confidence…');
+      });
+      evRow.appendChild(askLink);
+      el.appendChild(evRow);
+    }
+
+    return el;
+  }
+
+  function toggleExpand(id){
+    state.expanded = (state.expanded === id) ? null : id;
+    renderTop3(); renderAll();
+  }
+
+  // ---- Add candidate form ----
+  function buildAddForm(){
+    const d = state.addFormDraft || { do:'', why:'', goal:'', evidence:'', severity:'Mod', timing:'next visit' };
+    const wrap = document.createElement('div');
+    wrap.className = 'cp-add-form';
+    wrap.innerHTML =
+      '<div class="cp-add-form-head">New action candidate</div>' +
+      '<div class="cp-add-form-grid">' +
+        '<div class="cp-add-field full"><label>Do (required)</label><textarea rows="2" data-field="do" placeholder="What to do. e.g., Repeat ambulatory BP x 24 h."></textarea></div>' +
+        '<div class="cp-add-field full"><label>Why (required)</label><textarea rows="2" data-field="why" placeholder="Clinical reasoning. What makes this rise now."></textarea></div>' +
+        '<div class="cp-add-field"><label>Goal</label><input type="text" data-field="goal" placeholder="Measurable endpoint at follow-up"></div>' +
+        '<div class="cp-add-field"><label>Evidence</label><input type="text" data-field="evidence" placeholder="Guideline / model ref"></div>' +
+        '<div class="cp-add-field"><label>Severity</label>' +
+          '<div class="cp-seg" data-seg="severity">' +
+            ['High','Mod','Low'].map(s => '<button type="button" data-val="' + s + '"' + (d.severity===s?' class="active"':'') + '>' + (s==='Mod'?'Moderate':s) + '</button>').join('') +
+          '</div>' +
+        '</div>' +
+        '<div class="cp-add-field"><label>Timing</label><input type="text" data-field="timing" placeholder="30 d · next visit · 90 d"></div>' +
+      '</div>' +
+      '<div class="cp-add-form-actions">' +
+        '<button type="button" class="cp-btn" data-action="cancel">Cancel</button>' +
+        '<button type="button" class="cp-btn cp-btn-primary" data-action="save">Add to queue</button>' +
+      '</div>';
+
+    // populate defaults
+    wrap.querySelectorAll('[data-field]').forEach(el => {
+      const k = el.getAttribute('data-field');
+      el.value = d[k] || '';
+      el.addEventListener('input', () => { state.addFormDraft[k] = el.value; });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { cancelAdd(); }
+      });
+    });
+    // segmented severity
+    wrap.querySelectorAll('[data-seg="severity"] button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.addFormDraft.severity = btn.getAttribute('data-val');
+        wrap.querySelectorAll('[data-seg="severity"] button').forEach(b => b.classList.toggle('active', b === btn));
+      });
+    });
+    wrap.querySelector('[data-action="cancel"]').addEventListener('click', cancelAdd);
+    wrap.querySelector('[data-action="save"]').addEventListener('click', saveAdd);
+    return wrap;
+  }
+  function cancelAdd(){
+    state.addFormOpen = false;
+    state.addFormDraft = null;
+    renderAll();
+  }
+  function saveAdd(){
+    const d = state.addFormDraft || {};
+    if (!d.do || !d.do.trim() || !d.why || !d.why.trim()) {
+      announce('Do and Why are required.');
+      return;
+    }
+    const item = {
+      id: 'u' + Date.now(),
+      title: (d.do.trim().split(/[.!?·]/)[0] || 'New action').slice(0, 120),
+      severity: d.severity || 'Mod',
+      timing: (d.timing || 'next visit').trim(),
+      do: esc(d.do.trim()),
+      why: esc(d.why.trim()),
+      goal: esc((d.goal || '').trim()),
+      orders: [],
+      evidence: (d.evidence || '').trim(),
+      author: 'physician'
+    };
+    state.items.push(item);
+    state.addFormOpen = false;
+    state.addFormDraft = null;
+    renderTop3(); renderAll();
+    announce('Added ' + item.title + ' at position ' + rankLabel(state.items.length - 1));
+  }
+
+  // ---- Drag reorder ----
+  function onGripPointerDown(e){
+    if (e.button && e.button !== 0) return;
+    const gripBtn = e.currentTarget;
+    const card = gripBtn.closest('.cp-action');
+    if (!card) return;
+    // only in All pane
+    if (!card.closest('#cpPane-all')) return;
+    e.preventDefault();
+    gripBtn.setPointerCapture && gripBtn.setPointerCapture(e.pointerId);
+
+    const pane = document.getElementById('cpPane-all');
+    const cards = Array.from(pane.querySelectorAll('.cp-action.js-card'));
+    const srcIndex = cards.indexOf(card);
+    if (srcIndex < 0) return;
+    const rect = card.getBoundingClientRect();
+    // Approximate step: card height + gap (margin-bottom is 18px)
+    const step = rect.height + 18;
+
+    state.drag = {
+      pointerId: e.pointerId,
+      gripBtn,
+      card,
+      cards,
+      srcIndex,
+      curIndex: srcIndex,
+      startY: e.clientY,
+      step
+    };
+    card.classList.add('dragging');
+    card.style.transform = 'translateY(0px)';
+    card.style.transition = 'none';
+    // prep siblings
+    cards.forEach((c, i) => {
+      if (c === card) return;
+      c.classList.add('shifting');
+      c.style.transform = 'translateY(0px)';
+    });
+
+    window.addEventListener('pointermove', onDragMove);
+    window.addEventListener('pointerup', onDragEnd);
+    window.addEventListener('pointercancel', onDragEnd);
+  }
+  function onDragMove(e){
+    const d = state.drag; if (!d) return;
+    const dy = e.clientY - d.startY;
+    d.card.style.transform = 'translateY(' + dy + 'px)';
+    // compute target index
+    let target = d.srcIndex + Math.round(dy / d.step);
+    if (target < 0) target = 0;
+    if (target > d.cards.length - 1) target = d.cards.length - 1;
+    if (target !== d.curIndex) {
+      d.curIndex = target;
+      // shift siblings
+      d.cards.forEach((c, i) => {
+        if (c === d.card) return;
+        let shift = 0;
+        if (d.srcIndex < target && i > d.srcIndex && i <= target) shift = -d.step;
+        else if (d.srcIndex > target && i >= target && i < d.srcIndex) shift = d.step;
+        c.style.transform = 'translateY(' + shift + 'px)';
+      });
+    }
+  }
+  function onDragEnd(e){
+    const d = state.drag; if (!d) return;
+    window.removeEventListener('pointermove', onDragMove);
+    window.removeEventListener('pointerup', onDragEnd);
+    window.removeEventListener('pointercancel', onDragEnd);
+    // Clear inline styles
+    d.card.classList.remove('dragging');
+    d.cards.forEach(c => { c.classList.remove('shifting'); c.style.transform = ''; c.style.transition = ''; });
+    d.card.style.transform = ''; d.card.style.transition = '';
+    const { srcIndex, curIndex } = d;
+    state.drag = null;
+    if (curIndex !== srcIndex) {
+      reorder(srcIndex, curIndex);
+      announce('Moved action to position ' + rankLabel(curIndex));
+    }
+  }
+  function reorder(src, dst){
+    const [item] = state.items.splice(src, 1);
+    state.items.splice(dst, 0, item);
+    renderTop3(); renderAll();
+  }
+
+  // keyboard reorder on grip
+  function onGripKeydown(e){
+    const gripBtn = e.currentTarget;
+    const card = gripBtn.closest('.cp-action');
+    if (!card || !card.closest('#cpPane-all')) return;
+    const pane = document.getElementById('cpPane-all');
+    const cards = Array.from(pane.querySelectorAll('.cp-action.js-card'));
+    const index = cards.indexOf(card);
+    if (index < 0) return;
+
+    if (!state.kbdLift) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        state.kbdLift = { id: card.dataset.id, index };
+        gripBtn.classList.add('lifted');
+        announce('Lifted action at position ' + rankLabel(index) + '. Use arrow keys. Space to drop. Escape to cancel.');
+      }
+      return;
+    }
+    // in lifted state
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (index < state.items.length - 1) {
+        reorder(index, index + 1);
+        // refocus the grip of the moved card at its new index
+        setTimeout(() => refocusGrip(state.kbdLift.id, true), 0);
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (index > 0) {
+        reorder(index, index - 1);
+        setTimeout(() => refocusGrip(state.kbdLift.id, true), 0);
+      }
+    } else if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      state.kbdLift = null;
+      gripBtn.classList.remove('lifted');
+      announce('Dropped at position ' + rankLabel(index));
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      state.kbdLift = null;
+      gripBtn.classList.remove('lifted');
+      announce('Reorder cancelled');
+    }
+  }
+  function refocusGrip(id, keepLifted){
+    const pane = document.getElementById('cpPane-all');
+    const card = pane && pane.querySelector('.cp-action[data-id="' + id + '"]');
+    const grip = card && card.querySelector('.cp-grip');
+    if (grip) {
+      grip.focus();
+      if (keepLifted && state.kbdLift) grip.classList.add('lifted');
+    }
+  }
+
+  // ---- Inline popover ----
+  function openPopover(anchorEl, anchorLabel, placeholder){
+    closePopover();
+    const pop = document.createElement('div');
+    pop.className = 'cp-pop';
+    pop.innerHTML =
+      '<div class="cp-pop-head">' +
+        '<div class="cp-pop-title">Ask · ' + esc(anchorLabel) + '</div>' +
+        '<button class="cp-ask-iconbtn" data-action="close" aria-label="Close">' + xSvg() + '</button>' +
+      '</div>' +
+      '<div class="cp-pop-body">' +
+        '<textarea class="cp-pop-textarea" placeholder="' + esc(placeholder || 'Ask anything…') + '"></textarea>' +
+        '<div class="cp-pop-actions">' +
+          '<button class="cp-pop-btn ghost" data-action="close">Cancel</button>' +
+          '<button class="cp-pop-btn" data-action="ask">Ask</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(pop);
+    positionPopover(pop, anchorEl);
+    state.pop = { el: pop, anchorEl, anchorLabel };
+    const ta = pop.querySelector('textarea');
+    ta.focus();
+    ta.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitPopover(); }
+      else if (e.key === 'Escape') { e.preventDefault(); closePopover(); }
+    });
+    pop.querySelectorAll('[data-action="close"]').forEach(b => b.addEventListener('click', closePopover));
+    pop.querySelector('[data-action="ask"]').addEventListener('click', submitPopover);
+    setTimeout(() => document.addEventListener('mousedown', onDocClickForPopover), 0);
+  }
+  function positionPopover(pop, anchorEl){
+    const r = anchorEl.getBoundingClientRect();
+    const popW = 380;
+    const popH = pop.offsetHeight || 180;
+    let left = Math.min(window.innerWidth - popW - 12, Math.max(12, r.left));
+    let top = r.bottom + 6;
+    if (top + popH > window.innerHeight - 12) top = Math.max(12, r.top - popH - 6);
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+  }
+  function submitPopover(){
+    const pop = state.pop && state.pop.el;
+    if (!pop) return;
+    const ta = pop.querySelector('textarea');
+    const q = (ta.value || '').trim();
+    if (!q) return;
+    const { body, source } = mockAnswer(q, state.pop.anchorLabel);
+    const body$ = pop.querySelector('.cp-pop-body');
+    body$.innerHTML =
+      '<div class="cp-msg cp-msg-user"><div class="cp-msg-user-anchor">Re: ' + esc(state.pop.anchorLabel) + '</div>' + esc(q) + '</div>' +
+      '<div class="cp-pop-answer cp-msg-assistant">' + esc(body) + '<div class="cp-msg-source">' + esc(source) + '</div></div>' +
+      '<div class="cp-pop-actions">' +
+        '<button class="cp-pop-btn ghost" data-action="again">Ask another</button>' +
+        '<button class="cp-pop-btn" data-action="thread">Continue in thread →</button>' +
+      '</div>';
+    // store for thread graduation
+    state.pop.query = q;
+    state.pop.answered = { body, source };
+    pop.querySelector('[data-action="again"]').addEventListener('click', () => {
+      const label = state.pop.anchorLabel; const anchor = state.pop.anchorEl;
+      closePopover();
+      openPopover(anchor, label, 'Ask anything…');
+    });
+    pop.querySelector('[data-action="thread"]').addEventListener('click', graduateToThread);
+    positionPopover(pop, state.pop.anchorEl);
+  }
+  function graduateToThread(){
+    if (!state.pop) return;
+    const q = state.pop.query;
+    const label = state.pop.anchorLabel;
+    const answered = state.pop.answered;
+    closePopover();
+    openPane();
+    // Append the user message + same assistant reply to thread
+    state.pane.thread.push({ role: 'user', text: q, anchor: label });
+    state.pane.thread.push({ role: 'assistant', text: answered.body, source: answered.source });
+    renderPane();
+  }
+  function closePopover(){
+    if (state.pop && state.pop.el && state.pop.el.parentNode) {
+      state.pop.el.parentNode.removeChild(state.pop.el);
+    }
+    state.pop = null;
+    document.removeEventListener('mousedown', onDocClickForPopover);
+  }
+  function onDocClickForPopover(e){
+    if (!state.pop) return;
+    if (state.pop.el.contains(e.target)) return;
+    if (state.pop.anchorEl && state.pop.anchorEl.contains(e.target)) return;
+    closePopover();
+  }
+
+  // ---- Ask Pane ----
+  function openPane(){
+    state.pane.open = true;
+    const pane = document.getElementById('cpAskPane');
+    pane.classList.add('open');
+    pane.setAttribute('aria-hidden', 'false');
+    renderPane();
+  }
+  function closePane(){
+    state.pane.open = false;
+    const pane = document.getElementById('cpAskPane');
+    pane.classList.remove('open');
+    pane.setAttribute('aria-hidden', 'true');
+  }
+  function clearThread(){
+    state.pane.thread = [];
+    renderPane();
+  }
+  function renderPane(){
+    const inner = document.getElementById('cpAskPaneInner');
+    if (!inner) return;
+    const turns = state.pane.thread.filter(m => m.role === 'user').length;
+    let bodyHtml = '';
+    if (state.pane.thread.length === 0) {
+      bodyHtml =
+        '<div class="cp-ask-empty">' +
+          '<p>Ask about ranking, rationale, trade-offs, or draft the patient-facing version.</p>' +
+          '<div class="cp-ask-suggestions">' +
+            SUGGESTIONS.map((s,i) => '<button class="cp-ask-sugg" data-sugg="'+i+'">' + esc(s) + '</button>').join('') +
+          '</div>' +
+        '</div>';
+    } else {
+      bodyHtml = state.pane.thread.map(m => {
+        if (m.role === 'user') {
+          return '<div class="cp-msg cp-msg-user">' +
+            (m.anchor ? '<div class="cp-msg-user-anchor">Re: ' + esc(m.anchor) + '</div>' : '') +
+            esc(m.text) + '</div>';
+        }
+        return '<div class="cp-msg cp-msg-assistant">' + esc(m.text) +
+               '<div class="cp-msg-source">' + esc(m.source || '') + '</div></div>';
+      }).join('');
+    }
+
+    inner.innerHTML =
+      '<div class="cp-ask-head">' +
+        '<div class="cp-ask-head-title">' + sparkleSvg(12) + '<span>Ask Meridian</span><span class="cp-ask-turns">' + turns + ' turn' + (turns===1?'':'s') + '</span></div>' +
+        '<button class="cp-ask-iconbtn" data-action="clear" aria-label="Clear thread">' + trashSvg() + '</button>' +
+        '<button class="cp-ask-iconbtn" data-action="close" aria-label="Close pane">' + xSvg() + '</button>' +
+      '</div>' +
+      '<div class="cp-ask-body" id="cpAskBody">' + bodyHtml + '</div>' +
+      '<div class="cp-ask-foot">' +
+        '<textarea class="cp-ask-input" placeholder="Ask about this plan. Enter to send · Shift+Enter for newline."></textarea>' +
+        '<button class="cp-ask-send">Send</button>' +
+      '</div>';
+
+    // Bind
+    inner.querySelector('[data-action="close"]').addEventListener('click', closePane);
+    inner.querySelector('[data-action="clear"]').addEventListener('click', clearThread);
+    inner.querySelectorAll('.cp-ask-sugg').forEach(btn => {
+      btn.addEventListener('click', () => postToPane(SUGGESTIONS[parseInt(btn.getAttribute('data-sugg'),10)], null));
+    });
+    const input = inner.querySelector('.cp-ask-input');
+    const send = inner.querySelector('.cp-ask-send');
+    const submit = () => {
+      const v = (input.value || '').trim();
+      if (!v) return;
+      input.value = '';
+      postToPane(v, null);
+    };
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); }
+    });
+    send.addEventListener('click', submit);
+
+    // scroll to bottom
+    const body = document.getElementById('cpAskBody');
+    if (body) body.scrollTop = body.scrollHeight;
+  }
+  function postToPane(query, anchorLabel){
+    state.pane.thread.push({ role: 'user', text: query, anchor: anchorLabel || null });
+    const { body, source } = mockAnswer(query, anchorLabel);
+    state.pane.thread.push({ role: 'assistant', text: body, source });
+    renderPane();
+  }
+
+  // ---- ⌘K Command Palette ----
+  function openCmdk(){
+    if (state.cmdk.open) return;
+    state.cmdk.open = true;
+    const backdrop = document.createElement('div');
+    backdrop.className = 'cp-cmdk-backdrop';
+    backdrop.innerHTML =
+      '<div class="cp-cmdk" role="dialog" aria-label="Command palette">' +
+        '<div class="cp-cmdk-input-wrap">' +
+          '<span class="cp-cmdk-sparkle">' + sparkleSvg(14) + '</span>' +
+          '<input class="cp-cmdk-input" type="text" placeholder="Ask Meridian about this plan…" />' +
+        '</div>' +
+        '<div class="cp-cmdk-list">' +
+          SUGGESTIONS.map((s,i) => '<div class="cp-cmdk-item' + (i===0?' active':'') + '" data-idx="'+i+'"><span class="cp-cmdk-item-glyph">' + sparkleSvg(12) + '</span><span>' + esc(s) + '</span></div>').join('') +
+        '</div>' +
+        '<div class="cp-cmdk-foot"><span>↩ open in thread</span><span>Esc to close</span></div>' +
+      '</div>';
+    document.body.appendChild(backdrop);
+    const input = backdrop.querySelector('.cp-cmdk-input');
+    const items = Array.from(backdrop.querySelectorAll('.cp-cmdk-item'));
+    let active = 0;
+    const setActive = (i) => {
+      active = (i + items.length) % items.length;
+      items.forEach((el, j) => el.classList.toggle('active', j === active));
+    };
+    input.focus();
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); closeCmdk(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        const v = (input.value || '').trim();
+        const query = v || SUGGESTIONS[active];
+        closeCmdk();
+        openPane();
+        postToPane(query, null);
+      }
+    });
+    items.forEach((el, i) => {
+      el.addEventListener('click', () => {
+        closeCmdk();
+        openPane();
+        postToPane(SUGGESTIONS[i], null);
+      });
+      el.addEventListener('mouseenter', () => setActive(i));
+    });
+    backdrop.addEventListener('mousedown', (e) => {
+      if (e.target === backdrop) closeCmdk();
+    });
+    state.cmdk.el = backdrop;
+  }
+  function closeCmdk(){
+    if (!state.cmdk.open) return;
+    state.cmdk.open = false;
+    if (state.cmdk.el && state.cmdk.el.parentNode) state.cmdk.el.parentNode.removeChild(state.cmdk.el);
+    state.cmdk.el = null;
+  }
+
+  // ---- Global bindings ----
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const mod = isMac ? e.metaKey : e.ctrlKey;
+    if (mod && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      if (state.cmdk.open) closeCmdk(); else openCmdk();
+    } else if (e.key === 'Escape') {
+      if (state.cmdk.open) closeCmdk();
+    }
+  });
+
+  // Plan-level Ask chip
+  function bindPlanAsk(){
+    const btn = document.getElementById('cpAskPlan');
+    if (btn && !btn._bound) {
+      btn._bound = true;
+      btn.addEventListener('click', () => {
+        const seed = 'Walk me through this care plan and flag anything missing.';
+        openPane();
+        postToPane(seed, 'this care plan');
+      });
+    }
+  }
+
+  // Keep popover positioned on scroll/resize
+  window.addEventListener('scroll', () => { if (state.pop) positionPopover(state.pop.el, state.pop.anchorEl); }, true);
+  window.addEventListener('resize', () => { if (state.pop) positionPopover(state.pop.el, state.pop.anchorEl); });
+
+  // Init
+  function init(){
+    renderTop3();
+    renderAll();
+    renderPane();
+    bindPlanAsk();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  // Expose minimal hook for switchCp
+  window.CarePlan = {
+    onTabSwitch: function(id){ /* re-render is idempotent */ renderTop3(); renderAll(); },
+    openPane, closePane, openCmdk
+  };
+})();
 </script>
 
 
