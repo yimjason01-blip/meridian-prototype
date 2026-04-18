@@ -6513,6 +6513,7 @@ document.addEventListener('keydown', e => {
 
 // Sleep bars
 const sleepBars = document.getElementById('sleepBars');
+if (sleepBars) {
 [6.2,7.1,6.5,7.8,6.9,5.8,7.2,6.4,7.5,6.1,6.8,7.3,5.5,7.0,6.6,8.1,6.3,7.4,6.7,5.9,
 7.6,6.0,6.9,7.2,6.5,5.7,7.8,6.4,7.1,6.2,8.0,6.8,5.6,7.3,6.6,7.0,6.1,7.5,6.3,6.9,
 7.7,5.8,6.7,7.2,6.4,8.2,6.0,7.1,6.5,6.8,7.4,5.9,6.3,7.6,6.6,7.0,6.2,6.9,7.3,5.5,
@@ -6523,6 +6524,7 @@ const sleepBars = document.getElementById('sleepBars');
   bar.title = h.toFixed(1) + 'h';
   sleepBars.appendChild(bar);
 });
+}
 
 /* =====================================================================
    CARE PLAN v3 MODULE
