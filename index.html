@@ -1278,6 +1278,44 @@
     .cp-release-title { font-size: 20px; font-weight: 510; color: var(--text); letter-spacing: -0.3px; margin-bottom: 8px; }
     .cp-release-sub { font-size: 13px; color: var(--text-muted); line-height: 1.55; max-width: 62ch; margin-bottom: 28px; }
 
+    /* ─── Trajectory Preview (milestone ladder above release workflow) ─── */
+    .cp-traj { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px 20px; margin-bottom: 22px; }
+    .cp-traj-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+    .cp-traj-label { font-size: 12px; font-weight: 510; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-traj-meta { font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; }
+    .cp-traj-intro { font-size: 13px; color: var(--text-secondary); line-height: 1.55; max-width: 72ch; margin-bottom: 18px; padding: 12px 14px; border: 1px solid var(--border-subtle); border-radius: 6px; background: rgba(255,255,255,0.012); }
+    .cp-traj-intro strong { color: var(--text); font-weight: 510; }
+    .cp-traj-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 14px; font-size: 11px; }
+    .cp-traj-legend-item { display: inline-flex; align-items: center; gap: 7px; }
+    .cp-traj-legend-swatch { width: 14px; height: 10px; border-radius: 2px; }
+    .cp-traj-legend-label { color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.02em; }
+    .cp-traj-chart-wrap { margin: 0 -4px 16px; }
+    .cp-traj-chart { width: 100%; height: auto; display: block; }
+    .cp-traj-slider-box { border: 1px solid rgba(113,112,255,0.4); background: rgba(113,112,255,0.04); border-radius: 6px; padding: 14px 16px; margin-bottom: 18px; }
+    .cp-traj-slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .cp-traj-slider-title { font-size: 12px; font-weight: 510; letter-spacing: 0.04em; color: var(--text); }
+    .cp-traj-slider-value { font-size: 12px; color: var(--accent-hover); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; }
+    .cp-traj-slider-rail { position: relative; }
+    .cp-traj-slider-rail input[type=range] { width: 100%; accent-color: var(--accent-hover); position: relative; z-index: 2; }
+    .cp-traj-slider-tick { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 2px; height: 14px; background: rgba(168,173,183,0.6); pointer-events: none; z-index: 1; }
+    .cp-traj-slider-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; margin-top: 4px; }
+    .cp-traj-slider-labels span.mid { color: var(--text-muted); }
+    .cp-traj-slider-summary { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 10px; }
+    .cp-traj-slider-summary .num { color: var(--accent-hover); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-traj-table { display: grid; grid-template-columns: 1fr auto auto auto; gap: 12px 18px; font-size: 12px; margin-top: 4px; }
+    .cp-traj-table .cp-traj-th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .cp-traj-table .cp-traj-th.right { text-align: right; }
+    .cp-traj-table .cp-traj-row { display: contents; }
+    .cp-traj-row-label { display: flex; align-items: baseline; gap: 8px; padding: 8px 0; border-bottom: 1px dashed var(--border-subtle); }
+    .cp-traj-row-label .dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; transform: translateY(1px); }
+    .cp-traj-row-label .name { color: var(--text); font-size: 13px; line-height: 1.3; }
+    .cp-traj-row-label .src { display: block; color: var(--text-subtle); font-size: 10px; font-family: 'JetBrains Mono', ui-monospace, monospace; margin-top: 2px; letter-spacing: 0.04em; }
+    .cp-traj-row-cell { padding: 8px 0; border-bottom: 1px dashed var(--border-subtle); text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+    .cp-traj-row-cell.muted { color: var(--text-muted); }
+    .cp-traj-row-cell.secondary { color: var(--text-secondary); min-width: 48px; }
+    .cp-traj-foot { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 10px; color: var(--text-subtle); line-height: 1.5; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; max-width: 82ch; }
+    .cp-traj-foot-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; display: block; }
+
     /* Overview composer */
     .cp-overview { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px 20px; margin-bottom: 22px; }
     .cp-overview-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
@@ -7603,6 +7641,9 @@ if (sleepBars) {
       + '<div class="cp-release-sub">These three actions are what the patient will see. Everything else stays clinical-side. Compose a warm overview in your voice, preview it, confirm the follow-up, then release.</div>';
     wrap.appendChild(header);
 
+    // Trajectory preview — what this plan is claiming
+    wrap.appendChild(buildTrajectoryPreview());
+
     // Overview composer
     wrap.appendChild(buildOverviewComposer());
 
@@ -7642,6 +7683,294 @@ if (sleepBars) {
     if (!old) return;
     const fresh = buildReleaseWorkflow();
     old.parentNode.replaceChild(fresh, old);
+  }
+
+  function buildTrajectoryPreview(){
+    const wrap = document.createElement('div');
+    wrap.className = 'cp-traj';
+
+    // Shared milestone data (from Milestone Ladder in meridian-ds)
+    const milestones = [
+      { id:'mace',  label:'First heart attack or stroke', physLabel:'First MACE event',
+        source:'PREVENT (AHA 2023) + ATM hazard', without:68, win:5, maxShift:10, color:'#e8604c' },
+      { id:'ca',    label:'Cancer diagnosis',             physLabel:'Incident malignancy',
+        source:'SEER + ATM heterozygote cohort',  without:72, win:6, maxShift:8,  color:'#d14a6a' },
+      { id:'ind',   label:'Loss of independent living',   physLabel:'ADL-dependency',
+        source:'Framingham functional · N≈6,500', without:76, win:5, maxShift:7,  color:'#e09b2d' },
+      { id:'gait',  label:'Noticeable loss of mobility',  physLabel:'Gait speed < 1.0 m/s',
+        source:'Studenski cohort + pooled healthspan', without:70, win:4, maxShift:6, color:'#6db1c9' },
+    ];
+
+    // State
+    let progress = 50; // 0-100
+    const FUND_FRAC = 0.65;
+
+    // Scaling: piecewise linear
+    const scale = (p) => (p <= 50) ? (p/50)*FUND_FRAC : FUND_FRAC + ((p-50)/50)*(1 - FUND_FRAC);
+    const stageOf = (p) => p===0 ? 'No plan' : p<50 ? 'Fundamentals · in progress' : p===50 ? 'Fundamentals · complete' : p<100 ? 'Optimization · in progress' : 'Optimization · complete';
+
+    // Header
+    const head = document.createElement('div');
+    head.className = 'cp-traj-head';
+    head.innerHTML = '<div class="cp-traj-label">Trajectory preview · what this plan is claiming</div>'
+      + '<div class="cp-traj-meta">Reference cohort: ATM+ dyslipidemic males 45–50 · N≈7,412</div>';
+    wrap.appendChild(head);
+
+    // Intro
+    const intro = document.createElement('div');
+    intro.className = 'cp-traj-intro';
+    intro.innerHTML = 'These are statistical markers for <strong>people like this patient</strong>, not a promise. The journey has two stages: <strong>Fundamentals</strong> delivers most of the shift (meds, screening, lifestyle floor); <strong>Optimization</strong> adds further gains in patients with sustained precision care. Drag the slider to see what the current plan is claiming — if the gain looks thin, reshape the plan before releasing.';
+    wrap.appendChild(intro);
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.className = 'cp-traj-legend';
+    milestones.forEach(m => {
+      const item = document.createElement('div');
+      item.className = 'cp-traj-legend-item';
+      item.innerHTML = '<div class="cp-traj-legend-swatch" style="background:' + m.color + ';opacity:0.85"></div>'
+        + '<span class="cp-traj-legend-label">' + m.label + '</span>';
+      legend.appendChild(item);
+    });
+    wrap.appendChild(legend);
+
+    // Chart wrapper
+    const chartWrap = document.createElement('div');
+    chartWrap.className = 'cp-traj-chart-wrap';
+
+    // SVG geometry
+    const W = 640, H = 340;
+    const ageMin = 50, ageMax = 94;
+    const leftPad = 76, rightPad = 24;
+    const xOf = (age) => leftPad + ((age - ageMin) / (ageMax - ageMin)) * (W - leftPad - rightPad);
+    const y1 = 110, y2 = 230;
+    const laneSpacing = 14;
+    const bandH = 10;
+    const laneY = (i) => (i - 1.5) * laneSpacing;
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('class', 'cp-traj-chart');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+    const makeEl = (name, attrs) => {
+      const el = document.createElementNS(svgNS, name);
+      for (const k in attrs) el.setAttribute(k, attrs[k]);
+      return el;
+    };
+
+    // Static scaffolding (drawn once)
+    // Age axis
+    svg.appendChild(makeEl('line', { x1: leftPad, y1: H - 22, x2: W - rightPad, y2: H - 22,
+      stroke: '#35383e', 'stroke-width': '1' }));
+    [50,60,70,80,90].forEach(age => {
+      svg.appendChild(makeEl('line', { x1: xOf(age), y1: H - 22, x2: xOf(age), y2: H - 18,
+        stroke: '#a8adb7', 'stroke-width': '0.8' }));
+      const tx = makeEl('text', { x: xOf(age), y: H - 6, fill: '#a8adb7',
+        'font-size': '10', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle' });
+      tx.textContent = age;
+      svg.appendChild(tx);
+    });
+
+    // Track labels
+    const lblWithout = makeEl('text', { x: leftPad - 10, y: y1 - 34, fill: '#a8adb7',
+      'font-size': '11', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'end' });
+    lblWithout.textContent = 'Without';
+    svg.appendChild(lblWithout);
+    const lblWith = makeEl('text', { x: leftPad - 10, y: y2 - 34, fill: '#f7f8f8',
+      'font-size': '11', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'end' });
+    lblWith.textContent = 'With Meridian';
+    svg.appendChild(lblWith);
+
+    // Baseline dashed tracks
+    svg.appendChild(makeEl('line', { x1: leftPad, y1: y1, x2: W - rightPad, y2: y1,
+      stroke: '#35383e', 'stroke-width': '1', 'stroke-dasharray': '3 3' }));
+    svg.appendChild(makeEl('line', { x1: leftPad, y1: y2, x2: W - rightPad, y2: y2,
+      stroke: '#35383e', 'stroke-width': '1', 'stroke-dasharray': '3 3' }));
+
+    // You are here (patient age 47)
+    svg.appendChild(makeEl('line', { x1: xOf(47), y1: y1 - 30, x2: xOf(47), y2: y2 + 30,
+      stroke: '#f7f8f8', 'stroke-width': '1', 'stroke-dasharray': '2 2' }));
+    svg.appendChild(makeEl('circle', { cx: xOf(47), cy: y1, r: '3', fill: '#f7f8f8' }));
+    svg.appendChild(makeEl('circle', { cx: xOf(47), cy: y2, r: '3', fill: '#f7f8f8' }));
+    const youTxt = makeEl('text', { x: xOf(47), y: y1 - 50, fill: '#f7f8f8',
+      'font-size': '10', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle' });
+    youTxt.textContent = 'now · 47';
+    svg.appendChild(youTxt);
+
+    // Dynamic milestone group — we'll rebuild its contents on progress change
+    const dynGroup = makeEl('g', { id: 'cp-traj-dyn' });
+    svg.appendChild(dynGroup);
+
+    const renderMilestones = () => {
+      // clear
+      while (dynGroup.firstChild) dynGroup.removeChild(dynGroup.firstChild);
+      const s = scale(progress);
+      milestones.forEach((m, i) => {
+        const shift = m.maxShift * s;
+        const wMed = m.without + shift;
+        const shiftFrac = m.maxShift > 0 ? shift / m.maxShift : 0;
+        const withWin = m.win * (1 + shiftFrac * 0.3);
+        const yL1 = y1 + laneY(i);
+        const yL2 = y2 + laneY(i);
+
+        // Without (hollow)
+        dynGroup.appendChild(makeEl('rect', {
+          x: xOf(m.without - m.win), y: yL1 - bandH/2,
+          width: xOf(m.without + m.win) - xOf(m.without - m.win), height: bandH,
+          fill: m.color, 'fill-opacity': '0.08',
+          stroke: m.color, 'stroke-opacity': '0.65', 'stroke-width': '1', rx: '2'
+        }));
+        dynGroup.appendChild(makeEl('line', {
+          x1: xOf(m.without), y1: yL1 - bandH/2 - 1,
+          x2: xOf(m.without), y2: yL1 + bandH/2 + 1,
+          stroke: m.color, 'stroke-width': '1.4'
+        }));
+
+        // With Meridian (solid)
+        dynGroup.appendChild(makeEl('rect', {
+          x: xOf(wMed - withWin), y: yL2 - bandH/2,
+          width: xOf(wMed + withWin) - xOf(wMed - withWin), height: bandH,
+          fill: m.color, 'fill-opacity': '0.55',
+          stroke: m.color, 'stroke-opacity': '0.95', 'stroke-width': '1', rx: '2'
+        }));
+        dynGroup.appendChild(makeEl('line', {
+          x1: xOf(wMed), y1: yL2 - bandH/2 - 1,
+          x2: xOf(wMed), y2: yL2 + bandH/2 + 1,
+          stroke: m.color, 'stroke-width': '1.8'
+        }));
+
+        // Same-domain vertical thread
+        dynGroup.appendChild(makeEl('line', {
+          x1: xOf(m.without), y1: yL1 + bandH/2,
+          x2: xOf(wMed), y2: yL2 - bandH/2,
+          stroke: m.color, 'stroke-opacity': '0.3',
+          'stroke-width': '0.7', 'stroke-dasharray': '2 2'
+        }));
+
+        // Year labels on outer lanes
+        if (i === 0 || i === 3) {
+          const t1 = makeEl('text', {
+            x: xOf(m.without), y: i === 0 ? yL1 - 14 : yL1 + 24,
+            fill: m.color, 'fill-opacity': '0.85', 'font-size': '9',
+            'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle'
+          });
+          t1.textContent = m.without;
+          dynGroup.appendChild(t1);
+          const t2 = makeEl('text', {
+            x: xOf(wMed), y: i === 0 ? yL2 - 14 : yL2 + 24,
+            fill: m.color, 'font-size': '9',
+            'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle'
+          });
+          t2.textContent = wMed.toFixed(0);
+          dynGroup.appendChild(t2);
+        }
+      });
+    };
+    renderMilestones();
+    chartWrap.appendChild(svg);
+    wrap.appendChild(chartWrap);
+
+    // Slider box
+    const sliderBox = document.createElement('div');
+    sliderBox.className = 'cp-traj-slider-box';
+    sliderBox.innerHTML = '<div class="cp-traj-slider-head">'
+      + '<div class="cp-traj-slider-title">Engagement stage</div>'
+      + '<div class="cp-traj-slider-value" id="cp-traj-stage-val"></div>'
+      + '</div>'
+      + '<div class="cp-traj-slider-rail">'
+      +   '<input type="range" min="0" max="100" step="5" value="' + progress + '" id="cp-traj-slider">'
+      +   '<div class="cp-traj-slider-tick"></div>'
+      + '</div>'
+      + '<div class="cp-traj-slider-labels">'
+      +   '<span>Start</span>'
+      +   '<span class="mid">Fundamentals</span>'
+      +   '<span class="mid">|</span>'
+      +   '<span class="mid">Optimization</span>'
+      +   '<span>Full</span>'
+      + '</div>'
+      + '<div class="cp-traj-slider-summary" id="cp-traj-summary"></div>';
+    wrap.appendChild(sliderBox);
+
+    // Table
+    const table = document.createElement('div');
+    table.className = 'cp-traj-table';
+    table.innerHTML = '<div class="cp-traj-th">Milestone</div>'
+      + '<div class="cp-traj-th right">Without</div>'
+      + '<div class="cp-traj-th right">With Meridian</div>'
+      + '<div class="cp-traj-th right">Gain</div>';
+
+    milestones.forEach(m => {
+      const lblCell = document.createElement('div');
+      lblCell.className = 'cp-traj-row-label';
+      lblCell.innerHTML = '<span class="dot" style="background:' + m.color + ';opacity:0.85"></span>'
+        + '<span><span class="name">' + m.label + '</span><span class="src">' + m.source + '</span></span>';
+      table.appendChild(lblCell);
+
+      const withoutCell = document.createElement('div');
+      withoutCell.className = 'cp-traj-row-cell muted';
+      withoutCell.textContent = (m.without - m.win) + '–' + (m.without + m.win);
+      table.appendChild(withoutCell);
+
+      const withCell = document.createElement('div');
+      withCell.className = 'cp-traj-row-cell';
+      withCell.style.color = m.color;
+      withCell.dataset.withFor = m.id;
+      table.appendChild(withCell);
+
+      const gainCell = document.createElement('div');
+      gainCell.className = 'cp-traj-row-cell secondary';
+      gainCell.dataset.gainFor = m.id;
+      table.appendChild(gainCell);
+    });
+    wrap.appendChild(table);
+
+    // Footer
+    const foot = document.createElement('div');
+    foot.className = 'cp-traj-foot';
+    foot.innerHTML = '<span class="cp-traj-foot-lbl">Models + uncertainty</span>'
+      + 'PREVENT (CVD) · SEER (cancer) · Framingham functional · Studenski gait. '
+      + 'Per-milestone uncertainty ±3–5 years. Cohort-level inference; individual prediction not claimed. '
+      + 'At progress=0, With-Meridian band coincides with Without (no claimed shift, no added uncertainty). '
+      + 'Two-stage split (Fundamentals ≈65% / Optimization ≈35%) is a modeling convention synthesized from CTT, PREDIMED, HOPE-3, SPRINT — not a single published estimate.';
+    wrap.appendChild(foot);
+
+    // Updater
+    const updateAll = () => {
+      const s = scale(progress);
+      const avgGain = milestones.reduce((sum, m) => sum + m.maxShift * s, 0) / milestones.length;
+      // stage
+      const stageEl = wrap.querySelector('#cp-traj-stage-val');
+      if (stageEl) stageEl.textContent = stageOf(progress);
+      // summary
+      const sumEl = wrap.querySelector('#cp-traj-summary');
+      if (sumEl) {
+        sumEl.innerHTML = 'At <span class="num">' + stageOf(progress).toLowerCase() + '</span>, this plan claims <span class="num">≈' + avgGain.toFixed(1) + ' years</span> before these markers, on average. Fundamentals delivers ~65%; Optimization adds the rest with sustained precision care.';
+      }
+      // table cells
+      milestones.forEach(m => {
+        const shift = m.maxShift * s;
+        const wMed = m.without + shift;
+        const wCell = wrap.querySelector('[data-with-for="' + m.id + '"]');
+        const gCell = wrap.querySelector('[data-gain-for="' + m.id + '"]');
+        if (wCell) wCell.textContent = '→ ' + wMed.toFixed(0);
+        if (gCell) gCell.textContent = '+' + shift.toFixed(1) + 'y';
+      });
+      renderMilestones();
+    };
+    updateAll();
+
+    // Wire slider
+    const slider = wrap.querySelector('#cp-traj-slider');
+    if (slider) {
+      slider.addEventListener('input', (e) => {
+        progress = parseInt(e.target.value, 10);
+        updateAll();
+      });
+    }
+
+    return wrap;
   }
 
   function buildOverviewComposer(){
