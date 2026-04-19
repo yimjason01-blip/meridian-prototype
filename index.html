@@ -1271,6 +1271,99 @@
       .cp-ask-pane.open { flex: 0 0 340px; width: 340px; }
       .cp-ask-pane-inner { width: 340px; }
     }
+
+    /* ─── Release Workflow (Top 3 pane only) ─── */
+    .cp-release { margin-top: 36px; border-top: 1px solid var(--border); padding-top: 32px; }
+    .cp-release-eyebrow { font-size: 11px; font-weight: 590; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright, var(--accent)); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 10px; }
+    .cp-release-title { font-size: 20px; font-weight: 510; color: var(--text); letter-spacing: -0.3px; margin-bottom: 8px; }
+    .cp-release-sub { font-size: 13px; color: var(--text-muted); line-height: 1.55; max-width: 62ch; margin-bottom: 28px; }
+
+    /* Overview composer */
+    .cp-overview { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px 20px; margin-bottom: 22px; }
+    .cp-overview-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .cp-overview-label { font-size: 12px; font-weight: 510; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-overview-meta { font-size: 12px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-overview-textarea { width: 100%; min-height: 180px; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text); font: 400 14px/1.6 'Inter', sans-serif; padding: 14px 16px; border-radius: 8px; resize: vertical; font-feature-settings: 'cv01'; letter-spacing: -0.1px; }
+    .cp-overview-textarea:focus { outline: none; border-color: var(--border-strong); }
+    .cp-overview-textarea::placeholder { color: var(--text-subtle); }
+    .cp-overview-empty { padding: 40px 20px; text-align: center; color: var(--text-subtle); font-size: 13px; line-height: 1.6; background: var(--bg-panel); border: 1px dashed var(--border); border-radius: 8px; }
+    .cp-overview-empty .cp-gen-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; font-size: 13px; font-weight: 510; background: var(--accent); border: 1px solid var(--accent); color: var(--text); border-radius: 6px; cursor: pointer; font-family: inherit; letter-spacing: 0.01em; transition: all 0.15s; }
+    .cp-overview-empty .cp-gen-btn:hover { background: var(--accent-bright, var(--accent)); border-color: var(--accent-bright, var(--accent)); }
+    .cp-overview-empty .cp-gen-btn svg { width: 12px; height: 12px; }
+
+    .cp-overview-actions { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); }
+    .cp-overview-actions-left { display: flex; gap: 8px; }
+    .cp-overview-actions-right { display: flex; gap: 8px; align-items: center; }
+    .cp-overview-btn { padding: 7px 12px; font-size: 12px; font-weight: 500; color: var(--text-muted); background: transparent; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-family: inherit; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; }
+    .cp-overview-btn:hover { color: var(--text); border-color: var(--border-strong); }
+    .cp-overview-btn svg { width: 11px; height: 11px; }
+    .cp-overview-count { font-size: 11px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; }
+
+    /* Voice preview player */
+    .cp-voice { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 14px; display: flex; align-items: center; gap: 14px; }
+    .cp-voice-play { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); border: none; color: var(--text); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+    .cp-voice-play:hover { background: var(--accent-bright, var(--accent)); }
+    .cp-voice-play:disabled { opacity: 0.4; cursor: not-allowed; }
+    .cp-voice-play svg { width: 12px; height: 12px; }
+    .cp-voice-meta { flex: 1; min-width: 0; }
+    .cp-voice-label { font-size: 12px; color: var(--text); font-weight: 510; margin-bottom: 2px; letter-spacing: -0.05px; }
+    .cp-voice-sub { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; }
+    .cp-voice-progress { height: 2px; background: var(--border); border-radius: 1px; margin-top: 8px; position: relative; overflow: hidden; }
+    .cp-voice-progress-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: var(--accent); transition: width 0.1s linear; }
+    .cp-voice-regen { font-size: 11px; color: var(--text-muted); background: transparent; border: none; cursor: pointer; font-family: inherit; padding: 4px 8px; border-radius: 4px; letter-spacing: 0.02em; }
+    .cp-voice-regen:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+    /* Readiness checklist */
+    .cp-readiness { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 22px; }
+    .cp-readiness-head { font-size: 12px; font-weight: 510; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+    .cp-readiness-count { font-size: 12px; color: var(--text-subtle); letter-spacing: 0.04em; }
+    .cp-readiness-count.ready { color: var(--accent-bright, var(--accent)); }
+    .cp-readiness-list { display: flex; flex-direction: column; gap: 2px; }
+    .cp-gate { display: grid; grid-template-columns: 20px 1fr auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--border-subtle); }
+    .cp-gate:last-child { border-bottom: none; }
+    .cp-gate-check { width: 16px; height: 16px; border: 1.5px solid var(--border-strong); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: transparent; transition: all 0.2s; flex-shrink: 0; }
+    .cp-gate-check svg { width: 10px; height: 10px; }
+    .cp-gate.done .cp-gate-check { background: var(--accent); border-color: var(--accent); color: var(--text); }
+    .cp-gate-label { font-size: 14px; color: var(--text); letter-spacing: -0.1px; }
+    .cp-gate.done .cp-gate-label { color: var(--text-secondary); }
+    .cp-gate-meta { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.02em; }
+    .cp-gate-action { font-size: 12px; color: var(--text-muted); background: transparent; border: 1px solid var(--border); padding: 5px 10px; border-radius: 4px; cursor: pointer; font-family: inherit; letter-spacing: 0.02em; transition: all 0.15s; }
+    .cp-gate-action:hover { color: var(--text); border-color: var(--border-strong); }
+
+    /* Release button row */
+    .cp-release-footer { display: flex; justify-content: space-between; align-items: center; padding: 20px 0 4px; }
+    .cp-release-footer-note { font-size: 12px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; max-width: 48ch; line-height: 1.5; }
+    .cp-release-btn { padding: 11px 22px; font-size: 14px; font-weight: 510; letter-spacing: 0.01em; background: var(--accent); border: 1px solid var(--accent); color: var(--text); border-radius: 8px; cursor: pointer; font-family: inherit; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px; }
+    .cp-release-btn:hover:not(:disabled) { background: var(--accent-bright, var(--accent)); border-color: var(--accent-bright, var(--accent)); }
+    .cp-release-btn:disabled { background: var(--card); border-color: var(--border); color: var(--text-subtle); cursor: not-allowed; }
+    .cp-release-btn svg { width: 13px; height: 13px; }
+
+    /* Release confirmation modal */
+    .cp-confirm-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 10002; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .cp-confirm { width: 560px; max-width: 100%; background: var(--card); border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8); overflow: hidden; }
+    .cp-confirm-head { padding: 22px 26px 18px; border-bottom: 1px solid var(--border-subtle); }
+    .cp-confirm-eyebrow { font-size: 11px; font-weight: 590; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright, var(--accent)); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 8px; }
+    .cp-confirm-title { font-size: 18px; font-weight: 510; color: var(--text); letter-spacing: -0.25px; }
+    .cp-confirm-body { padding: 18px 26px 22px; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .cp-confirm-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 8px 0; border-bottom: 1px dashed var(--border-subtle); font-size: 13px; }
+    .cp-confirm-row:last-child { border-bottom: none; }
+    .cp-confirm-row-lbl { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 500; padding-top: 1px; }
+    .cp-confirm-row-val { color: var(--text); letter-spacing: -0.1px; }
+    .cp-confirm-actions { padding: 16px 26px 22px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); background: rgba(255,255,255,0.012); }
+    .cp-confirm-cancel { padding: 9px 16px; font-size: 13px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; cursor: pointer; font-family: inherit; letter-spacing: 0.01em; font-weight: 500; }
+    .cp-confirm-cancel:hover { background: rgba(255,255,255,0.04); border-color: var(--border-strong); }
+    .cp-confirm-go { padding: 9px 18px; font-size: 13px; background: var(--accent); border: 1px solid var(--accent); color: var(--text); border-radius: 6px; cursor: pointer; font-family: inherit; letter-spacing: 0.01em; font-weight: 510; }
+    .cp-confirm-go:hover { background: var(--accent-bright, var(--accent)); }
+
+    /* Released state */
+    .cp-released { background: rgba(113,112,255,0.06); border: 1px solid var(--accent); border-radius: 10px; padding: 22px 26px; margin-bottom: 22px; }
+    .cp-released-eyebrow { font-size: 11px; font-weight: 590; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright, var(--accent)); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 8px; }
+    .cp-released-title { font-size: 16px; font-weight: 510; color: var(--text); letter-spacing: -0.25px; margin-bottom: 6px; }
+    .cp-released-meta { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; }
+
+    /* Spinner for generate-in-progress */
+    .cp-spin { width: 12px; height: 12px; border: 1.5px solid rgba(255,255,255,0.2); border-top-color: var(--text); border-radius: 50%; animation: cp-spin 0.7s linear infinite; display: inline-block; }
+    @keyframes cp-spin { to { transform: rotate(360deg); } }
   </style>
 
   <div class="cp-wrap">
@@ -6725,8 +6818,27 @@ if (sleepBars) {
     addFormDraft: null,
     pane: { open: false, thread: [] },
     pop: null,               // { anchorEl, anchorLabel, answer?, query? }
-    cmdk: { open: false, query: '' }
+    cmdk: { open: false, query: '' },
+    release: {
+      overview: '',          // textarea content (AI-drafted, physician-edited)
+      overviewGenerated: false, // has AI drafted it?
+      overviewGenerating: false,
+      voiceGenerated: false, // has the audio been generated from current text?
+      voicePreviewPlayed: false, // has physician played end-to-end at least once?
+      voiceDuration: 0,      // seconds, from the audio element
+      voiceAudio: null,      // the Audio() instance
+      voicePlaying: false,
+      voiceProgress: 0,      // 0-1
+      followUpScheduled: false,
+      followUpDate: null,
+      released: false,
+      releasedAt: null,
+      confirmOpen: false
+    }
   };
+
+  // AI-drafted overview (patient voice, written from the top 3 cards)
+  const OVERVIEW_DRAFT = "Hey Jason, it's Dr. Thompson. I wanted to take a couple minutes to walk you through what we found and what we're going to do about it.\n\nThe short version: the system flagged three things that matter most for you right now, and everything else is being tracked quietly in the background.\n\nFirst priority is cholesterol. Your ApoB came back high, and that's the single biggest lever we have on long-term cardiovascular risk. I'm starting you on a low-dose statin today.\n\nSecond, we're seeing your nervous system is running hot — heart rate variability is down, resting heart rate is up over the last six months, and inflammation markers are elevated. That's a stress and recovery signal, so we're going to work on sleep and nervous system recovery over the next eight weeks.\n\nThird, we need a cardiac rhythm check before we push your training any harder. Don't worry — this is a precaution, not an emergency.\n\nEverything else on your chart is either being watched or already in a good range. I'll see you in twelve weeks to check in on all three. If anything feels off before then, message me directly. Take care.";
 
   const SUGGESTIONS = [
     'Re-rank by cost to impact',
@@ -6783,6 +6895,8 @@ if (sleepBars) {
     state.items.slice(0, 3).forEach((item, i) => {
       root.appendChild(buildCard(item, i, { readonly: true, work: true }));
     });
+    // Release workflow lives below the 3 work cards
+    root.appendChild(buildReleaseWorkflow());
   }
 
   // ---- Render: ALL (reorderable + add form) ----
@@ -7442,6 +7556,497 @@ if (sleepBars) {
   window.addEventListener('scroll', () => { if (state.pop) positionPopover(state.pop.el, state.pop.anchorEl); }, true);
   window.addEventListener('resize', () => { if (state.pop) positionPopover(state.pop.el, state.pop.anchorEl); });
 
+  // ─────────────────────────────────────────────
+  //  Release Workflow (Top 3 pane, below the 3 cards)
+  // ─────────────────────────────────────────────
+
+  function playSvg(){ return '<svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><polygon points="3,2 10,6 3,10"/></svg>'; }
+  function pauseSvg(){ return '<svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="2.5" height="8"/><rect x="6.5" y="2" width="2.5" height="8"/></svg>'; }
+  function checkSvg(){ return '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.5 6.2 5 8.7 9.5 3.5"/></svg>'; }
+  function sendSvg(){ return '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6 L10.5 6 M7 2.5 L10.5 6 L7 9.5"/></svg>'; }
+
+  function gateCount(){
+    const r = state.release;
+    let n = 0;
+    if (!!r.overview && r.overview.trim().length > 20) n++;
+    if (r.voicePreviewPlayed) n++;
+    if (r.followUpScheduled) n++;
+    // Cards approved gate — for prototype, hard-coded to true (the 3 cards are accepted state)
+    // In production this would check per-card accept state.
+    n++;
+    return n;
+  }
+
+  function allGatesDone(){ return gateCount() === 4; }
+
+  function formatDuration(s){
+    if (!isFinite(s)) return '—';
+    const m = Math.floor(s / 60);
+    const r = Math.floor(s % 60);
+    return m + ':' + String(r).padStart(2, '0');
+  }
+
+  function buildReleaseWorkflow(){
+    const wrap = document.createElement('div');
+    wrap.className = 'cp-release';
+    wrap.id = 'cpRelease';
+
+    if (state.release.released) {
+      wrap.innerHTML = buildReleasedHTML();
+      return wrap;
+    }
+
+    // Header
+    const header = document.createElement('div');
+    header.innerHTML = '<div class="cp-release-eyebrow">Step 2 · Release to patient</div>'
+      + '<div class="cp-release-title">Hand off the plan</div>'
+      + '<div class="cp-release-sub">These three actions are what the patient will see. Everything else stays clinical-side. Compose a warm overview in your voice, preview it, confirm the follow-up, then release.</div>';
+    wrap.appendChild(header);
+
+    // Overview composer
+    wrap.appendChild(buildOverviewComposer());
+
+    // Readiness checklist
+    wrap.appendChild(buildReadinessList());
+
+    // Release footer
+    const footer = document.createElement('div');
+    footer.className = 'cp-release-footer';
+    const note = document.createElement('div');
+    note.className = 'cp-release-footer-note';
+    const remain = 4 - gateCount();
+    note.textContent = allGatesDone()
+      ? 'All gates clear. Releasing will place orders, send the overview, and start tracking clocks for the three actions.'
+      : remain + ' ' + (remain === 1 ? 'item' : 'items') + ' remaining before release.';
+    footer.appendChild(note);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cp-release-btn';
+    btn.innerHTML = sendSvg() + '<span>Release plan to patient</span>';
+    btn.disabled = !allGatesDone();
+    btn.addEventListener('click', () => {
+      if (!allGatesDone()) return;
+      state.release.confirmOpen = true;
+      openConfirmModal();
+    });
+    footer.appendChild(btn);
+    wrap.appendChild(footer);
+
+    return wrap;
+  }
+
+  // Re-render only the release workflow block without touching the cards
+  function rerenderRelease(){
+    const old = document.getElementById('cpRelease');
+    if (!old) return;
+    const fresh = buildReleaseWorkflow();
+    old.parentNode.replaceChild(fresh, old);
+  }
+
+  function buildOverviewComposer(){
+    const r = state.release;
+    const box = document.createElement('div');
+    box.className = 'cp-overview';
+
+    const head = document.createElement('div');
+    head.className = 'cp-overview-head';
+    const lbl = document.createElement('div');
+    lbl.className = 'cp-overview-label';
+    lbl.textContent = 'Overview message · your voice';
+    const meta = document.createElement('div');
+    meta.className = 'cp-overview-meta';
+    meta.textContent = r.overviewGenerated ? 'AI-drafted from top 3 · edit freely' : 'Patient hears this first';
+    head.appendChild(lbl);
+    head.appendChild(meta);
+    box.appendChild(head);
+
+    if (!r.overview && !r.overviewGenerating) {
+      // Empty state: offer to generate
+      const empty = document.createElement('div');
+      empty.className = 'cp-overview-empty';
+      empty.innerHTML = '<div>Draft a warm overview for the patient.<br>Meridian reads the three accepted actions and writes a first draft in your voice.</div>'
+        + '<button class="cp-gen-btn" id="cpGenOverview">' + sparkleSvg(12) + '<span>Generate draft</span></button>';
+      empty.querySelector('#cpGenOverview').addEventListener('click', generateOverview);
+      box.appendChild(empty);
+      return box;
+    }
+
+    if (r.overviewGenerating) {
+      const empty = document.createElement('div');
+      empty.className = 'cp-overview-empty';
+      empty.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:10px;"><span class="cp-spin"></span><span>Drafting from the three accepted actions…</span></div>';
+      box.appendChild(empty);
+      return box;
+    }
+
+    // Populated state — textarea + voice + actions
+    const ta = document.createElement('textarea');
+    ta.className = 'cp-overview-textarea';
+    ta.value = r.overview;
+    ta.placeholder = 'Write directly or regenerate a draft';
+    ta.addEventListener('input', () => {
+      state.release.overview = ta.value;
+      // Text changed → invalidate voice
+      if (state.release.voiceGenerated) {
+        state.release.voiceGenerated = false;
+        state.release.voicePreviewPlayed = false;
+        if (state.release.voiceAudio) {
+          state.release.voiceAudio.pause();
+          state.release.voiceAudio = null;
+          state.release.voicePlaying = false;
+          state.release.voiceProgress = 0;
+        }
+        rerenderRelease();
+      } else {
+        // just update count
+        const c = box.querySelector('.cp-overview-count');
+        if (c) c.textContent = ta.value.length + ' chars · ~' + Math.max(1, Math.round(ta.value.split(/\s+/).length / 140 * 60)) + 's read';
+      }
+    });
+    box.appendChild(ta);
+
+    // Voice player (only after text exists)
+    box.appendChild(buildVoicePlayer());
+
+    // Actions row
+    const actions = document.createElement('div');
+    actions.className = 'cp-overview-actions';
+    const left = document.createElement('div');
+    left.className = 'cp-overview-actions-left';
+    const regenBtn = document.createElement('button');
+    regenBtn.type = 'button';
+    regenBtn.className = 'cp-overview-btn';
+    regenBtn.innerHTML = sparkleSvg(11) + '<span>Regenerate</span>';
+    regenBtn.addEventListener('click', generateOverview);
+    left.appendChild(regenBtn);
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'cp-overview-btn';
+    clearBtn.innerHTML = '<span>Clear</span>';
+    clearBtn.addEventListener('click', () => {
+      state.release.overview = '';
+      state.release.overviewGenerated = false;
+      state.release.voiceGenerated = false;
+      state.release.voicePreviewPlayed = false;
+      if (state.release.voiceAudio) { state.release.voiceAudio.pause(); state.release.voiceAudio = null; }
+      rerenderRelease();
+    });
+    left.appendChild(clearBtn);
+    actions.appendChild(left);
+
+    const right = document.createElement('div');
+    right.className = 'cp-overview-actions-right';
+    const count = document.createElement('div');
+    count.className = 'cp-overview-count';
+    count.textContent = r.overview.length + ' chars · ~' + Math.max(1, Math.round(r.overview.split(/\s+/).length / 140 * 60)) + 's read';
+    right.appendChild(count);
+    actions.appendChild(right);
+    box.appendChild(actions);
+
+    return box;
+  }
+
+  function buildVoicePlayer(){
+    const r = state.release;
+    const box = document.createElement('div');
+    box.className = 'cp-voice';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cp-voice-play';
+    btn.innerHTML = r.voicePlaying ? pauseSvg() : playSvg();
+    btn.setAttribute('aria-label', r.voicePlaying ? 'Pause preview' : 'Play preview');
+    btn.addEventListener('click', toggleVoicePlayback);
+    box.appendChild(btn);
+
+    const meta = document.createElement('div');
+    meta.className = 'cp-voice-meta';
+    const label = document.createElement('div');
+    label.className = 'cp-voice-label';
+    label.textContent = r.voiceGenerated
+      ? (r.voicePreviewPlayed ? 'Voice preview ✓ listened end-to-end' : 'Voice preview ready · please listen before release')
+      : 'Voice preview · generated from the message above';
+    meta.appendChild(label);
+    const sub = document.createElement('div');
+    sub.className = 'cp-voice-sub';
+    sub.textContent = 'Dr. Thompson · cloned voice · ' + (r.voiceDuration ? formatDuration(r.voiceDuration) : '~1:15');
+    meta.appendChild(sub);
+    const prog = document.createElement('div');
+    prog.className = 'cp-voice-progress';
+    const fill = document.createElement('div');
+    fill.className = 'cp-voice-progress-fill';
+    fill.style.width = (r.voiceProgress * 100) + '%';
+    prog.appendChild(fill);
+    meta.appendChild(prog);
+    box.appendChild(meta);
+
+    const regen = document.createElement('button');
+    regen.type = 'button';
+    regen.className = 'cp-voice-regen';
+    regen.textContent = 'Re-generate voice';
+    regen.addEventListener('click', () => {
+      if (state.release.voiceAudio) { state.release.voiceAudio.pause(); state.release.voiceAudio = null; }
+      state.release.voiceGenerated = false;
+      state.release.voicePreviewPlayed = false;
+      state.release.voicePlaying = false;
+      state.release.voiceProgress = 0;
+      rerenderRelease();
+    });
+    box.appendChild(regen);
+
+    return box;
+  }
+
+  function buildReadinessList(){
+    const r = state.release;
+    const box = document.createElement('div');
+    box.className = 'cp-readiness';
+
+    const head = document.createElement('div');
+    head.className = 'cp-readiness-head';
+    const h1 = document.createElement('div');
+    h1.textContent = 'Release readiness';
+    head.appendChild(h1);
+    const h2 = document.createElement('div');
+    h2.className = 'cp-readiness-count' + (allGatesDone() ? ' ready' : '');
+    h2.textContent = gateCount() + ' of 4 · ' + (allGatesDone() ? 'ready to release' : 'in progress');
+    head.appendChild(h2);
+    box.appendChild(head);
+
+    const list = document.createElement('div');
+    list.className = 'cp-readiness-list';
+
+    const gates = [
+      {
+        done: true,
+        label: 'Three action candidates accepted',
+        meta: 'Top 3 approved · orders staged',
+        action: null
+      },
+      {
+        done: !!r.overview && r.overview.trim().length > 20,
+        label: 'Overview message drafted',
+        meta: r.overview ? (r.overview.length + ' chars') : '—',
+        action: null
+      },
+      {
+        done: r.voicePreviewPlayed,
+        label: 'Voice preview listened end-to-end',
+        meta: r.voicePreviewPlayed ? 'Ok to send' : (r.voiceGenerated ? 'Play it once' : 'Awaits message'),
+        action: null
+      },
+      {
+        done: r.followUpScheduled,
+        label: 'Follow-up visit scheduled',
+        meta: r.followUpScheduled ? r.followUpDate : '12-week window',
+        action: r.followUpScheduled ? null : { label: 'Schedule', handler: scheduleFollowUp }
+      }
+    ];
+
+    gates.forEach(g => {
+      const row = document.createElement('div');
+      row.className = 'cp-gate' + (g.done ? ' done' : '');
+      const chk = document.createElement('div');
+      chk.className = 'cp-gate-check';
+      chk.innerHTML = checkSvg();
+      row.appendChild(chk);
+      const content = document.createElement('div');
+      const lbl = document.createElement('div');
+      lbl.className = 'cp-gate-label';
+      lbl.textContent = g.label;
+      content.appendChild(lbl);
+      const m = document.createElement('div');
+      m.className = 'cp-gate-meta';
+      m.textContent = g.meta;
+      content.appendChild(m);
+      row.appendChild(content);
+      if (g.action) {
+        const ab = document.createElement('button');
+        ab.type = 'button';
+        ab.className = 'cp-gate-action';
+        ab.textContent = g.action.label;
+        ab.addEventListener('click', g.action.handler);
+        row.appendChild(ab);
+      } else {
+        const spacer = document.createElement('div');
+        row.appendChild(spacer);
+      }
+      list.appendChild(row);
+    });
+
+    box.appendChild(list);
+    return box;
+  }
+
+  // ---- Actions ----
+
+  function generateOverview(){
+    state.release.overviewGenerating = true;
+    state.release.overview = '';
+    state.release.overviewGenerated = false;
+    state.release.voiceGenerated = false;
+    state.release.voicePreviewPlayed = false;
+    rerenderRelease();
+    // Simulate AI draft: 1.4s delay, then typewriter-stream the text in
+    setTimeout(() => {
+      state.release.overviewGenerating = false;
+      state.release.overview = OVERVIEW_DRAFT;
+      state.release.overviewGenerated = true;
+      // Also "generate" the voice (map to pre-recorded file)
+      state.release.voiceGenerated = true;
+      rerenderRelease();
+    }, 1400);
+  }
+
+  function toggleVoicePlayback(){
+    const r = state.release;
+    if (!r.voiceGenerated) return;
+
+    if (!r.voiceAudio) {
+      const a = new Audio('overview-voice-preview.mp3');
+      a.preload = 'metadata';
+      a.addEventListener('loadedmetadata', () => {
+        state.release.voiceDuration = a.duration;
+        const sub = document.querySelector('.cp-voice-sub');
+        if (sub) sub.textContent = 'Dr. Thompson · cloned voice · ' + formatDuration(a.duration);
+      });
+      a.addEventListener('timeupdate', () => {
+        if (!a.duration) return;
+        state.release.voiceProgress = a.currentTime / a.duration;
+        const fill = document.querySelector('.cp-voice-progress-fill');
+        if (fill) fill.style.width = (state.release.voiceProgress * 100) + '%';
+      });
+      a.addEventListener('ended', () => {
+        state.release.voicePlaying = false;
+        state.release.voicePreviewPlayed = true;
+        state.release.voiceProgress = 1;
+        rerenderRelease();
+      });
+      a.addEventListener('pause', () => {
+        state.release.voicePlaying = false;
+        // Update just the play button icon, not full rerender (preserves scroll)
+        const btn = document.querySelector('.cp-voice-play');
+        if (btn) { btn.innerHTML = playSvg(); btn.setAttribute('aria-label', 'Play preview'); }
+      });
+      a.addEventListener('play', () => {
+        state.release.voicePlaying = true;
+        const btn = document.querySelector('.cp-voice-play');
+        if (btn) { btn.innerHTML = pauseSvg(); btn.setAttribute('aria-label', 'Pause preview'); }
+      });
+      state.release.voiceAudio = a;
+    }
+
+    const a = state.release.voiceAudio;
+    if (a.paused) a.play().catch(err => {
+      // Autoplay/permissions issue: still mark as played so physician can proceed
+      console.warn('[cp] voice playback failed:', err && err.message);
+      state.release.voicePreviewPlayed = true;
+      rerenderRelease();
+    });
+    else a.pause();
+  }
+
+  function scheduleFollowUp(){
+    // Prototype: pick a date 12 weeks out on a Tuesday 10am
+    const d = new Date();
+    d.setDate(d.getDate() + 84);
+    // round to next Tuesday
+    while (d.getDay() !== 2) d.setDate(d.getDate() + 1);
+    const opts = { month: 'short', day: 'numeric', year: 'numeric' };
+    state.release.followUpScheduled = true;
+    state.release.followUpDate = d.toLocaleDateString('en-US', opts) + ' · 10:00 AM';
+    announce('Follow-up scheduled for ' + state.release.followUpDate);
+    rerenderRelease();
+  }
+
+  // ---- Confirmation modal ----
+
+  function openConfirmModal(){
+    closeConfirmModal(); // ensure no duplicate
+    const back = document.createElement('div');
+    back.className = 'cp-confirm-backdrop';
+    back.id = 'cpConfirmBackdrop';
+    back.addEventListener('click', (e) => { if (e.target === back) closeConfirmModal(); });
+
+    const modal = document.createElement('div');
+    modal.className = 'cp-confirm';
+
+    const head = document.createElement('div');
+    head.className = 'cp-confirm-head';
+    head.innerHTML = '<div class="cp-confirm-eyebrow">Confirm release</div>'
+      + '<div class="cp-confirm-title">Send this plan to Jason Yim?</div>';
+    modal.appendChild(head);
+
+    const body = document.createElement('div');
+    body.className = 'cp-confirm-body';
+    const titles = state.items.slice(0, 3).map(i => i.title.replace(/<[^>]+>/g, '').split(':')[0]);
+    body.innerHTML =
+        '<div class="cp-confirm-row"><div class="cp-confirm-row-lbl">Actions</div><div class="cp-confirm-row-val">3 released · ' + state.items.length + ' total · ' + (state.items.length - 3) + ' kept clinical-side</div></div>'
+      + '<div class="cp-confirm-row"><div class="cp-confirm-row-lbl">Orders</div><div class="cp-confirm-row-val">Rosuvastatin 10 mg · Sleep study · Ambulatory ECG · f/u 12w</div></div>'
+      + '<div class="cp-confirm-row"><div class="cp-confirm-row-lbl">Message</div><div class="cp-confirm-row-val">' + state.release.overview.split(/\s+/).length + '-word overview + voice preview</div></div>'
+      + '<div class="cp-confirm-row"><div class="cp-confirm-row-lbl">Follow-up</div><div class="cp-confirm-row-val">' + (state.release.followUpDate || '—') + '</div></div>'
+      + '<div class="cp-confirm-row"><div class="cp-confirm-row-lbl">Delivery</div><div class="cp-confirm-row-val">Patient app · arrives within 2 minutes · care team notified</div></div>';
+    modal.appendChild(body);
+
+    const actions = document.createElement('div');
+    actions.className = 'cp-confirm-actions';
+    const cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.className = 'cp-confirm-cancel';
+    cancel.textContent = 'Cancel';
+    cancel.addEventListener('click', closeConfirmModal);
+    const go = document.createElement('button');
+    go.type = 'button';
+    go.className = 'cp-confirm-go';
+    go.textContent = 'Release plan';
+    go.addEventListener('click', commitRelease);
+    actions.appendChild(cancel);
+    actions.appendChild(go);
+    modal.appendChild(actions);
+
+    back.appendChild(modal);
+    document.body.appendChild(back);
+
+    // ESC to close
+    document.addEventListener('keydown', confirmKeyHandler);
+  }
+
+  function confirmKeyHandler(e){
+    if (e.key === 'Escape') closeConfirmModal();
+  }
+
+  function closeConfirmModal(){
+    const back = document.getElementById('cpConfirmBackdrop');
+    if (back) back.remove();
+    document.removeEventListener('keydown', confirmKeyHandler);
+    state.release.confirmOpen = false;
+  }
+
+  function commitRelease(){
+    state.release.released = true;
+    state.release.releasedAt = new Date();
+    closeConfirmModal();
+    rerenderRelease();
+    announce('Plan released to patient');
+    // Scroll the released card into view
+    setTimeout(() => {
+      const el = document.getElementById('cpRelease');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 120);
+  }
+
+  function buildReleasedHTML(){
+    const d = state.release.releasedAt || new Date();
+    const ts = d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    return '<div class="cp-released">'
+      + '<div class="cp-released-eyebrow">Released · ' + ts + '</div>'
+      + '<div class="cp-released-title">Plan sent to Jason Yim</div>'
+      + '<div class="cp-released-meta">3 actions · orders placed · overview + voice delivered · follow-up ' + (state.release.followUpDate || '—') + '</div>'
+      + '</div>'
+      + '<div style="display:flex;gap:10px;"><button class="cp-overview-btn" onclick="window.CarePlan.resetRelease()">Start a new release</button></div>';
+  }
+
   // Init
   function init(){
     renderTop3();
@@ -7455,7 +8060,17 @@ if (sleepBars) {
   // Expose minimal hook for switchCp
   window.CarePlan = {
     onTabSwitch: function(id){ /* re-render is idempotent */ renderTop3(); renderAll(); },
-    openPane, closePane, openCmdk, postToPane
+    openPane, closePane, openCmdk, postToPane,
+    resetRelease: function(){
+      state.release = {
+        overview: '', overviewGenerated: false, overviewGenerating: false,
+        voiceGenerated: false, voicePreviewPlayed: false, voiceDuration: 0,
+        voiceAudio: null, voicePlaying: false, voiceProgress: 0,
+        followUpScheduled: false, followUpDate: null,
+        released: false, releasedAt: null, confirmOpen: false
+      };
+      rerenderRelease();
+    }
   };
 })();
 </script>
