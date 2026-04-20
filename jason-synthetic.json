@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "name": "Jason's Synthetic Meridian Data Model",
+    "version": "1.0",
+    "updated": "2026-04-20",
+    "scope": "Exact dataset that exists after a standard Meridian onboarding. Four sources only: self-report intake, wearable ingestion, lab uploads, genetic panel. Nothing computed, nothing retroactive, nothing fabricated.",
+    "use": "Single source of truth for both physician and patient prototypes. Render off this. If a field isn't here, it doesn't exist in the UI."
+  },
+
+  "demographics": {
+    "name": "Jason Yim",
+    "age": 47,
+    "sex": "Male",
+    "height_cm": 178,
+    "height_display": "5'10\"",
+    "weight_kg": 72.5,
+    "bmi": 23.0,
+    "married": true,
+    "spouse_name": "Hala",
+    "children": [{ "name": "Senna", "age": 6 }]
+  },
+
+  "intake": {
+    "active_diagnoses": [],
+    "medications": [],
+    "supplements": [],
+    "allergies": "NKDA",
+    "tobacco": "Never",
+    "alcohol": "Moderate · 2–4 drinks/week",
+    "exercise": "Cycling 5–7 hrs/week, recreational MTB and snowboarding",
+    "sleep_reported": "Generally consistent, ~7 hr target",
+    "family_history": {
+      "paternal_grandfather": "GI cancer, died early 80s",
+      "paternal_other": "No significant history reported",
+      "maternal": "No significant history reported",
+      "spouse_parents": "Both with Stage 3–4 dementia",
+      "children_tested": false,
+      "notes": "Daughter (6) not genetically tested — pediatric ATM cascade testing per NCCN deferred to adulthood"
+    }
+  },
+
+  "wearable": {
+    "device": "Apple Watch",
+    "window_days": 30,
+    "last_synced": "2026-04-19T14:02:00Z",
+    "metrics": {
+      "hrv_sdnn_4wk_avg_ms": 52,
+      "resting_hr_7day_avg_bpm": 52,
+      "sleep_duration_avg": "7h 10m",
+      "sleep_duration_min": 430,
+      "deep_sleep_avg": "1h 20m",
+      "deep_sleep_min": 80,
+      "steps_daily_avg": 8400,
+      "active_energy_daily_avg_kcal": 620,
+      "workouts_30d": { "total": 11, "cycling": 9, "walking": 2 }
+    }
+  },
+
+  "labs": {
+    "panel_date": "2026-04-10",
+    "lab": "Quest Diagnostics",
+    "source": "Patient-uploaded PDF",
+    "lipid_panel": {
+      "total_cholesterol": { "value": 203, "unit": "mg/dL", "ref": "<200", "flag": "borderline" },
+      "ldl_c":             { "value": 128, "unit": "mg/dL", "ref": "<100 (goal)", "flag": "high" },
+      "hdl_c":             { "value":  58, "unit": "mg/dL", "ref": ">40", "flag": "ok" },
+      "triglycerides":     { "value":  85, "unit": "mg/dL", "ref": "<150", "flag": "ok" }
+    },
+    "apo_b":  { "value": 98, "unit": "mg/dL", "ref": "<80 (goal)", "flag": "high" },
+    "lp_a":   { "value": 62, "unit": "mg/dL", "ref": "<30 (goal)", "flag": "high" },
+    "hs_crp": { "value": 1.1, "unit": "mg/L", "ref": "<1.0 (goal)", "flag": "borderline" },
+    "metabolic": {
+      "a1c":             { "value": 5.4, "unit": "%",     "ref": "<5.7",   "flag": "ok" },
+      "fasting_glucose": { "value": 88,  "unit": "mg/dL", "ref": "70–99",   "flag": "ok" }
+    },
+    "renal": {
+      "creatinine": { "value": 0.98, "unit": "mg/dL", "ref": "0.7–1.3", "flag": "ok" },
+      "egfr":       { "value": ">90", "unit": "mL/min", "ref": ">90",     "flag": "ok" }
+    },
+    "liver": {
+      "alt": { "value": 24, "unit": "U/L", "flag": "ok" },
+      "ast": { "value": 22, "unit": "U/L", "flag": "ok" }
+    },
+    "thyroid": {
+      "tsh": { "value": 1.8, "unit": "mIU/L", "ref": "0.4–4.0", "flag": "ok" }
+    },
+    "cbc": "All values within reference range"
+  },
+
+  "genetic": {
+    "panel": "Invitae Comprehensive Cancer + Cardiovascular",
+    "genes_tested": 163,
+    "run_date": "2026-02-03",
+    "pathogenic": [
+      {
+        "gene": "ATM",
+        "variant": "c.8147T>C",
+        "zygosity": "heterozygous",
+        "implications": "Elevated risk for pancreatic, breast, and prostate cancer"
+      }
+    ],
+    "vus_count": 2,
+    "vus_note": "Non-actionable",
+    "other": "All other 160 genes negative"
+  },
+
+  "derived_for_ui": {
+    "_note": "The only derived values allowed for UI. Everything else must be a direct read from the four sources above.",
+    "cardiovascular_risk_drivers": ["ApoB 98", "Lp(a) 62", "ATM+", "Family: paternal grandfather GI cancer"],
+    "cancer_surveillance_trigger": "ATM+ → pancreatic MRI annual per NCCN",
+    "cohort_for_futures": "47 yo male, ApoB 95–105, Lp(a) 55–70, ATM+, athletic BMI",
+    "data_gaps": [
+      "No prior lab history on file (single panel, first run)",
+      "No CAC on file",
+      "No abdominal imaging on file"
+    ]
+  }
+}
