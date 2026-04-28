@@ -84,6 +84,12 @@
     "thyroid": {
       "tsh": { "value": 1.8, "unit": "mIU/L", "ref": "0.4–4.0", "flag": "ok" }
     },
+    "blood_pressure": {
+      "sbp": { "value": 116, "unit": "mmHg", "ref": "<120 (optimal)", "flag": "ok" },
+      "dbp": { "value":  76, "unit": "mmHg", "ref": "<80 (optimal)",  "flag": "ok" },
+      "measured_at": "2026-04-10",
+      "source": "Intake clinic reading"
+    },
     "cbc": "All values within reference range"
   },
 

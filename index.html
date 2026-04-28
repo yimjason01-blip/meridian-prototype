@@ -120,10 +120,10 @@
     font-size: 20px;
     font-weight: 400;
     letter-spacing: -0.03em;
-    color: var(--text-secondary);
+    color: var(--text);
     line-height: 1.08;
   }
-  .header-left h1 span { color: var(--text-secondary); }
+  .header-left h1 span { color: var(--text); }
   .header-right {
     font-size: 13px;
     color: var(--text-secondary);
@@ -998,7 +998,31 @@
   <!-- ============================================================ -->
 
   <style>
-    /* === Care Plan · action layer scoped styles === */
+    /* Pinned Register card — first-class, non-rankable, sits above tabs */
+    .cp-pinned-wrap { margin-bottom: 24px; }
+    .cp-pinned-eyebrow { font-size: 11px; font-weight: 590; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright, var(--accent)); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .cp-pinned-eyebrow svg { width: 11px; height: 11px; }
+    .cp-pinned { padding: 16px 18px; background: rgba(113,112,255,0.05); border: 1px solid rgba(113,112,255,0.4); border-radius: 10px; margin-bottom: 10px; }
+    .cp-pinned-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+    .cp-pinned-icon { width: 22px; height: 22px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; color: var(--accent-bright, var(--accent)); margin-top: 1px; }
+    .cp-pinned-icon svg { width: 14px; height: 14px; }
+    .cp-pinned-headline { flex: 1; min-width: 0; }
+    .cp-pinned-title { font-size: 14px; font-weight: 510; color: var(--text); letter-spacing: -0.18px; line-height: 1.45; margin-bottom: 4px; }
+    .cp-pinned-meta { font-size: 11px; font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--text-muted); letter-spacing: 0.05em; }
+    .cp-pinned-meta strong { color: var(--accent-bright, var(--accent)); font-weight: 510; }
+    .cp-pinned-body { padding-left: 34px; }
+    .cp-pinned-body .cp-row { display: grid; grid-template-columns: 60px 1fr; gap: 12px; padding: 6px 0; font-size: 13px; line-height: 1.55; }
+    .cp-pinned-body .cp-row-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'JetBrains Mono', ui-monospace, monospace; padding-top: 2px; }
+    .cp-pinned-body .cp-row-val { color: var(--text-secondary); }
+    .cp-pinned-orders { padding: 10px 0 0 34px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .cp-pinned-orders .cp-order-btn { background: rgba(113,112,255,0.08); border-color: rgba(113,112,255,0.3); }
+
+    /* Score chip on cards */
+    .cp-score-chip { font-size: 11px; font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--text-muted); letter-spacing: 0.04em; padding: 2px 7px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 4px; flex-shrink: 0; margin-left: auto; }
+    .cp-score-chip strong { color: var(--text); font-weight: 510; }
+    .cp-score-chip.moved { color: var(--status-warn); border-color: rgba(224,155,45,0.35); }
+
+    /* Care Plan · action layer scoped styles (continued) */
     .cp-wrap { padding: 28px 32px 64px; max-width: 1280px; margin: 0 auto; }
 
     /* Meta strip (above hero) */
@@ -1409,10 +1433,13 @@
     <!-- Plan header -->
     <div class="cp-plan-header">
       <div class="cp-plan-header-left">
-        <div class="cp-plan-header-eyebrow">Run #127 · Framework v2 · 2026-04-17</div>
-        <div class="cp-plan-header-title">Care plan. 10 candidates. 3 sustained. 2 new. 0 reversed.</div>
+        <div class="cp-plan-header-eyebrow">Run #128 · Action Layer v1.0 · 2026-04-25 · 6-run reproducibility (3 Opus + 3 GPT-5.5)</div>
+        <div class="cp-plan-header-title">Care plan. 1 pinned · 13 candidates · 3 surfaced · 0 reversed.</div>
       </div>
     </div>
+
+    <!-- Pinned Register actions — Tier 1 by rule, NOT rankable -->
+    <div class="cp-pinned-wrap" id="cpPinnedWrap"></div>
 
     <!-- Care plan nav (underline highlighter) -->
     <div class="cp-nav" style="display:flex; gap:28px; border-bottom:1px solid var(--border); margin-bottom:22px;">
@@ -3221,7 +3248,7 @@
       <!-- Identity -->
       <div>
         <div style="font-size:12px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px;">Patient</div>
-        <div style="font-size:17px; font-weight:510; color:var(--text); letter-spacing:-0.01em;">Yim, Jason</div>
+        <div style="font-size:17px; font-weight:510; color:var(--text); letter-spacing:-0.01em;">Yason, Jim</div>
         <div style="font-size:12px; color:var(--text-muted); font-family:'JetBrains Mono',ui-monospace,monospace; margin-top:2px;">M · 47y · Asian</div>
         <div style="font-size:12px; color:var(--text-subtle); font-family:'JetBrains Mono',ui-monospace,monospace;">DOB 1978-11-04 · MRN 00418592</div>
       </div>
@@ -6154,155 +6181,218 @@ if (sleepBars) {
 (function(){
   'use strict';
 
-  // ---- Master list (ranks derived from index) ----
+  // ---- Pinned Register actions (Tier 1 by rule, not rankable) ----
+  const REGISTER_PINS = [
+    {
+      id: 'reg-atm-counseling',
+      trigger_id: 'ACMG-SF-ATM',
+      title: 'Genetic counseling referral for ATM heterozygous P/LP variant',
+      guideline: 'ACMG SF v3.2 — ATM listed as Tier 2 secondary-finding gene',
+      do: '<strong>Refer to genetic counselor</strong> for ATM c.8147T&gt;C heterozygous P/LP review. Cascade testing offer to first-degree relatives at age of consent.',
+      why: 'P/LP variant on ACMG Secondary Findings list. Counseling, gene-specific surveillance, and cascade testing are guideline-mandated; this is a Tier 1 floor, not a ranked candidate.',
+      orders: [
+        { glyph: '✚', label: 'Genetic counseling referral' },
+        { glyph: '✉', label: 'Cascade testing offer (1° relatives)' }
+      ],
+      evidence: 'ACMG SF v3.2 · NCCN ATM management v2.2024'
+    }
+  ];
+
+  // ---- Master ranked-candidate list (from 6-run Action Layer reproducibility study) ----
+  // score = weighted SPAREQ avg across runs (S×0.25 + P×0.20 + A×0.20 + R×0.15 + E×0.10 + Q×0.10).
+  // Higher = higher initial priority. originalRank locks the engine's order so any manual reorder
+  // remains auditable against the run.
   const ITEMS = [
     {
       id: 'a01',
-      title: 'Autonomic load workup: 6-month HRV/RHR trend + hs-CRP rise',
-      severity: 'High', timing: '2 wk',
-      do: '<strong>Sleep extension to ≥7h</strong> + HRV biofeedback 2×/wk × 8 wk. <strong>Defer training intensity block</strong> until cardiac clearance (Action 03).',
-      why: 'HRV <span class="cp-mono">68→42 ms</span>, RHR <span class="cp-mono">52→61 bpm</span>, hs-CRP <span class="cp-mono">0.8→1.9 mg/L</span> over 6 mo: sustained sympathetic tone amplifying CVD + metabolic + neuro risk simultaneously. Cross-domain driver that no single model captures.',
-      goal: 'HRV ≥ 55 ms (4-wk avg) · hs-CRP &lt; 1.0 · RHR ≤ 56 at 12 wk',
+      score: 3.65, originalRank: 1,
+      title: 'Baseline PSA + DRE — ATM-driven prostate surveillance',
+      severity: 'High', timing: 'this visit',
+      do: '<strong>Order PSA + DRE</strong> now. ATM carriers begin enhanced prostate surveillance at 40; patient is 47 with no prior PSA. Establish annual cadence.',
+      why: 'ATM heterozygous P/LP carriers have ~2× lifetime prostate cancer risk and a higher-grade phenotype. Catastrophic-if-missed framing — late-stage prostate cancer survival delta is large. Patient is 7 years overdue for ATM-carrier start age.',
+      goal: 'Baseline PSA documented · annual cadence scheduled · prostate domain closed',
       orders: [
-        { glyph: '✚', label: 'Sleep study (HSAT)' },
-        { glyph: '✚', label: 'hs-CRP repeat 12 wk' },
-        { glyph: '✚', label: 'Referral: HRV biofeedback' },
-        { glyph: '✚', label: 'Follow-up 12 wk' }
+        { glyph: '✚', label: 'PSA' },
+        { glyph: '✚', label: 'DRE this visit' },
+        { glyph: '✚', label: 'Annual surveillance schedule' }
       ],
-      evidence: 'Meridian systemic model v2.3 · HRV/CRP composite · Evidence bundle #127',
+      evidence: 'NCCN genetic/familial high-risk v2.2024 · Meridian cancer model · Action Layer 6/6 runs',
       author: 'meridian'
     },
     {
       id: 'a02',
-      title: 'Initiate low-dose rosuvastatin: ApoB 96, ATM carrier, baseline Lp(a) elevated',
+      score: 3.30, originalRank: 2,
+      title: 'Initiate moderate-intensity statin (rosuvastatin 5–10 mg qd)',
       severity: 'High', timing: 'this visit',
-      do: '<strong>Rosuvastatin 5 mg qd</strong>. Repeat lipid + CK + LFTs at 8 wk. Escalate to 10 mg if ApoB &gt; 80 at 12 wk.',
-      why: 'ApoB <span class="cp-mono">96</span>, Lp(a) <span class="cp-mono">78</span>, LDL-C <span class="cp-mono">142</span>. ATM carrier: impaired vascular DNA repair compounds lipid load. ApoB-driven retention is the rate-limiting step of atherogenesis.',
-      goal: 'ApoB &lt; 80 · LDL-C &lt; 100 · tolerability (myalgia, LFTs) at 12 wk',
+      do: '<strong>Rosuvastatin 5 mg qd</strong> ×4 wk → escalate to 10 mg qd. Repeat lipid panel + ApoB + CK + LFTs at 6–8 wk. Target ApoB &lt;80.',
+      why: 'Lp(a) <span class="cp-mono">62 mg/dL ≈ 149 nmol/L</span> crosses the &gt;125 nmol/L threshold for lipid clinic + PCSK9 evaluation. ApoB <span class="cp-mono">98</span>, LDL <span class="cp-mono">128</span>. Lp(a) is genetically fixed — statin reduces the modifiable ApoB-particle arm of the atherogenic load.',
+      goal: 'ApoB &lt;80 · LDL-C &lt;100 · tolerability assessed at 12 wk',
       orders: [
         { glyph: '℞', label: 'Rosuvastatin 5 mg qd #90' },
-        { glyph: '✚', label: 'Lipid panel + CK + CMP 8wk' },
-        { glyph: '✚', label: 'ApoB 8wk' },
+        { glyph: '✚', label: 'Lipid + ApoB + CK + CMP 6–8 wk' },
         { glyph: '✚', label: 'Follow-up 12 wk' }
       ],
-      evidence: 'PREVENT (AHA 2023) · ACC/AHA 2019 · Meridian CVD model v2.3',
+      evidence: 'AHA PREVENT 2024 · NLA Lp(a) 2019 · Meridian CVD model · Action Layer 6/6 runs',
       author: 'meridian'
     },
     {
       id: 'a03',
-      title: 'CAC + stress echo: baseline arterial state',
-      severity: 'High', timing: '2 wk',
-      do: '<strong>Coronary calcium scan (CAC) + stress echocardiogram</strong>. One-time outpatient imaging. Schedule within 30 days of statin start.',
-      why: 'RHR <span class="cp-mono">52</span> with lightheadedness on standing. No domain model triggers but conduction disease must be ruled out before aerobic prescription is safe to escalate. Distinguishes athletic brady from pathologic sinus node dysfunction.',
-      goal: 'Baseline CAC and stress response established. CAC &lt;100 confirms the low-risk phenotype; higher values prompt intensity reassessment.',
+      score: 3.20, originalRank: 3,
+      title: 'Coronary artery calcium (CAC) scan — baseline imaging',
+      severity: 'High', timing: '30 d',
+      do: '<strong>Non-contrast cardiac CT (Agatston)</strong> outpatient. Schedule within 30 days of statin start.',
+      why: 'CAC reclassifies ~50% of intermediate-risk patients (MESA). Lp(a)+ profile is exactly where CAC has the most decision-changing power — anchors the longitudinal CVD record and gates aspirin / PCSK9i decisions.',
+      goal: 'CAC &lt;100 confirms low-risk phenotype · ≥100 prompts intensification · ≥400 → cardiology referral',
       orders: [
-        { glyph: '✚', label: 'CAC scan (outpatient)' },
-        { glyph: '✚', label: '12-lead EKG' },
-        { glyph: '✚', label: 'Cardiology consult (conditional)' }
+        { glyph: '✚', label: 'CAC scan (outpatient)' }
       ],
-      evidence: 'ACC/AHA syncope guideline 2017 · Meridian cardiac gate v2.1',
+      evidence: 'MESA · CAC Consortium · Meridian CVD model § CAC reclassifier',
       author: 'meridian'
     },
     {
       id: 'a04',
-      title: 'Metabolic surveillance — no action indicated at baseline',
+      score: 3.15, originalRank: 4,
+      title: 'Confirmatory Lp(a) in nmol/L (molar assay)',
       severity: 'Mod', timing: '30 d',
-      do: 'No pharmacologic metabolic intervention at baseline. A1c 5.4, fasting glucose 88, HDL 58 all normal. Revisit if labs drift at 12-week recheck.',
-      why: 'HbA1c <span class="cp-mono">5.8</span>, fasting insulin <span class="cp-mono">14</span> (HOMA-IR <span class="cp-mono">3.1</span>), TG/HDL <span class="cp-mono">2.6</span>. Below T2DM but solidly insulin-resistant. Hepatic insulin sensitization reduces cardiometabolic risk and pancreatic/colorectal cancer risk in carriers.',
-      goal: 'HbA1c &lt; 5.5 · HOMA-IR &lt; 2.0 · TG/HDL &lt; 2.0 at 12 wk',
+      do: '<strong>Repeat Lp(a) — nmol/L isoform-independent assay</strong>, nonfasting. Lifetime-stable — single confirmation sufficient.',
+      why: 'Current value <span class="cp-mono">62 mg/dL</span> was converted to nmol/L; mg/dL is contaminated by apo(a) isoform-size variation. Lp(a) retest variation is 10–20% due to inflammation. Confirmation locks the value before lipid-clinic and cascade decisions.',
+      goal: 'Confirmed Lp(a) in nmol/L documented · isoform-size uncertainty resolved',
       orders: [
-        { glyph: '—', label: 'No Rx — surveillance only' },
-        { glyph: '✚', label: 'HbA1c + insulin 12 wk' },
-        { glyph: '✚', label: 'B12 at 6 mo' }
+        { glyph: '✚', label: 'Lp(a) nmol/L' }
       ],
-      evidence: 'DPP follow-up · ADA 2024 standards · Meridian metabolic model v2.2',
+      evidence: 'NLA Lp(a) 2019 · Volgman 2024 (PMID 38879448) · Action Layer 6/6 runs',
       author: 'meridian'
     },
     {
       id: 'a05',
-      title: 'Lp(a) one-time quantification + family cascade counseling',
-      severity: 'Mod', timing: '30 d',
-      do: '<strong>Lp(a) nmol/L (molar assay)</strong> once, nonfasting. If &gt; 125, escalate statin target. Note Senna cascade: Lp(a) check at age 18+.',
-      why: 'No Lp(a) on file. Lifetime-stable, single measurement sufficient. Elevated Lp(a) doubles ASCVD risk independent of LDL. Flags first-degree relatives: Senna at 50% genetic risk as ATM carrier.',
-      goal: 'Baseline value documented · cascade counseling noted · no re-test needed',
+      score: 3.15, originalRank: 5,
+      title: 'APOE genotyping (one-time, off-panel add-on)',
+      severity: 'High', timing: '60 d',
+      do: '<strong>Order APOE genotype</strong> (~$100 add-on, off-Invitae-panel). Trajectory anchor for Neuro and lipid metabolism.',
+      why: 'ε4/ε4 carries 12–15× AD risk; ε3/ε3 is reference. Highest-value off-panel test for Jim — reclassifies 20-yr dementia risk and informs CVD lipid metabolism. Current Neuro confidence tier is Tier 3 (base only) without it.',
+      goal: 'APOE genotype documented · Neuro model upgraded to Tier 2 · counseling per result',
       orders: [
-        { glyph: '✚', label: 'Lp(a) nmol/L' },
-        { glyph: '✉', label: 'Family genetic counseling note' }
+        { glyph: '✚', label: 'APOE genotype' },
+        { glyph: '✉', label: 'Pre-test counseling note' }
       ],
-      evidence: 'NLA Lp(a) statement 2019 · ESC 2021 prevention · Meridian CVD model v2.3',
+      evidence: 'Lancet 2024 commission · Meridian Neuro model · Action Layer 6/6 runs',
       author: 'meridian'
     },
     {
       id: 'a06',
-      title: 'Cognitive baseline + APOE-aware sleep architecture protocol',
-      severity: 'Mod', timing: '60 d',
-      do: '<strong>Baseline cognitive battery (CANTAB or ACE-III)</strong> + sleep protocol: fixed wake time, temperature floor, no alcohol after 19:00 × 90 d. Reassess.',
-      why: 'APOE e3/e4 + paternal dementia + wearable deep-sleep <span class="cp-mono">0.8 h/night</span> (target &gt;1.2). Deep sleep drives glymphatic amyloid clearance; e4 carriers have reduced clearance capacity. 15–20 yr latency means intervention leverage is highest now.',
-      goal: 'Cognitive battery stable y/y · deep sleep ≥ 1.2 h/night (4-wk avg) at 90 d',
+      score: 3.10, originalRank: 6,
+      title: 'Pancreatic surveillance plan — start age 50 (EUS / MRI-MRCP)',
+      severity: 'High', timing: '90 d',
+      do: '<strong>Schedule pancreatic surveillance to begin at age 50</strong>: alternating EUS and MRI-MRCP annually. Document the plan in chart now; do not initiate imaging yet.',
+      why: 'ATM carrier + paternal grandfather GI cancer meets CAPS criteria for high-risk surveillance. Grandfather diagnosed at age 82 (not premature) → CAPS-recommended start age 50. Patient is 47 — plan now, image at 50 unless FHx reclassifies.',
+      goal: 'Surveillance plan documented · age-50 trigger set · revisit if FHx clarification reveals earlier onset',
       orders: [
-        { glyph: '✚', label: 'Neurocog battery (CANTAB)' },
-        { glyph: '✉', label: 'Sleep protocol handout' },
-        { glyph: '✚', label: 'Follow-up 90 d' }
+        { glyph: '✚', label: 'Plan: EUS/MRCP at age 50' },
+        { glyph: '✉', label: 'Patient education: ATM + pancreas' }
       ],
-      evidence: 'Lancet Commission 2020 · Meridian neuro model v2.1',
+      evidence: 'CAPS consortium 2020 · NCCN pancreas v1.2024 · Meridian cancer model',
       author: 'meridian'
     },
     {
       id: 'a07',
-      title: 'Musculoskeletal — not indicated at baseline',
-      severity: 'Low', timing: '90 d',
-      do: 'No MSK complaint at intake. Revisit only if patient reports pain or mobility limitation at a future visit.',
-      why: 'Training adherence <span class="cp-mono">1.4 sessions/wk</span> (target 3), recurrent stiffness, BJJ hiatus. Mobility deficit is the proximate cause of VO₂ decline: not motivation, not cardiac, not metabolic. Fix the substrate before intensifying load.',
-      goal: 'Sessions/wk ≥ 3 sustained 4 wk · stiffness &lt; 2/10 · FMS ≥ 14',
-      orders: [
-        { glyph: '—', label: 'No referral — baseline only' },
-        { glyph: '✉', label: 'Mobility protocol handout' },
-        { glyph: '✚', label: 'Follow-up 90 d' }
-      ],
-      evidence: 'Meridian mobility model v1.4 · FMS cohort data',
-      author: 'meridian'
-    },
-    {
-      id: 'a08',
-      title: 'Pancreatic MRCP: ATM + FDR pancreatic ca, never screened',
-      severity: 'High', timing: '30 d',
-      do: '<strong>Pancreas-protocol MRCP</strong> with gadolinium + secretin if available. Establish annual surveillance schedule.',
-      why: 'ATM het <span class="cp-mono">c.8395_8404del</span> + paternal GF pancreatic ca meets CAPS criteria for high-risk surveillance. Zero prior imaging. ATM carriers have 2–4× lifetime pancreatic risk; stage I→IV survival delta is 10×. Cancer domain model cannot close until this gap is filled.',
-      goal: 'Baseline MRCP complete · annual surveillance scheduled · cancer domain closed',
-      orders: [
-        { glyph: '✚', label: 'MRCP pancreas-protocol' },
-        { glyph: '✚', label: 'Genetic counseling (if not done)' },
-        { glyph: '✚', label: 'Annual surveillance schedule' }
-      ],
-      evidence: 'CAPS consortium 2020 · NCCN pancreas v1.2024 · Meridian cancer model v2.2',
-      author: 'meridian'
-    },
-    {
-      id: 'a09',
-      title: 'Colonoscopy per NCCN ATM surveillance interval',
-      severity: 'Low', timing: '180 d',
-      do: '<strong>Screening colonoscopy</strong> at age 40 or 10 y before earliest FDR dx, whichever earlier. Repeat every 5 y if normal.',
-      why: 'ATM heterozygotes carry modestly increased colorectal risk. Patient is 52, no prior colonoscopy on file. Low-acuity but audit-visible gap. NCCN recommends standard-interval surveillance with ATM flag.',
-      goal: 'Baseline colonoscopy complete · interval documented · no polyps or managed per pathology',
+      score: 3.05, originalRank: 7,
+      title: 'Baseline screening colonoscopy',
+      severity: 'Mod', timing: '90 d',
+      do: '<strong>GI referral: screening colonoscopy</strong>. Repeat every 5 yr if normal (ATM modifier on standard 10-yr interval).',
+      why: 'USPSTF colonoscopy age 45–75; patient is 47 with no prior colonoscopy. ATM heterozygotes carry modestly increased CRC risk; standard 10-yr interval shortened to 5-yr per NCCN. Audit-visible gap.',
+      goal: 'Baseline colonoscopy complete · 5-yr interval documented · pathology managed',
       orders: [
         { glyph: '✚', label: 'GI referral: screening colonoscopy' },
         { glyph: '✉', label: 'Bowel prep instructions' }
       ],
-      evidence: 'NCCN genetic/familial high-risk v2.2024 · Meridian cancer model v2.2',
+      evidence: 'USPSTF 2021 · NCCN genetic/familial high-risk v2.2024',
+      author: 'meridian'
+    },
+    {
+      id: 'a08',
+      score: 2.95, originalRank: 8,
+      title: 'Lipid / preventive cardiology referral — PCSK9i evaluation',
+      severity: 'High', timing: '60 d',
+      do: '<strong>Refer to lipid clinic / preventive cardiology</strong> for PCSK9i candidacy assessment given Lp(a) above the 125 nmol/L threshold. Aspirin shared decision-making concurrent.',
+      why: 'Lp(a) 149 nmol/L crosses the &gt;125 threshold for specialist evaluation per Meridian CVD model § A1 clinical action triggers. PCSK9i has demonstrable Lp(a)-lowering effect (~25–30%) in addition to LDL/ApoB.',
+      goal: 'Specialist evaluation complete · PCSK9i decision documented · aspirin discussion logged',
+      orders: [
+        { glyph: '✚', label: 'Lipid clinic referral' },
+        { glyph: '✉', label: 'Aspirin SDM note' }
+      ],
+      evidence: 'NLA Lp(a) 2019 · ESC 2021 · Meridian CVD model § A1',
+      author: 'meridian'
+    },
+    {
+      id: 'a09',
+      score: 2.85, originalRank: 9,
+      title: 'CPET / structured ramp test for confirmed VO₂max',
+      severity: 'Mod', timing: '90 d',
+      do: '<strong>CPET or structured ramp test</strong> to confirm wearable VO₂max (52, ~80th percentile). Trajectory-anchor diagnostic; uncertainty buffer wider on wearable estimates.',
+      why: 'Wearable VO₂max correlates r=0.83 with CPET but has ±3–5 mL/kg/min individual error. Confirming the percentile band tightens the CRF cross-cutting modifier across CVD, Metabolic, and Neuro models. One-time measurement is a durable baseline.',
+      goal: 'Measured VO₂max documented · CRF percentile band confirmed · trajectory baseline established',
+      orders: [
+        { glyph: '✚', label: 'CPET referral or ramp test' }
+      ],
+      evidence: 'Dosis 2026 (PMID 41592155) · Meridian CRF cross-cutting modifier',
       author: 'meridian'
     },
     {
       id: 'a10',
-      title: 'Annual breast MRI continuation: ATM-directed surveillance',
-      severity: 'Mod', timing: '90 d',
-      do: '<strong>Breast MRI with contrast</strong>, alternating every 6 mo with mammography + US. Continue indefinitely.',
-      why: 'ATM heterozygote lifetime breast risk <span class="cp-mono">25–40%</span>. Last MRI 14 mo ago. Surveillance cadence must not lapse. MRI adds sensitivity over mammography alone in dense tissue (patient density category C).',
-      goal: 'MRI within 90 d · alternating schedule documented · no interval lapse',
+      score: 2.85, originalRank: 10,
+      title: 'Family history clarification — paternal grandfather GI cancer',
+      severity: 'Mod', timing: '30 d',
+      do: '<strong>Contact patient for FHx detail</strong>: grandfather\'s GI cancer subtype (pancreatic? colorectal? gastric?) and age at diagnosis. Reclassifies pancreatic surveillance start age.',
+      why: 'Current chart: paternal grandfather GI cancer, age at death 82, age at diagnosis unknown. If diagnosis was premature (&lt;55), CAPS criteria shift surveillance start earlier than 50. Low-effort, high-information.',
+      goal: 'Subtype + age at dx documented · pancreatic plan reconfirmed or revised',
       orders: [
-        { glyph: '✚', label: 'Breast MRI w/ contrast' },
-        { glyph: '✚', label: 'Breast surgeon follow-up' }
+        { glyph: '✉', label: 'Patient outreach: FHx detail' },
+        { glyph: '✚', label: 'Update pedigree' }
       ],
-      evidence: 'ACR appropriateness · NCCN breast screening 2024 · Meridian cancer model v2.2',
+      evidence: 'CAPS consortium 2020 · NCCN pancreas v1.2024',
+      author: 'meridian'
+    },
+    {
+      id: 'a11',
+      score: 2.70, originalRank: 11,
+      title: 'Home blood pressure monitoring — 7-day protocol',
+      severity: 'Mod', timing: '60 d',
+      do: '<strong>Validated home cuff (Omron or Withings)</strong>, AM + PM × 7 days. Brings BP variability into the model.',
+      why: 'Currently only single in-office BP <span class="cp-mono">116/76</span> on file. CVD Domain B blood-pressure-variability modifier (B1) cannot fire without ≥7 days home cuff data. Closes a CVD model data gap.',
+      goal: '7-day series complete · variability calculated · B1 modifier evaluated',
+      orders: [
+        { glyph: '✉', label: 'Home cuff protocol handout' },
+        { glyph: '✚', label: 'Follow-up at 30 d to review' }
+      ],
+      evidence: 'Rothwell Lancet 2010 · Meridian CVD model § Domain B',
+      author: 'meridian'
+    },
+    {
+      id: 'a12',
+      score: 2.50, originalRank: 12,
+      title: 'PHQ-9 / GAD-7 baseline screening',
+      severity: 'Mod', timing: 'next visit',
+      do: '<strong>Administer PHQ-9 + GAD-7</strong> at next visit. Standard intake screen; depression is a Lancet 2024 modifiable dementia risk factor.',
+      why: 'Mental health not yet captured. Closes a Neuro Domain C lifestyle gap and provides baseline before any prescribing.',
+      goal: 'PHQ-9 + GAD-7 scored · trajectory baseline · escalation per result',
+      orders: [
+        { glyph: '✚', label: 'PHQ-9 + GAD-7 next visit' }
+      ],
+      evidence: 'USPSTF 2023 · Lancet 2024 dementia commission',
+      author: 'meridian'
+    },
+    {
+      id: 'a13',
+      score: 2.40, originalRank: 13,
+      title: 'Baseline DEXA — body composition + bone density',
+      severity: 'Low', timing: '180 d',
+      do: '<strong>DEXA scan</strong> for baseline body composition and bone density. One-time trajectory anchor.',
+      why: 'Trajectory-anchor diagnostic. BMI 23 doesn\'t resolve lean mass vs. fat mass; BMD baseline at 47 informs decade-out fracture-risk projections.',
+      goal: 'Baseline body comp + BMD documented · 5-yr re-scan interval set',
+      orders: [
+        { glyph: '✚', label: 'DEXA referral' }
+      ],
+      evidence: 'ISCD 2019 · Meridian metabolic model · Action Layer reproducibility study',
       author: 'meridian'
     }
   ];
@@ -6337,7 +6427,7 @@ if (sleepBars) {
   };
 
   // AI-drafted overview (patient voice, written from the top 3 cards)
-  const OVERVIEW_DRAFT = "Hey Jason, it's Dr. Thompson. I wanted to take a couple minutes to walk you through what we found and what we're going to do about it.\n\nThe short version: the system flagged three things that matter most for you right now, and everything else is being tracked quietly in the background.\n\nFirst priority is cholesterol. Your ApoB came back high, and that's the single biggest lever we have on long-term cardiovascular risk. I'm starting you on a low-dose statin today.\n\nSecond, we're seeing your nervous system is running hot — heart rate variability is down, resting heart rate is up over the last six months, and inflammation markers are elevated. That's a stress and recovery signal, so we're going to work on sleep and nervous system recovery over the next eight weeks.\n\nThird, we need a cardiac rhythm check before we push your training any harder. Don't worry — this is a precaution, not an emergency.\n\nEverything else on your chart is either being watched or already in a good range. I'll see you in twelve weeks to check in on all three. If anything feels off before then, message me directly. Take care.";
+  const OVERVIEW_DRAFT = "Hey Jim, it's Dr. Thompson. Quick update on what we found and what we're going to do.\n\nThe short version: three things rose to the top, and one of them is non-negotiable because of your genetics.\n\nFirst, your ATM gene result triggered a guideline-mandated genetic counseling referral. That's a separate item from the rest — we don't rank it, we just do it. Counseling will also walk you through cascade testing for first-degree relatives.\n\nThen, three actions stood out from the engine's analysis:\n\nNumber one is a baseline PSA today. As an ATM carrier you should have started prostate surveillance at 40, and you're seven years overdue. This is a single blood test plus a brief exam, and it sets up your annual cadence.\n\nNumber two is a low-dose statin. Your Lp(a) came back high — that's a lifetime, genetically determined cardiovascular risk factor. Lifestyle won't lower it, but a statin lowers the modifiable side of the equation. We'll recheck cholesterol and ApoB in eight weeks.\n\nNumber three is a coronary artery calcium scan. It's the single most informative cardiac diagnostic for someone with your profile, and it tells us whether to push harder on the lipid plan or hold steady. Outpatient, ten minutes.\n\nEverything else on your chart is being tracked or already in a good range. I'll see you in twelve weeks. Message me directly if anything feels off before then. Take care.";
 
   const SUGGESTIONS = [
     'Re-rank by cost to impact',
@@ -6487,6 +6577,17 @@ if (sleepBars) {
     metaEl.className = 'cp-action-meta';
     metaEl.textContent = item.severity + ' · ' + item.timing;
     metaRow.appendChild(metaEl);
+    // Score chip — initial engine ranking, persists after manual reorder
+    if (typeof item.score === 'number' && typeof item.originalRank === 'number') {
+      const scoreChip = document.createElement('span');
+      const moved = (index + 1) !== item.originalRank;
+      scoreChip.className = 'cp-score-chip' + (moved ? ' moved' : '');
+      scoreChip.title = moved
+        ? 'Engine ranked this #' + item.originalRank + ' (score ' + item.score.toFixed(2) + '). You moved it to #' + (index + 1) + '.'
+        : 'Engine score (weighted SPAREQ): ' + item.score.toFixed(2);
+      scoreChip.innerHTML = (moved ? '⤳ ' : '') + 'Engine #<strong>' + item.originalRank + '</strong> · ' + item.score.toFixed(2);
+      metaRow.appendChild(scoreChip);
+    }
     // Ask chip: on the All tab (sort + understand) AND on the Top 3 work cards (deliberation).
     // Skipped only when explicitly readonly without work (e.g. a future static preview).
     if (!readonly || work) {
@@ -7765,7 +7866,7 @@ if (sleepBars) {
     const head = document.createElement('div');
     head.className = 'cp-confirm-head';
     head.innerHTML = '<div class="cp-confirm-eyebrow">Confirm release</div>'
-      + '<div class="cp-confirm-title">Send this plan to Jason Yim?</div>';
+      + '<div class="cp-confirm-title">Send this plan to Jim Yason?</div>';
     modal.appendChild(head);
 
     const body = document.createElement('div');
@@ -7831,14 +7932,56 @@ if (sleepBars) {
     const ts = d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     return '<div class="cp-released">'
       + '<div class="cp-released-eyebrow">Released · ' + ts + '</div>'
-      + '<div class="cp-released-title">Plan sent to Jason Yim</div>'
+      + '<div class="cp-released-title">Plan sent to Jim Yason</div>'
       + '<div class="cp-released-meta">3 actions · orders placed · overview + voice delivered · follow-up ' + (state.release.followUpDate || '—') + '</div>'
       + '</div>'
       + '<div style="display:flex;gap:10px;"><button class="cp-overview-btn" onclick="window.CarePlan.resetRelease()">Start a new release</button></div>';
   }
 
+  // ---- Render: PINNED REGISTER (Tier 1 by rule, no SPAREQ, not draggable) ----
+  function renderPinned(){
+    const root = document.getElementById('cpPinnedWrap');
+    if (!root) return;
+    if (!REGISTER_PINS.length) { root.innerHTML = ''; return; }
+    let html = '<div class="cp-pinned-eyebrow">' +
+      '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">' +
+        '<path d="M6 1.5v6M6 9.5v1.5M3 4l3-2 3 2v3a3 3 0 0 1-3 3 3 3 0 0 1-3-3z"/>' +
+      '</svg>' +
+      'Pinned · Mandatory-Action Register · Tier 1 by rule (not rankable)' +
+      '</div>';
+    REGISTER_PINS.forEach(p => {
+      html += '<div class="cp-pinned" data-id="' + esc(p.id) + '">' +
+        '<div class="cp-pinned-head">' +
+          '<div class="cp-pinned-icon">' +
+            '<svg viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">' +
+              '<path d="M7 1l1.4 4.2H12.5L9.4 8l1.1 4.1L7 9.6 3.5 12.1 4.6 8 1.5 5.2h4.1z"/>' +
+            '</svg>' +
+          '</div>' +
+          '<div class="cp-pinned-headline">' +
+            '<div class="cp-pinned-title">' + esc(p.title) + '</div>' +
+            '<div class="cp-pinned-meta">Trigger: <strong>' + esc(p.trigger_id) + '</strong> · ' + esc(p.guideline) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cp-pinned-body">' +
+          '<div class="cp-row"><div class="cp-row-lbl">Do</div><div class="cp-row-val">' + p.do + '</div></div>' +
+          '<div class="cp-row"><div class="cp-row-lbl">Why</div><div class="cp-row-val">' + p.why + '</div></div>' +
+          '<div class="cp-row"><div class="cp-row-lbl">Evidence</div><div class="cp-row-val">' + esc(p.evidence) + '</div></div>' +
+        '</div>';
+      if (p.orders && p.orders.length){
+        html += '<div class="cp-pinned-orders">';
+        p.orders.forEach(o => {
+          html += '<button class="cp-order-btn"><span class="cp-order-glyph">' + esc(o.glyph) + '</span>' + esc(o.label) + '</button>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+    root.innerHTML = html;
+  }
+
   // Init
   function init(){
+    renderPinned();
     renderTop3();
     renderAll();
     renderPane();
