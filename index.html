@@ -1323,7 +1323,9 @@
     .cp-traj-slider-rail { position: relative; }
     .cp-traj-slider-rail input[type=range] { width: 100%; accent-color: var(--accent-hover); position: relative; z-index: 2; }
     .cp-traj-slider-tick { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 2px; height: 14px; background: rgba(168,173,183,0.6); pointer-events: none; z-index: 1; }
-    .cp-traj-slider-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; margin-top: 4px; }
+    .cp-traj-current-marker { position: absolute; top: 50%; left: 34%; transform: translate(-50%, -50%); width: 2px; height: 22px; background: var(--status-warn); pointer-events: none; z-index: 3; box-shadow: 0 0 0 3px rgba(224,155,45,0.12); }
+    .cp-traj-current-label { position: absolute; left: 34%; top: 22px; transform: translateX(-50%); font-size: 9px; color: var(--status-warn); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; white-space: nowrap; pointer-events: none; }
+    .cp-traj-slider-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; margin-top: 18px; }
     .cp-traj-slider-labels span.mid { color: var(--text-muted); }
     .cp-traj-slider-summary { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 10px; }
     .cp-traj-slider-summary .num { color: var(--accent-hover); font-family: 'JetBrains Mono', ui-monospace, monospace; }
@@ -7285,12 +7287,12 @@ if (sleepBars) {
     ];
 
     // State
-    let progress = 50; // 0-100
+    let progress = 100; // 0 = highest modeled risk profile, 100 = lowest modeled risk profile
     const FUND_FRAC = 0.65;
 
-    // Scaling: piecewise linear
+    // Scaling: piecewise linear risk reduction across the modeled risk continuum
     const scale = (p) => (p <= 50) ? (p/50)*FUND_FRAC : FUND_FRAC + ((p-50)/50)*(1 - FUND_FRAC);
-    const stageOf = (p) => p===0 ? 'No plan' : p<50 ? 'Fundamentals · in progress' : p===50 ? 'Fundamentals · complete' : p<100 ? 'Optimization · in progress' : 'Optimization · complete';
+    const riskStateOf = (p) => p===0 ? 'Highest modeled risk' : p<50 ? 'Higher risk profile' : p===50 ? 'Midpoint risk profile' : p<100 ? 'Lower risk profile' : 'Lowest modeled risk';
 
     // Header
     const head = document.createElement('div');
@@ -7302,7 +7304,7 @@ if (sleepBars) {
     // Intro
     const intro = document.createElement('div');
     intro.className = 'cp-traj-intro';
-    intro.innerHTML = 'These are statistical markers for <strong>people like this patient</strong>, not a promise. The journey has two stages: <strong>Fundamentals</strong> delivers most of the shift (meds, screening, lifestyle floor); <strong>Optimization</strong> adds further gains in patients with sustained precision care. Drag the slider to see what the current plan is claiming — if the gain looks thin, reshape the plan before releasing.';
+    intro.innerHTML = 'These are statistical markers for <strong>people like this patient</strong>, not a promise. The chart now shows the full modeled risk continuum: <strong>higher-risk profiles</strong> pull first-event windows earlier; <strong>lower-risk profiles</strong> push them later. The patient marker shows where this case starts on that continuum; the plan is the path toward the lower-risk end.';
     wrap.appendChild(intro);
 
     // Legend
@@ -7397,11 +7399,11 @@ if (sleepBars) {
     // Track labels
     const lblWithout = makeEl('text', { x: leftPad - 10, y: y1 - 34, fill: '#a8adb7',
       'font-size': '11', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'end' });
-    lblWithout.textContent = 'Without';
+    lblWithout.textContent = 'Higher risk';
     svg.appendChild(lblWithout);
     const lblWith = makeEl('text', { x: leftPad - 10, y: y2 - 34, fill: '#f7f8f8',
       'font-size': '11', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'end' });
-    lblWith.textContent = 'With Meridian';
+    lblWith.textContent = 'Lower risk';
     svg.appendChild(lblWith);
 
     // Baseline dashed tracks
@@ -7480,19 +7482,19 @@ if (sleepBars) {
     const sliderBox = document.createElement('div');
     sliderBox.className = 'cp-traj-slider-box';
     sliderBox.innerHTML = '<div class="cp-traj-slider-head">'
-      + '<div class="cp-traj-slider-title">Engagement stage</div>'
+      + '<div class="cp-traj-slider-title">Risk profile continuum</div>'
       + '<div class="cp-traj-slider-value" id="cp-traj-stage-val"></div>'
       + '</div>'
       + '<div class="cp-traj-slider-rail">'
       +   '<input type="range" min="0" max="100" step="5" value="' + progress + '" id="cp-traj-slider">'
       +   '<div class="cp-traj-slider-tick"></div>'
+      +   '<div class="cp-traj-current-marker"></div>'
+      +   '<div class="cp-traj-current-label">Patient now</div>'
       + '</div>'
       + '<div class="cp-traj-slider-labels">'
-      +   '<span>Start</span>'
-      +   '<span class="mid">Fundamentals</span>'
-      +   '<span class="mid">|</span>'
-      +   '<span class="mid">Optimization</span>'
-      +   '<span>Full</span>'
+      +   '<span>Highest risk</span>'
+      +   '<span class="mid">Current profile</span>'
+      +   '<span>Lowest risk</span>'
       + '</div>'
       + '<div class="cp-traj-slider-summary" id="cp-traj-summary"></div>';
     wrap.appendChild(sliderBox);
@@ -7501,8 +7503,8 @@ if (sleepBars) {
     const table = document.createElement('div');
     table.className = 'cp-traj-table';
     table.innerHTML = '<div class="cp-traj-th">Milestone</div>'
-      + '<div class="cp-traj-th right">Without</div>'
-      + '<div class="cp-traj-th right">With Meridian</div>'
+      + '<div class="cp-traj-th right">Higher risk</div>'
+      + '<div class="cp-traj-th right">Lower risk</div>'
       + '<div class="cp-traj-th right">Gain</div>';
 
     milestones.forEach(m => {
@@ -7537,8 +7539,8 @@ if (sleepBars) {
       + 'PREVENT (CVD) · SEER (cancer) · Framingham functional · Studenski gait. '
       + 'Tapered bands are probability-density windows: center tick = median; thicker center = more likely timing; tails = less likely but plausible. '
       + 'Per-milestone uncertainty ±3–5 years. Cohort-level inference; individual prediction not claimed. '
-      + 'At progress=0, With-Meridian band coincides with Without (no claimed shift, no added uncertainty). '
-      + 'Two-stage split (Fundamentals ≈65% / Optimization ≈35%) is a modeling convention synthesized from CTT, PREDIMED, HOPE-3, SPRINT, not a single published estimate.';
+      + 'At the highest-risk end, lower-risk and higher-risk bands coincide because no modeled risk reduction is applied. '
+      + 'As the slider moves toward lower risk, the lower-risk row shifts later and uncertainty widens with claim size. The patient-now marker is an illustrative starting point on the continuum.';
     wrap.appendChild(foot);
 
     // Updater
@@ -7547,11 +7549,11 @@ if (sleepBars) {
       const avgGain = milestones.reduce((sum, m) => sum + m.maxShift * s, 0) / milestones.length;
       // stage
       const stageEl = wrap.querySelector('#cp-traj-stage-val');
-      if (stageEl) stageEl.textContent = stageOf(progress);
+      if (stageEl) stageEl.textContent = riskStateOf(progress);
       // summary
       const sumEl = wrap.querySelector('#cp-traj-summary');
       if (sumEl) {
-        sumEl.innerHTML = 'At <span class="num">' + stageOf(progress).toLowerCase() + '</span>, this plan claims <span class="num">≈' + avgGain.toFixed(1) + ' years</span> before these markers, on average. Fundamentals delivers ~65%; Optimization adds the rest with sustained precision care.';
+        sumEl.innerHTML = 'Showing <span class="num">' + riskStateOf(progress).toLowerCase() + '</span>. Across this risk state, first-event windows shift later by <span class="num">≈' + avgGain.toFixed(1) + ' years</span> on average versus the higher-risk end.';
       }
       // table cells
       milestones.forEach(m => {
