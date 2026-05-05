@@ -7324,7 +7324,7 @@ if (sleepBars) {
     // SVG geometry
     const W = 640, H = 340;
     const ageMin = 50, ageMax = 94;
-    const leftPad = 76, rightPad = 24;
+    const leftPad = 112, rightPad = 24;
     const xOf = (age) => leftPad + ((age - ageMin) / (ageMax - ageMin)) * (W - leftPad - rightPad);
     const y1 = 110, y2 = 230;
     const laneSpacing = 14;
@@ -7341,6 +7341,44 @@ if (sleepBars) {
       const el = document.createElementNS(svgNS, name);
       for (const k in attrs) el.setAttribute(k, attrs[k]);
       return el;
+    };
+
+    // Encoding contract: x-position = age, band width = likely event window, band thickness = relative probability density.
+    // The tapered shape is intentional: probability is highest near the median tick and falls toward the edges.
+    // At progress=0, With-Meridian uses the same center and same window as Without: zero claim, zero added uncertainty.
+    const densityPath = (x1, x2, y, h) => {
+      const w = Math.max(1, x2 - x1);
+      const xc = x1 + w / 2;
+      const shoulder = w * 0.24;
+      const tail = w * 0.10;
+      return [
+        'M', x1, y,
+        'C', x1 + tail, y, x1 + shoulder, y - h/2, xc, y - h/2,
+        'C', x2 - shoulder, y - h/2, x2 - tail, y, x2, y,
+        'C', x2 - tail, y, x2 - shoulder, y + h/2, xc, y + h/2,
+        'C', x1 + shoulder, y + h/2, x1 + tail, y, x1, y,
+        'Z'
+      ].join(' ');
+    };
+
+    const appendDensityBand = (group, opts) => {
+      const x1 = xOf(opts.center - opts.win);
+      const x2 = xOf(opts.center + opts.win);
+      // faint baseline thread so tails still read on dark canvas
+      group.appendChild(makeEl('line', {
+        x1, y1: opts.y, x2, y2: opts.y,
+        stroke: opts.color, 'stroke-opacity': opts.threadOpacity, 'stroke-width': '1.2', 'stroke-linecap': 'round'
+      }));
+      group.appendChild(makeEl('path', {
+        d: densityPath(x1, x2, opts.y, opts.height),
+        fill: opts.color, 'fill-opacity': opts.fillOpacity,
+        stroke: opts.color, 'stroke-opacity': opts.strokeOpacity, 'stroke-width': '0.9'
+      }));
+      group.appendChild(makeEl('line', {
+        x1: xOf(opts.center), y1: opts.y - opts.height/2 - 2,
+        x2: xOf(opts.center), y2: opts.y + opts.height/2 + 2,
+        stroke: opts.color, 'stroke-width': opts.tickWidth, 'stroke-linecap': 'round'
+      }));
     };
 
     // Static scaffolding (drawn once)
@@ -7398,31 +7436,22 @@ if (sleepBars) {
         const yL1 = y1 + laneY(i);
         const yL2 = y2 + laneY(i);
 
-        // Without (hollow)
-        dynGroup.appendChild(makeEl('rect', {
-          x: xOf(m.without - m.win), y: yL1 - bandH/2,
-          width: xOf(m.without + m.win) - xOf(m.without - m.win), height: bandH,
-          fill: m.color, 'fill-opacity': '0.08',
-          stroke: m.color, 'stroke-opacity': '0.65', 'stroke-width': '1', rx: '2'
-        }));
-        dynGroup.appendChild(makeEl('line', {
-          x1: xOf(m.without), y1: yL1 - bandH/2 - 1,
-          x2: xOf(m.without), y2: yL1 + bandH/2 + 1,
-          stroke: m.color, 'stroke-width': '1.4'
-        }));
+        // Without: tapered probability-density window, median tick at center
+        appendDensityBand(dynGroup, {
+          center: m.without, win: m.win, y: yL1, color: m.color,
+          height: bandH + 3, fillOpacity: '0.14', strokeOpacity: '0.55', threadOpacity: '0.18', tickWidth: '1.4'
+        });
 
-        // With Meridian (solid)
-        dynGroup.appendChild(makeEl('rect', {
-          x: xOf(wMed - withWin), y: yL2 - bandH/2,
-          width: xOf(wMed + withWin) - xOf(wMed - withWin), height: bandH,
-          fill: m.color, 'fill-opacity': '0.55',
-          stroke: m.color, 'stroke-opacity': '0.95', 'stroke-width': '1', rx: '2'
-        }));
-        dynGroup.appendChild(makeEl('line', {
-          x1: xOf(wMed), y1: yL2 - bandH/2 - 1,
-          x2: xOf(wMed), y2: yL2 + bandH/2 + 1,
-          stroke: m.color, 'stroke-width': '1.8'
-        }));
+        // With Meridian: same density shape shifted later by the claimed risk reduction.
+        // Visual uncertainty/prominence scales with claim size: at zero claim it mirrors Without.
+        appendDensityBand(dynGroup, {
+          center: wMed, win: withWin, y: yL2, color: m.color,
+          height: bandH + 3 + (shiftFrac * 2),
+          fillOpacity: String(0.14 + shiftFrac * 0.36),
+          strokeOpacity: String(0.55 + shiftFrac * 0.33),
+          threadOpacity: String(0.18 + shiftFrac * 0.06),
+          tickWidth: String(1.4 + shiftFrac * 0.4)
+        });
 
         // Same-domain vertical thread
         dynGroup.appendChild(makeEl('line', {
@@ -7514,9 +7543,10 @@ if (sleepBars) {
     foot.className = 'cp-traj-foot';
     foot.innerHTML = '<span class="cp-traj-foot-lbl">Models + uncertainty</span>'
       + 'PREVENT (CVD) · SEER (cancer) · Framingham functional · Studenski gait. '
+      + 'Tapered bands are probability-density windows: center tick = median; thicker center = more likely timing; tails = less likely but plausible. '
       + 'Per-milestone uncertainty ±3–5 years. Cohort-level inference; individual prediction not claimed. '
       + 'At progress=0, With-Meridian band coincides with Without (no claimed shift, no added uncertainty). '
-      + 'Two-stage split (Fundamentals ≈65% / Optimization ≈35%) is a modeling convention synthesized from CTT, PREDIMED, HOPE-3, SPRINT — not a single published estimate.';
+      + 'Two-stage split (Fundamentals ≈65% / Optimization ≈35%) is a modeling convention synthesized from CTT, PREDIMED, HOPE-3, SPRINT, not a single published estimate.';
     wrap.appendChild(foot);
 
     // Updater
