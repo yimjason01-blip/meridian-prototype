@@ -1340,6 +1340,26 @@
     .cp-traj-row-cell { padding: 8px 0; border-bottom: 1px dashed var(--border-subtle); text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
     .cp-traj-row-cell.muted { color: var(--text-muted); }
     .cp-traj-row-cell.secondary { color: var(--text-secondary); min-width: 48px; }
+    .cp-traj-denom { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .cp-traj-denom-card { border: 1px solid var(--border); background: rgba(255,255,255,0.014); border-radius: 8px; padding: 16px; }
+    .cp-traj-denom-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 7px; }
+    .cp-traj-denom-title { font-size: 14px; color: var(--text); font-weight: 510; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .cp-traj-denom-copy { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; max-width: 56ch; }
+    .cp-traj-dotgrid { display: grid; grid-template-columns: repeat(10, 9px); gap: 5px; align-items: center; margin-bottom: 12px; }
+    .cp-traj-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(168,173,183,0.22); }
+    .cp-traj-dot.window { background: #e8604c; box-shadow: 0 0 0 2px rgba(232,96,76,0.16); }
+    .cp-traj-dot.event { background: rgba(232,96,76,0.44); }
+    .cp-traj-denom-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 10px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-traj-denom-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .cp-traj-mini-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; background: rgba(168,173,183,0.22); }
+    .cp-traj-mini-dot.window { background: #e8604c; }
+    .cp-traj-mini-dot.event { background: rgba(232,96,76,0.44); }
+    .cp-traj-stack { display: flex; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-subtle); margin: 8px 0 10px; }
+    .cp-traj-stack-seg.noevent { background: rgba(168,173,183,0.18); }
+    .cp-traj-stack-seg.event { background: rgba(232,96,76,0.44); }
+    .cp-traj-stack-seg.window { background: #e8604c; }
+    .cp-traj-denom-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 8px; font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-top: 7px; }
+    .cp-traj-denom-row strong { color: var(--text); font-weight: 510; }
     .cp-traj-foot { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 10px; color: var(--text-subtle); line-height: 1.5; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; max-width: 82ch; }
     .cp-traj-foot-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; display: block; }
 
@@ -7531,6 +7551,47 @@ if (sleepBars) {
       table.appendChild(gainCell);
     });
     wrap.appendChild(table);
+
+    // First-event denominator sketches: two possible ways to show what share of the cohort enters the timing distribution.
+    // Prototype figures only until backed by cumulative-incidence model output: higher-risk MACE ever=42%, in-window=15%; lower-risk ever=28%, in-window=8%.
+    const buildDots = (windowPct, everPct) => {
+      let html = '<div class="cp-traj-dotgrid" aria-label="100 comparable people">';
+      for (let i = 0; i < 100; i++) {
+        const cls = i < windowPct ? 'window' : i < everPct ? 'event' : '';
+        html += '<span class="cp-traj-dot ' + cls + '"></span>';
+      }
+      html += '</div>';
+      return html;
+    };
+    const buildStack = (windowPct, everPct) => {
+      const noEvent = 100 - everPct;
+      const outside = everPct - windowPct;
+      return '<div class="cp-traj-stack" aria-label="Event denominator bar">'
+        + '<div class="cp-traj-stack-seg noevent" style="width:' + noEvent + '%"></div>'
+        + '<div class="cp-traj-stack-seg event" style="width:' + outside + '%"></div>'
+        + '<div class="cp-traj-stack-seg window" style="width:' + windowPct + '%"></div>'
+        + '</div>';
+    };
+    const denom = document.createElement('div');
+    denom.className = 'cp-traj-denom';
+    denom.innerHTML = '<div class="cp-traj-denom-card">'
+      + '<div class="cp-traj-denom-kicker">Incarnation A · 100 people</div>'
+      + '<div class="cp-traj-denom-title">Who actually enters the first-event window?</div>'
+      + '<div class="cp-traj-denom-copy">This separates the timing distribution from the denominator. In this sketch, 42 of 100 comparable higher-risk patients have a first MACE by the horizon; 15 land inside the highlighted 63-73 window.</div>'
+      + buildDots(15, 42)
+      + '<div class="cp-traj-denom-legend"><span><i class="cp-traj-mini-dot window"></i>15 in window</span><span><i class="cp-traj-mini-dot event"></i>27 event outside window</span><span><i class="cp-traj-mini-dot"></i>58 no first MACE by horizon</span></div>'
+      + '</div>'
+      + '<div class="cp-traj-denom-card">'
+      + '<div class="cp-traj-denom-kicker">Incarnation B · Probability decomposition</div>'
+      + '<div class="cp-traj-denom-title">Split incidence from timing.</div>'
+      + '<div class="cp-traj-denom-copy">Same idea, less pictorial. The bar answers: never enters the distribution, enters outside the window, enters inside the window. Lower-risk state compresses both event share and window share.</div>'
+      + '<div class="cp-traj-denom-row"><strong>Higher risk</strong><span></span><span>42% ever · 15% in window</span></div>'
+      + buildStack(15, 42)
+      + '<div class="cp-traj-denom-row"><strong>Lower risk</strong><span></span><span>28% ever · 8% in shifted window</span></div>'
+      + buildStack(8, 28)
+      + '<div class="cp-traj-denom-legend"><span><i class="cp-traj-mini-dot"></i>No first MACE</span><span><i class="cp-traj-mini-dot event"></i>First MACE outside window</span><span><i class="cp-traj-mini-dot window"></i>First MACE in window</span></div>'
+      + '</div>';
+    wrap.appendChild(denom);
 
     // Footer
     const foot = document.createElement('div');
