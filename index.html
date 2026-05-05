@@ -1341,25 +1341,17 @@
     .cp-traj-row-cell.muted { color: var(--text-muted); }
     .cp-traj-row-cell.secondary { color: var(--text-secondary); min-width: 48px; }
     .cp-traj-denom { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .cp-traj-denom.cp-traj-denom-single { grid-template-columns: 1fr; }
     .cp-traj-denom-card { border: 1px solid var(--border); background: rgba(255,255,255,0.014); border-radius: 8px; padding: 16px; }
     .cp-traj-denom-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-bottom: 7px; }
     .cp-traj-denom-title { font-size: 14px; color: var(--text); font-weight: 510; letter-spacing: -0.02em; margin-bottom: 6px; }
-    .cp-traj-denom-copy { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; max-width: 56ch; }
-    .cp-traj-dotgrid { display: grid; grid-template-columns: repeat(10, 9px); gap: 5px; align-items: center; margin-bottom: 12px; }
-    .cp-traj-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(168,173,183,0.22); }
-    .cp-traj-dot.window { background: #e8604c; box-shadow: 0 0 0 2px rgba(232,96,76,0.16); }
-    .cp-traj-dot.event { background: rgba(232,96,76,0.44); }
-    .cp-traj-denom-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 10px; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; }
-    .cp-traj-denom-legend span { display: inline-flex; align-items: center; gap: 5px; }
-    .cp-traj-mini-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; background: rgba(168,173,183,0.22); }
-    .cp-traj-mini-dot.window { background: #e8604c; }
-    .cp-traj-mini-dot.event { background: rgba(232,96,76,0.44); }
-    .cp-traj-stack { display: flex; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-subtle); margin: 8px 0 10px; }
-    .cp-traj-stack-seg.noevent { background: rgba(168,173,183,0.18); }
-    .cp-traj-stack-seg.event { background: rgba(232,96,76,0.44); }
-    .cp-traj-stack-seg.window { background: #e8604c; }
-    .cp-traj-denom-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 8px; font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; margin-top: 7px; }
-    .cp-traj-denom-row strong { color: var(--text); font-weight: 510; }
+    .cp-traj-denom-copy { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; max-width: 72ch; }
+    .cp-traj-glyph-row { display: grid; grid-template-columns: 240px 1fr; gap: 18px; align-items: center; }
+    .cp-traj-glyph { width: 220px; height: auto; display: block; }
+    .cp-traj-glyph-notes { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+    .cp-traj-glyph-notes div { border-left: 1px solid var(--border-subtle); padding-left: 10px; }
+    .cp-traj-glyph-notes strong { display: block; font-size: 11px; color: var(--text); font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 510; margin-bottom: 4px; }
+    .cp-traj-glyph-notes span { display: block; font-size: 12px; line-height: 1.45; color: var(--text-muted); }
     .cp-traj-foot { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 10px; color: var(--text-subtle); line-height: 1.5; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; max-width: 82ch; }
     .cp-traj-foot-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; display: block; }
 
@@ -7295,15 +7287,16 @@ if (sleepBars) {
     wrap.className = 'cp-traj';
 
     // Shared milestone data (from Milestone Ladder in meridian-ds)
+    // Prototype incidence figures are cumulative ever-event probability by the modeled horizon.
     const milestones = [
       { id:'mace',  label:'First heart attack or stroke', physLabel:'First MACE event',
-        source:'PREVENT (AHA 2023) + ATM hazard', without:68, win:5, maxShift:10, color:'#e8604c' },
+        source:'PREVENT (AHA 2023) + ATM hazard', without:68, win:5, maxShift:10, incidenceHigh:42, incidenceLow:28, color:'#e8604c' },
       { id:'gait',  label:'Noticeable loss of mobility',  physLabel:'Gait speed < 1.0 m/s',
-        source:'Studenski cohort + pooled healthspan', without:70, win:4, maxShift:6, color:'#6db1c9' },
+        source:'Studenski cohort + pooled healthspan', without:70, win:4, maxShift:6, incidenceHigh:36, incidenceLow:24, color:'#6db1c9' },
       { id:'ca',    label:'Cancer diagnosis',             physLabel:'Incident malignancy',
-        source:'SEER + ATM heterozygote cohort',  without:72, win:6, maxShift:8,  color:'#d14a6a' },
+        source:'SEER + ATM heterozygote cohort',  without:72, win:6, maxShift:8, incidenceHigh:31, incidenceLow:24,  color:'#d14a6a' },
       { id:'ind',   label:'Loss of independent living',   physLabel:'ADL-dependency',
-        source:'Framingham functional · N≈6,500', without:76, win:5, maxShift:7,  color:'#e09b2d' },
+        source:'Framingham functional · N≈6,500', without:76, win:5, maxShift:7, incidenceHigh:22, incidenceLow:14,  color:'#e09b2d' },
     ];
 
     // State
@@ -7324,7 +7317,7 @@ if (sleepBars) {
     // Intro
     const intro = document.createElement('div');
     intro.className = 'cp-traj-intro';
-    intro.innerHTML = 'These are statistical markers for <strong>people like this patient</strong>, not a promise. The chart now shows the full modeled risk continuum: <strong>higher-risk profiles</strong> pull first-event windows earlier; <strong>lower-risk profiles</strong> push them later. The patient marker shows where this case starts on that continuum; the plan is the path toward the lower-risk end.';
+    intro.innerHTML = 'These are statistical markers for <strong>people like this patient</strong>, not a promise. Each triangle carries both pieces of the event forecast: <strong>base width = likely timing window</strong>; <strong>height = cumulative incidence by the modeled horizon</strong>. Sliding toward a lower-risk profile shifts event windows later and shrinks the triangle when fewer comparable people ever experience the event.';
     wrap.appendChild(intro);
 
     // Legend
@@ -7344,14 +7337,15 @@ if (sleepBars) {
     chartWrap.className = 'cp-traj-chart-wrap';
 
     // SVG geometry
-    const W = 640, H = 340;
+    const W = 640, H = 430;
     const ageMin = 50, ageMax = 94;
     const leftPad = 112, rightPad = 24;
     const xOf = (age) => leftPad + ((age - ageMin) / (ageMax - ageMin)) * (W - leftPad - rightPad);
-    const y1 = 110, y2 = 230;
-    const laneSpacing = 14;
-    const bandH = 10;
+    const y1 = 160, y2 = 330;
+    const laneSpacing = 24;
     const laneY = (i) => (i - 1.5) * laneSpacing;
+    const maxIncidence = Math.max.apply(null, milestones.map(m => m.incidenceHigh));
+    const incidenceHeight = (pct) => 12 + (pct / maxIncidence) * 58;
 
     const svgNS = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(svgNS, 'svg');
@@ -7365,42 +7359,38 @@ if (sleepBars) {
       return el;
     };
 
-    // Encoding contract: x-position = age, band width = likely event window, band thickness = relative probability density.
-    // The tapered shape is intentional: probability is highest near the median tick and falls toward the edges.
-    // At progress=0, With-Meridian uses the same center and same window as Without: zero claim, zero added uncertainty.
-    const densityPath = (x1, x2, y, h) => {
-      const w = Math.max(1, x2 - x1);
-      const xc = x1 + w / 2;
-      const shoulder = w * 0.24;
-      const tail = w * 0.10;
-      return [
-        'M', x1, y,
-        'C', x1 + tail, y, x1 + shoulder, y - h/2, xc, y - h/2,
-        'C', x2 - shoulder, y - h/2, x2 - tail, y, x2, y,
-        'C', x2 - tail, y, x2 - shoulder, y + h/2, xc, y + h/2,
-        'C', x1 + shoulder, y + h/2, x1 + tail, y, x1, y,
-        'Z'
-      ].join(' ');
+    // Encoding contract: x-position = age, triangle base width = likely event window, apex x = median age, triangle height = cumulative ever-event incidence.
+    // Height is a glyph dimension, not area: because base uses years and height uses percent, triangle area is not itself a probability.
+    // Do NOT normalize or smooth heights independently. If incidence changes, the apex moves with the same percent-to-pixel scale.
+    const trianglePath = (x1, x2, yBase, h) => {
+      const xc = x1 + (x2 - x1) / 2;
+      return ['M', x1, yBase, 'L', xc, yBase - h, 'L', x2, yBase, 'Z'].join(' ');
     };
 
-    const appendDensityBand = (group, opts) => {
+    const appendIncidenceTriangle = (group, opts) => {
       const x1 = xOf(opts.center - opts.win);
       const x2 = xOf(opts.center + opts.win);
-      // faint baseline thread so tails still read on dark canvas
+      const h = incidenceHeight(opts.incidence);
+      const xc = xOf(opts.center);
       group.appendChild(makeEl('line', {
         x1, y1: opts.y, x2, y2: opts.y,
-        stroke: opts.color, 'stroke-opacity': opts.threadOpacity, 'stroke-width': '1.2', 'stroke-linecap': 'round'
+        stroke: opts.color, 'stroke-opacity': opts.baseOpacity, 'stroke-width': '1.2', 'stroke-linecap': 'round'
       }));
       group.appendChild(makeEl('path', {
-        d: densityPath(x1, x2, opts.y, opts.height),
+        d: trianglePath(x1, x2, opts.y, h),
         fill: opts.color, 'fill-opacity': opts.fillOpacity,
-        stroke: opts.color, 'stroke-opacity': opts.strokeOpacity, 'stroke-width': '0.9'
+        stroke: opts.color, 'stroke-opacity': opts.strokeOpacity, 'stroke-width': opts.strokeWidth
       }));
       group.appendChild(makeEl('line', {
-        x1: xOf(opts.center), y1: opts.y - opts.height/2 - 2,
-        x2: xOf(opts.center), y2: opts.y + opts.height/2 + 2,
-        stroke: opts.color, 'stroke-width': opts.tickWidth, 'stroke-linecap': 'round'
+        x1: xc, y1: opts.y, x2: xc, y2: opts.y - h,
+        stroke: opts.color, 'stroke-opacity': opts.medianOpacity, 'stroke-width': '1', 'stroke-dasharray': '2 2'
       }));
+      const pct = makeEl('text', {
+        x: xc, y: opts.y - h - 5, fill: opts.color, 'fill-opacity': opts.textOpacity,
+        'font-size': '9', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle'
+      });
+      pct.textContent = Math.round(opts.incidence) + '%';
+      group.appendChild(pct);
     };
 
     // Static scaffolding (drawn once)
@@ -7417,11 +7407,11 @@ if (sleepBars) {
     });
 
     // Track labels
-    const lblWithout = makeEl('text', { x: leftPad - 10, y: y1 - 34, fill: '#a8adb7',
+    const lblWithout = makeEl('text', { x: leftPad - 10, y: y1 - 76, fill: '#a8adb7',
       'font-size': '11', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'end' });
     lblWithout.textContent = 'Higher risk';
     svg.appendChild(lblWithout);
-    const lblWith = makeEl('text', { x: leftPad - 10, y: y2 - 34, fill: '#f7f8f8',
+    const lblWith = makeEl('text', { x: leftPad - 10, y: y2 - 76, fill: '#f7f8f8',
       'font-size': '11', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'end' });
     lblWith.textContent = 'Lower risk';
     svg.appendChild(lblWith);
@@ -7433,11 +7423,11 @@ if (sleepBars) {
       stroke: '#35383e', 'stroke-width': '1', 'stroke-dasharray': '3 3' }));
 
     // You are here (patient age 47)
-    svg.appendChild(makeEl('line', { x1: xOf(47), y1: y1 - 30, x2: xOf(47), y2: y2 + 30,
+    svg.appendChild(makeEl('line', { x1: xOf(47), y1: y1 - 80, x2: xOf(47), y2: y2 + 18,
       stroke: '#f7f8f8', 'stroke-width': '1', 'stroke-dasharray': '2 2' }));
     svg.appendChild(makeEl('circle', { cx: xOf(47), cy: y1, r: '3', fill: '#f7f8f8' }));
     svg.appendChild(makeEl('circle', { cx: xOf(47), cy: y2, r: '3', fill: '#f7f8f8' }));
-    const youTxt = makeEl('text', { x: xOf(47), y: y1 - 50, fill: '#f7f8f8',
+    const youTxt = makeEl('text', { x: xOf(47), y: y1 - 96, fill: '#f7f8f8',
       'font-size': '10', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle' });
     youTxt.textContent = 'now · 47';
     svg.appendChild(youTxt);
@@ -7458,21 +7448,20 @@ if (sleepBars) {
         const yL1 = y1 + laneY(i);
         const yL2 = y2 + laneY(i);
 
-        // Without: tapered probability-density window, median tick at center
-        appendDensityBand(dynGroup, {
-          center: m.without, win: m.win, y: yL1, color: m.color,
-          height: bandH + 3, fillOpacity: '0.14', strokeOpacity: '0.55', threadOpacity: '0.18', tickWidth: '1.4'
+        const incidence = m.incidenceHigh - ((m.incidenceHigh - m.incidenceLow) * s);
+
+        // Higher-risk profile: triangle base = timing window, apex = median age, height = ever-event incidence.
+        appendIncidenceTriangle(dynGroup, {
+          center: m.without, win: m.win, incidence: m.incidenceHigh, y: yL1, color: m.color,
+          fillOpacity: '0.12', strokeOpacity: '0.58', baseOpacity: '0.22', medianOpacity: '0.42', textOpacity: '0.78', strokeWidth: '0.9'
         });
 
-        // With Meridian: same density shape shifted later by the claimed risk reduction.
-        // Visual uncertainty/prominence scales with claim size: at zero claim it mirrors Without.
-        appendDensityBand(dynGroup, {
-          center: wMed, win: withWin, y: yL2, color: m.color,
-          height: bandH + 3 + (shiftFrac * 2),
-          fillOpacity: String(0.14 + shiftFrac * 0.36),
-          strokeOpacity: String(0.55 + shiftFrac * 0.33),
-          threadOpacity: String(0.18 + shiftFrac * 0.06),
-          tickWidth: String(1.4 + shiftFrac * 0.4)
+        // Lower-risk profile: as risk falls, base moves later and height shrinks with incidence.
+        appendIncidenceTriangle(dynGroup, {
+          center: wMed, win: withWin, incidence: incidence, y: yL2, color: m.color,
+          fillOpacity: String(0.14 + shiftFrac * 0.26), strokeOpacity: String(0.58 + shiftFrac * 0.26),
+          baseOpacity: String(0.24 + shiftFrac * 0.10), medianOpacity: String(0.42 + shiftFrac * 0.16),
+          textOpacity: String(0.80 + shiftFrac * 0.16), strokeWidth: String(0.9 + shiftFrac * 0.25)
         });
 
         // Year labels on outer lanes
@@ -7524,8 +7513,8 @@ if (sleepBars) {
     table.className = 'cp-traj-table';
     table.innerHTML = '<div class="cp-traj-th">Milestone</div>'
       + '<div class="cp-traj-th right">Higher risk</div>'
-      + '<div class="cp-traj-th right">Lower risk</div>'
-      + '<div class="cp-traj-th right">Gain</div>';
+      + '<div class="cp-traj-th right">Selected profile</div>'
+      + '<div class="cp-traj-th right">Shift</div>';
 
     milestones.forEach(m => {
       const lblCell = document.createElement('div');
@@ -7536,7 +7525,7 @@ if (sleepBars) {
 
       const withoutCell = document.createElement('div');
       withoutCell.className = 'cp-traj-row-cell muted';
-      withoutCell.textContent = (m.without - m.win) + '–' + (m.without + m.win);
+      withoutCell.textContent = (m.without - m.win) + '–' + (m.without + m.win) + ' · ' + m.incidenceHigh + '%';
       table.appendChild(withoutCell);
 
       const withCell = document.createElement('div');
@@ -7552,56 +7541,29 @@ if (sleepBars) {
     });
     wrap.appendChild(table);
 
-    // First-event denominator sketches: two possible ways to show what share of the cohort enters the timing distribution.
-    // Prototype figures only until backed by cumulative-incidence model output: higher-risk MACE ever=42%, in-window=15%; lower-risk ever=28%, in-window=8%.
-    const buildDots = (windowPct, everPct) => {
-      let html = '<div class="cp-traj-dotgrid" aria-label="100 comparable people">';
-      for (let i = 0; i < 100; i++) {
-        const cls = i < windowPct ? 'window' : i < everPct ? 'event' : '';
-        html += '<span class="cp-traj-dot ' + cls + '"></span>';
-      }
-      html += '</div>';
-      return html;
-    };
-    const buildStack = (windowPct, everPct) => {
-      const noEvent = 100 - everPct;
-      const outside = everPct - windowPct;
-      return '<div class="cp-traj-stack" aria-label="Event denominator bar">'
-        + '<div class="cp-traj-stack-seg noevent" style="width:' + noEvent + '%"></div>'
-        + '<div class="cp-traj-stack-seg event" style="width:' + outside + '%"></div>'
-        + '<div class="cp-traj-stack-seg window" style="width:' + windowPct + '%"></div>'
-        + '</div>';
-    };
-    const denom = document.createElement('div');
-    denom.className = 'cp-traj-denom';
-    denom.innerHTML = '<div class="cp-traj-denom-card">'
-      + '<div class="cp-traj-denom-kicker">Incarnation A · 100 people</div>'
-      + '<div class="cp-traj-denom-title">Who actually enters the first-event window?</div>'
-      + '<div class="cp-traj-denom-copy">This separates the timing distribution from the denominator. In this sketch, 42 of 100 comparable higher-risk patients have a first MACE by the horizon; 15 land inside the highlighted 63-73 window.</div>'
-      + buildDots(15, 42)
-      + '<div class="cp-traj-denom-legend"><span><i class="cp-traj-mini-dot window"></i>15 in window</span><span><i class="cp-traj-mini-dot event"></i>27 event outside window</span><span><i class="cp-traj-mini-dot"></i>58 no first MACE by horizon</span></div>'
+    // Triangle encoding card: one mark carries timing and incidence together.
+    const encoding = document.createElement('div');
+    encoding.className = 'cp-traj-denom cp-traj-denom-single';
+    encoding.innerHTML = '<div class="cp-traj-denom-card">'
+      + '<div class="cp-traj-denom-kicker">Triangle encoding</div>'
+      + '<div class="cp-traj-denom-title">Base = event window. Height = incidence.</div>'
+      + '<div class="cp-traj-denom-copy">The prior denominator sketches are now collapsed into the chart itself. A wide triangle means broad timing uncertainty. A tall triangle means many comparable people ever experience the event by the modeled horizon. The apex is the median event age among those who experience it.</div>'
+      + '<div class="cp-traj-glyph-row">'
+      +   '<svg class="cp-traj-glyph" viewBox="0 0 220 110" aria-label="Triangle encoding example"><line x1="20" y1="90" x2="200" y2="90" stroke="rgba(168,173,183,0.45)" stroke-width="1"/><path d="M45 88 L112 24 L180 88 Z" fill="rgba(232,96,76,0.22)" stroke="#e8604c" stroke-width="1.2"/><line x1="112" y1="88" x2="112" y2="24" stroke="#e8604c" stroke-opacity="0.65" stroke-dasharray="2 2"/><text x="112" y="16" fill="#e8604c" font-size="10" text-anchor="middle" font-family="JetBrains Mono, monospace">incidence</text><text x="112" y="106" fill="#a8adb7" font-size="10" text-anchor="middle" font-family="JetBrains Mono, monospace">timing window</text></svg>'
+      +   '<div class="cp-traj-glyph-notes"><div><strong>Width</strong><span>left/right base endpoints are the plausible event window.</span></div><div><strong>Height</strong><span>cumulative event incidence for the selected risk profile.</span></div><div><strong>Apex</strong><span>median or modal event age inside that conditional timing distribution.</span></div></div>'
       + '</div>'
-      + '<div class="cp-traj-denom-card">'
-      + '<div class="cp-traj-denom-kicker">Incarnation B · Probability decomposition</div>'
-      + '<div class="cp-traj-denom-title">Split incidence from timing.</div>'
-      + '<div class="cp-traj-denom-copy">Same idea, less pictorial. The bar answers: never enters the distribution, enters outside the window, enters inside the window. Lower-risk state compresses both event share and window share.</div>'
-      + '<div class="cp-traj-denom-row"><strong>Higher risk</strong><span></span><span>42% ever · 15% in window</span></div>'
-      + buildStack(15, 42)
-      + '<div class="cp-traj-denom-row"><strong>Lower risk</strong><span></span><span>28% ever · 8% in shifted window</span></div>'
-      + buildStack(8, 28)
-      + '<div class="cp-traj-denom-legend"><span><i class="cp-traj-mini-dot"></i>No first MACE</span><span><i class="cp-traj-mini-dot event"></i>First MACE outside window</span><span><i class="cp-traj-mini-dot window"></i>First MACE in window</span></div>'
       + '</div>';
-    wrap.appendChild(denom);
+    wrap.appendChild(encoding);
 
     // Footer
     const foot = document.createElement('div');
     foot.className = 'cp-traj-foot';
     foot.innerHTML = '<span class="cp-traj-foot-lbl">Models + uncertainty</span>'
       + 'PREVENT (CVD) · SEER (cancer) · Framingham functional · Studenski gait. '
-      + 'Tapered bands are probability-density windows: center tick = median; thicker center = more likely timing; tails = less likely but plausible. '
+      + 'Triangle base = conditional timing window; apex = median event age; height = cumulative incidence by the modeled horizon. '
       + 'Per-milestone uncertainty ±3–5 years. Cohort-level inference; individual prediction not claimed. '
-      + 'At the highest-risk end, lower-risk and higher-risk bands coincide because no modeled risk reduction is applied. '
-      + 'As the slider moves toward lower risk, the lower-risk row shifts later and uncertainty widens with claim size. The patient-now marker is an illustrative starting point on the continuum.';
+      + 'At the highest-risk end, lower-risk and higher-risk triangles coincide because no modeled risk reduction is applied. '
+      + 'As the slider moves toward lower risk, the lower-risk row shifts later and shrinks when modeled incidence falls. Triangle area is not interpreted as probability.';
     wrap.appendChild(foot);
 
     // Updater
@@ -7614,7 +7576,8 @@ if (sleepBars) {
       // summary
       const sumEl = wrap.querySelector('#cp-traj-summary');
       if (sumEl) {
-        sumEl.innerHTML = 'Showing <span class="num">' + riskStateOf(progress).toLowerCase() + '</span>. Across this risk state, first-event windows shift later by <span class="num">≈' + avgGain.toFixed(1) + ' years</span> on average versus the higher-risk end.';
+        const avgDrop = milestones.reduce((sum, m) => sum + ((m.incidenceHigh - m.incidenceLow) * s), 0) / milestones.length;
+        sumEl.innerHTML = 'Showing <span class="num">' + riskStateOf(progress).toLowerCase() + '</span>. Triangles shift later by <span class="num">≈' + avgGain.toFixed(1) + ' years</span> on average and shrink by <span class="num">≈' + avgDrop.toFixed(0) + ' percentage points</span> versus the higher-risk end.';
       }
       // table cells
       milestones.forEach(m => {
@@ -7622,8 +7585,11 @@ if (sleepBars) {
         const wMed = m.without + shift;
         const wCell = wrap.querySelector('[data-with-for="' + m.id + '"]');
         const gCell = wrap.querySelector('[data-gain-for="' + m.id + '"]');
-        if (wCell) wCell.textContent = '→ ' + wMed.toFixed(0);
-        if (gCell) gCell.textContent = '+' + shift.toFixed(1) + 'y';
+        const incidence = m.incidenceHigh - ((m.incidenceHigh - m.incidenceLow) * s);
+        const shiftFrac = m.maxShift > 0 ? shift / m.maxShift : 0;
+        const withWin = m.win * (1 + shiftFrac * 0.3);
+        if (wCell) wCell.textContent = (wMed - withWin).toFixed(0) + '–' + (wMed + withWin).toFixed(0) + ' · ' + incidence.toFixed(0) + '%';
+        if (gCell) gCell.textContent = '+' + shift.toFixed(1) + 'y · -' + (m.incidenceHigh - incidence).toFixed(0) + 'pp';
       });
       renderMilestones();
     };
