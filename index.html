@@ -983,6 +983,7 @@
     <!-- SECTION TAB BAR (segmented control, right-aligned in header) -->
     <div class="header-tabs" style="display:inline-flex;gap:2px;align-items:center;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:3px;">
       <button onclick="switchSection('plan')" id="secTab-plan" style="padding:6px 14px;font-size:13px;font-weight:510;letter-spacing:-0.13px;border:none;cursor:pointer;color:#08090a;background:#ffffff;border-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,0.3);transition:all 0.15s ease;font-feature-settings:'cv01','ss03';">Care Plan</button>
+      <button onclick="switchSection('trajectory')" id="secTab-trajectory" style="padding:6px 14px;font-size:13px;font-weight:510;letter-spacing:-0.13px;border:none;cursor:pointer;color:var(--text-muted);background:transparent;border-radius:6px;transition:all 0.15s ease;font-feature-settings:'cv01','ss03';">Trajectory</button>
       <button onclick="switchSection('analysis')" id="secTab-analysis" style="padding:6px 14px;font-size:13px;font-weight:510;letter-spacing:-0.13px;border:none;cursor:pointer;color:var(--text-muted);background:transparent;border-radius:6px;transition:all 0.15s ease;font-feature-settings:'cv01','ss03';">Risk Models</button>
       <button onclick="switchSection('data')" id="secTab-data" style="padding:6px 14px;font-size:13px;font-weight:510;letter-spacing:-0.13px;border:none;cursor:pointer;color:var(--text-muted);background:transparent;border-radius:6px;transition:all 0.15s ease;font-feature-settings:'cv01','ss03';">EMR</button>
     </div>
@@ -1495,6 +1496,19 @@
   </div><!-- /.cp-wrap -->
 
   </div><!-- /section-plan -->
+
+  <!-- SECTION: TRAJECTORY -->
+  <div id="section-trajectory" style="display:none;">
+    <div class="cp-wrap">
+      <div class="cp-plan-header">
+        <div class="cp-plan-header-left">
+          <div class="cp-plan-header-eyebrow">Trajectory lab · isolated from release workflow</div>
+          <div class="cp-plan-header-title">What this plan is claiming.</div>
+        </div>
+      </div>
+      <div id="trajectoryPageMount"></div>
+    </div>
+  </div><!-- /section-trajectory -->
 
   <!-- SECTION: RISK ANALYSIS -->
   <div id="section-analysis" style="display:none;">
@@ -4994,7 +5008,7 @@ function toggleExtraCredit() {
 
 // === SECTION TAB SWITCHING (segmented control style) ===
 function switchSection(section) {
-  ['plan','analysis','data'].forEach(s => {
+  ['plan','trajectory','analysis','data'].forEach(s => {
     document.getElementById('section-' + s).style.display = s === section ? 'block' : 'none';
     const tab = document.getElementById('secTab-' + s);
     if (s === section) {
@@ -5010,6 +5024,9 @@ function switchSection(section) {
   // Trigger initial render when switching sections
   if (section === 'analysis') {
     if (typeof switchRm === 'function') setTimeout(() => switchRm('summary'), 50);
+  }
+  if (section === 'trajectory') {
+    if (window.CarePlan && typeof window.CarePlan.renderTrajectoryPage === 'function') window.CarePlan.renderTrajectoryPage();
   }
   if (section === 'plan') {
     // drawQoLChart removed with care plan rebuild
@@ -7203,9 +7220,6 @@ if (sleepBars) {
       + '<div class="cp-release-sub">These three actions are what the patient will see. Everything else stays clinical-side. Compose a warm overview in your voice, preview it, confirm the follow-up, then release.</div>';
     wrap.appendChild(header);
 
-    // Trajectory preview — what this plan is claiming
-    wrap.appendChild(buildTrajectoryPreview());
-
     // Overview composer
     wrap.appendChild(buildOverviewComposer());
 
@@ -7245,6 +7259,13 @@ if (sleepBars) {
     if (!old) return;
     const fresh = buildReleaseWorkflow();
     old.parentNode.replaceChild(fresh, old);
+  }
+
+  function renderTrajectoryPage(){
+    const root = document.getElementById('trajectoryPageMount');
+    if (!root) return;
+    root.innerHTML = '';
+    root.appendChild(buildTrajectoryPreview());
   }
 
   function buildTrajectoryPreview(){
@@ -7993,6 +8014,7 @@ if (sleepBars) {
   // Expose minimal hook for switchCp
   window.CarePlan = {
     onTabSwitch: function(id){ /* re-render is idempotent */ renderTop3(); renderAll(); },
+    renderTrajectoryPage,
     openPane, closePane, openCmdk, postToPane,
     resetRelease: function(){
       state.release = {
@@ -8021,15 +8043,17 @@ if (sleepBars) {
   'use strict';
   // Wire the rail to the Care Plan module's openPane. Seed query is derived from the current section.
   function currentSection(){
-    if (document.getElementById('section-plan')     && document.getElementById('section-plan').style.display !== 'none'    ) return 'plan';
-    if (document.getElementById('section-analysis') && document.getElementById('section-analysis').style.display !== 'none') return 'analysis';
-    if (document.getElementById('section-data')     && document.getElementById('section-data').style.display !== 'none'    ) return 'data';
+    if (document.getElementById('section-plan')       && document.getElementById('section-plan').style.display !== 'none'      ) return 'plan';
+    if (document.getElementById('section-trajectory') && document.getElementById('section-trajectory').style.display !== 'none') return 'trajectory';
+    if (document.getElementById('section-analysis')   && document.getElementById('section-analysis').style.display !== 'none'  ) return 'analysis';
+    if (document.getElementById('section-data')       && document.getElementById('section-data').style.display !== 'none'      ) return 'data';
     return 'plan';
   }
   const seedBySection = {
-    plan:     { query: 'Walk me through this care plan and flag anything missing.',                anchor: 'this care plan' },
-    analysis: { query: 'Summarize the highest risk driver across domains for this patient.',       anchor: 'risk models' },
-    data:     { query: 'What in the chart conflicts with or updates the current care plan?',       anchor: 'EMR chart' }
+    plan:       { query: 'Walk me through this care plan and flag anything missing.',                anchor: 'this care plan' },
+    trajectory: { query: 'Critique this trajectory preview and identify what needs redesign.',       anchor: 'trajectory preview' },
+    analysis:   { query: 'Summarize the highest risk driver across domains for this patient.',       anchor: 'risk models' },
+    data:       { query: 'What in the chart conflicts with or updates the current care plan?',       anchor: 'EMR chart' }
   };
   const rail = document.getElementById('cpAskRail');
   function onRail(){
