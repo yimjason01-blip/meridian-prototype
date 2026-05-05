@@ -7297,6 +7297,8 @@ if (sleepBars) {
         source:'SEER + ATM heterozygote cohort',  without:72, win:6, maxShift:8, incidenceHigh:31, incidenceLow:24,  color:'#d14a6a' },
       { id:'ind',   label:'Loss of independent living',   physLabel:'ADL-dependency',
         source:'Framingham functional · N≈6,500', without:76, win:5, maxShift:7, incidenceHigh:22, incidenceLow:14,  color:'#e09b2d' },
+      { id:'neuro', label:'Neurodegenerative diagnosis', physLabel:'MCI, dementia, or parkinsonism',
+        source:'NACC + Framingham dementia incidence', without:79, win:6, maxShift:7, incidenceHigh:18, incidenceLow:11, color:'#9b8cff' },
     ];
 
     // State
@@ -7337,13 +7339,14 @@ if (sleepBars) {
     chartWrap.className = 'cp-traj-chart-wrap';
 
     // SVG geometry
-    const W = 640, H = 430;
-    const ageMin = 50, ageMax = 94;
+    const W = 640, H = 480;
+    const ageMin = 50, ageMax = 96;
     const leftPad = 112, rightPad = 24;
     const xOf = (age) => leftPad + ((age - ageMin) / (ageMax - ageMin)) * (W - leftPad - rightPad);
-    const y1 = 160, y2 = 330;
-    const laneSpacing = 24;
-    const laneY = (i) => (i - 1.5) * laneSpacing;
+    const y1 = 190, y2 = 370;
+    const laneSpacing = 22;
+    const laneOffset = (milestones.length - 1) / 2;
+    const laneY = (i) => (i - laneOffset) * laneSpacing;
     const maxIncidence = Math.max.apply(null, milestones.map(m => m.incidenceHigh));
     const incidenceHeight = (pct) => 12 + (pct / maxIncidence) * 58;
 
@@ -7423,11 +7426,11 @@ if (sleepBars) {
       stroke: '#35383e', 'stroke-width': '1', 'stroke-dasharray': '3 3' }));
 
     // You are here (patient age 47)
-    svg.appendChild(makeEl('line', { x1: xOf(47), y1: y1 - 80, x2: xOf(47), y2: y2 + 18,
+    svg.appendChild(makeEl('line', { x1: xOf(47), y1: y1 - 86, x2: xOf(47), y2: y2 + 18,
       stroke: '#f7f8f8', 'stroke-width': '1', 'stroke-dasharray': '2 2' }));
     svg.appendChild(makeEl('circle', { cx: xOf(47), cy: y1, r: '3', fill: '#f7f8f8' }));
     svg.appendChild(makeEl('circle', { cx: xOf(47), cy: y2, r: '3', fill: '#f7f8f8' }));
-    const youTxt = makeEl('text', { x: xOf(47), y: y1 - 96, fill: '#f7f8f8',
+    const youTxt = makeEl('text', { x: xOf(47), y: y1 - 102, fill: '#f7f8f8',
       'font-size': '10', 'font-family': "'JetBrains Mono', monospace", 'text-anchor': 'middle' });
     youTxt.textContent = 'now · 47';
     svg.appendChild(youTxt);
@@ -7465,7 +7468,7 @@ if (sleepBars) {
         });
 
         // Year labels on outer lanes
-        if (i === 0 || i === 3) {
+        if (i === 0 || i === milestones.length - 1) {
           const t1 = makeEl('text', {
             x: xOf(m.without), y: i === 0 ? yL1 - 14 : yL1 + 24,
             fill: m.color, 'fill-opacity': '0.85', 'font-size': '9',
@@ -7559,7 +7562,7 @@ if (sleepBars) {
     const foot = document.createElement('div');
     foot.className = 'cp-traj-foot';
     foot.innerHTML = '<span class="cp-traj-foot-lbl">Models + uncertainty</span>'
-      + 'PREVENT (CVD) · SEER (cancer) · Framingham functional · Studenski gait. '
+      + 'PREVENT (CVD) · SEER (cancer) · Framingham functional · Studenski gait · NACC/Framingham neurodegenerative incidence. '
       + 'Triangle base = conditional timing window; apex = median event age; height = cumulative incidence by the modeled horizon. '
       + 'Per-milestone uncertainty ±3–5 years. Cohort-level inference; individual prediction not claimed. '
       + 'At the highest-risk end, lower-risk and higher-risk triangles coincide because no modeled risk reduction is applied. '
