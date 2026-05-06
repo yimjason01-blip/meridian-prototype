@@ -42,10 +42,9 @@
     .copy p { margin: 0 0 10px; }
     .copy p:last-child { margin-bottom: 0; }
     .copy strong { color: var(--text); font-weight: 540; }
-    .callout { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 14px; }
-    .callout div { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 10px; padding: 13px 14px; }
-    .callout strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 5px; }
-    .callout span { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .definition-list { display: grid; gap: 12px; margin-top: 14px; max-width: 96ch; }
+    .definition-list p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.52; }
+    .definition-list strong { color: var(--text); font-weight: 540; }
     .legend { display: flex; flex-wrap: wrap; gap: 14px 18px; margin: 16px 0 6px; }
     .legend span { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font: 11px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.03em; }
     .swatch { width: 13px; height: 10px; border-radius: 2px; display: inline-block; }
@@ -57,15 +56,15 @@
     .autonomy-legend span { display: inline-flex; gap: 7px; align-items: center; }
     .line-key { width: 24px; height: 0; border-top: 2px solid currentColor; display: inline-block; }
     .line-key.dashed { border-top-style: dashed; opacity: 0.7; }
-    .autonomy-readout { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 10px; padding: 12px 13px; color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 10px; }
-    .autonomy-event-key { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 8px; margin: 8px 0 0; }
-    .autonomy-event-key span { border: 1px solid var(--border-soft); background: rgba(255,255,255,0.018); border-radius: 8px; padding: 7px 8px; color: var(--muted); font: 10px/1.3 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
+    .autonomy-readout { color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 10px; max-width: 104ch; }
+    .autonomy-event-key { display: flex; flex-wrap: wrap; gap: 8px 12px; margin: 8px 0 0; }
+    .autonomy-event-key span { color: var(--muted); font: 10px/1.3 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
     .autonomy-event-key b { color: var(--text); font-weight: 590; margin-right: 4px; }
     .autonomy-event-key i { display: inline-block; width: 7px; height: 7px; border-radius: 2px; margin-right: 5px; transform: translateY(1px); }
     .autonomy-readout strong { color: var(--text); font-weight: 540; }
-    .control-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-bottom: 18px; }
-    .slider-box { border: 1px solid rgba(113,112,255,0.38); background: rgba(113,112,255,0.045); border-radius: 9px; padding: 15px 16px; }
-    .slider-box.reserve { border-color: rgba(109,177,201,0.34); background: rgba(109,177,201,0.04); }
+    .control-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; margin-bottom: 18px; }
+    .slider-box { padding: 0; }
+    .slider-box.reserve { }
     .slider-row { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; margin-bottom: 8px; }
     .slider-title { font-size: 12px; font-weight: 540; color: var(--text); }
     .slider-value { color: #b9b8ff; font: 12px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.04em; }
@@ -86,25 +85,21 @@
     .cell.selected { color: var(--text); }
     .cell.shift { color: #c6c5ff; }
     .note { color: var(--muted); font: 11px/1.58 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.035em; margin-top: 14px; max-width: 104ch; }
-    .chart-caveat { border: 1px solid rgba(224,155,45,0.26); background: rgba(224,155,45,0.04); border-radius: 9px; padding: 11px 12px; color: var(--muted); font-size: 12px; line-height: 1.48; margin: 12px 0 14px; }
+    .chart-caveat { color: var(--muted); font-size: 12px; line-height: 1.48; margin: 12px 0 14px; }
     .chart-caveat strong { color: var(--warn); font-weight: 540; }
     .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-    .list li { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 9px; padding: 12px 13px; }
-    .list strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 5px; }
-    .list span { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; }
-    .method-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .method { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 10px; padding: 13px 14px; }
-    .method strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 6px; }
-    .method span { color: var(--muted); font-size: 13px; line-height: 1.48; display: block; }
+    .list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; max-width: 96ch; }
+    .list li { color: var(--muted); font-size: 13px; line-height: 1.48; }
+    .list strong { color: var(--text); font-weight: 540; }
+    .list span { color: var(--muted); }
     .ref-table { display: grid; grid-template-columns: 210px 1fr 1fr; gap: 0 14px; }
     .ref-h { color: var(--subtle); font: 10px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 9px; border-bottom: 1px solid var(--border); }
     .ref-cell { padding: 12px 0; border-bottom: 1px dashed var(--border-soft); color: var(--muted); font-size: 13px; line-height: 1.45; }
     .ref-cell strong { color: var(--text); font-weight: 540; }
-    .calc { display: grid; gap: 10px; color: var(--muted); font: 11px/1.55 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
-    .calc div { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 9px; padding: 11px 12px; }
+    .calc { display: grid; gap: 8px; color: var(--muted); font: 11px/1.55 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
+    .calc div { padding: 0; }
     @media (max-width: 880px) {
-      .top, .two, .method-grid, .callout, .control-grid { grid-template-columns: 1fr; }
+      .top, .two, .control-grid { grid-template-columns: 1fr; }
       .autonomy-event-key { grid-template-columns: 1fr; }
       .ref-table, .table { grid-template-columns: 1fr; }
       .ref-h, .th { display: none; }
@@ -132,26 +127,18 @@
         <h2>What this page is testing</h2>
         <div class="copy">
           <p>Event timing alone is incomplete. A forecast also needs the denominator: what share of comparable people experience the endpoint by the modeled horizon.</p>
-          <p>The triangle chart combines those two quantities. Base = central 80% timing interval among affected people. Height = cumulative incidence by age 95. The autonomy curve then shows how disease risk and functional reserve change the expected consequence.</p>
-        </div>
-        <div class="callout">
-          <div><strong>Incidence</strong><span>What percent have the endpoint by age 95?</span></div>
-          <div><strong>Timing</strong><span>Among affected people, when does it tend to occur?</span></div>
-          <div><strong>Autonomy</strong><span>How much functional reserve remains as events accumulate?</span></div>
+          <p>The triangle chart combines those two quantities: base is the central 80% timing interval among affected people, and height is cumulative incidence by age 95. The autonomy curve then shows how disease risk and functional reserve change the expected consequence.</p>
         </div>
       </section>
 
       <section class="panel">
         <h2>Method, in plain English</h2>
         <div class="copy">
-          <p>This version compares cohort profiles, not a proven Meridian treatment effect. The reference cohort is ATM positive, dyslipidemic males age 45 to 50. Values are illustrative placeholders.</p>
-          <p>For each endpoint, the prototype stores median timing, central 80% timing interval, and cumulative incidence by age 95. Endpoints are marginal: not mutually exclusive, not competing-risk adjusted, and not a multi-state sequence.</p>
+          <p>This version compares synthetic risk states, not a calibrated cohort and not a proven Meridian treatment effect. Values are placeholders used to test the visual grammar.</p>
+          <p>For each endpoint, the prototype stores median timing, central 80% timing interval, and cumulative incidence by age 95. These values are not derived from ATM status, dyslipidemia, sex, or age-specific cohort data. Endpoints are marginal: not mutually exclusive, not competing-risk adjusted, and not a multi-state sequence.</p>
         </div>
-        <div class="method-grid" style="margin-top:14px;">
-          <div class="method"><strong>Population</strong><span>ATM positive, dyslipidemic males age 45 to 50. Review cohort, not final calibration.</span></div>
-          <div class="method"><strong>Horizon</strong><span>Cumulative incidence is by age 95. Other horizons require relabeling and recalibration.</span></div>
-          <div class="method"><strong>Comparison</strong><span>Higher-risk profile versus lower-risk profile. Not yet intervention-attributable.</span></div>
-          <div class="method"><strong>Event structure</strong><span>Marginal endpoints. Prior events, death, and dependencies are not yet modeled.</span></div>
+        <div class="copy" style="margin-top:10px;">
+          <p>The population is a synthetic midlife prevention cohort. The horizon is age 95. The comparison is a higher-risk synthetic state versus a lower-risk synthetic state. Prior events, death, and endpoint dependencies are not modeled yet.</p>
         </div>
       </section>
 
@@ -161,11 +148,8 @@
           <p>Disease risk controls the event layer: incidence and timing. Functional reserve controls the consequence layer: starting reserve, decline slope, event-impact sensitivity, and threshold crossing.</p>
           <p>The controls are intentionally orthogonal. Disease risk moves the event triangles. Functional reserve changes only the autonomy curve. Event markers on this chart are x-axis timing markers, not autonomy-score thresholds.</p>
         </div>
-        <div class="method-grid" style="margin-top:14px;">
-          <div class="method"><strong>Disease risk</strong><span>Moves triangle timing and incidence.</span></div>
-          <div class="method"><strong>Functional reserve</strong><span>Changes curve height, slope, and event-impact sensitivity.</span></div>
-          <div class="method"><strong>Score bands</strong><span>90+ full reserve; 75 to 90 independent but narrowing; 60 to 75 vulnerable; 45 to 60 independence threshold; below 45 supported.</span></div>
-          <div class="method"><strong>Event markers</strong><span>Numbered x-axis markers show selected median event ages only.</span></div>
+        <div class="copy" style="margin-top:10px;">
+          <p>The autonomy scale is grouped into practical bands: 90+ means full autonomy with reserve; 75 to 90 means independent but narrowing; 60 to 75 means vulnerable independence; 45 to 60 is the independence-threshold zone; below 45 means supported living. The numbered event markers are only timing markers on the x-axis.</p>
         </div>
         <div class="control-grid">
           <div class="slider-box">
@@ -198,7 +182,7 @@
 
       <section class="panel">
         <h2>Trajectory chart</h2>
-        <div class="copy"><p>Each triangle is one endpoint forecast. Width = p10 to p90 event timing among affected people. Height = cumulative incidence by age 95. Apex = median event age. Values are placeholders.</p></div>
+        <div class="copy"><p>Each triangle shows one prototype endpoint object. Width = p10 to p90 timing among affected people. Height = cumulative incidence by age 95. Apex = median event age. Values are synthetic placeholders.</p></div>
         <div class="chart-caveat"><strong>Important:</strong> judge the representation, not the placeholder risks.</div>
         <div class="legend" id="legend"></div>
         <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 720 500" aria-label="Trajectory triangle chart"></svg></div>
@@ -209,15 +193,16 @@
       <section class="panel">
         <h2>Endpoint definitions</h2>
         <div class="copy"><p>Endpoint definitions are visible because reviewers should be able to challenge the object being modeled. MACE and cancer are cleaner. Mobility, independence, and MCI or dementia need stricter production rules.</p></div>
-        <div class="method-grid" id="definitions" style="margin-top:14px;"></div>
+        <div class="definition-list" id="definitions"></div>
       </section>
 
       <section class="panel">
         <h2>Limitations</h2>
         <ul class="list">
-          <li><strong>Placeholder values.</strong><span>Displayed numbers are illustrative, not calibrated model output.</span></li>
+          <li><strong>Placeholder values.</strong><span>Displayed numbers are synthetic, not calibrated model output.</span></li>
+          <li><strong>No phenotype calibration yet.</strong><span>Values are not derived from ATM status, dyslipidemia, sex, or age-specific cohort data.</span></li>
           <li><strong>No competing risks yet.</strong><span>Death, prior events, and cross-endpoint dependencies are not modeled.</span></li>
-          <li><strong>No intervention attribution yet.</strong><span>Lower-risk state is a cohort comparison, not a proven Meridian effect.</span></li>
+          <li><strong>No intervention attribution yet.</strong><span>Lower-risk state is a synthetic comparison, not a proven Meridian effect.</span></li>
           <li><strong>Functional endpoints need stricter rules.</strong><span>Mobility, independence, and cognition require operational thresholds before clinical use.</span></li>
         </ul>
       </section>
@@ -227,8 +212,8 @@
         <div class="copy"><p>References identify intended evidence families for production calibration. They do not justify the placeholder values shown here.</p></div>
         <div class="ref-table" style="margin-top:14px;">
           <div class="ref-h">Endpoint</div><div class="ref-h">Reference family</div><div class="ref-h">How it would be used</div>
-          <div class="ref-cell"><strong>First heart attack or stroke</strong></div><div class="ref-cell">Khan SS et al. AHA PREVENT equations scientific statement. Circulation, 2023. PMID 37947094.</div><div class="ref-cell">Baseline absolute cardiovascular risk and age-specific risk framing. ATM would need a documented modifier or separate evidence layer.</div>
-          <div class="ref-cell"><strong>Cancer diagnosis</strong></div><div class="ref-cell">NCI SEER Program and SEER Stat. NCCN Genetic/Familial High-Risk Assessment guidance for ATM-associated surveillance.</div><div class="ref-cell">Age-specific cancer incidence baseline plus gene-specific modifier and endpoint inclusion rules.</div>
+          <div class="ref-cell"><strong>First heart attack or stroke</strong></div><div class="ref-cell">Khan SS et al. AHA PREVENT equations scientific statement. Circulation, 2023. PMID 37947094.</div><div class="ref-cell">Candidate source for baseline absolute cardiovascular risk and age-specific risk framing.</div>
+          <div class="ref-cell"><strong>Cancer diagnosis</strong></div><div class="ref-cell">NCI SEER Program and SEER Stat. NCCN Genetic/Familial High-Risk Assessment guidance if a gene-specific model is added.</div><div class="ref-cell">Candidate sources for age-specific cancer incidence and future gene-specific modifiers.</div>
           <div class="ref-cell"><strong>Mobility loss</strong></div><div class="ref-cell">Studenski S et al. Gait speed and survival in older adults. JAMA, 2011.</div><div class="ref-cell">Functional aging anchor. Production use would need incidence of sustained gait-speed threshold crossing, not mortality association alone.</div>
           <div class="ref-cell"><strong>Loss of independent living</strong></div><div class="ref-cell">Katz ADL and Lawton IADL frameworks. Framingham and geriatric functional-decline cohorts.</div><div class="ref-cell">Operationalize ADL or IADL dependence, assisted-living transition, or another durable independence threshold.</div>
           <div class="ref-cell"><strong>Incident MCI or dementia</strong></div><div class="ref-cell">Satizabal CL et al. Incidence of dementia over three decades in the Framingham Heart Study. NEJM, 2016. Morris JC et al. NACC Uniform Data Set. Alzheimer Disease and Associated Disorders, 2006.</div><div class="ref-cell">Age-specific MCI or dementia incidence calibration. Parkinsonism and other neurodegenerative syndromes should be separate unless explicitly modeled.</div>
@@ -240,7 +225,7 @@
         <h2>Calculation notes for reviewers who want the mechanics</h2>
         <div class="calc">
           <div>For each endpoint e, the prototype stores: medianAgeHigh, p10AgeHigh, p90AgeHigh, incidenceHighBy95, maxMedianShift, incidenceLowBy95.</div>
-          <div>The displayed base is the central 80% conditional timing interval: p10 to p90 among cohort members who experience the endpoint by age 95.</div>
+          <div>The displayed base is the central 80% conditional timing interval: p10 to p90 among synthetic cohort members who experience the endpoint by age 95.</div>
           <div>Disease-risk scale r ranges from 0 to 1. At r = 0, selected event layer equals the higher-risk profile. At r = 1, selected event layer equals the lower-risk profile.</div>
           <div>Functional-reserve scale q ranges from 0 to 1. It changes the autonomy curve only. It does not change endpoint incidence, timing, or triangle geometry.</div>
           <div>Autonomy score bands: 90 to 100 = full autonomy with reserve; 75 to 90 = independent with narrowing reserve; 60 to 75 = vulnerable independence; 45 to 60 = independence threshold; below 45 = supported or dependent living.</div>
@@ -256,11 +241,11 @@
 
   <script>
     const events = [
-      { id:'mace', label:'First heart attack or stroke', source:'PREVENT plus ATM modifier', definition:'First nonfatal myocardial infarction, ischemic stroke, or cardiovascular death composite, subject to final model definition.', median:68, win:5, maxShift:10, high:42, low:28, impact:9, color:'#e8604c' },
-      { id:'mobility', label:'Noticeable loss of mobility', source:'Studenski plus pooled healthspan cohorts', definition:'Sustained gait speed below 1.0 m/s or equivalent clinically meaningful mobility limitation.', median:70, win:4, maxShift:6, high:36, low:24, impact:16, color:'#6db1c9' },
-      { id:'cancer', label:'Cancer diagnosis', source:'SEER plus ATM heterozygote cohort', definition:'Incident invasive malignancy excluding non-melanoma skin cancer unless final oncology model includes it.', median:72, win:6, maxShift:8, high:31, low:24, impact:11, color:'#d14a6a' },
-      { id:'independence', label:'Loss of independent living', source:'Framingham functional cohorts', definition:'Sustained ADL or IADL dependence, assisted-living transition, or equivalent functional threshold.', median:76, win:5, maxShift:7, high:22, low:14, impact:28, color:'#e09b2d' },
-      { id:'neuro', label:'Incident MCI or dementia diagnosis', source:'NACC plus Framingham dementia incidence', definition:'Clinically diagnosed MCI or dementia. Parkinsonism and other neurodegenerative syndromes should be separate endpoints unless explicitly modeled.', median:79, win:6, maxShift:7, high:18, low:11, impact:22, color:'#9b8cff' }
+      { id:'mace', label:'First heart attack or stroke', source:'Synthetic placeholder, PREVENT candidate reference', definition:'First nonfatal myocardial infarction, ischemic stroke, or cardiovascular death composite, subject to final model definition.', median:68, win:5, maxShift:10, high:42, low:28, impact:9, color:'#e8604c' },
+      { id:'mobility', label:'Noticeable loss of mobility', source:'Synthetic placeholder, gait-speed candidate reference', definition:'Sustained gait speed below 1.0 m/s or equivalent clinically meaningful mobility limitation.', median:70, win:4, maxShift:6, high:36, low:24, impact:16, color:'#6db1c9' },
+      { id:'cancer', label:'Cancer diagnosis', source:'Synthetic placeholder, SEER candidate reference', definition:'Incident invasive malignancy excluding non-melanoma skin cancer unless final oncology model includes it.', median:72, win:6, maxShift:8, high:31, low:24, impact:11, color:'#d14a6a' },
+      { id:'independence', label:'Loss of independent living', source:'Synthetic placeholder, ADL/IADL candidate reference', definition:'Sustained ADL or IADL dependence, assisted-living transition, or equivalent functional threshold.', median:76, win:5, maxShift:7, high:22, low:14, impact:28, color:'#e09b2d' },
+      { id:'neuro', label:'Incident MCI or dementia diagnosis', source:'Synthetic placeholder, Framingham/NACC candidate reference', definition:'Clinically diagnosed MCI or dementia. Parkinsonism and other neurodegenerative syndromes should be separate endpoints unless explicitly modeled.', median:79, win:6, maxShift:7, high:18, low:11, impact:22, color:'#9b8cff' }
     ];
 
     const FUND_FRAC = 0.65;
@@ -323,7 +308,7 @@
       document.getElementById('legend').innerHTML = events.map(e => '<span><i class="swatch" style="background:' + e.color + '"></i>' + e.label + '</span>').join('');
     }
     function renderDefinitions() {
-      document.getElementById('definitions').innerHTML = events.map(e => '<div class="method"><strong>' + e.label + '</strong><span>' + e.definition + '</span></div>').join('');
+      document.getElementById('definitions').innerHTML = events.map(e => '<p><strong>' + e.label + ':</strong> ' + e.definition + '</p>').join('');
     }
     function renderTable(s) {
       const rows = ['<div class="th">Endpoint</div><div class="th right">Higher risk</div><div class="th right">Selected profile</div><div class="th right">Shift</div>'];
