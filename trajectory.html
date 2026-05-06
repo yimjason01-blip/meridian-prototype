@@ -61,6 +61,14 @@
     .autonomy-event-key span { color: var(--muted); font: 10px/1.3 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
     .autonomy-event-key b { color: var(--text); font-weight: 590; margin-right: 4px; }
     .autonomy-event-key i { display: inline-block; width: 7px; height: 7px; border-radius: 2px; margin-right: 5px; transform: translateY(1px); }
+    .band-list { display: grid; gap: 10px; margin-top: 14px; max-width: 96ch; }
+    .band-item { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; background: rgba(255,255,255,0.015); }
+    .band-item.threshold { border-color: rgba(201,169,110,0.42); background: rgba(201,169,110,0.045); }
+    .band-head { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: baseline; margin-bottom: 6px; }
+    .band-range { color: var(--text); font: 12px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.04em; font-weight: 600; }
+    .band-name { color: var(--text); font-size: 14px; font-weight: 550; letter-spacing: -0.01em; }
+    .band-frailty { color: var(--subtle); font: 11px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.03em; margin-left: auto; }
+    .band-body { color: var(--muted); font-size: 13px; line-height: 1.55; }
     .view-toggle { display: inline-flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; padding: 3px; margin: 4px 0 12px; background: rgba(255,255,255,0.02); }
     .toggle-btn { background: transparent; border: 0; color: var(--muted); font: 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.04em; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
     .toggle-btn.active { background: rgba(113,112,255,0.18); color: var(--text); }
@@ -189,6 +197,35 @@
         <div class="autonomy-readout" id="autonomyReadout"></div>
         <div class="note">Production calibration should map HRS and NHATS data across EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization. The dashed reference curve always represents high risk plus low reserve; the colored curve responds to both sliders.</div>
         <div class="table" id="eventTable" style="margin-top:18px;"></div>
+      </section>
+
+      <section class="panel">
+        <h2>What the capacity bands mean in real-world terms</h2>
+        <div class="copy">
+          <p>The 0 to 100 scale is anchored to validated frailty and disability literature (Katz ADL, Lawton IADL, Fried frailty phenotype, Rockwood frailty index). Each band represents a qualitatively different life, not a linear loss. The number is supporting detail; the band is what the patient lives.</p>
+        </div>
+        <div class="band-list">
+          <div class="band-item">
+            <div class="band-head"><span class="band-range">90 to 100</span><span class="band-name">Full capacity with reserve</span><span class="band-frailty">Fried 0/5</span></div>
+            <div class="band-body">Anything within prior baseline. Full work capacity, full physical activity (hike, lift, sex, sport), full cognitive load. Reserve intact: pneumonia or a broken ankle is recoverable without long-term loss. Most healthy adults under 60.</div>
+          </div>
+          <div class="band-item">
+            <div class="band-head"><span class="band-range">75 to 90</span><span class="band-name">Independent, reserve narrowing</span><span class="band-frailty">Fried 1/5</span></div>
+            <div class="band-body">Fully independent in ADLs and IADLs: work, drive, travel, manage finances, exercise. The buffer is gone. A hospitalization, fall, or moderate illness now causes a step-down that does not fully recover. Mild functional limitations creep in (slower stairs, slightly worse balance, longer recovery). Typical 65 to 80 with no major chronic disease.</div>
+          </div>
+          <div class="band-item">
+            <div class="band-head"><span class="band-range">60 to 75</span><span class="band-name">Vulnerable independence</span><span class="band-frailty">Fried 2/5 (pre-frail)</span></div>
+            <div class="band-body">Still independent but visibly compromised. Some IADLs becoming hard: heavy housework, complex finances, long-distance driving at night. Walking distance shorter, hills are work, balance compensations visible. One bad event (fall, surgery, infection) likely tips into the next band. Common 75 to 85.</div>
+          </div>
+          <div class="band-item threshold">
+            <div class="band-head"><span class="band-range">45 to 60</span><span class="band-name">Independence threshold</span><span class="band-frailty">Fried 3/5 (frail)</span></div>
+            <div class="band-body">The hinge zone. Some ADLs require effort or workarounds: bathing safely, dressing, transferring out of a low chair. Driving is being given up. Cooking simplified. Fall risk material. Most still live independently with home modifications, family check-ins, and a brittle steady-state. One bad week can drop them into the bottom band.</div>
+          </div>
+          <div class="band-item">
+            <div class="band-head"><span class="band-range">below 45</span><span class="band-name">Supported or dependent living</span><span class="band-frailty">Fried 4 to 5/5</span></div>
+            <div class="band-body">At least one ADL requires help: bathing, dressing, toileting, transfers, eating. Caregiver in the home, assisted living, or nursing facility. Mortality risk doubled to quadrupled versus same-age peers in higher bands.</div>
+          </div>
+        </div>
       </section>
 
       <section class="panel">
