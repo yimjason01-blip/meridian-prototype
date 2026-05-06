@@ -161,13 +161,13 @@
         <h2>Autonomy curve, first pass</h2>
         <div class="copy">
           <p>This section separates two forces that often get blended together. Disease risk controls the event layer: how many people reach an endpoint by age 95 and when that endpoint tends to occur. Functional reserve controls the lived-consequence layer: how much autonomy a person has before an event, how steeply reserve declines, and how much autonomy is lost when an event occurs.</p>
-          <p>In this prototype, each endpoint can affect the curve in two ways. First, it contributes an expected autonomy impact weighted by its cumulative incidence. Second, when disease risk improves, the event shifts later and its expected impact begins later. Functional reserve is orthogonal: it does not move the event triangles. It changes the autonomy curve by raising reserve, flattening decline, softening event impact, and delaying threshold crossing. The curve is intentionally truncated at the age 95 horizon and should not be visually extrapolated beyond that boundary.</p>
+          <p>In this prototype, each endpoint can affect the curve in two ways. First, it contributes an expected autonomy impact weighted by its cumulative incidence. Second, when disease risk improves, the event shifts later and its expected impact begins later. Functional reserve is orthogonal: it does not move the event triangles. It changes the autonomy curve by raising reserve, flattening decline, softening event impact, and delaying threshold crossing. Event markers encode age only. Their vertical position is not an autonomy-score claim. The curve is intentionally truncated at the age 95 horizon and should not be visually extrapolated beyond that boundary.</p>
         </div>
         <div class="method-grid" style="margin-top:14px;">
           <div class="method"><strong>Disease risk</strong><span>Changes endpoint incidence and timing. This is the only control that moves the event triangles.</span></div>
           <div class="method"><strong>Functional reserve</strong><span>Changes the autonomy curve through starting reserve, slope, event-impact sensitivity, and late threshold crossing.</span></div>
-          <div class="method"><strong>External anchors</strong><span>EQ-5D, WHODAS, PROMIS Physical Function, Katz ADL, Lawton IADL, Fried frailty, and Rockwood deficit accumulation.</span></div>
-          <div class="method"><strong>Event dots</strong><span>Dots mark the selected median event ages for the same five endpoints shown in the triangle chart and table below.</span></div>
+          <div class="method"><strong>Score bands</strong><span>90 to 100 full autonomy; 75 to 90 independent with narrowing reserve; 60 to 75 vulnerable independence; 45 to 60 independence threshold; below 45 supported or dependent living.</span></div>
+          <div class="method"><strong>Event markers</strong><span>Numbered markers show selected median event ages. Their x-position maps to age; their y-position is not interpreted as the score at which the event occurs.</span></div>
         </div>
         <div class="control-grid">
           <div class="slider-box">
@@ -190,11 +190,12 @@
           </div>
           <div class="summary" id="summary" style="grid-column:1 / -1;"></div>
         </div>
-        <div class="autonomy-legend"><span><i class="line-key dashed" style="color:#a8adb7"></i>Higher-risk autonomy curve</span><span><i class="line-key" style="color:#b9b8ff"></i>Selected-risk autonomy curve</span><span>Numbered dots = same five event medians below</span></div>
+        <div class="autonomy-legend"><span><i class="line-key dashed" style="color:#a8adb7"></i>High risk plus low reserve curve</span><span><i class="line-key" style="color:#b9b8ff"></i>Selected curve</span><span>Numbered ticks = selected median event ages</span></div>
         <div class="autonomy-wrap"><svg class="autonomy-chart" id="autonomyChart" viewBox="0 0 720 330" aria-label="Expected autonomy curve"></svg></div>
         <div class="autonomy-event-key" id="autonomyEventKey"></div>
+        <div class="note">Event timing row: numbered markers answer when each endpoint tends to occur. They do not answer what autonomy score defines that endpoint. Loss of independent living is anchored to the 45 to 60 independence-threshold band for affected individuals.</div>
         <div class="autonomy-readout" id="autonomyReadout"></div>
-        <div class="note">Autonomy method note: this is a documented first-pass construct. Production calibration should use longitudinal datasets such as HRS or NHATS, mapping repeated EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization data onto a common 0 to 100 autonomy scale. The age 95 endpoint is a model horizon, not an implied continuation line.</div>
+        <div class="note">Autonomy method note: this is a documented first-pass construct. Production calibration should use longitudinal datasets such as HRS or NHATS, mapping repeated EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization data onto a common 0 to 100 autonomy scale. Loss of independent living belongs to the 45 to 60 threshold band for affected individuals; the cohort-average curve can remain above that band because not everyone has the endpoint by the horizon. The age 95 endpoint is a model horizon, not an implied continuation line.</div>
       </section>
 
       <section class="panel">
@@ -257,6 +258,7 @@
           <div>The displayed base is the central 80% conditional timing interval: p10 to p90 among cohort members who experience the endpoint by age 95.</div>
           <div>Disease-risk scale r ranges from 0 to 1. At r = 0, selected event layer equals the higher-risk profile. At r = 1, selected event layer equals the lower-risk profile.</div>
           <div>Functional-reserve scale q ranges from 0 to 1. It changes the autonomy curve only. It does not change endpoint incidence, timing, or triangle geometry.</div>
+          <div>Autonomy score bands: 90 to 100 = full autonomy with reserve; 75 to 90 = independent with narrowing reserve; 60 to 75 = vulnerable independence; 45 to 60 = independence threshold; below 45 = supported or dependent living.</div>
           <div>selectedMedianAge = medianAgeHigh + maxMedianShift x r.</div>
           <div>selectedIncidenceBy95 = incidenceHighBy95 minus ((incidenceHighBy95 minus incidenceLowBy95) x r).</div>
           <div>selectedP10Age = p10AgeHigh + maxMedianShift x r. selectedP90Age = p90AgeHigh + maxMedianShift x r, with optional widening only if the calibrated model shows wider late-age uncertainty.</div>
@@ -356,6 +358,13 @@
     const autonomySvg = document.getElementById('autonomyChart');
     const AW = 720, AH = 330;
     const aLeft = 56, aRight = 24, aTop = 24, aBottom = 42;
+    const autonomyBands = [
+      { low:90, high:100, label:'Full autonomy with reserve', fill:'rgba(113,112,255,0.075)' },
+      { low:75, high:90, label:'Independent, reserve narrowing', fill:'rgba(185,184,255,0.050)' },
+      { low:60, high:75, label:'Vulnerable independence', fill:'rgba(109,177,201,0.055)' },
+      { low:45, high:60, label:'Independence threshold', fill:'rgba(224,155,45,0.070)' },
+      { low:0, high:45, label:'Supported or dependent living', fill:'rgba(232,96,76,0.045)' }
+    ];
     const aX = (age) => aLeft + ((age - 47) / (95 - 47)) * (AW - aLeft - aRight);
     const aY = (score) => aTop + ((100 - score) / 100) * (AH - aTop - aBottom);
     const clampScore = (v) => Math.max(0, Math.min(100, v));
@@ -386,7 +395,11 @@
       if (!autonomySvg) return;
       autonomySvg.innerHTML = '';
       autonomySvg.appendChild(el('rect', { x:0, y:0, width:AW, height:AH, fill:'transparent' }));
-      [100,75,50,25,0].forEach(score => {
+      autonomyBands.forEach(band => {
+        autonomySvg.appendChild(el('rect', { x:aLeft, y:aY(band.high), width:AW-aLeft-aRight, height:aY(band.low)-aY(band.high), fill:band.fill }));
+        autonomySvg.appendChild(el('text', { x:AW-aRight-8, y:aY((band.low + band.high) / 2)+4, fill:'#d7dbe3', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end', 'fill-opacity':0.86 }, band.label));
+      });
+      [100,90,75,60,45,0].forEach(score => {
         autonomySvg.appendChild(el('line', { x1:aLeft, y1:aY(score), x2:AW-aRight, y2:aY(score), stroke:'rgba(168,173,183,0.14)', 'stroke-width':1 }));
         autonomySvg.appendChild(el('text', { x:aLeft-12, y:aY(score)+4, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, score));
       });
@@ -397,13 +410,19 @@
       autonomySvg.appendChild(el('text', { x:18, y:24, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'start' }, 'autonomy 0 to 100'));
       autonomySvg.appendChild(el('text', { x:aX(95), y:aTop-8, fill:'#a8adb7', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, 'horizon 95'));
       autonomySvg.appendChild(el('line', { x1:aLeft, y1:AH-aBottom, x2:AW-aRight, y2:AH-aBottom, stroke:'rgba(168,173,183,0.28)', 'stroke-width':1 }));
+      autonomySvg.appendChild(el('text', { x:aLeft+4, y:AH-aBottom-18, fill:'#d7dbe3', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'start', 'fill-opacity':0.88 }, 'event timing row, x-axis only'));
       autonomySvg.appendChild(el('path', { d:autonomyPath(0, 0), fill:'none', stroke:'#a8adb7', 'stroke-opacity':0.62, 'stroke-width':2, 'stroke-dasharray':'5 5' }));
       autonomySvg.appendChild(el('path', { d:autonomyPath(riskS, reserveS), fill:'none', stroke:'#b9b8ff', 'stroke-opacity':0.95, 'stroke-width':2.4 }));
+      // Event markers encode x-axis timing only. They sit on the age axis as diamonds,
+      // not on the autonomy curve, so y-position is never read as an event threshold.
       events.forEach((e, i) => {
         const center = e.median + e.maxShift * riskS;
-        const score = autonomyScore(center, riskS, reserveS);
-        autonomySvg.appendChild(el('circle', { cx:aX(center), cy:aY(score), r:8, fill:e.color, 'fill-opacity':0.95 }));
-        autonomySvg.appendChild(el('text', { x:aX(center), y:aY(score)+3.5, fill:'#08090a', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'font-weight':590, 'text-anchor':'middle' }, i + 1));
+        const x = aX(center);
+        const y = AH - aBottom - 8;
+        const d = ['M', x, y - 8, 'L', x + 8, y, 'L', x, y + 8, 'L', x - 8, y, 'Z'].join(' ');
+        autonomySvg.appendChild(el('line', { x1:x, y1:aTop, x2:x, y2:AH-aBottom, stroke:e.color, 'stroke-opacity':0.22, 'stroke-width':1, 'stroke-dasharray':'2 4' }));
+        autonomySvg.appendChild(el('path', { d, fill:e.color, 'fill-opacity':0.98, stroke:'#08090a', 'stroke-width':1 }));
+        autonomySvg.appendChild(el('text', { x, y:y+3.5, fill:'#08090a', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'font-weight':590, 'text-anchor':'middle' }, i + 1));
       });
       const key = document.getElementById('autonomyEventKey');
       if (key) key.innerHTML = events.map((e, i) => '<span><i style="background:' + e.color + '"></i><b>' + (i + 1) + '</b>' + e.label + '</span>').join('');
