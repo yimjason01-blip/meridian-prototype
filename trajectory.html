@@ -38,7 +38,7 @@
     .panel { background: rgba(19,22,27,0.84); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; box-shadow: 0 22px 70px rgba(0,0,0,0.23); }
     .panel h2 { margin: 0 0 10px; font-size: 19px; letter-spacing: -0.035em; font-weight: 550; }
     .panel h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: -0.02em; font-weight: 550; }
-    .copy { color: var(--muted); font-size: 13px; line-height: 1.58; max-width: 92ch; }
+    .copy { color: var(--muted); font-size: 14px; line-height: 1.58; max-width: 92ch; }
     .copy p { margin: 0 0 10px; }
     .copy p:last-child { margin-bottom: 0; }
     .copy strong { color: var(--text); font-weight: 540; }
@@ -51,6 +51,14 @@
     .swatch { width: 13px; height: 10px; border-radius: 2px; display: inline-block; }
     .chart-wrap { margin: 10px -4px 18px; }
     .chart { width: 100%; height: auto; display: block; }
+    .autonomy-wrap { margin: 12px -4px 14px; }
+    .autonomy-chart { width: 100%; height: auto; display: block; }
+    .autonomy-legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0 4px; color: var(--muted); font: 11px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.03em; }
+    .autonomy-legend span { display: inline-flex; gap: 7px; align-items: center; }
+    .line-key { width: 24px; height: 0; border-top: 2px solid currentColor; display: inline-block; }
+    .line-key.dashed { border-top-style: dashed; opacity: 0.7; }
+    .autonomy-readout { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 10px; padding: 12px 13px; color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 10px; }
+    .autonomy-readout strong { color: var(--text); font-weight: 540; }
     .slider-box { border: 1px solid rgba(113,112,255,0.38); background: rgba(113,112,255,0.045); border-radius: 9px; padding: 15px 16px; margin-bottom: 18px; }
     .slider-row { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; margin-bottom: 8px; }
     .slider-title { font-size: 12px; font-weight: 540; color: var(--text); }
@@ -76,14 +84,14 @@
     .list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
     .list li { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 9px; padding: 12px 13px; }
     .list strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 5px; }
-    .list span { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .list span { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; }
     .method-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
     .method { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 10px; padding: 13px 14px; }
     .method strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 6px; }
-    .method span { color: var(--muted); font-size: 12px; line-height: 1.48; display: block; }
+    .method span { color: var(--muted); font-size: 13px; line-height: 1.48; display: block; }
     .ref-table { display: grid; grid-template-columns: 210px 1fr 1fr; gap: 0 14px; }
     .ref-h { color: var(--subtle); font: 10px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 9px; border-bottom: 1px solid var(--border); }
-    .ref-cell { padding: 12px 0; border-bottom: 1px dashed var(--border-soft); color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .ref-cell { padding: 12px 0; border-bottom: 1px dashed var(--border-soft); color: var(--muted); font-size: 13px; line-height: 1.45; }
     .ref-cell strong { color: var(--text); font-weight: 540; }
     .calc { display: grid; gap: 10px; color: var(--muted); font: 11px/1.55 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
     .calc div { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 9px; padding: 11px 12px; }
@@ -141,20 +149,38 @@
       </section>
 
       <section class="panel">
-        <h2>Trajectory chart</h2>
-        <div class="copy"><p>Read each triangle as one endpoint forecast. Width is timing: the 10th to 90th percentile interval among people who experience the endpoint by age 95. Height is incidence. Apex is median event age among those who experience the endpoint. The numbers are placeholders so reviewers can judge the communication structure before the final model exists.</p></div>
-        <div class="chart-caveat"><strong>Important:</strong> evaluate the representation, not the placeholder values. The chart is designed to show the shape of the forecast object that Meridian needs to model, not to assert these exact risks.</div>
-        <div class="legend" id="legend"></div>
-        <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 720 500" aria-label="Trajectory triangle chart"></svg></div>
+        <h2>Autonomy curve, first pass</h2>
+        <div class="copy">
+          <p>This section connects the slider to the idea of bending the curve. The autonomy curve is not a new disease endpoint. It is a 0 to 100 functional independence trajectory anchored to established external constructs: EQ-5D or WHODAS for health utility and disability, PROMIS Physical Function for function, Katz ADL and Lawton IADL for hard independence thresholds, and frailty index logic for reserve and slope.</p>
+          <p>In this prototype, each endpoint can affect the curve in two ways. First, it contributes an expected autonomy impact weighted by its cumulative incidence. Second, when risk improves, the event shifts later and its expected impact begins later. The slider therefore bends the curve by preserving reserve, reducing expected event burden, and delaying event-related slope changes.</p>
+        </div>
+        <div class="method-grid" style="margin-top:14px;">
+          <div class="method"><strong>Y-axis</strong><span>Autonomy score from 0 to 100. It is a mapped functional score, not raw EQ-5D, raw WHODAS, or raw ADL count.</span></div>
+          <div class="method"><strong>External anchors</strong><span>EQ-5D, WHODAS, PROMIS Physical Function, Katz ADL, Lawton IADL, Fried frailty, and Rockwood deficit accumulation.</span></div>
+          <div class="method"><strong>Curve shape</strong><span>Baseline age-related decline plus event-related downward pressure. Events are smoothed transitions, not instant deterministic drops.</span></div>
+          <div class="method"><strong>Slider meaning</strong><span>Movement toward a lower-risk, higher-reserve profile. It is still not claimed as a proven treatment effect.</span></div>
+        </div>
         <div class="slider-box">
           <div class="slider-row">
-            <div class="slider-title">Risk profile comparison</div>
+            <div class="slider-title">Curve-bending state</div>
             <div class="slider-value" id="stageValue"></div>
           </div>
           <input id="riskSlider" type="range" min="0" max="100" step="5" value="100" aria-label="Risk profile continuum" />
           <div class="slider-labels"><span>Higher-risk profile</span><span>Lower-risk profile</span></div>
           <div class="summary" id="summary"></div>
         </div>
+        <div class="autonomy-legend"><span><i class="line-key dashed" style="color:#a8adb7"></i>Higher-risk autonomy curve</span><span><i class="line-key" style="color:#b9b8ff"></i>Selected-risk autonomy curve</span></div>
+        <div class="autonomy-wrap"><svg class="autonomy-chart" id="autonomyChart" viewBox="0 0 720 330" aria-label="Expected autonomy curve"></svg></div>
+        <div class="autonomy-readout" id="autonomyReadout"></div>
+        <div class="note">Autonomy method note: this is a documented first-pass construct. Production calibration should use longitudinal datasets such as HRS or NHATS, mapping repeated EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, and mortality data onto a common 0 to 100 autonomy scale.</div>
+      </section>
+
+      <section class="panel">
+        <h2>Trajectory chart</h2>
+        <div class="copy"><p>Read each triangle as one endpoint forecast. Width is timing: the 10th to 90th percentile interval among people who experience the endpoint by age 95. Height is incidence. Apex is median event age among those who experience the endpoint. The numbers are placeholders so reviewers can judge the communication structure before the final model exists.</p></div>
+        <div class="chart-caveat"><strong>Important:</strong> evaluate the representation, not the placeholder values. The chart is designed to show the shape of the forecast object that Meridian needs to model, not to assert these exact risks.</div>
+        <div class="legend" id="legend"></div>
+        <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 720 500" aria-label="Trajectory triangle chart"></svg></div>
         <div class="table" id="eventTable"></div>
         <div class="note">Encoding note: triangle base spans the central 80% conditional timing interval, p10 to p90, among people who experience the endpoint by age 95. Triangle area is not interpreted as probability because its units would mix years and percent. In production, the chart should add uncertainty intervals once the event models are calibrated.</div>
       </section>
@@ -198,6 +224,7 @@
           <div class="ref-cell"><strong>Mobility loss</strong></div><div class="ref-cell">Studenski S et al. Gait speed and survival in older adults. JAMA, 2011.</div><div class="ref-cell">Functional aging anchor. Production use would need incidence of sustained gait-speed threshold crossing, not mortality association alone.</div>
           <div class="ref-cell"><strong>Loss of independent living</strong></div><div class="ref-cell">Katz ADL and Lawton IADL frameworks. Framingham and geriatric functional-decline cohorts.</div><div class="ref-cell">Operationalize ADL or IADL dependence, assisted-living transition, or another durable independence threshold.</div>
           <div class="ref-cell"><strong>Incident MCI or dementia</strong></div><div class="ref-cell">Satizabal CL et al. Incidence of dementia over three decades in the Framingham Heart Study. NEJM, 2016. Morris JC et al. NACC Uniform Data Set. Alzheimer Disease and Associated Disorders, 2006.</div><div class="ref-cell">Age-specific MCI or dementia incidence calibration. Parkinsonism and other neurodegenerative syndromes should be separate unless explicitly modeled.</div>
+          <div class="ref-cell"><strong>Autonomy curve</strong></div><div class="ref-cell">Katz ADL, Lawton IADL, EQ-5D, WHODAS 2.0, PROMIS Physical Function, Fried frailty phenotype, Rockwood frailty index, Gill disability trajectories before death, HRS, and NHATS.</div><div class="ref-cell">Anchor the 0 to 100 autonomy score, define late independence thresholds, estimate reserve slope, and calibrate event-related drops and recovery trajectories.</div>
         </div>
       </section>
 
@@ -210,6 +237,8 @@
           <div>selectedMedianAge = medianAgeHigh + maxMedianShift x s.</div>
           <div>selectedIncidenceBy95 = incidenceHighBy95 minus ((incidenceHighBy95 minus incidenceLowBy95) x s).</div>
           <div>selectedP10Age = p10AgeHigh + maxMedianShift x s. selectedP90Age = p90AgeHigh + maxMedianShift x s, with optional widening only if the calibrated model shows wider late-age uncertainty.</div>
+          <div>Autonomy prototype: autonomy(age) = baseline reserve decline minus the sum of event impact weights multiplied by each endpoint's cumulative incidence and a smoothed timing transition around that endpoint's median age.</div>
+          <div>Slider effect on autonomy: lower-risk movement reduces baseline decline, lowers event incidence weights, and shifts event transitions later. This documents curve bending without claiming final causal calibration.</div>
         </div>
       </section>
     </section>
@@ -217,11 +246,11 @@
 
   <script>
     const events = [
-      { id:'mace', label:'First heart attack or stroke', source:'PREVENT plus ATM modifier', definition:'First nonfatal myocardial infarction, ischemic stroke, or cardiovascular death composite, subject to final model definition.', median:68, win:5, maxShift:10, high:42, low:28, color:'#e8604c' },
-      { id:'mobility', label:'Noticeable loss of mobility', source:'Studenski plus pooled healthspan cohorts', definition:'Sustained gait speed below 1.0 m/s or equivalent clinically meaningful mobility limitation.', median:70, win:4, maxShift:6, high:36, low:24, color:'#6db1c9' },
-      { id:'cancer', label:'Cancer diagnosis', source:'SEER plus ATM heterozygote cohort', definition:'Incident invasive malignancy excluding non-melanoma skin cancer unless final oncology model includes it.', median:72, win:6, maxShift:8, high:31, low:24, color:'#d14a6a' },
-      { id:'independence', label:'Loss of independent living', source:'Framingham functional cohorts', definition:'Sustained ADL or IADL dependence, assisted-living transition, or equivalent functional threshold.', median:76, win:5, maxShift:7, high:22, low:14, color:'#e09b2d' },
-      { id:'neuro', label:'Incident MCI or dementia diagnosis', source:'NACC plus Framingham dementia incidence', definition:'Clinically diagnosed MCI or dementia. Parkinsonism and other neurodegenerative syndromes should be separate endpoints unless explicitly modeled.', median:79, win:6, maxShift:7, high:18, low:11, color:'#9b8cff' }
+      { id:'mace', label:'First heart attack or stroke', source:'PREVENT plus ATM modifier', definition:'First nonfatal myocardial infarction, ischemic stroke, or cardiovascular death composite, subject to final model definition.', median:68, win:5, maxShift:10, high:42, low:28, impact:9, color:'#e8604c' },
+      { id:'mobility', label:'Noticeable loss of mobility', source:'Studenski plus pooled healthspan cohorts', definition:'Sustained gait speed below 1.0 m/s or equivalent clinically meaningful mobility limitation.', median:70, win:4, maxShift:6, high:36, low:24, impact:16, color:'#6db1c9' },
+      { id:'cancer', label:'Cancer diagnosis', source:'SEER plus ATM heterozygote cohort', definition:'Incident invasive malignancy excluding non-melanoma skin cancer unless final oncology model includes it.', median:72, win:6, maxShift:8, high:31, low:24, impact:11, color:'#d14a6a' },
+      { id:'independence', label:'Loss of independent living', source:'Framingham functional cohorts', definition:'Sustained ADL or IADL dependence, assisted-living transition, or equivalent functional threshold.', median:76, win:5, maxShift:7, high:22, low:14, impact:28, color:'#e09b2d' },
+      { id:'neuro', label:'Incident MCI or dementia diagnosis', source:'NACC plus Framingham dementia incidence', definition:'Clinically diagnosed MCI or dementia. Parkinsonism and other neurodegenerative syndromes should be separate endpoints unless explicitly modeled.', median:79, win:6, maxShift:7, high:18, low:11, impact:22, color:'#9b8cff' }
     ];
 
     const FUND_FRAC = 0.65;
@@ -298,6 +327,59 @@
       });
       document.getElementById('eventTable').innerHTML = rows.join('');
     }
+
+    const autonomySvg = document.getElementById('autonomyChart');
+    const AW = 720, AH = 330;
+    const aLeft = 56, aRight = 24, aTop = 24, aBottom = 42;
+    const aX = (age) => aLeft + ((age - 47) / (95 - 47)) * (AW - aLeft - aRight);
+    const aY = (score) => aTop + ((100 - score) / 60) * (AH - aTop - aBottom);
+    const clampScore = (v) => Math.max(35, Math.min(100, v));
+    const smoothStep = (age, center) => 1 / (1 + Math.exp(-(age - center) / 3.2));
+    function autonomyScore(age, s, selected) {
+      const t = age - 47;
+      const slope = selected ? 0.20 - (0.055 * s) : 0.20;
+      const accel = selected ? 0.010 - (0.0045 * s) : 0.010;
+      let score = 94 - slope * t - accel * t * t;
+      events.forEach(e => {
+        const center = selected ? e.median + (e.maxShift * s) : e.median;
+        const incidence = selected ? e.high - ((e.high - e.low) * s) : e.high;
+        score -= e.impact * (incidence / 100) * smoothStep(age, center);
+      });
+      return clampScore(score);
+    }
+    function autonomyPath(s, selected) {
+      const pts = [];
+      for (let age = 47; age <= 95; age += 1) pts.push([aX(age), aY(autonomyScore(age, s, selected))]);
+      return pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+    }
+    function renderAutonomy(s) {
+      if (!autonomySvg) return;
+      autonomySvg.innerHTML = '';
+      autonomySvg.appendChild(el('rect', { x:0, y:0, width:AW, height:AH, fill:'transparent' }));
+      [100,80,60,40].forEach(score => {
+        autonomySvg.appendChild(el('line', { x1:aLeft, y1:aY(score), x2:AW-aRight, y2:aY(score), stroke:'rgba(168,173,183,0.14)', 'stroke-width':1 }));
+        autonomySvg.appendChild(el('text', { x:aLeft-12, y:aY(score)+4, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, score));
+      });
+      [50,60,70,80,90].forEach(age => {
+        autonomySvg.appendChild(el('line', { x1:aX(age), y1:aTop, x2:aX(age), y2:AH-aBottom, stroke:'rgba(168,173,183,0.10)', 'stroke-width':1 }));
+        autonomySvg.appendChild(el('text', { x:aX(age), y:AH-16, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, age));
+      });
+      autonomySvg.appendChild(el('text', { x:18, y:24, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'start' }, 'autonomy'));
+      autonomySvg.appendChild(el('line', { x1:aLeft, y1:AH-aBottom, x2:AW-aRight, y2:AH-aBottom, stroke:'rgba(168,173,183,0.28)', 'stroke-width':1 }));
+      autonomySvg.appendChild(el('path', { d:autonomyPath(0, false), fill:'none', stroke:'#a8adb7', 'stroke-opacity':0.62, 'stroke-width':2, 'stroke-dasharray':'5 5' }));
+      autonomySvg.appendChild(el('path', { d:autonomyPath(s, true), fill:'none', stroke:'#b9b8ff', 'stroke-opacity':0.95, 'stroke-width':2.4 }));
+      events.forEach(e => {
+        const center = e.median + e.maxShift * s;
+        const score = autonomyScore(center, s, true);
+        autonomySvg.appendChild(el('circle', { cx:aX(center), cy:aY(score), r:3.2, fill:e.color, 'fill-opacity':0.95 }));
+      });
+      const high85 = autonomyScore(85, 0, false);
+      const selected85 = autonomyScore(85, s, true);
+      const high95 = autonomyScore(95, 0, false);
+      const selected95 = autonomyScore(95, s, true);
+      const readout = document.getElementById('autonomyReadout');
+      if (readout) readout.innerHTML = '<strong>Current slider state:</strong> projected autonomy is ' + (selected85 - high85).toFixed(1) + ' points higher at age 85 and ' + (selected95 - high95).toFixed(1) + ' points higher at age 95 versus the higher-risk curve. This is an illustrative curve-bending readout, not a calibrated forecast.';
+    }
     function render() {
       const s = scale(progress);
       const dyn = document.getElementById('dyn');
@@ -320,6 +402,7 @@
       document.getElementById('stageValue').textContent = stateLabel(progress);
       document.getElementById('summary').innerHTML = 'Showing <span class="num">' + stateLabel(progress).toLowerCase() + '</span>. Event windows move later by <span class="num">≈' + avgShift.toFixed(1) + ' years</span> on average and cumulative incidence falls by <span class="num">≈' + avgDrop.toFixed(0) + ' percentage points</span> versus the higher-risk profile.';
       renderTable(s);
+      renderAutonomy(s);
     }
 
     drawStatic();
