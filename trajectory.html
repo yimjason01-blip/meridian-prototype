@@ -118,8 +118,8 @@
     <section class="top">
       <div>
         <div class="kicker">Meridian trajectory preview</div>
-        <h1>Showing how risk changes both whether an event happens and when it tends to happen.</h1>
-        <p class="lede">This page is a reviewer artifact for the trajectory concept. The intent is to test whether clinicians can understand one idea quickly: event timing is incomplete unless it is paired with the denominator. For every endpoint, Meridian eventually needs to answer both questions: what share of comparable people experience the event by the horizon, and when does it usually occur among those who do?</p>
+        <h1>Showing both whether health events happen and when they tend to happen.</h1>
+        <p class="lede">This review page tests one forecast object: cumulative incidence by age 95, conditional timing among affected people, and the expected autonomy consequence of risk plus functional reserve.</p>
       </div>
       <aside class="status">
         <strong>Clinical status</strong>
@@ -129,45 +129,43 @@
 
     <section class="stack">
       <section class="panel">
-        <h2>Intent</h2>
+        <h2>What this page is testing</h2>
         <div class="copy">
-          <p>The purpose of this view is not to convince anyone that Meridian has finalized these numbers. The purpose is to make the forecast object honest before the model is finalized.</p>
-          <p>A conventional event window says, for example, that a first heart attack or stroke tends to occur around a certain age. That is only a conditional timing statement. It applies to people who have the event. The missing denominator is the share of comparable people who have the event at all by the modeled horizon.</p>
-          <p>This page tests a single visual grammar for combining those two pieces. The triangle base shows the central 80% timing interval, from the 10th to 90th percentile of event timing among people who experience the endpoint by the horizon. The triangle height shows cumulative incidence by the horizon. Moving from a higher-risk profile to a lower-risk profile can therefore do two things at once: push the event later and reduce the share of people who ever enter that event distribution.</p>
+          <p>Event timing alone is incomplete. A forecast also needs the denominator: what share of comparable people experience the endpoint by the modeled horizon.</p>
+          <p>The triangle chart combines those two quantities. Base = central 80% timing interval among affected people. Height = cumulative incidence by age 95. The autonomy curve then shows how disease risk and functional reserve change the expected consequence.</p>
         </div>
         <div class="callout">
-          <div><strong>Question 1</strong><span>What percent of comparable people have this event by the horizon?</span></div>
-          <div><strong>Question 2</strong><span>Among people who have it, when does it tend to occur?</span></div>
-          <div><strong>Question 3</strong><span>Does a lower-risk profile change incidence, timing, or both?</span></div>
+          <div><strong>Incidence</strong><span>What percent have the endpoint by age 95?</span></div>
+          <div><strong>Timing</strong><span>Among affected people, when does it tend to occur?</span></div>
+          <div><strong>Autonomy</strong><span>How much functional reserve remains as events accumulate?</span></div>
         </div>
       </section>
 
       <section class="panel">
         <h2>Method, in plain English</h2>
         <div class="copy">
-          <p>This version compares two cohort profiles, not a treatment effect. The higher-risk row represents a worse modeled risk state for a 45 to 50 year-old ATM positive, dyslipidemic male reference cohort. The selected-risk row moves along a continuum toward a lower-risk profile. The page does not claim that Meridian interventions have caused that movement.</p>
-          <p>For each endpoint, the prototype stores four placeholder quantities: a median event age, a central 80% timing interval around that median, cumulative incidence by age 95 for a higher-risk profile, and cumulative incidence by age 95 for a lower-risk profile. The slider interpolates between the two risk profiles. It shifts the timing window later and lowers the cumulative incidence.</p>
-          <p>These are marginal endpoint estimates. They are not mutually exclusive, not a competing-risk adjusted survival model, and not a single multi-state sequence. Those are production modeling requirements, not finished work in this artifact.</p>
+          <p>This version compares cohort profiles, not a proven Meridian treatment effect. The reference cohort is ATM positive, dyslipidemic males age 45 to 50. Values are illustrative placeholders.</p>
+          <p>For each endpoint, the prototype stores median timing, central 80% timing interval, and cumulative incidence by age 95. Endpoints are marginal: not mutually exclusive, not competing-risk adjusted, and not a multi-state sequence.</p>
         </div>
         <div class="method-grid" style="margin-top:14px;">
-          <div class="method"><strong>Population frame</strong><span>ATM positive, dyslipidemic males age 45 to 50. This is a review cohort label, not a final calibrated cohort definition.</span></div>
-          <div class="method"><strong>Horizon</strong><span>Cumulative incidence is shown by age 95. If production uses age 85, age 90, or lifetime risk, every number must be recalibrated and relabeled.</span></div>
-          <div class="method"><strong>Risk comparison</strong><span>Higher-risk profile versus lower-risk profile. This is not yet an intervention-attributable Meridian effect.</span></div>
-          <div class="method"><strong>Event structure</strong><span>Endpoints are marginal. Prior events, death, and cross-endpoint dependency are not yet modeled.</span></div>
+          <div class="method"><strong>Population</strong><span>ATM positive, dyslipidemic males age 45 to 50. Review cohort, not final calibration.</span></div>
+          <div class="method"><strong>Horizon</strong><span>Cumulative incidence is by age 95. Other horizons require relabeling and recalibration.</span></div>
+          <div class="method"><strong>Comparison</strong><span>Higher-risk profile versus lower-risk profile. Not yet intervention-attributable.</span></div>
+          <div class="method"><strong>Event structure</strong><span>Marginal endpoints. Prior events, death, and dependencies are not yet modeled.</span></div>
         </div>
       </section>
 
       <section class="panel">
-        <h2>Autonomy curve, first pass</h2>
+        <h2>Autonomy consequence layer</h2>
         <div class="copy">
-          <p>This section separates two forces that often get blended together. Disease risk controls the event layer: how many people reach an endpoint by age 95 and when that endpoint tends to occur. Functional reserve controls the lived-consequence layer: how much autonomy a person has before an event, how steeply reserve declines, and how much autonomy is lost when an event occurs.</p>
-          <p>In this prototype, each endpoint can affect the curve in two ways. First, it contributes an expected autonomy impact weighted by its cumulative incidence. Second, when disease risk improves, the event shifts later and its expected impact begins later. Functional reserve is orthogonal: it does not move the event triangles. It changes the autonomy curve by raising reserve, flattening decline, softening event impact, and delaying threshold crossing. Event markers encode age only. Their vertical position is not an autonomy-score claim. The curve is intentionally truncated at the age 95 horizon and should not be visually extrapolated beyond that boundary.</p>
+          <p>Disease risk controls the event layer: incidence and timing. Functional reserve controls the consequence layer: starting reserve, decline slope, event-impact sensitivity, and threshold crossing.</p>
+          <p>The controls are intentionally orthogonal. Disease risk moves the event triangles. Functional reserve changes only the autonomy curve. Event markers on this chart are x-axis timing markers, not autonomy-score thresholds.</p>
         </div>
         <div class="method-grid" style="margin-top:14px;">
-          <div class="method"><strong>Disease risk</strong><span>Changes endpoint incidence and timing. This is the only control that moves the event triangles.</span></div>
-          <div class="method"><strong>Functional reserve</strong><span>Changes the autonomy curve through starting reserve, slope, event-impact sensitivity, and late threshold crossing.</span></div>
-          <div class="method"><strong>Score bands</strong><span>90 to 100 full autonomy; 75 to 90 independent with narrowing reserve; 60 to 75 vulnerable independence; 45 to 60 independence threshold; below 45 supported or dependent living.</span></div>
-          <div class="method"><strong>Event markers</strong><span>Numbered markers show selected median event ages. Their x-position maps to age; their y-position is not interpreted as the score at which the event occurs.</span></div>
+          <div class="method"><strong>Disease risk</strong><span>Moves triangle timing and incidence.</span></div>
+          <div class="method"><strong>Functional reserve</strong><span>Changes curve height, slope, and event-impact sensitivity.</span></div>
+          <div class="method"><strong>Score bands</strong><span>90+ full reserve; 75 to 90 independent but narrowing; 60 to 75 vulnerable; 45 to 60 independence threshold; below 45 supported.</span></div>
+          <div class="method"><strong>Event markers</strong><span>Numbered x-axis markers show selected median event ages only.</span></div>
         </div>
         <div class="control-grid">
           <div class="slider-box">
@@ -193,53 +191,40 @@
         <div class="autonomy-legend"><span><i class="line-key dashed" style="color:#a8adb7"></i>High risk plus low reserve curve</span><span><i class="line-key" style="color:#b9b8ff"></i>Selected curve</span><span>Numbered ticks = selected median event ages</span></div>
         <div class="autonomy-wrap"><svg class="autonomy-chart" id="autonomyChart" viewBox="0 0 720 330" aria-label="Expected autonomy curve"></svg></div>
         <div class="autonomy-event-key" id="autonomyEventKey"></div>
-        <div class="note">Event timing row: numbered markers answer when each endpoint tends to occur. They do not answer what autonomy score defines that endpoint. Loss of independent living is anchored to the 45 to 60 independence-threshold band for affected individuals.</div>
+        <div class="note">Marker row: numbers answer when endpoints tend to occur, not what autonomy score defines them. Loss of independent living is anchored to the 45 to 60 threshold band for affected individuals.</div>
         <div class="autonomy-readout" id="autonomyReadout"></div>
-        <div class="note">Autonomy method note: this is a documented first-pass construct. Production calibration should use longitudinal datasets such as HRS or NHATS, mapping repeated EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization data onto a common 0 to 100 autonomy scale. Loss of independent living belongs to the 45 to 60 threshold band for affected individuals; the cohort-average curve can remain above that band because not everyone has the endpoint by the horizon. The age 95 endpoint is a model horizon, not an implied continuation line.</div>
+        <div class="note">Autonomy scale is illustrative. Production calibration should map HRS or NHATS data across EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization.</div>
       </section>
 
       <section class="panel">
         <h2>Trajectory chart</h2>
-        <div class="copy"><p>Read each triangle as one endpoint forecast. Width is timing: the 10th to 90th percentile interval among people who experience the endpoint by age 95. Height is incidence. Apex is median event age among those who experience the endpoint. The numbers are placeholders so reviewers can judge the communication structure before the final model exists.</p></div>
-        <div class="chart-caveat"><strong>Important:</strong> evaluate the representation, not the placeholder values. The chart is designed to show the shape of the forecast object that Meridian needs to model, not to assert these exact risks.</div>
+        <div class="copy"><p>Each triangle is one endpoint forecast. Width = p10 to p90 event timing among affected people. Height = cumulative incidence by age 95. Apex = median event age. Values are placeholders.</p></div>
+        <div class="chart-caveat"><strong>Important:</strong> judge the representation, not the placeholder risks.</div>
         <div class="legend" id="legend"></div>
         <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 720 500" aria-label="Trajectory triangle chart"></svg></div>
         <div class="table" id="eventTable"></div>
-        <div class="note">Encoding note: triangle base spans the central 80% conditional timing interval, p10 to p90, among people who experience the endpoint by age 95. Triangle area is not interpreted as probability because its units would mix years and percent. In production, the chart should add uncertainty intervals once the event models are calibrated.</div>
+        <div class="note">Encoding note: triangle area is not probability. Base is years. Height is percent. Production should add uncertainty intervals after calibration.</div>
       </section>
 
       <section class="panel">
         <h2>Endpoint definitions</h2>
-        <div class="copy"><p>These definitions are deliberately visible because MD reviewers should be able to challenge the endpoint object itself. MACE and cancer are cleaner event objects. Mobility, independent living, and MCI or dementia need stricter operational definitions before production use.</p></div>
+        <div class="copy"><p>Endpoint definitions are visible because reviewers should be able to challenge the object being modeled. MACE and cancer are cleaner. Mobility, independence, and MCI or dementia need stricter production rules.</p></div>
         <div class="method-grid" id="definitions" style="margin-top:14px;"></div>
       </section>
 
-      <section class="two">
-        <div class="panel">
-          <h2>What this version fixes</h2>
-          <ul class="list">
-            <li><strong>It explains intent first.</strong><span>The first section tells the reader why the page exists before showing the chart.</span></li>
-            <li><strong>It separates communication concept from model truth.</strong><span>The page says the values are placeholders and invites review of the representation.</span></li>
-            <li><strong>It defines the horizon.</strong><span>Incidence means cumulative incidence by age 95 in this prototype.</span></li>
-            <li><strong>It separates risk-state comparison from plan effect.</strong><span>Lower-risk profile is not presented as a proven causal result of Meridian interventions.</span></li>
-            <li><strong>It discloses marginal endpoints.</strong><span>The page says the events are not mutually exclusive and not yet competing-risk adjusted.</span></li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h2>What would still get challenged</h2>
-          <ul class="list">
-            <li><strong>The placeholder numbers.</strong><span>They need to be replaced by calibrated model outputs with confidence intervals.</span></li>
-            <li><strong>Competing risks.</strong><span>Death and prior events need explicit treatment before this becomes clinical truth.</span></li>
-            <li><strong>Intervention attribution.</strong><span>If Meridian claims movement from high to low risk, the causal pathway must be shown.</span></li>
-            <li><strong>Functional endpoints.</strong><span>Mobility loss and independent living need stricter measurement rules.</span></li>
-            <li><strong>Endpoint dependencies.</strong><span>Stroke, dementia, mobility loss, cancer, and independence are clinically entangled.</span></li>
-          </ul>
-        </div>
+      <section class="panel">
+        <h2>Limitations</h2>
+        <ul class="list">
+          <li><strong>Placeholder values.</strong><span>Displayed numbers are illustrative, not calibrated model output.</span></li>
+          <li><strong>No competing risks yet.</strong><span>Death, prior events, and cross-endpoint dependencies are not modeled.</span></li>
+          <li><strong>No intervention attribution yet.</strong><span>Lower-risk state is a cohort comparison, not a proven Meridian effect.</span></li>
+          <li><strong>Functional endpoints need stricter rules.</strong><span>Mobility, independence, and cognition require operational thresholds before clinical use.</span></li>
+        </ul>
       </section>
 
       <section class="panel">
         <h2>References and intended production use</h2>
-        <div class="copy"><p>The references below are not claiming to justify the placeholder values. They identify the intended evidence families for production calibration. A production version should document the exact cohort extraction, eligibility rules, age-specific hazard construction, and calibration results.</p></div>
+        <div class="copy"><p>References identify intended evidence families for production calibration. They do not justify the placeholder values shown here.</p></div>
         <div class="ref-table" style="margin-top:14px;">
           <div class="ref-h">Endpoint</div><div class="ref-h">Reference family</div><div class="ref-h">How it would be used</div>
           <div class="ref-cell"><strong>First heart attack or stroke</strong></div><div class="ref-cell">Khan SS et al. AHA PREVENT equations scientific statement. Circulation, 2023. PMID 37947094.</div><div class="ref-cell">Baseline absolute cardiovascular risk and age-specific risk framing. ATM would need a documented modifier or separate evidence layer.</div>
