@@ -58,6 +58,10 @@
     .line-key { width: 24px; height: 0; border-top: 2px solid currentColor; display: inline-block; }
     .line-key.dashed { border-top-style: dashed; opacity: 0.7; }
     .autonomy-readout { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 10px; padding: 12px 13px; color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 10px; }
+    .autonomy-event-key { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 8px; margin: 8px 0 0; }
+    .autonomy-event-key span { border: 1px solid var(--border-soft); background: rgba(255,255,255,0.018); border-radius: 8px; padding: 7px 8px; color: var(--muted); font: 10px/1.3 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
+    .autonomy-event-key b { color: var(--text); font-weight: 590; margin-right: 4px; }
+    .autonomy-event-key i { display: inline-block; width: 7px; height: 7px; border-radius: 2px; margin-right: 5px; transform: translateY(1px); }
     .autonomy-readout strong { color: var(--text); font-weight: 540; }
     .slider-box { border: 1px solid rgba(113,112,255,0.38); background: rgba(113,112,255,0.045); border-radius: 9px; padding: 15px 16px; margin-bottom: 18px; }
     .slider-row { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; margin-bottom: 8px; }
@@ -97,6 +101,7 @@
     .calc div { border: 1px solid var(--border-soft); background: var(--soft); border-radius: 9px; padding: 11px 12px; }
     @media (max-width: 880px) {
       .top, .two, .method-grid, .callout { grid-template-columns: 1fr; }
+      .autonomy-event-key { grid-template-columns: 1fr; }
       .ref-table, .table { grid-template-columns: 1fr; }
       .ref-h, .th { display: none; }
       .ref-cell, .cell, .event { border-bottom: none; text-align: left; padding-bottom: 4px; }
@@ -151,14 +156,14 @@
       <section class="panel">
         <h2>Autonomy curve, first pass</h2>
         <div class="copy">
-          <p>This section connects the slider to the idea of bending the curve. The autonomy curve is not a new disease endpoint. It is a 0 to 100 functional independence trajectory anchored to established external constructs: EQ-5D or WHODAS for health utility and disability, PROMIS Physical Function for function, Katz ADL and Lawton IADL for hard independence thresholds, and frailty index logic for reserve and slope.</p>
-          <p>In this prototype, each endpoint can affect the curve in two ways. First, it contributes an expected autonomy impact weighted by its cumulative incidence. Second, when risk improves, the event shifts later and its expected impact begins later. The slider therefore bends the curve by preserving reserve, reducing expected event burden, and delaying event-related slope changes.</p>
+          <p>This section connects the slider to the idea of bending the curve. The autonomy curve is not a new disease endpoint. It is a bounded 0 to 100 functional independence trajectory anchored to established external constructs: EQ-5D or WHODAS for health utility and disability, PROMIS Physical Function for function, Katz ADL and Lawton IADL for hard independence thresholds, and frailty index logic for reserve and slope.</p>
+          <p>In this prototype, each endpoint can affect the curve in two ways. First, it contributes an expected autonomy impact weighted by its cumulative incidence. Second, when risk improves, the event shifts later and its expected impact begins later. The slider therefore bends the curve by preserving reserve, reducing expected event burden, and delaying event-related slope changes. The curve is intentionally truncated at the age 95 horizon and should not be visually extrapolated beyond that boundary.</p>
         </div>
         <div class="method-grid" style="margin-top:14px;">
           <div class="method"><strong>Y-axis</strong><span>Autonomy score from 0 to 100. It is a mapped functional score, not raw EQ-5D, raw WHODAS, or raw ADL count.</span></div>
           <div class="method"><strong>External anchors</strong><span>EQ-5D, WHODAS, PROMIS Physical Function, Katz ADL, Lawton IADL, Fried frailty, and Rockwood deficit accumulation.</span></div>
-          <div class="method"><strong>Curve shape</strong><span>Baseline age-related decline plus event-related downward pressure. Events are smoothed transitions, not instant deterministic drops.</span></div>
-          <div class="method"><strong>Slider meaning</strong><span>Movement toward a lower-risk, higher-reserve profile. It is still not claimed as a proven treatment effect.</span></div>
+          <div class="method"><strong>Curve shape</strong><span>Baseline age-related decline, late-life terminal compression, plus event-related downward pressure. Events are smoothed transitions, not instant deterministic drops.</span></div>
+          <div class="method"><strong>Event dots</strong><span>Dots mark the selected median event ages for the same five endpoints shown in the triangle chart and table below.</span></div>
         </div>
         <div class="slider-box">
           <div class="slider-row">
@@ -169,10 +174,11 @@
           <div class="slider-labels"><span>Higher-risk profile</span><span>Lower-risk profile</span></div>
           <div class="summary" id="summary"></div>
         </div>
-        <div class="autonomy-legend"><span><i class="line-key dashed" style="color:#a8adb7"></i>Higher-risk autonomy curve</span><span><i class="line-key" style="color:#b9b8ff"></i>Selected-risk autonomy curve</span></div>
+        <div class="autonomy-legend"><span><i class="line-key dashed" style="color:#a8adb7"></i>Higher-risk autonomy curve</span><span><i class="line-key" style="color:#b9b8ff"></i>Selected-risk autonomy curve</span><span>Numbered dots = same five event medians below</span></div>
         <div class="autonomy-wrap"><svg class="autonomy-chart" id="autonomyChart" viewBox="0 0 720 330" aria-label="Expected autonomy curve"></svg></div>
+        <div class="autonomy-event-key" id="autonomyEventKey"></div>
         <div class="autonomy-readout" id="autonomyReadout"></div>
-        <div class="note">Autonomy method note: this is a documented first-pass construct. Production calibration should use longitudinal datasets such as HRS or NHATS, mapping repeated EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, and mortality data onto a common 0 to 100 autonomy scale.</div>
+        <div class="note">Autonomy method note: this is a documented first-pass construct. Production calibration should use longitudinal datasets such as HRS or NHATS, mapping repeated EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization data onto a common 0 to 100 autonomy scale. The age 95 endpoint is a model horizon, not an implied continuation line.</div>
       </section>
 
       <section class="panel">
@@ -237,8 +243,8 @@
           <div>selectedMedianAge = medianAgeHigh + maxMedianShift x s.</div>
           <div>selectedIncidenceBy95 = incidenceHighBy95 minus ((incidenceHighBy95 minus incidenceLowBy95) x s).</div>
           <div>selectedP10Age = p10AgeHigh + maxMedianShift x s. selectedP90Age = p90AgeHigh + maxMedianShift x s, with optional widening only if the calibrated model shows wider late-age uncertainty.</div>
-          <div>Autonomy prototype: autonomy(age) = baseline reserve decline minus the sum of event impact weights multiplied by each endpoint's cumulative incidence and a smoothed timing transition around that endpoint's median age.</div>
-          <div>Slider effect on autonomy: lower-risk movement reduces baseline decline, lowers event incidence weights, and shifts event transitions later. This documents curve bending without claiming final causal calibration.</div>
+          <div>Autonomy prototype: autonomy(age) = baseline reserve decline minus late-life terminal compression minus the sum of event impact weights multiplied by each endpoint's cumulative incidence and a smoothed timing transition around that endpoint's median age.</div>
+          <div>Slider effect on autonomy: lower-risk movement reduces early decline, lowers event incidence weights, and shifts event transitions later. It does not remove terminal aging and the curve is not extrapolated beyond the age 95 horizon.</div>
         </div>
       </section>
     </section>
@@ -315,12 +321,12 @@
     }
     function renderTable(s) {
       const rows = ['<div class="th">Endpoint</div><div class="th right">Higher risk</div><div class="th right">Selected profile</div><div class="th right">Shift</div>'];
-      events.forEach(e => {
+      events.forEach((e, i) => {
         const shift = e.maxShift * s;
         const center = e.median + shift;
         const win = e.win;
         const incidence = e.high - ((e.high - e.low) * s);
-        rows.push('<div class="event"><i class="dot" style="background:' + e.color + '"></i><span><span class="name">' + e.label + '</span><span class="src">' + e.source + '</span></span></div>');
+        rows.push('<div class="event"><i class="dot" style="background:' + e.color + '"></i><span><span class="name">' + (i + 1) + '. ' + e.label + '</span><span class="src">' + e.source + '</span></span></div>');
         rows.push('<div class="cell">' + (e.median - e.win).toFixed(0) + ' to ' + (e.median + e.win).toFixed(0) + ' · ' + e.high + '%</div>');
         rows.push('<div class="cell selected">' + (center - win).toFixed(0) + ' to ' + (center + win).toFixed(0) + ' · ' + incidence.toFixed(0) + '%</div>');
         rows.push('<div class="cell shift">+' + shift.toFixed(1) + 'y · -' + (e.high - incidence).toFixed(0) + 'pp</div>');
@@ -332,14 +338,17 @@
     const AW = 720, AH = 330;
     const aLeft = 56, aRight = 24, aTop = 24, aBottom = 42;
     const aX = (age) => aLeft + ((age - 47) / (95 - 47)) * (AW - aLeft - aRight);
-    const aY = (score) => aTop + ((100 - score) / 60) * (AH - aTop - aBottom);
-    const clampScore = (v) => Math.max(35, Math.min(100, v));
+    const aY = (score) => aTop + ((100 - score) / 100) * (AH - aTop - aBottom);
+    const clampScore = (v) => Math.max(0, Math.min(100, v));
     const smoothStep = (age, center) => 1 / (1 + Math.exp(-(age - center) / 3.2));
     function autonomyScore(age, s, selected) {
       const t = age - 47;
-      const slope = selected ? 0.20 - (0.055 * s) : 0.20;
-      const accel = selected ? 0.010 - (0.0045 * s) : 0.010;
+      const slope = selected ? 0.20 - (0.035 * s) : 0.20;
+      const accel = selected ? 0.010 - (0.0025 * s) : 0.010;
+      const terminalCenter = selected ? 89 + (2 * s) : 89;
+      const terminalDrag = selected ? 10 - (2 * s) : 10;
       let score = 94 - slope * t - accel * t * t;
+      score -= terminalDrag * (1 / (1 + Math.exp(-(age - terminalCenter) / 2.8)));
       events.forEach(e => {
         const center = selected ? e.median + (e.maxShift * s) : e.median;
         const incidence = selected ? e.high - ((e.high - e.low) * s) : e.high;
@@ -356,23 +365,27 @@
       if (!autonomySvg) return;
       autonomySvg.innerHTML = '';
       autonomySvg.appendChild(el('rect', { x:0, y:0, width:AW, height:AH, fill:'transparent' }));
-      [100,80,60,40].forEach(score => {
+      [100,75,50,25,0].forEach(score => {
         autonomySvg.appendChild(el('line', { x1:aLeft, y1:aY(score), x2:AW-aRight, y2:aY(score), stroke:'rgba(168,173,183,0.14)', 'stroke-width':1 }));
         autonomySvg.appendChild(el('text', { x:aLeft-12, y:aY(score)+4, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, score));
       });
-      [50,60,70,80,90].forEach(age => {
+      [50,60,70,80,90,95].forEach(age => {
         autonomySvg.appendChild(el('line', { x1:aX(age), y1:aTop, x2:aX(age), y2:AH-aBottom, stroke:'rgba(168,173,183,0.10)', 'stroke-width':1 }));
         autonomySvg.appendChild(el('text', { x:aX(age), y:AH-16, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, age));
       });
-      autonomySvg.appendChild(el('text', { x:18, y:24, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'start' }, 'autonomy'));
+      autonomySvg.appendChild(el('text', { x:18, y:24, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'start' }, 'autonomy 0 to 100'));
+      autonomySvg.appendChild(el('text', { x:aX(95), y:aTop-8, fill:'#a8adb7', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, 'horizon 95'));
       autonomySvg.appendChild(el('line', { x1:aLeft, y1:AH-aBottom, x2:AW-aRight, y2:AH-aBottom, stroke:'rgba(168,173,183,0.28)', 'stroke-width':1 }));
       autonomySvg.appendChild(el('path', { d:autonomyPath(0, false), fill:'none', stroke:'#a8adb7', 'stroke-opacity':0.62, 'stroke-width':2, 'stroke-dasharray':'5 5' }));
       autonomySvg.appendChild(el('path', { d:autonomyPath(s, true), fill:'none', stroke:'#b9b8ff', 'stroke-opacity':0.95, 'stroke-width':2.4 }));
-      events.forEach(e => {
+      events.forEach((e, i) => {
         const center = e.median + e.maxShift * s;
         const score = autonomyScore(center, s, true);
-        autonomySvg.appendChild(el('circle', { cx:aX(center), cy:aY(score), r:3.2, fill:e.color, 'fill-opacity':0.95 }));
+        autonomySvg.appendChild(el('circle', { cx:aX(center), cy:aY(score), r:8, fill:e.color, 'fill-opacity':0.95 }));
+        autonomySvg.appendChild(el('text', { x:aX(center), y:aY(score)+3.5, fill:'#08090a', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'font-weight':590, 'text-anchor':'middle' }, i + 1));
       });
+      const key = document.getElementById('autonomyEventKey');
+      if (key) key.innerHTML = events.map((e, i) => '<span><i style="background:' + e.color + '"></i><b>' + (i + 1) + '</b>' + e.label + '</span>').join('');
       const high85 = autonomyScore(85, 0, false);
       const selected85 = autonomyScore(85, s, true);
       const high95 = autonomyScore(95, 0, false);
