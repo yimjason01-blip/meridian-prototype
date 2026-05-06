@@ -120,8 +120,8 @@
     <section class="top">
       <div>
         <div class="kicker">Meridian trajectory preview</div>
-        <h1>How likely the events are, when they tend to happen, and what they cost in autonomy.</h1>
-        <p class="lede">This is a communication prototype. The Events view shows when each endpoint tends to happen and how often. The Quality of life view shows the autonomy curve that follows from those events plus functional reserve. Every number on the page is a synthetic placeholder. Nothing here is calibrated to a specific cohort or yet a validated Meridian model output.</p>
+        <h1>How likely the events are, when they tend to happen, and what they cost in functional capacity.</h1>
+        <p class="lede">This is a communication prototype. The Events view shows when each endpoint tends to happen and how often. The Functional capacity view shows the capacity curve that follows from those events plus functional reserve. Every number on the page is a synthetic placeholder. Nothing here is calibrated to a specific cohort or yet a validated Meridian model output.</p>
       </div>
     </section>
 
@@ -129,7 +129,7 @@
       <section class="panel">
         <h2>What this page is testing</h2>
         <div class="copy">
-          <p>Event timing alone is incomplete. A useful forecast also needs a denominator: of comparable people, what share actually reach the endpoint by the modeled horizon? The Events view combines those two into one shape per endpoint. The Quality of life view then shows the autonomy curve that follows under a chosen level of functional reserve. Both views share an age axis and a single scenario controlled by the sliders below.</p>
+          <p>Event timing alone is incomplete. A useful forecast also needs a denominator: of comparable people, what share actually reach the endpoint by the modeled horizon? The Events view combines those two into one shape per endpoint. The Functional capacity view then shows the capacity curve that follows under a chosen level of functional reserve. Both views share an age axis and a single scenario controlled by the sliders below.</p>
         </div>
       </section>
 
@@ -141,10 +141,10 @@
       </section>
 
       <section class="panel">
-        <h2>From risk to events to quality of life</h2>
+        <h2>From risk to events to functional capacity</h2>
         <div class="copy">
-          <p>Two views of the same age axis under the same scenario. The Events view shows when each endpoint tends to occur and how often. The Quality of life view shows the autonomy curve that follows from those events plus functional reserve. Toggle between them. Disease risk moves the events. Functional reserve changes how steeply the autonomy curve falls and how hard each event hits it.</p>
-          <p>The autonomy scale runs 0 to 100, banded into five practical zones: 90 and above is full autonomy with reserve, 75 to 90 is independent but narrowing, 60 to 75 is vulnerable independence, 45 to 60 is the independence-threshold zone, and below 45 is supported or dependent living.</p>
+          <p>Two views of the same age axis under the same scenario. The Events view shows when each endpoint tends to occur and how often. The Functional capacity view shows the capacity curve that follows from those events plus functional reserve. Toggle between them. Disease risk moves the events. Functional reserve changes how steeply the capacity curve falls and how hard each event hits it.</p>
+          <p>The functional capacity scale runs 0 to 100, banded into five practical zones: 90 and above is full capacity with reserve, 75 to 90 is independent but narrowing, 60 to 75 is vulnerable independence, 45 to 60 is the independence-threshold zone, and below 45 is supported or dependent living.</p>
         </div>
         <div class="control-grid">
           <div class="slider-box">
@@ -161,7 +161,7 @@
               <div class="slider-title">Functional reserve</div>
               <div class="slider-value" id="reserveStageValue"></div>
             </div>
-            <div class="control-help">Changes the autonomy curve's height, slope, and sensitivity to events.</div>
+            <div class="control-help">Changes the capacity curve's height, slope, and sensitivity to events.</div>
             <input id="reserveSlider" type="range" min="0" max="100" step="5" value="50" aria-label="Functional reserve continuum" />
             <div class="slider-labels"><span>Lower reserve</span><span>Higher reserve</span></div>
           </div>
@@ -169,7 +169,7 @@
         </div>
         <div class="view-toggle" role="tablist" aria-label="Chart view">
           <button id="viewEvents" class="toggle-btn active" role="tab" aria-selected="true" type="button">Events</button>
-          <button id="viewQol" class="toggle-btn" role="tab" aria-selected="false" type="button">Quality of life</button>
+          <button id="viewQol" class="toggle-btn" role="tab" aria-selected="false" type="button">Functional capacity</button>
         </div>
         <div id="legendEvents" class="autonomy-legend">
           <span>Triangle apex = median event age</span>
@@ -183,7 +183,7 @@
         </div>
         <div class="autonomy-wrap">
           <svg class="autonomy-chart" id="eventsChart" viewBox="0 0 720 360" aria-label="Event timing and incidence chart"></svg>
-          <svg class="autonomy-chart" id="qolChart" viewBox="0 0 720 360" aria-label="Expected autonomy curve" hidden></svg>
+          <svg class="autonomy-chart" id="qolChart" viewBox="0 0 720 360" aria-label="Expected functional capacity curve" hidden></svg>
         </div>
         <div class="autonomy-event-key" id="autonomyEventKey"></div>
         <div class="autonomy-readout" id="autonomyReadout"></div>
@@ -216,7 +216,7 @@
           <div class="ref-cell"><strong>Mobility loss</strong></div><div class="ref-cell">Studenski S et al. Gait speed and survival in older adults. JAMA, 2011.</div><div class="ref-cell">Functional aging anchor. Production use would need incidence of sustained gait-speed threshold crossing, not mortality association alone.</div>
           <div class="ref-cell"><strong>Loss of independent living</strong></div><div class="ref-cell">Katz ADL and Lawton IADL frameworks. Framingham and geriatric functional-decline cohorts.</div><div class="ref-cell">Operationalize ADL or IADL dependence, assisted-living transition, or another durable independence threshold.</div>
           <div class="ref-cell"><strong>Incident MCI or dementia</strong></div><div class="ref-cell">Satizabal CL et al. Incidence of dementia over three decades in the Framingham Heart Study. NEJM, 2016. Morris JC et al. NACC Uniform Data Set. Alzheimer Disease and Associated Disorders, 2006.</div><div class="ref-cell">Age-specific MCI or dementia incidence calibration. Parkinsonism and other neurodegenerative syndromes should be separate unless explicitly modeled.</div>
-          <div class="ref-cell"><strong>Autonomy curve</strong></div><div class="ref-cell">Katz ADL, Lawton IADL, EQ-5D, WHODAS 2.0, PROMIS Physical Function, Fried frailty phenotype, Rockwood frailty index, Gill disability trajectories before death, HRS, and NHATS.</div><div class="ref-cell">Anchor the 0 to 100 autonomy score, define late independence thresholds, estimate reserve slope, and calibrate event-related drops and recovery trajectories.</div>
+          <div class="ref-cell"><strong>Functional capacity curve</strong></div><div class="ref-cell">Katz ADL, Lawton IADL, EQ-5D, WHODAS 2.0, PROMIS Physical Function, Fried frailty phenotype, Rockwood frailty index, Gill disability trajectories before death, HRS, and NHATS.</div><div class="ref-cell">Anchor the 0 to 100 functional capacity score, define late independence thresholds, estimate reserve slope, and calibrate event-related drops and recovery trajectories.</div>
         </div>
       </section>
 
@@ -226,12 +226,12 @@
           <div>For each endpoint e, the prototype stores: medianAgeHigh, p10AgeHigh, p90AgeHigh, incidenceHighBy95, maxMedianShift, incidenceLowBy95.</div>
           <div>The displayed base is the central 80% conditional timing interval: p10 to p90 among synthetic cohort members who experience the endpoint by age 95.</div>
           <div>Disease-risk scale r ranges from 0 to 1. At r = 0, selected event layer equals the higher-risk profile. At r = 1, selected event layer equals the lower-risk profile.</div>
-          <div>Functional-reserve scale q ranges from 0 to 1. It changes the autonomy curve only. It does not change endpoint incidence, timing, or triangle geometry.</div>
-          <div>Autonomy score bands: 90 to 100 = full autonomy with reserve; 75 to 90 = independent with narrowing reserve; 60 to 75 = vulnerable independence; 45 to 60 = independence threshold; below 45 = supported or dependent living.</div>
+          <div>Functional-reserve scale q ranges from 0 to 1. It changes the functional capacity curve only. It does not change endpoint incidence, timing, or triangle geometry.</div>
+          <div>Functional capacity bands: 90 to 100 = full capacity with reserve; 75 to 90 = independent with narrowing reserve; 60 to 75 = vulnerable independence; 45 to 60 = independence threshold; below 45 = supported or dependent living.</div>
           <div>selectedMedianAge = medianAgeHigh + maxMedianShift x r.</div>
           <div>selectedIncidenceBy95 = incidenceHighBy95 minus ((incidenceHighBy95 minus incidenceLowBy95) x r).</div>
           <div>selectedP10Age = p10AgeHigh + maxMedianShift x r. selectedP90Age = p90AgeHigh + maxMedianShift x r, with optional widening only if the calibrated model shows wider late-age uncertainty.</div>
-          <div>Autonomy prototype: autonomy(age) = baseline reserve minus age-related decline minus late-life terminal compression minus the sum of event impact weights multiplied by each endpoint's cumulative incidence and smoothed timing transition.</div>
+          <div>Functional capacity prototype: capacity(age) = baseline reserve minus age-related decline minus late-life terminal compression minus the sum of event impact weights multiplied by each endpoint's cumulative incidence and smoothed timing transition.</div>
           <div>Disease risk affects the event terms: incidence, median timing, and when event burden begins. Functional reserve affects the consequence terms: starting reserve, decline slope, terminal compression, and event-impact multiplier. The two controls are intentionally orthogonal in this prototype.</div>
         </div>
       </section>
@@ -261,7 +261,7 @@
       return node;
     }
 
-    // Two SVG charts: events (top toggle) and quality of life (bottom toggle).
+    // Two SVG charts: events (top toggle) and functional capacity (bottom toggle).
     const eventsSvg = document.getElementById('eventsChart');
     const qolSvg = document.getElementById('qolChart');
     const CW = 720, CH = 360;
@@ -283,7 +283,7 @@
     const aY = (score) => qTop + ((100 - score) / 100) * (qBottom - qTop);
 
     const autonomyBands = [
-      { low:90, high:100, label:'Full autonomy with reserve', fill:'rgba(113,112,255,0.075)' },
+      { low:90, high:100, label:'Full capacity with reserve', fill:'rgba(113,112,255,0.075)' },
       { low:75, high:90, label:'Independent, reserve narrowing', fill:'rgba(185,184,255,0.050)' },
       { low:60, high:75, label:'Vulnerable independence', fill:'rgba(109,177,201,0.055)' },
       { low:45, high:60, label:'Independence threshold', fill:'rgba(224,155,45,0.070)' },
@@ -367,7 +367,7 @@
         qolSvg.appendChild(el('text', { x:cLeft-12, y:aY(score)+4, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, score));
       });
       drawAxis(qolSvg, qTop);
-      qolSvg.appendChild(el('text', { x:cLeft+2, y:qTop+12, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace' }, 'autonomy 0-100'));
+      qolSvg.appendChild(el('text', { x:cLeft+2, y:qTop+12, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace' }, 'functional capacity 0-100'));
       // Reference (high risk, low reserve)
       qolSvg.appendChild(el('path', { d:autonomyPath(0, 0), fill:'none', stroke:'#a8adb7', 'stroke-opacity':0.55, 'stroke-width':2, 'stroke-dasharray':'5 5' }));
       // Selected
@@ -396,7 +396,7 @@
         const ref95 = autonomyScore(95, 0, 0);
         const dRiskAt85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, 0, reserveS);
         const dReserveAt85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, riskS, 0);
-        readout.innerHTML = '<strong>Quality of life view, age 85:</strong> selected curve sits about <span class="num">' + Math.round(sel85 - ref85) + '</span> points above the high-risk, low-reserve reference. Holding reserve where it is, dialing risk from highest to current adds about <span class="num">' + Math.round(dRiskAt85) + '</span> points; holding risk where it is, dialing reserve from lowest to current adds about <span class="num">' + Math.round(dReserveAt85) + '</span>. The two amounts are not additive because risk and reserve interact through how hard each event hits the curve. By age 95 the gap is about <span class="num">' + Math.round(sel95 - ref95) + '</span> points.';
+        readout.innerHTML = '<strong>Functional capacity view, age 85:</strong> selected curve sits about <span class="num">' + Math.round(sel85 - ref85) + '</span> points above the high-risk, low-reserve reference. Holding reserve where it is, dialing risk from highest to current adds about <span class="num">' + Math.round(dRiskAt85) + '</span> points; holding risk where it is, dialing reserve from lowest to current adds about <span class="num">' + Math.round(dReserveAt85) + '</span>. The two amounts are not additive because risk and reserve interact through how hard each event hits the curve. By age 95 the gap is about <span class="num">' + Math.round(sel95 - ref95) + '</span> points.';
       }
     }
 
