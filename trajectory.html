@@ -113,43 +113,31 @@
     <section class="top">
       <div>
         <div class="kicker">Meridian trajectory preview</div>
-        <h1>Showing both whether health events happen and when they tend to happen.</h1>
-        <p class="lede">This review page tests one forecast object: cumulative incidence by age 95, conditional timing among affected people, and the expected autonomy consequence of risk plus functional reserve.</p>
+        <h1>How likely the events are, when they tend to happen, and what they cost in autonomy.</h1>
+        <p class="lede">This is a communication prototype. Three quantities are bundled into one forecast object: cumulative incidence by age 95, the central timing window among people who experience the event, and the autonomy curve that follows from events plus functional reserve. Every number on the page is a synthetic placeholder. Nothing here is calibrated to a specific cohort or yet a validated Meridian model output.</p>
       </div>
-      <aside class="status">
-        <strong>Clinical status</strong>
-        <p>Communication prototype. The values are illustrative placeholders. This is not a patient-specific forecast and not yet a validated Meridian model output.</p>
-      </aside>
     </section>
 
     <section class="stack">
       <section class="panel">
         <h2>What this page is testing</h2>
         <div class="copy">
-          <p>Event timing alone is incomplete. A forecast also needs the denominator: what share of comparable people experience the endpoint by the modeled horizon.</p>
-          <p>The triangle chart combines those two quantities: base is the central 80% timing interval among affected people, and height is cumulative incidence by age 95. The autonomy curve then shows how disease risk and functional reserve change the expected consequence.</p>
+          <p>Event timing alone is incomplete. A useful forecast also needs a denominator: of comparable people, what share actually reach the endpoint by the modeled horizon? The triangle chart combines those two quantities into one shape per endpoint, and the autonomy curve then shows the consequence of that event burden under a chosen level of functional reserve.</p>
         </div>
       </section>
 
       <section class="panel">
         <h2>Method, in plain English</h2>
         <div class="copy">
-          <p>This version compares synthetic risk states, not a calibrated cohort and not a proven Meridian treatment effect. Values are placeholders used to test the visual grammar.</p>
-          <p>For each endpoint, the prototype stores median timing, central 80% timing interval, and cumulative incidence by age 95. These values are not derived from ATM status, dyslipidemia, sex, or age-specific cohort data. Endpoints are marginal: not mutually exclusive, not competing-risk adjusted, and not a multi-state sequence.</p>
-        </div>
-        <div class="copy" style="margin-top:10px;">
-          <p>The population is a synthetic midlife prevention cohort. The horizon is age 95. The comparison is a higher-risk synthetic state versus a lower-risk synthetic state. Prior events, death, and endpoint dependencies are not modeled yet.</p>
+          <p>For each endpoint the prototype stores median timing, the central 80% timing window, and cumulative incidence by age 95. These numbers are not derived from ATM status, dyslipidemia, sex, or any age-specific cohort; they are placeholders chosen to test the visual grammar. Endpoints are marginal: not mutually exclusive, not competing-risk adjusted, and not a multi-state sequence. The horizon is age 95, the comparison is one synthetic risk state against another, and prior events, death, and endpoint dependencies are not modeled.</p>
         </div>
       </section>
 
       <section class="panel">
         <h2>Autonomy consequence layer</h2>
         <div class="copy">
-          <p>Disease risk controls the event layer: incidence and timing. Functional reserve controls the consequence layer: starting reserve, decline slope, event-impact sensitivity, and threshold crossing.</p>
-          <p>The controls are intentionally orthogonal. Disease risk moves the event triangles. Functional reserve changes only the autonomy curve. Event markers on this chart are x-axis timing markers, not autonomy-score thresholds.</p>
-        </div>
-        <div class="copy" style="margin-top:10px;">
-          <p>The autonomy scale is grouped into practical bands: 90+ means full autonomy with reserve; 75 to 90 means independent but narrowing; 60 to 75 means vulnerable independence; 45 to 60 is the independence-threshold zone; below 45 means supported living. The numbered event markers are only timing markers on the x-axis.</p>
+          <p>Disease risk and functional reserve are deliberately separated. Disease risk moves the event triangles by changing incidence and timing. Functional reserve changes only the autonomy curve by setting starting reserve, decline slope, sensitivity to events, and how close the curve runs to the independence threshold. The two sliders below should feel orthogonal, and the event markers under the autonomy chart are timing markers on the age axis, not autonomy thresholds.</p>
+          <p>The autonomy scale runs 0 to 100 and is grouped into five practical bands: 90 and above is full autonomy with reserve, 75 to 90 is independent but narrowing, 60 to 75 is vulnerable independence, 45 to 60 is the independence-threshold zone, and below 45 is supported or dependent living.</p>
         </div>
         <div class="control-grid">
           <div class="slider-box">
@@ -182,29 +170,25 @@
 
       <section class="panel">
         <h2>Trajectory chart</h2>
-        <div class="copy"><p>Each triangle shows one prototype endpoint object. Width = p10 to p90 timing among affected people. Height = cumulative incidence by age 95. Apex = median event age. Values are synthetic placeholders.</p></div>
-        <div class="chart-caveat"><strong>Important:</strong> judge the representation, not the placeholder risks.</div>
+        <div class="copy"><p>Each triangle is one prototype endpoint object. Width is the p10 to p90 timing window among affected people, height is cumulative incidence by age 95, and the apex marks the median age. Triangle area is not probability; the base is years and the height is percent. Production should add uncertainty intervals once the model is calibrated.</p></div>
         <div class="legend" id="legend"></div>
         <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 720 500" aria-label="Trajectory triangle chart"></svg></div>
         <div class="table" id="eventTable"></div>
-        <div class="note">Encoding note: triangle area is not probability. Base is years. Height is percent. Production should add uncertainty intervals after calibration.</div>
       </section>
 
       <section class="panel">
         <h2>Endpoint definitions</h2>
-        <div class="copy"><p>Endpoint definitions are visible because reviewers should be able to challenge the object being modeled. MACE and cancer are cleaner. Mobility, independence, and MCI or dementia need stricter production rules.</p></div>
+        <div class="copy">
+          <p>Definitions are visible because reviewers should be able to challenge the object being modeled. MACE and cancer have cleaner literature definitions. Mobility, independence, and MCI or dementia need stricter operational rules before clinical use.</p>
+        </div>
         <div class="definition-list" id="definitions"></div>
       </section>
 
       <section class="panel">
         <h2>Limitations</h2>
-        <ul class="list">
-          <li><strong>Placeholder values.</strong><span>Displayed numbers are synthetic, not calibrated model output.</span></li>
-          <li><strong>No phenotype calibration yet.</strong><span>Values are not derived from ATM status, dyslipidemia, sex, or age-specific cohort data.</span></li>
-          <li><strong>No competing risks yet.</strong><span>Death, prior events, and cross-endpoint dependencies are not modeled.</span></li>
-          <li><strong>No intervention attribution yet.</strong><span>Lower-risk state is a synthetic comparison, not a proven Meridian effect.</span></li>
-          <li><strong>Functional endpoints need stricter rules.</strong><span>Mobility, independence, and cognition require operational thresholds before clinical use.</span></li>
-        </ul>
+        <div class="copy">
+          <p>The displayed numbers are synthetic, not calibrated to any phenotype, and not the output of a fitted Meridian model. The lower-risk state is a synthetic comparison, not an attributable Meridian intervention effect. Death, prior events, and cross-endpoint dependencies are not modeled, so cumulative incidences are marginal and not a coherent multi-state sequence. Mobility, independence, and cognition still need stricter operational thresholds before any clinical use.</p>
+        </div>
       </section>
 
       <section class="panel">
@@ -241,11 +225,11 @@
 
   <script>
     const events = [
-      { id:'mace', label:'First heart attack or stroke', source:'Synthetic placeholder, PREVENT candidate reference', definition:'First nonfatal myocardial infarction, ischemic stroke, or cardiovascular death composite, subject to final model definition.', median:68, win:5, maxShift:10, high:42, low:28, impact:9, color:'#e8604c' },
-      { id:'mobility', label:'Noticeable loss of mobility', source:'Synthetic placeholder, gait-speed candidate reference', definition:'Sustained gait speed below 1.0 m/s or equivalent clinically meaningful mobility limitation.', median:70, win:4, maxShift:6, high:36, low:24, impact:16, color:'#6db1c9' },
-      { id:'cancer', label:'Cancer diagnosis', source:'Synthetic placeholder, SEER candidate reference', definition:'Incident invasive malignancy excluding non-melanoma skin cancer unless final oncology model includes it.', median:72, win:6, maxShift:8, high:31, low:24, impact:11, color:'#d14a6a' },
-      { id:'independence', label:'Loss of independent living', source:'Synthetic placeholder, ADL/IADL candidate reference', definition:'Sustained ADL or IADL dependence, assisted-living transition, or equivalent functional threshold.', median:76, win:5, maxShift:7, high:22, low:14, impact:28, color:'#e09b2d' },
-      { id:'neuro', label:'Incident MCI or dementia diagnosis', source:'Synthetic placeholder, Framingham/NACC candidate reference', definition:'Clinically diagnosed MCI or dementia. Parkinsonism and other neurodegenerative syndromes should be separate endpoints unless explicitly modeled.', median:79, win:6, maxShift:7, high:18, low:11, impact:22, color:'#9b8cff' }
+      { id:'mace', label:'First heart attack or stroke', source:'PREVENT candidate reference', definition:'First nonfatal myocardial infarction, ischemic stroke, or cardiovascular death composite, subject to final model definition.', median:68, win:5, maxShift:10, high:42, low:28, impact:9, color:'#e8604c' },
+      { id:'mobility', label:'Noticeable loss of mobility', source:'gait-speed candidate reference', definition:'Sustained gait speed below 1.0 m/s or equivalent clinically meaningful mobility limitation.', median:70, win:4, maxShift:6, high:36, low:24, impact:16, color:'#6db1c9' },
+      { id:'cancer', label:'Cancer diagnosis', source:'SEER candidate reference', definition:'Incident invasive malignancy excluding non-melanoma skin cancer unless final oncology model includes it.', median:72, win:6, maxShift:8, high:31, low:24, impact:11, color:'#d14a6a' },
+      { id:'independence', label:'Loss of independent living', source:'ADL/IADL candidate reference', definition:'Sustained ADL or IADL dependence, assisted-living transition, or equivalent functional threshold.', median:76, win:5, maxShift:7, high:22, low:14, impact:28, color:'#e09b2d' },
+      { id:'neuro', label:'Incident MCI or dementia diagnosis', source:'Framingham/NACC candidate reference', definition:'Clinically diagnosed MCI or dementia. Parkinsonism and other neurodegenerative syndromes should be separate endpoints unless explicitly modeled.', median:79, win:6, maxShift:7, high:18, low:11, impact:22, color:'#9b8cff' }
     ];
 
     const FUND_FRAC = 0.65;
@@ -320,7 +304,7 @@
         rows.push('<div class="event"><i class="dot" style="background:' + e.color + '"></i><span><span class="name">' + (i + 1) + '. ' + e.label + '</span><span class="src">' + e.source + '</span></span></div>');
         rows.push('<div class="cell">' + (e.median - e.win).toFixed(0) + ' to ' + (e.median + e.win).toFixed(0) + ' · ' + e.high + '%</div>');
         rows.push('<div class="cell selected">' + (center - win).toFixed(0) + ' to ' + (center + win).toFixed(0) + ' · ' + incidence.toFixed(0) + '%</div>');
-        rows.push('<div class="cell shift">+' + shift.toFixed(1) + 'y · -' + (e.high - incidence).toFixed(0) + 'pp</div>');
+        rows.push('<div class="cell shift">+' + Math.round(shift) + 'y · -' + Math.round(e.high - incidence) + 'pp</div>');
       });
       document.getElementById('eventTable').innerHTML = rows.join('');
     }
@@ -402,7 +386,7 @@
       const selected95 = autonomyScore(95, riskS, reserveS);
       const reserveOnly85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, riskS, 0);
       const readout = document.getElementById('autonomyReadout');
-      if (readout) readout.innerHTML = '<strong>Current state:</strong> projected autonomy is ' + (selected85 - high85).toFixed(1) + ' points higher at age 85 and ' + (selected95 - high95).toFixed(1) + ' points higher at age 95 versus high risk plus low reserve. At the current disease-risk setting, functional reserve contributes ' + reserveOnly85.toFixed(1) + ' of those age-85 points. This is an illustrative decomposition, not a calibrated forecast.';
+      if (readout) readout.innerHTML = '<strong>Current state:</strong> projected autonomy is about ' + Math.round(selected85 - high85) + ' points higher at age 85 and about ' + Math.round(selected95 - high95) + ' points higher at age 95 versus the high-risk, low-reserve curve. At the current disease-risk setting, functional reserve accounts for roughly ' + Math.round(reserveOnly85) + ' of those age-85 points.';
     }
     function render() {
       const riskS = scale(riskProgress);
@@ -426,7 +410,7 @@
       const avgDrop = events.reduce((sum, e) => sum + ((e.high - e.low) * riskS), 0) / events.length;
       document.getElementById('riskStageValue').textContent = stateLabel(riskProgress);
       document.getElementById('reserveStageValue').textContent = reserveLabel(reserveProgress);
-      document.getElementById('summary').innerHTML = 'Disease risk: <span class="num">' + stateLabel(riskProgress).toLowerCase() + '</span>. Event windows move later by <span class="num">≈' + avgShift.toFixed(1) + ' years</span> on average and cumulative incidence falls by <span class="num">≈' + avgDrop.toFixed(0) + ' percentage points</span>. Functional reserve: <span class="num">' + reserveLabel(reserveProgress).toLowerCase() + '</span>, changing the autonomy curve without changing the event triangles.';
+      document.getElementById('summary').innerHTML = 'Disease risk: <span class="num">' + stateLabel(riskProgress).toLowerCase() + '</span>. Event windows shift later by about <span class="num">' + Math.round(avgShift) + ' years</span> on average and cumulative incidence falls by about <span class="num">' + Math.round(avgDrop) + ' percentage points</span>. Functional reserve: <span class="num">' + reserveLabel(reserveProgress).toLowerCase() + '</span>, changing the autonomy curve without changing the event triangles.';
       renderTable(riskS);
       renderAutonomy(riskS, reserveS);
     }
