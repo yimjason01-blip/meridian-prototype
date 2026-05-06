@@ -61,6 +61,13 @@
     .autonomy-event-key span { color: var(--muted); font: 10px/1.3 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
     .autonomy-event-key b { color: var(--text); font-weight: 590; margin-right: 4px; }
     .autonomy-event-key i { display: inline-block; width: 7px; height: 7px; border-radius: 2px; margin-right: 5px; transform: translateY(1px); }
+    .view-toggle { display: inline-flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; padding: 3px; margin: 4px 0 12px; background: rgba(255,255,255,0.02); }
+    .toggle-btn { background: transparent; border: 0; color: var(--muted); font: 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.04em; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
+    .toggle-btn.active { background: rgba(113,112,255,0.18); color: var(--text); }
+    [hidden] { display: none !important; }
+    .toggle-btn:hover:not(.active) { color: var(--text); }
+    .slider-box.disabled { opacity: 0.42; pointer-events: none; }
+    .slider-box.disabled .slider-title::after { content: " (does not affect events)"; color: var(--subtle); font-weight: 400; letter-spacing: 0; text-transform: none; }
     .autonomy-readout strong { color: var(--text); font-weight: 540; }
     .control-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; margin-bottom: 18px; }
     .slider-box { padding: 0; }
@@ -114,7 +121,7 @@
       <div>
         <div class="kicker">Meridian trajectory preview</div>
         <h1>How likely the events are, when they tend to happen, and what they cost in autonomy.</h1>
-        <p class="lede">This is a communication prototype. Three quantities are bundled into one forecast object: cumulative incidence by age 95, the central timing window among people who experience the event, and the autonomy curve that follows from events plus functional reserve. Every number on the page is a synthetic placeholder. Nothing here is calibrated to a specific cohort or yet a validated Meridian model output.</p>
+        <p class="lede">This is a communication prototype. The Events view shows when each endpoint tends to happen and how often. The Quality of life view shows the autonomy curve that follows from those events plus functional reserve. Every number on the page is a synthetic placeholder. Nothing here is calibrated to a specific cohort or yet a validated Meridian model output.</p>
       </div>
     </section>
 
@@ -122,7 +129,7 @@
       <section class="panel">
         <h2>What this page is testing</h2>
         <div class="copy">
-          <p>Event timing alone is incomplete. A useful forecast also needs a denominator: of comparable people, what share actually reach the endpoint by the modeled horizon? The triangle chart combines those two quantities into one shape per endpoint, and the autonomy curve then shows the consequence of that event burden under a chosen level of functional reserve.</p>
+          <p>Event timing alone is incomplete. A useful forecast also needs a denominator: of comparable people, what share actually reach the endpoint by the modeled horizon? The Events view combines those two into one shape per endpoint. The Quality of life view then shows the autonomy curve that follows under a chosen level of functional reserve. Both views share an age axis and a single scenario controlled by the sliders below.</p>
         </div>
       </section>
 
@@ -136,7 +143,7 @@
       <section class="panel">
         <h2>From risk to events to quality of life</h2>
         <div class="copy">
-          <p>One figure, one age axis, three connected layers. The top row shows when each event tends to occur and how often; the curve below shows the quality-of-life consequence; the dotted lines tie each event to the point on the curve it explains. Disease risk moves the events. Functional reserve changes how steeply the curve falls and how hard each event hits it.</p>
+          <p>Two views of the same age axis under the same scenario. The Events view shows when each endpoint tends to occur and how often. The Quality of life view shows the autonomy curve that follows from those events plus functional reserve. Toggle between them. Disease risk moves the events. Functional reserve changes how steeply the autonomy curve falls and how hard each event hits it.</p>
           <p>The autonomy scale runs 0 to 100, banded into five practical zones: 90 and above is full autonomy with reserve, 75 to 90 is independent but narrowing, 60 to 75 is vulnerable independence, 45 to 60 is the independence-threshold zone, and below 45 is supported or dependent living.</p>
         </div>
         <div class="control-grid">
@@ -160,12 +167,24 @@
           </div>
           <div class="summary" id="summary" style="grid-column:1 / -1;"></div>
         </div>
-        <div class="autonomy-legend">
+        <div class="view-toggle" role="tablist" aria-label="Chart view">
+          <button id="viewEvents" class="toggle-btn active" role="tab" aria-selected="true" type="button">Events</button>
+          <button id="viewQol" class="toggle-btn" role="tab" aria-selected="false" type="button">Quality of life</button>
+        </div>
+        <div id="legendEvents" class="autonomy-legend">
+          <span>Triangle apex = median event age</span>
+          <span>Triangle base = central 80% timing window</span>
+          <span>Triangle height = cumulative incidence by 95</span>
+        </div>
+        <div id="legendQol" class="autonomy-legend" hidden>
           <span><i class="line-key dashed" style="color:#a8adb7"></i>Reference: high risk, low reserve</span>
           <span><i class="line-key" style="color:#b9b8ff"></i>Selected curve</span>
-          <span>Triangle apex = median event age. Triangle base = central 80% timing window. Triangle height = cumulative incidence by 95.</span>
+          <span>Numbered ticks on the age axis = selected median event ages</span>
         </div>
-        <div class="autonomy-wrap"><svg class="autonomy-chart" id="combinedChart" viewBox="0 0 720 600" aria-label="Combined trajectory and autonomy chart"></svg></div>
+        <div class="autonomy-wrap">
+          <svg class="autonomy-chart" id="eventsChart" viewBox="0 0 720 360" aria-label="Event timing and incidence chart"></svg>
+          <svg class="autonomy-chart" id="qolChart" viewBox="0 0 720 360" aria-label="Expected autonomy curve" hidden></svg>
+        </div>
         <div class="autonomy-event-key" id="autonomyEventKey"></div>
         <div class="autonomy-readout" id="autonomyReadout"></div>
         <div class="note">Production calibration should map HRS and NHATS data across EQ-5D, WHODAS, PROMIS, ADL, IADL, frailty, cognition, mortality, and institutionalization. The dashed reference curve always represents high risk plus low reserve; the colored curve responds to both sliders.</div>
@@ -242,24 +261,26 @@
       return node;
     }
 
-    // Combined chart: shared age axis, event triangles up top, autonomy curve below.
-    const chart = document.getElementById('combinedChart');
-    const CW = 720, CH = 600;
+    // Two SVG charts: events (top toggle) and quality of life (bottom toggle).
+    const eventsSvg = document.getElementById('eventsChart');
+    const qolSvg = document.getElementById('qolChart');
+    const CW = 720, CH = 360;
     const cLeft = 64, cRight = 28;
     const ageMin = 47, ageMax = 95;
     const cX = (age) => cLeft + ((age - ageMin) / (ageMax - ageMin)) * (CW - cLeft - cRight);
+    const axisBottomY = CH - 36;
 
-    // Triangle band (top)
-    const tBandTop = 30;
-    const laneSpacing = 38;
-    const laneY0 = tBandTop + 26;
+    // Events chart layout
+    const eTop = 24;
+    const laneSpacing = 44;
+    const laneY0 = eTop + 30;
     const laneY = (i) => laneY0 + i * laneSpacing;
     const maxIncidence = Math.max(...events.map(e => e.high));
-    const heightOf = (pct) => 12 + (pct / maxIncidence) * 24;
+    const heightOf = (pct) => 16 + (pct / maxIncidence) * 30;
 
-    // Autonomy band (bottom) - kept tight to the triangle band so connectors read.
-    const aTop = 268, aBottom = CH - 56;
-    const aY = (score) => aTop + ((100 - score) / 100) * (aBottom - aTop);
+    // QoL chart layout
+    const qTop = 24, qBottom = axisBottomY;
+    const aY = (score) => qTop + ((100 - score) / 100) * (qBottom - qTop);
 
     const autonomyBands = [
       { low:90, high:100, label:'Full autonomy with reserve', fill:'rgba(113,112,255,0.075)' },
@@ -272,9 +293,7 @@
     const clampScore = (v) => Math.max(0, Math.min(100, v));
     const smoothStep = (age, center) => 1 / (1 + Math.exp(-(age - center) / 3.2));
 
-    // Autonomy model. excludeId omits one endpoint's contribution so we can attribute
-    // a curve drop to a single event for the visual connectors.
-    function autonomyScore(age, riskS, reserveS, excludeId) {
+    function autonomyScore(age, riskS, reserveS) {
       const t = age - ageMin;
       const startingReserve = 94 + (2 * reserveS);
       const slope = 0.22 - (0.045 * reserveS);
@@ -285,7 +304,6 @@
       let score = startingReserve - slope * t - accel * t * t;
       score -= terminalDrag * (1 / (1 + Math.exp(-(age - terminalCenter) / 2.8)));
       events.forEach(e => {
-        if (e.id === excludeId) return;
         const center = e.median + (e.maxShift * riskS);
         const incidence = e.high - ((e.high - e.low) * riskS);
         score -= e.impact * eventImpactMultiplier * (incidence / 100) * smoothStep(age, center);
@@ -303,42 +321,21 @@
       return ['M', x1, y, 'L', xc, y - h, 'L', x2, y, 'Z'].join(' ');
     }
 
-    function renderCombined(riskS, reserveS) {
-      chart.innerHTML = '';
-      // Background and panel labels
-      chart.appendChild(el('rect', { x:0, y:0, width:CW, height:CH, fill:'transparent' }));
-      chart.appendChild(el('text', { x:cLeft, y:18, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'letter-spacing':'0.08em' }, 'EVENTS  ·  when they tend to occur and how often'));
-      // Quality of life label sits in the gap between the two panels.
-      chart.appendChild(el('text', { x:cLeft, y:aTop-8, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'letter-spacing':'0.08em' }, 'QUALITY OF LIFE  ·  expected autonomy 0-100'));
-
-      // Autonomy bands
-      autonomyBands.forEach(band => {
-        chart.appendChild(el('rect', { x:cLeft, y:aY(band.high), width:CW-cLeft-cRight, height:aY(band.low)-aY(band.high), fill:band.fill }));
-        chart.appendChild(el('text', { x:CW-cRight-8, y:aY((band.low + band.high) / 2)+4, fill:'#d7dbe3', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end', 'fill-opacity':0.86 }, band.label));
-      });
-      // Y gridlines + labels
-      [100,90,75,60,45,0].forEach(score => {
-        chart.appendChild(el('line', { x1:cLeft, y1:aY(score), x2:CW-cRight, y2:aY(score), stroke:'rgba(168,173,183,0.14)', 'stroke-width':1 }));
-        chart.appendChild(el('text', { x:cLeft-12, y:aY(score)+4, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, score));
-      });
-      // Shared age axis (drawn between the two panels and at the bottom)
-      const axisY = aBottom + 22;
-      chart.appendChild(el('line', { x1:cLeft, y1:axisY, x2:CW-cRight, y2:axisY, stroke:'rgba(168,173,183,0.35)', 'stroke-width':1 }));
+    function drawAxis(svg, topY) {
+      svg.appendChild(el('line', { x1:cLeft, y1:axisBottomY, x2:CW-cRight, y2:axisBottomY, stroke:'rgba(168,173,183,0.35)', 'stroke-width':1 }));
       [50,55,60,65,70,75,80,85,90,95].forEach(age => {
-        chart.appendChild(el('line', { x1:cX(age), y1:tBandTop, x2:cX(age), y2:axisY, stroke:'rgba(168,173,183,0.08)', 'stroke-width':1 }));
-        chart.appendChild(el('text', { x:cX(age), y:axisY+18, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, age));
+        svg.appendChild(el('line', { x1:cX(age), y1:topY, x2:cX(age), y2:axisBottomY, stroke:'rgba(168,173,183,0.08)', 'stroke-width':1 }));
+        svg.appendChild(el('text', { x:cX(age), y:axisBottomY+16, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, age));
       });
-      chart.appendChild(el('text', { x:cX(ageMax), y:axisY+34, fill:'#a8adb7', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, 'age'));
-      // "Now" line at 47
-      chart.appendChild(el('line', { x1:cX(47), y1:tBandTop, x2:cX(47), y2:aBottom, stroke:'#f7f8f8', 'stroke-width':1, 'stroke-dasharray':'2 2', 'stroke-opacity':0.5 }));
-      chart.appendChild(el('text', { x:cX(47), y:tBandTop-4, fill:'#f7f8f8', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, 'now 47'));
+      svg.appendChild(el('text', { x:CW-cRight, y:axisBottomY+30, fill:'#a8adb7', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, 'age'));
+      svg.appendChild(el('line', { x1:cX(47), y1:topY, x2:cX(47), y2:axisBottomY, stroke:'#f7f8f8', 'stroke-width':1, 'stroke-dasharray':'2 2', 'stroke-opacity':0.5 }));
+      svg.appendChild(el('text', { x:cX(47), y:topY-6, fill:'#f7f8f8', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, 'now 47'));
+    }
 
-      // Reference autonomy curve (always high risk, low reserve)
-      chart.appendChild(el('path', { d:autonomyPath(0, 0), fill:'none', stroke:'#a8adb7', 'stroke-opacity':0.55, 'stroke-width':2, 'stroke-dasharray':'5 5' }));
-      // Selected curve
-      chart.appendChild(el('path', { d:autonomyPath(riskS, reserveS), fill:'none', stroke:'#b9b8ff', 'stroke-opacity':0.96, 'stroke-width':2.6 }));
-
-      // Triangles + connectors per event
+    function renderEvents(riskS) {
+      eventsSvg.innerHTML = '';
+      eventsSvg.appendChild(el('rect', { x:0, y:0, width:CW, height:CH, fill:'transparent' }));
+      drawAxis(eventsSvg, eTop);
       events.forEach((e, i) => {
         const shift = e.maxShift * riskS;
         const center = e.median + shift;
@@ -349,42 +346,76 @@
         const x2 = cX(center + win);
         const xc = cX(center);
         const h = heightOf(incidence);
-        // Lane base line
-        chart.appendChild(el('line', { x1:cX(ageMin), y1:yLane, x2:cX(ageMax), y2:yLane, stroke:e.color, 'stroke-opacity':0.10, 'stroke-width':1 }));
-        // Triangle
-        chart.appendChild(el('line', { x1, y1:yLane, x2, y2:yLane, stroke:e.color, 'stroke-opacity':0.7, 'stroke-width':1.4, 'stroke-linecap':'round' }));
-        chart.appendChild(el('path', { d:pathTriangle(x1, x2, yLane, h), fill:e.color, 'fill-opacity':0.32, stroke:e.color, 'stroke-opacity':0.85, 'stroke-width':1 }));
-        chart.appendChild(el('text', { x:xc, y:yLane - h - 5, fill:e.color, 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, Math.round(incidence) + '%'));
-        chart.appendChild(el('text', { x:cX(ageMin)-10, y:yLane+4, fill:e.color, 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, (i+1)));
-        // Connector: solid colored line from triangle apex straight down to the
-        // exact point on the selected curve, with a soft halo for legibility.
-        const yOnSelected = aY(autonomyScore(center, riskS, reserveS));
-        const yOnWithout = aY(autonomyScore(center, riskS, reserveS, e.id));
-        chart.appendChild(el('line', { x1:xc, y1:yLane - h, x2:xc, y2:yOnSelected, stroke:e.color, 'stroke-opacity':0.25, 'stroke-width':6 }));
-        chart.appendChild(el('line', { x1:xc, y1:yLane - h, x2:xc, y2:yOnSelected, stroke:e.color, 'stroke-opacity':0.95, 'stroke-width':2.4 }));
-        chart.appendChild(el('circle', { cx:xc, cy:yLane - h, r:3, fill:e.color, stroke:'#08090a', 'stroke-width':1 }));
-        // Drop bracket on the curve: vertical segment between the curve "without
-        // this event" and the curve "with this event" - the attributable share
-        // of the drop. Stays honest: small contribution shows as a small tick.
-        chart.appendChild(el('line', { x1:xc, y1:yOnWithout, x2:xc, y2:yOnSelected, stroke:e.color, 'stroke-opacity':0.95, 'stroke-width':4, 'stroke-linecap':'round' }));
-        chart.appendChild(el('line', { x1:xc-6, y1:yOnWithout, x2:xc+6, y2:yOnWithout, stroke:e.color, 'stroke-opacity':0.85, 'stroke-width':1.5 }));
-        chart.appendChild(el('circle', { cx:xc, cy:yOnSelected, r:4, fill:e.color, stroke:'#08090a', 'stroke-width':1.2 }));
+        eventsSvg.appendChild(el('line', { x1:cX(ageMin), y1:yLane, x2:cX(ageMax), y2:yLane, stroke:e.color, 'stroke-opacity':0.10, 'stroke-width':1 }));
+        eventsSvg.appendChild(el('line', { x1, y1:yLane, x2, y2:yLane, stroke:e.color, 'stroke-opacity':0.7, 'stroke-width':1.4, 'stroke-linecap':'round' }));
+        eventsSvg.appendChild(el('path', { d:pathTriangle(x1, x2, yLane, h), fill:e.color, 'fill-opacity':0.32, stroke:e.color, 'stroke-opacity':0.85, 'stroke-width':1 }));
+        eventsSvg.appendChild(el('text', { x:xc, y:yLane - h - 5, fill:e.color, 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle' }, Math.round(incidence) + '%'));
+        eventsSvg.appendChild(el('text', { x:cX(ageMin)-10, y:yLane+4, fill:e.color, 'font-size':11, 'font-family':'JetBrains Mono, monospace', 'font-weight':600, 'text-anchor':'end' }, (i+1)));
+        eventsSvg.appendChild(el('text', { x:xc, y:yLane+14, fill:e.color, 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'middle', 'fill-opacity':0.7 }, 'median ' + Math.round(center)));
       });
+    }
 
-      // Event key
-      const key = document.getElementById('autonomyEventKey');
-      if (key) key.innerHTML = events.map((e, i) => '<span><i style="background:' + e.color + '"></i><b>' + (i + 1) + '</b>' + e.label + '</span>').join('');
+    function renderQol(riskS, reserveS) {
+      qolSvg.innerHTML = '';
+      qolSvg.appendChild(el('rect', { x:0, y:0, width:CW, height:CH, fill:'transparent' }));
+      autonomyBands.forEach(band => {
+        qolSvg.appendChild(el('rect', { x:cLeft, y:aY(band.high), width:CW-cLeft-cRight, height:aY(band.low)-aY(band.high), fill:band.fill }));
+        qolSvg.appendChild(el('text', { x:CW-cRight-8, y:aY((band.low + band.high) / 2)+4, fill:'#d7dbe3', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end', 'fill-opacity':0.86 }, band.label));
+      });
+      [100,90,75,60,45,0].forEach(score => {
+        qolSvg.appendChild(el('line', { x1:cLeft, y1:aY(score), x2:CW-cRight, y2:aY(score), stroke:'rgba(168,173,183,0.14)', 'stroke-width':1 }));
+        qolSvg.appendChild(el('text', { x:cLeft-12, y:aY(score)+4, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace', 'text-anchor':'end' }, score));
+      });
+      drawAxis(qolSvg, qTop);
+      qolSvg.appendChild(el('text', { x:cLeft+2, y:qTop+12, fill:'#a8adb7', 'font-size':10, 'font-family':'JetBrains Mono, monospace' }, 'autonomy 0-100'));
+      // Reference (high risk, low reserve)
+      qolSvg.appendChild(el('path', { d:autonomyPath(0, 0), fill:'none', stroke:'#a8adb7', 'stroke-opacity':0.55, 'stroke-width':2, 'stroke-dasharray':'5 5' }));
+      // Selected
+      qolSvg.appendChild(el('path', { d:autonomyPath(riskS, reserveS), fill:'none', stroke:'#b9b8ff', 'stroke-opacity':0.96, 'stroke-width':2.6 }));
+      // Numbered ticks at median event ages on the age axis
+      events.forEach((e, i) => {
+        const center = e.median + e.maxShift * riskS;
+        const x = cX(center);
+        qolSvg.appendChild(el('line', { x1:x, y1:axisBottomY-5, x2:x, y2:axisBottomY+5, stroke:e.color, 'stroke-width':2 }));
+        qolSvg.appendChild(el('circle', { cx:x, cy:axisBottomY, r:7, fill:e.color, 'fill-opacity':0.95, stroke:'#08090a', 'stroke-width':1 }));
+        qolSvg.appendChild(el('text', { x, y:axisBottomY+3.5, fill:'#08090a', 'font-size':9, 'font-family':'JetBrains Mono, monospace', 'font-weight':600, 'text-anchor':'middle' }, i+1));
+      });
+    }
 
-      // Readout: contribution-aware framing, no false additive decomposition
-      const ref85 = autonomyScore(85, 0, 0);
-      const ref95 = autonomyScore(95, 0, 0);
-      const sel85 = autonomyScore(85, riskS, reserveS);
-      const sel95 = autonomyScore(95, riskS, reserveS);
-      // Marginal effect framings (held at current other-slider position):
-      const dRiskAt85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, 0, reserveS);
-      const dReserveAt85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, riskS, 0);
+    function renderReadout(riskS, reserveS, mode) {
       const readout = document.getElementById('autonomyReadout');
-      if (readout) readout.innerHTML = '<strong>At age 85:</strong> selected curve sits about <span class="num">' + Math.round(sel85 - ref85) + '</span> points above the high-risk, low-reserve reference. Holding reserve where it is, dialing risk from highest to current adds about <span class="num">' + Math.round(dRiskAt85) + '</span> points; holding risk where it is, dialing reserve from lowest to current adds about <span class="num">' + Math.round(dReserveAt85) + '</span>. The two amounts are not additive because risk and reserve interact through how hard each event hits the curve. By age 95 the gap is about <span class="num">' + Math.round(sel95 - ref95) + '</span> points.';
+      if (!readout) return;
+      if (mode === 'events') {
+        const avgShift = events.reduce((sum, e) => sum + e.maxShift * riskS, 0) / events.length;
+        const avgDrop = events.reduce((sum, e) => sum + ((e.high - e.low) * riskS), 0) / events.length;
+        readout.innerHTML = '<strong>Events view:</strong> compared with the higher-risk profile, event timing windows shift later by about <span class="num">' + Math.round(avgShift) + ' years</span> on average and cumulative incidence by 95 falls by about <span class="num">' + Math.round(avgDrop) + ' percentage points</span>. Functional reserve does not change these numbers.';
+      } else {
+        const ref85 = autonomyScore(85, 0, 0);
+        const sel85 = autonomyScore(85, riskS, reserveS);
+        const sel95 = autonomyScore(95, riskS, reserveS);
+        const ref95 = autonomyScore(95, 0, 0);
+        const dRiskAt85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, 0, reserveS);
+        const dReserveAt85 = autonomyScore(85, riskS, reserveS) - autonomyScore(85, riskS, 0);
+        readout.innerHTML = '<strong>Quality of life view, age 85:</strong> selected curve sits about <span class="num">' + Math.round(sel85 - ref85) + '</span> points above the high-risk, low-reserve reference. Holding reserve where it is, dialing risk from highest to current adds about <span class="num">' + Math.round(dRiskAt85) + '</span> points; holding risk where it is, dialing reserve from lowest to current adds about <span class="num">' + Math.round(dReserveAt85) + '</span>. The two amounts are not additive because risk and reserve interact through how hard each event hits the curve. By age 95 the gap is about <span class="num">' + Math.round(sel95 - ref95) + '</span> points.';
+      }
+    }
+
+    let currentView = 'events';
+    function setView(view) {
+      currentView = view;
+      const eventsActive = view === 'events';
+      document.getElementById('viewEvents').classList.toggle('active', eventsActive);
+      document.getElementById('viewQol').classList.toggle('active', !eventsActive);
+      document.getElementById('viewEvents').setAttribute('aria-selected', String(eventsActive));
+      document.getElementById('viewQol').setAttribute('aria-selected', String(!eventsActive));
+      eventsSvg.toggleAttribute('hidden', !eventsActive);
+      qolSvg.toggleAttribute('hidden', eventsActive);
+      document.getElementById('legendEvents').toggleAttribute('hidden', !eventsActive);
+      document.getElementById('legendQol').toggleAttribute('hidden', eventsActive);
+      // Reserve slider has no effect on events; dim it but leave it readable.
+      const reserveBox = document.querySelector('.slider-box.reserve');
+      if (reserveBox) reserveBox.classList.toggle('disabled', eventsActive);
+      render();
     }
 
     function renderTable(riskS) {
@@ -409,19 +440,26 @@
     function render() {
       const riskS = scale(riskProgress);
       const reserveS = scale(reserveProgress);
-      const avgShift = events.reduce((sum, e) => sum + e.maxShift * riskS, 0) / events.length;
-      const avgDrop = events.reduce((sum, e) => sum + ((e.high - e.low) * riskS), 0) / events.length;
       document.getElementById('riskStageValue').textContent = stateLabel(riskProgress);
       document.getElementById('reserveStageValue').textContent = reserveLabel(reserveProgress);
+      const avgShift = events.reduce((sum, e) => sum + e.maxShift * riskS, 0) / events.length;
+      const avgDrop = events.reduce((sum, e) => sum + ((e.high - e.low) * riskS), 0) / events.length;
       document.getElementById('summary').innerHTML = 'Disease risk: <span class="num">' + stateLabel(riskProgress).toLowerCase() + '</span>. Event windows shift later by about <span class="num">' + Math.round(avgShift) + ' years</span> on average; cumulative incidence falls by about <span class="num">' + Math.round(avgDrop) + ' percentage points</span>. Functional reserve: <span class="num">' + reserveLabel(reserveProgress).toLowerCase() + '</span>.';
-      renderCombined(riskS, reserveS);
+      // Both charts get re-rendered so toggling never shows stale state.
+      renderEvents(riskS);
+      renderQol(riskS, reserveS);
+      renderReadout(riskS, reserveS, currentView);
+      const key = document.getElementById('autonomyEventKey');
+      if (key) key.innerHTML = events.map((e, i) => '<span><i style="background:' + e.color + '"></i><b>' + (i + 1) + '</b>' + e.label + '</span>').join('');
       renderTable(riskS);
     }
 
     renderDefinitions();
-    render();
+    setView('events');
     document.getElementById('riskSlider').addEventListener('input', (e) => { riskProgress = Number(e.target.value); render(); });
     document.getElementById('reserveSlider').addEventListener('input', (e) => { reserveProgress = Number(e.target.value); render(); });
+    document.getElementById('viewEvents').addEventListener('click', () => setView('events'));
+    document.getElementById('viewQol').addEventListener('click', () => setView('qol'));
   </script>
 </body>
 </html>
