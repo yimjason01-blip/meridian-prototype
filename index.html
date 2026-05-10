@@ -1449,7 +1449,7 @@
     <div class="cp-plan-header">
       <div class="cp-plan-header-left">
         <div class="cp-plan-header-eyebrow">Run #129 · Action Layer v2.0 · Engine v1.5 · Dual-Bucket · 2026-05-09</div>
-        <div class="cp-plan-header-title">Care plan. 2 pinned · <span id="cpHeaderSocCount">5</span> Standard of Care · <span id="cpHeaderAdjCount">5</span> Patient-Specific Adjuncts.</div>
+        <div class="cp-plan-header-title">Care plan. 2 pinned · <span id="cpHeaderSocCount">4</span> Standard of Care · <span id="cpHeaderAdjCount">5</span> Patient-Specific Adjuncts.</div>
       </div>
     </div>
 
@@ -6295,80 +6295,67 @@ if (sleepBars) {
   // score = weighted SPAREQ avg across runs (S×0.25 + P×0.20 + A×0.20 + R×0.15 + E×0.10 + Q×0.10).
   // Higher = higher initial priority. originalRank locks the engine's order so any manual reorder
   // remains auditable against the run.
-  // ---- ITEMS — Standard of Care lane (5 candidates, all guideline-anchored) ----
-  // Engine v1.5 dual-bucket. SoC bucket: USPSTF / ACC-AHA / NCCN / KDIGO / CAPS / ACMG anchors.
-  // SPAREQ Q anchor strict (1=expert opinion through 4=multi-RCT/meta-analysis).
+  // ---- ITEMS — Standard of Care lane (4 candidates, real BioMCP run) ----
+  // Source: jason-real-action-layer-soc.json — Claude opus-4-7 + 15 BioMCP queries.
+  // Replaces prior hand-curated 5-item list. Engine v1.5 SoC bucket: guideline-anchored
+  // (USPSTF/ACC-AHA/NCCN/ACMG/KDIGO), Q-strict (1=expert, 4=multi-RCT/meta).
   const ITEMS = [
     {
-      id: 's01', score: 3.55, originalRank: 1, lane: 'soc',
-      title: 'Baseline screening colonoscopy',
-      severity: 'High', timing: '90 d',
-      do: '<strong>GI referral: screening colonoscopy</strong>. ATM het + 2° GI cancer hx → 5-yr cadence (vs standard 10-yr).',
-      why: 'USPSTF 2021 Grade B starting age 45; patient is 47 with no prior. ATM het CRC OR ~1.5–2.0 + paternal grandfather GI cancer. Catastrophic-if-missed framing — T1 CRC 5-yr survival 90%+ vs late-stage 14%.',
-      goal: 'Baseline colonoscopy complete · pathology read · 5-yr interval documented',
+      id: 's01', score: 3.90, originalRank: 1, lane: 'soc',
+      title: 'Average-risk colorectal cancer screening — initiate now (age 47)',
+      severity: 'High', timing: 'within 3 mo',
+      do: '<strong>Screening colonoscopy now</strong>; if normal, repeat q5y per NCCN ATM-het pathway (vs q10y average-risk). FIT acceptable interim option.',
+      why: 'Colonoscopy detects/removes adenomatous precursors and identifies early-stage CRC. ATM het CRC OR ~1.5–2×; paternal-line GI cancer further compresses screening interval per NCCN. Patient is 47, overdue under USPSTF 2021 (45–75 Grade B), and qualifies for ATM-modified q5y cadence.',
+      goal: 'Colonoscopy completed · pathology documented · 5-yr surveillance interval set',
       orders: [
         { glyph: '✚', label: 'GI referral: screening colonoscopy' },
         { glyph: '✉', label: 'Bowel prep instructions' }
       ],
-      evidence: 'USPSTF 2021 Grade B · NCCN Genetic/Familial High-Risk v2.2024 · PMID 34003218',
-      guideline_anchor: 'USPSTF Grade B 2021',
+      evidence: 'USPSTF 2021 Grade B PMID 41186951 · NCCN CRC Screening v2.2024 PMID 41228253 · COLONPREV PMID 41715250',
+      guideline_anchor: 'USPSTF Grade B 2021 + NCCN CRC Screening v2.2024 (ATM modifier)',
       author: 'meridian'
     },
     {
-      id: 's02', score: 3.20, originalRank: 2, lane: 'soc',
-      title: 'Lifestyle optimization for LDL/ApoB — Mediterranean pattern, no statin',
-      severity: 'Mod', timing: 'this visit',
-      do: '<strong>Mediterranean diet pattern</strong>, saturated fat &lt;7% kcal, soluble fiber 10–25 g/day. Reassess lipids + ApoB at 6 months.',
-      why: 'LDL 121 (above &lt;100 goal); ApoB 96 (moderate band 90–129). 10-yr ASCVD ~1% post CAC=0 → no statin indication. Diet/exercise is the first-line lever; PREDIMED RCT-grade.',
-      goal: 'Repeat lipid + ApoB at 6 mo · target ApoB &lt;90',
+      id: 's02', score: 3.50, originalRank: 2, lane: 'soc',
+      title: 'Baseline PSA for ATM-carrier prostate cancer screening',
+      severity: 'High', timing: 'within 3 mo',
+      do: '<strong>Serum PSA now</strong>; if &lt;1.0 ng/mL repeat annually, if ≥1.0 ng/mL annual + urology referral with lowered biopsy threshold.',
+      why: 'ATM-deficient prostate cancers occur earlier and trend more aggressive. Baseline PSA at 40+ in ATM/BRCA carriers enables velocity tracking and earlier biopsy threshold (NCCN v1.2024 + Philadelphia Prostate Cancer Consensus 2019). IMPACT cohort supports the carrier pathway.',
+      goal: 'PSA result on file · annual cadence established',
       orders: [
-        { glyph: '✚', label: 'Lipid + ApoB repeat 6 mo' },
-        { glyph: '✉', label: 'MedDiet patient handout' }
+        { glyph: '✚', label: 'PSA (ATM-carrier baseline)' },
+        { glyph: '✉', label: 'Patient handout: ATM + prostate' }
       ],
-      evidence: 'PREDIMED PMID 29897866 · USPSTF Grade B 2022 dietary counseling · ACC/AHA 2018',
-      guideline_anchor: 'ACC/AHA 2018 + USPSTF 2022',
+      evidence: 'NCCN Prostate Early Detection v1.2024 + Philadelphia Consensus PMID 37202470 · Hereditary urologic surveillance PMID 41440226 · Germline-driven prostate consensus PMID 41590381',
+      guideline_anchor: 'NCCN Prostate Cancer Early Detection v1.2024 (ATM/BRCA carrier pathway)',
       author: 'meridian'
     },
     {
-      id: 's03', score: 2.85, originalRank: 3, lane: 'soc',
-      title: 'Measure hs-CRP',
-      severity: 'Mod', timing: '90 d',
-      do: '<strong>Add hs-CRP</strong> to next blood draw. Closes ACC/AHA risk-enhancer gap.',
-      why: 'Last lipid-adjacent inflammatory marker not measured. If &gt;2.0 → updates risk picture; if &lt;2.0 → confirms low-risk band. Trivial cost; only EVOI-positive diagnostic still open in this profile.',
-      goal: 'hs-CRP value on file',
+      id: 's03', score: 3.25, originalRank: 3, lane: 'soc',
+      title: 'Cystatin C–based eGFR confirmation',
+      severity: 'Mod', timing: 'next lab draw',
+      do: '<strong>Order serum cystatin C</strong>; calculate eGFRcr-cys (CKD-EPI 2021).',
+      why: 'eGFR 72 + creatinine 1.25 (high-normal) in a muscular phenotype — Cr-based eGFR likely underestimates true GFR. Cystatin C is independent of muscle mass; combined eGFRcr-cys reduces bias and reclassifies many borderline-Stage 2 patients to true GFR ≥90. KDIGO 2024 recommends in exactly this scenario. Resolves whether annual monitoring is even indicated.',
+      goal: 'eGFRcr-cys result documented · CKD staging finalized',
+      orders: [
+        { glyph: '✚', label: 'Serum cystatin C' }
+      ],
+      evidence: 'KDIGO 2024 CKD Guideline · Cystatin C systematic review PMID 37928862 · Cr/cystatin-C real-world comparison PMID 41516239 · GFR accuracy PMID 40973716',
+      guideline_anchor: 'KDIGO 2024 CKD Evaluation & Management',
+      author: 'meridian'
+    },
+    {
+      id: 's04', score: 3.05, originalRank: 4, lane: 'soc',
+      title: 'hs-CRP measurement as ASCVD risk-enhancer',
+      severity: 'Mod', timing: '6 mo',
+      do: '<strong>Add hs-CRP</strong> to next fasting lipid panel.',
+      why: 'hs-CRP reflects residual inflammatory risk. In this patient with CAC=0 and ApoB borderline (96), an elevated hs-CRP would shift the ApoB conversation; a low hs-CRP further supports continued statin deferral. Lowest-cost risk-enhancer that meaningfully informs whether to revisit statin before CAC warranty (~5–7y) expires.',
+      goal: 'hs-CRP value documented · lipid plan updated',
       orders: [
         { glyph: '✚', label: 'hs-CRP' }
       ],
-      evidence: 'ACC/AHA 2019 risk-enhancer list · MESA',
-      guideline_anchor: 'ACC/AHA 2019',
-      author: 'meridian'
-    },
-    {
-      id: 's04', score: 2.70, originalRank: 4, lane: 'soc',
-      title: 'Annual eGFR + urine ACR',
-      severity: 'Mod', timing: '12 mo',
-      do: '<strong>Annual eGFR + urine ACR</strong>. If eGFR drops &gt;5/yr or persistent &lt;60, refer nephrology.',
-      why: 'eGFR 72 with creatinine 1.25 (high-normal). Most likely athletic-baseline; trajectory tracking distinguishes from incipient CKD.',
-      goal: 'Annual values on file · trajectory tracked',
-      orders: [
-        { glyph: '✚', label: 'eGFR + urine ACR annual' }
-      ],
-      evidence: 'KDIGO 2024 CKD',
-      guideline_anchor: 'KDIGO 2024',
-      author: 'meridian'
-    },
-    {
-      id: 's05', score: 2.40, originalRank: 5, lane: 'soc',
-      title: 'Cascade-conditional breast MRI for ATM het 1° female relatives',
-      severity: 'High', timing: 'cascade-driven',
-      do: 'After cascade testing identifies ATM het female 1° relatives, schedule annual breast MRI from age 30 per NCCN.',
-      why: 'ATM het breast cancer OR ~2.0; MRI catches 80%+ vs ~50% mammography in dense breasts. Patient is the index — this surfaces because cascade results will route directly to relatives\' care.',
-      goal: 'Cascade results returned · surveillance initiated for confirmed het relatives',
-      orders: [
-        { glyph: '✉', label: 'Cascade follow-through tracker' }
-      ],
-      evidence: 'NCCN Breast Cancer Screening 2024 · PMID 37458768',
-      guideline_anchor: 'NCCN 2024',
+      evidence: 'ACC/AHA 2018/2019 risk-enhancer (Class IIb) · ASPC reaffirmation PMID 35342890 · Critical lipid appraisal PMID 40579058 · Biomarker stratification PMID 40213037',
+      guideline_anchor: 'ACC/AHA 2018 Cholesterol + 2019 Primary Prevention',
       author: 'meridian'
     }
   ];
@@ -6656,7 +6643,7 @@ if (sleepBars) {
   };
 
   // AI-drafted overview (patient voice, written from the top 3 cards)
-  const OVERVIEW_DRAFT = "Hey Jason, it's Dr. Mizani. Quick update on what the engine surfaced and what we're going to do.\n\nFirst, the genetics-driven items are non-negotiable. Your ATM heterozygous result triggered two pinned actions: a clinical-genetics referral for counseling and cascade testing of your first-degree relatives, plus a pancreatic surveillance plan that begins at age 50 with annual MRI/MRCP and EUS. Those are guideline floors, not ranked recommendations.\n\nFrom the Standard of Care lane, the top three are: a baseline screening colonoscopy now — you're past the USPSTF age-45 trigger and ATM plus your paternal grandfather's GI history shortens the cadence to five years; a Mediterranean diet pattern with a six-month lipid recheck targeting ApoB under 90 — your CAC of zero and 10-year ASCVD around 1% mean no statin yet; and an hs-CRP at the next blood draw to close the last enhancer gap.\n\nThe Patient-Specific Adjuncts lane is the offensive set, gated on your optimized profile. Five candidates from the unsupervised engine run. Top three: aspirin 81 mg daily after a shared-decision visit and bleed screen — CAPP2 in Lynch is the closest hereditary analog and showed 50% colorectal cancer reduction at ten years; alcohol minimization to two standard drinks per week or abstain — acetaldehyde creates the exact double-strand breaks ATM is supposed to repair, and the pancreatic dose-response cohort shows a threshold effect; and a one-time H. pylori stool antigen test — Choi NEJM showed about 55% gastric cancer reduction in family-history-positive individuals, and it also de-risks the chronic aspirin. Behind those: a standing IR-stewardship protocol and resistant starch around 30 grams a day from the CAPP2 resistant-starch arm.\n\nEverything else on your chart is being tracked or already in a strong range. I'll see you in twelve weeks.";
+  const OVERVIEW_DRAFT = "Hey Jason, it's Dr. Mizani. Quick update on what the engine surfaced and what we're going to do.\n\nFirst, the genetics-driven items are non-negotiable. Your ATM heterozygous result triggered two pinned actions: a clinical-genetics referral for counseling and cascade testing of your first-degree relatives, plus a pancreatic surveillance plan that begins at age 50 with annual MRI/MRCP and EUS. Those are guideline floors, not ranked recommendations.\n\nFrom the Standard of Care lane, four candidates from the unsupervised engine run. Top three: a baseline screening colonoscopy now — you're past the USPSTF age-45 trigger and your ATM plus paternal grandfather's GI history pulls the cadence to five years; a baseline PSA — NCCN puts ATM and BRCA carriers on a separate prostate-screening pathway starting at forty, and we want a velocity baseline now; and a cystatin-C eGFR confirmation, because your creatinine is high-normal in a muscular phenotype and the creatinine-only eGFR likely understates your true kidney function. Behind those, hs-CRP added to your next lipid panel as the last ACC AHA risk enhancer.\n\nThe Patient-Specific Adjuncts lane is the offensive set, gated on your optimized profile. Five candidates from the unsupervised engine run. Top three: aspirin 81 mg daily after a shared-decision visit and bleed screen — CAPP2 in Lynch is the closest hereditary analog and showed 50% colorectal cancer reduction at ten years; alcohol minimization to two standard drinks per week or abstain — acetaldehyde creates the exact double-strand breaks ATM is supposed to repair, and the pancreatic dose-response cohort shows a threshold effect; and a one-time H. pylori stool antigen test — Choi NEJM showed about 55% gastric cancer reduction in family-history-positive individuals, and it also de-risks the chronic aspirin. Behind those: a standing IR-stewardship protocol and resistant starch around 30 grams a day from the CAPP2 resistant-starch arm.\n\nEverything else on your chart is being tracked or already in a strong range. I'll see you in twelve weeks.";
 
   const SUGGESTIONS = [
     'Re-rank by cost to impact',

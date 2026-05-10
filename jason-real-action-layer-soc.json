@@ -1,0 +1,360 @@
+{
+  "model": "claude-opus-4-7",
+  "biomcp_calls": 15,
+  "biomcp_log": [
+    {
+      "q": "NCCN ATM germline prostate cancer PSA screening guideline",
+      "r_size": 1278
+    },
+    {
+      "q": "USPSTF colorectal cancer screening 45 recommendation 2021",
+      "r_size": 1264
+    },
+    {
+      "q": "ATM heterozygous colorectal cancer surveillance colonoscopy NCCN",
+      "r_size": 1346
+    },
+    {
+      "q": "KDIGO 2024 cystatin C eGFR confirmation guideline",
+      "r_size": 1431
+    },
+    {
+      "q": "ATM male breast cancer surveillance NCCN guideline",
+      "r_size": 1187
+    },
+    {
+      "q": "PHILharmonic IMPACT ATM prostate PSA screening BRCA",
+      "r_size": 91
+    },
+    {
+      "q": "ACC AHA 2018 cholesterol guideline ApoB primary prevention",
+      "r_size": 1302
+    },
+    {
+      "q": "USPSTF hepatitis C screening adults 2020 grade B",
+      "r_size": 1316
+    },
+    {
+      "q": "Inker cystatin C creatinine eGFR equation muscle mass bias",
+      "r_size": 1358
+    },
+    {
+      "q": "IMPACT study prostate cancer screening BRCA2 ATM PSA early detection",
+      "r_size": 1368
+    },
+    {
+      "q": "colonoscopy screening average risk meta-analysis mortality reduction",
+      "r_size": 1410
+    },
+    {
+      "q": "hs-CRP cardiovascular risk reclassification ACC AHA primary prevention",
+      "r_size": 1471
+    },
+    {
+      "q": "Grundy 2018 ACC AHA cholesterol guideline risk enhancers",
+      "r_size": 921
+    },
+    {
+      "q": "Page IMPACT BRCA2 prostate cancer screening MRI biopsy 2019",
+      "r_size": 1258
+    },
+    {
+      "q": "USPSTF lung cancer screening 2021 low-dose CT eligibility criteria",
+      "r_size": 802
+    }
+  ],
+  "output": {
+    "bucket": "standard_of_care",
+    "compute_tier": "deep",
+    "patient_id": "Jason Yim",
+    "register_pinned_actions": [
+      {
+        "register_trigger_id": "ACMG-SF-ATM",
+        "action_name": "Genetic counseling + cascade testing for ATM heterozygous P/LP variant",
+        "guideline_basis": "ACMG SF v3.2 (Miller 2022) · NCCN Genetic/Familial High-Risk v2.2024",
+        "intervention": "Refer to clinical geneticist for ATM c.8147T>C heterozygous P/LP confirmation, counseling, and cascade testing of first-degree relatives.",
+        "mechanism": "P/LP variant on ACMG Secondary Findings list. Counseling + gene-specific surveillance + cascade testing are guideline-mandated for actionable hereditary cancer predisposition.",
+        "tracking_metric": "Geneticist visit completed; cascade offer documented for 1° relatives",
+        "urgency": "this visit",
+        "citations": [
+          {
+            "pmid": "35802134",
+            "doi": "",
+            "supports": "ACMG SF v3.2 secondary findings list including ATM"
+          },
+          {
+            "pmid": "35353815",
+            "doi": "",
+            "supports": "CARRIERS — ATM cancer ORs supporting cascade rationale"
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      },
+      {
+        "register_trigger_id": "ATM-CAPS-pancreas",
+        "action_name": "Annual pancreatic surveillance per CAPS 2020 — start age 50",
+        "guideline_basis": "International CAPS Consortium 2020 (Goggins et al.) · NCCN pancreas v1.2024",
+        "intervention": "Document plan for annual MRI/MRCP + EUS starting age 50.",
+        "mechanism": "ATM het + 2° relative with PDAC meets CAPS surveillance criteria. ATM ~5–9x lifetime PDAC risk; stage-shift detection via imaging is the dominant mortality lever.",
+        "tracking_metric": "Plan in chart; first imaging scheduled at age 50",
+        "urgency": "document this visit",
+        "citations": [
+          {
+            "pmid": "31672839",
+            "doi": "",
+            "supports": "CAPS 2020 consortium surveillance criteria"
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      }
+    ],
+    "soc_ranked_candidates": [
+      {
+        "id": "S1",
+        "action_name": "Average-risk colorectal cancer screening — initiate now (age 47)",
+        "type": "screening",
+        "domain": "cancer",
+        "trigger": {
+          "kind": "guideline_universal",
+          "ref_id": "USPSTF-CRC-2021",
+          "summary": "Patient is 47 (eligible 45–75); ATM het + paternal-line GI cancer further raises pre-test probability."
+        },
+        "guideline_anchor": "USPSTF Grade B 2021 (CRC screening 45–75); NCCN CRC Screening v2.2024 (ATM = consider screening at 40 or 10y before earliest dx, q5y colonoscopy)",
+        "mechanism": "Colonoscopy detects and removes adenomatous precursors and identifies early-stage CRC. ATM het carries ~1.5–2x CRC OR; paternal-line GI cancer further compresses screening interval per NCCN.",
+        "intervention": "Screening colonoscopy now; if normal, repeat q5y per NCCN ATM-het pathway (vs q10y average-risk). FIT acceptable interim option.",
+        "tracking_metric": "Colonoscopy completed; pathology documented; surveillance interval set in chart",
+        "urgency": "within 3 months (overdue under USPSTF; ATM-modified interval q5y)",
+        "evoi_status": "n/a",
+        "evoi_reasoning": "",
+        "spareq": {
+          "s": 4,
+          "s_reason": "ATM het + family GI hx + age ≥45 — strong, multi-source signal",
+          "p": 4,
+          "p_reason": "USPSTF + NCCN + multi-society endorsement; high-prior intervention",
+          "a": 4,
+          "a_reason": "Outcome-redirect: polypectomy prevents incident CRC; stage-shift on detection",
+          "r": 4,
+          "r_reason": "Single bowel prep + procedure; covered by insurance; widely available",
+          "e": 3,
+          "e_reason": "Procedural risks (perforation ~1/1000, sedation) but well-characterized",
+          "q": 4,
+          "q_reason": "USPSTF Grade B + NCCN + multiple RCT/cohort evidence for mortality reduction"
+        },
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "41186951",
+            "doi": "10.1001/jamanetworkopen.2025.41330",
+            "supports": "USPSTF 2021 expanded CRC screening to 45–49"
+          },
+          {
+            "pmid": "41228253",
+            "doi": "10.3390/cancers17213461",
+            "supports": "Hereditary CRC including ATM-modified surveillance pathways"
+          },
+          {
+            "pmid": "41715250",
+            "doi": "10.1002/ueg2.70169",
+            "supports": "Colonoscopy vs FIT outcomes (COLONPREV)"
+          }
+        ],
+        "evidence_status": "biomcp_grounded",
+        "classification": "standard_of_care"
+      },
+      {
+        "id": "S2",
+        "action_name": "Baseline PSA for ATM-carrier prostate cancer screening",
+        "type": "screening",
+        "domain": "cancer",
+        "trigger": {
+          "kind": "domain_finding",
+          "ref_id": "cancer.atm_prostate_or",
+          "summary": "ATM het ~2x prostate OR; NCCN recommends earlier-onset PSA discussion for ATM/BRCA carriers at 40+."
+        },
+        "guideline_anchor": "NCCN Prostate Cancer Early Detection v1.2024 (ATM/BRCA carriers — consider baseline PSA at age 40, annual thereafter); Philadelphia Prostate Cancer Consensus 2019",
+        "mechanism": "ATM-deficient prostate cancers occur earlier and trend more aggressive. Baseline PSA at 40+ in carriers enables velocity tracking and earlier biopsy threshold; supported by IMPACT study cohort data in BRCA2/ATM carriers.",
+        "intervention": "Serum PSA now; if <1.0 ng/mL repeat annually, if ≥1.0 ng/mL annual + urology referral threshold lowered.",
+        "tracking_metric": "PSA result on file; annual cadence established",
+        "urgency": "within 3 months",
+        "evoi_status": "pass",
+        "evoi_reasoning": "Result changes management: triggers urology referral / MRI pathway if elevated; establishes baseline velocity reference even if low.",
+        "spareq": {
+          "s": 4,
+          "s_reason": "ATM P/LP carrier age 47 — direct guideline trigger",
+          "p": 3,
+          "p_reason": "NCCN-anchored carrier pathway; less universal than population PSA debate",
+          "a": 3,
+          "a_reason": "Stage-shift potential for ATM-associated prostate cancer; outcome-redirect via earlier biopsy threshold",
+          "r": 4,
+          "r_reason": "Single venipuncture, low cost, included in standard chem panels",
+          "e": 4,
+          "e_reason": "No procedural harm; downstream overdiagnosis risk mitigated by carrier-specific pathway",
+          "q": 3,
+          "q_reason": "Single-society (NCCN) carrier-pathway recommendation + Philadelphia consensus + IMPACT cohort"
+        },
+        "dependencies": [
+          "ACMG-SF-ATM"
+        ],
+        "citations": [
+          {
+            "pmid": "37202470",
+            "doi": "",
+            "supports": "Guidelines for genetic testing and PSA screening in prostate cancer (Philadelphia consensus + NCCN review)"
+          },
+          {
+            "pmid": "41440226",
+            "doi": "10.3390/curroncol32120698",
+            "supports": "Hereditary urologic cancer surveillance including ATM PSA pathway"
+          },
+          {
+            "pmid": "41590381",
+            "doi": "10.3390/curroncol33010061",
+            "supports": "Multidisciplinary consensus on germline-driven prostate screening"
+          }
+        ],
+        "evidence_status": "biomcp_grounded",
+        "classification": "standard_of_care"
+      },
+      {
+        "id": "S3",
+        "action_name": "Cystatin C-based eGFR confirmation",
+        "type": "diagnostic",
+        "domain": "ckd",
+        "trigger": {
+          "kind": "domain_finding",
+          "ref_id": "ckd.egfr_72_athletic",
+          "summary": "eGFR 72 with Cr 1.25 in muscular phenotype likely overestimates CKD risk; KDIGO 2024 recommends cystatin C confirmation when creatinine-based eGFR is discordant with clinical context."
+        },
+        "guideline_anchor": "KDIGO 2024 CKD Evaluation & Management Guideline (cystatin C confirmation for borderline / discordant eGFR)",
+        "mechanism": "Cystatin C is independent of muscle mass; combined creatinine–cystatin C eGFR (eGFRcr-cys) reduces bias in athletic/high-muscle phenotypes and reclassifies many borderline-Stage 2 patients to true GFR ≥90.",
+        "intervention": "Order serum cystatin C; calculate eGFRcr-cys (CKD-EPI 2021).",
+        "tracking_metric": "eGFRcr-cys result documented; CKD staging finalized",
+        "urgency": "next lab draw",
+        "evoi_status": "pass",
+        "evoi_reasoning": "Result resolves whether eGFR 72 represents true mild reduction vs muscle-mass artifact; changes whether annual eGFR/UACR monitoring vs no further follow-up is indicated.",
+        "spareq": {
+          "s": 3,
+          "s_reason": "Single discordant signal (eGFR 72 + Cr 1.25 high-normal) in muscular phenotype",
+          "p": 3,
+          "p_reason": "KDIGO-recommended confirmatory test in this exact scenario",
+          "a": 3,
+          "a_reason": "Trajectory-anchor: avoids mislabeling as Stage 2 CKD; redirects monitoring intensity",
+          "r": 4,
+          "r_reason": "Single add-on serum test, low cost",
+          "e": 4,
+          "e_reason": "No harm; pure information gain",
+          "q": 3,
+          "q_reason": "Single guideline body (KDIGO) + multiple cohort/validation studies"
+        },
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "37928862",
+            "doi": "",
+            "supports": "Cystatin C as GFR estimation marker — systematic review"
+          },
+          {
+            "pmid": "41516239",
+            "doi": "10.3390/ijms27010364",
+            "supports": "Comparison of creatinine, cystatin C, and combined equations in real-world CKD"
+          },
+          {
+            "pmid": "40973716",
+            "doi": "10.1038/s41416-025-03190-3",
+            "supports": "Accuracy of GFR estimates — cystatin C reduces bias"
+          }
+        ],
+        "evidence_status": "biomcp_grounded",
+        "classification": "standard_of_care"
+      },
+      {
+        "id": "S4",
+        "action_name": "hs-CRP measurement as ASCVD risk-enhancer",
+        "type": "diagnostic",
+        "domain": "cvd",
+        "trigger": {
+          "kind": "data_gap",
+          "ref_id": "cvd.hs_crp_missing",
+          "summary": "hs-CRP not in panel; ACC/AHA 2018/2019 lists hs-CRP ≥2.0 mg/L as a risk-enhancing factor that informs borderline statin decisions."
+        },
+        "guideline_anchor": "ACC/AHA 2018 Cholesterol Guideline + 2019 Primary Prevention Guideline (hs-CRP listed risk enhancer; Class IIb)",
+        "mechanism": "hs-CRP reflects residual inflammatory risk; in this patient with CAC=0 and ApoB borderline, an elevated hs-CRP would shift the borderline ApoB conversation, while a low hs-CRP further supports continued statin deferral.",
+        "intervention": "Add hs-CRP to next fasting lipid panel.",
+        "tracking_metric": "hs-CRP value documented; lipid management plan updated",
+        "urgency": "next lab draw (within 6 months)",
+        "evoi_status": "pass",
+        "evoi_reasoning": "In a CAC=0 patient with borderline ApoB 96 and LDL 121, hs-CRP is the lowest-cost risk-enhancer that meaningfully informs whether to revisit statin initiation before the CAC warranty expires (~5–7y).",
+        "spareq": {
+          "s": 3,
+          "s_reason": "Borderline ApoB + LDL in patient with CAC=0; missing risk-enhancer",
+          "p": 3,
+          "p_reason": "Guideline-listed enhancer; impact moderated by CAC=0 protective context",
+          "a": 2,
+          "a_reason": "Trajectory-anchor: low likelihood of changing immediate management given CAC=0 power-of-zero",
+          "r": 4,
+          "r_reason": "Single add-on serum test, ~$10–30",
+          "e": 4,
+          "e_reason": "No harm",
+          "q": 3,
+          "q_reason": "ACC/AHA 2018/2019 Class IIb risk enhancer; supportive cohort evidence"
+        },
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "35342890",
+            "doi": "10.1016/j.ajpc.2022.100335",
+            "supports": "ASPC clinical practice statement reaffirming hs-CRP as ACC/AHA risk enhancer"
+          },
+          {
+            "pmid": "40579058",
+            "doi": "10.1016/j.jacadv.2025.101823",
+            "supports": "Critical appraisal of lipid management — biomarker-enhanced risk stratification"
+          },
+          {
+            "pmid": "40213037",
+            "doi": "10.1016/j.ajpc.2025.100965",
+            "supports": "Integrating biomarkers including hs-CRP into ASCVD risk stratification"
+          }
+        ],
+        "evidence_status": "biomcp_grounded",
+        "classification": "standard_of_care"
+      }
+    ],
+    "dropped_diagnostics_evoi": [],
+    "considered_and_excluded": [
+      {
+        "action_name": "Statin initiation for primary prevention",
+        "reason": "no_signal — PREVENT very-low-risk band, CAC=0 power-of-zero, BP 116/76, A1c 5.3, optimal Lp(a); ACC/AHA 2018 supports deferral. Revisit at CAC warranty expiration."
+      },
+      {
+        "action_name": "Annual breast MRI for ATM male carrier",
+        "reason": "contraindicated — NCCN does not recommend male breast MRI screening for ATM carriers; clinical breast exam education only."
+      },
+      {
+        "action_name": "Low-dose CT lung cancer screening",
+        "reason": "no_signal — patient does not meet USPSTF 2021 eligibility (no ≥20 pack-year smoking history)."
+      },
+      {
+        "action_name": "USPSTF HCV one-time screening",
+        "reason": "covered_by_register_pin: separate routine universal screen; if not yet completed should be ordered at next primary-care visit per USPSTF Grade B 2020 — flagged for PCP routine but not load-bearing here."
+      },
+      {
+        "action_name": "DEXA bone density",
+        "reason": "no_signal — age 47 male, no risk factors; below USPSTF/Endocrine Society thresholds."
+      },
+      {
+        "action_name": "APOE genotyping",
+        "reason": "belongs_in_adjuncts_bucket — no guideline body endorses APOE testing for asymptomatic primary-prevention neurodegeneration risk; informative but not SoC."
+      },
+      {
+        "action_name": "Aspirin primary prevention",
+        "reason": "contraindicated — USPSTF 2022 recommends against initiating aspirin for primary ASCVD prevention in adults ≥40 absent clear high-risk indication; this patient is very-low-risk band."
+      },
+      {
+        "action_name": "UACR (urine albumin-creatinine ratio)",
+        "reason": "covered_by_register_pin: bundled with S3 follow-up — KDIGO recommends UACR alongside eGFR; will be ordered concurrent with cystatin C, not a separate scored candidate."
+      }
+    ]
+  },
+  "raw_text_full": "I have sufficient grounding. Let me return the JSON.\n\n```json\n{\n  \"bucket\": \"standard_of_care\",\n  \"compute_tier\": \"deep\",\n  \"patient_id\": \"Jason Yim\",\n  \"register_pinned_actions\": [\n    {\n      \"register_trigger_id\": \"ACMG-SF-ATM\",\n      \"action_name\": \"Genetic counseling + cascade testing for ATM heterozygous P/LP variant\",\n      \"guideline_basis\": \"ACMG SF v3.2 (Miller 2022) · NCCN Genetic/Familial High-Risk v2.2024\",\n      \"intervention\": \"Refer to clinical geneticist for ATM c.8147T>C heterozygous P/LP confirmation, counseling, and cascade testing of first-degree relatives.\",\n      \"mechanism\": \"P/LP variant on ACMG Secondary Findings list. Counseling + gene-specific surveillance + cascade testing are guideline-mandated for actionable hereditary cancer predisposition.\",\n      \"tracking_metric\": \"Geneticist visit completed; cascade offer documented for 1° relatives\",\n      \"urgency\": \"this visit\",\n      \"citations\": [\n        {\"pmid\": \"35802134\", \"doi\": \"\", \"supports\": \"ACMG SF v3.2 secondary findings list including ATM\"},\n        {\"pmid\": \"35353815\", \"doi\": \"\", \"supports\": \"CARRIERS — ATM cancer ORs supporting cascade rationale\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    },\n    {\n      \"register_trigger_id\": \"ATM-CAPS-pancreas\",\n      \"action_name\": \"Annual pancreatic surveillance per CAPS 2020 — start age 50\",\n      \"guideline_basis\": \"International CAPS Consortium 2020 (Goggins et al.) · NCCN pancreas v1.2024\",\n      \"intervention\": \"Document plan for annual MRI/MRCP + EUS starting age 50.\",\n      \"mechanism\": \"ATM het + 2° relative with PDAC meets CAPS surveillance criteria. ATM ~5–9x lifetime PDAC risk; stage-shift detection via imaging is the dominant mortality lever.\",\n      \"tracking_metric\": \"Plan in chart; first imaging scheduled at age 50\",\n      \"urgency\": \"document this visit\",\n      \"citations\": [\n        {\"pmid\": \"31672839\", \"doi\": \"\", \"supports\": \"CAPS 2020 consortium surveillance criteria\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    }\n  ],\n  \"soc_ranked_candidates\": [\n    {\n      \"id\": \"S1\",\n      \"action_name\": \"Average-risk colorectal cancer screening — initiate now (age 47)\",\n      \"type\": \"screening\",\n      \"domain\": \"cancer\",\n      \"trigger\": {\n        \"kind\": \"guideline_universal\",\n        \"ref_id\": \"USPSTF-CRC-2021\",\n        \"summary\": \"Patient is 47 (eligible 45–75); ATM het + paternal-line GI cancer further raises pre-test probability.\"\n      },\n      \"guideline_anchor\": \"USPSTF Grade B 2021 (CRC screening 45–75); NCCN CRC Screening v2.2024 (ATM = consider screening at 40 or 10y before earliest dx, q5y colonoscopy)\",\n      \"mechanism\": \"Colonoscopy detects and removes adenomatous precursors and identifies early-stage CRC. ATM het carries ~1.5–2x CRC OR; paternal-line GI cancer further compresses screening interval per NCCN.\",\n      \"intervention\": \"Screening colonoscopy now; if normal, repeat q5y per NCCN ATM-het pathway (vs q10y average-risk). FIT acceptable interim option.\",\n      \"tracking_metric\": \"Colonoscopy completed; pathology documented; surveillance interval set in chart\",\n      \"urgency\": \"within 3 months (overdue under USPSTF; ATM-modified interval q5y)\",\n      \"evoi_status\": \"n/a\",\n      \"evoi_reasoning\": \"\",\n      \"spareq\": {\n        \"s\": 4, \"s_reason\": \"ATM het + family GI hx + age ≥45 — strong, multi-source signal\",\n        \"p\": 4, \"p_reason\": \"USPSTF + NCCN + multi-society endorsement; high-prior intervention\",\n        \"a\": 4, \"a_reason\": \"Outcome-redirect: polypectomy prevents incident CRC; stage-shift on detection\",\n        \"r\": 4, \"r_reason\": \"Single bowel prep + procedure; covered by insurance; widely available\",\n        \"e\": 3, \"e_reason\": \"Procedural risks (perforation ~1/1000, sedation) but well-characterized\",\n        \"q\": 4, \"q_reason\": \"USPSTF Grade B + NCCN + multiple RCT/cohort evidence for mortality reduction\"\n      },\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"41186951\", \"doi\": \"10.1001/jamanetworkopen.2025.41330\", \"supports\": \"USPSTF 2021 expanded CRC screening to 45–49\"},\n        {\"pmid\": \"41228253\", \"doi\": \"10.3390/cancers17213461\", \"supports\": \"Hereditary CRC including ATM-modified surveillance pathways\"},\n        {\"pmid\": \"41715250\", \"doi\": \"10.1002/ueg2.70169\", \"supports\": \"Colonoscopy vs FIT outcomes (COLONPREV)\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\",\n      \"classification\": \"standard_of_care\"\n    },\n    {\n      \"id\": \"S2\",\n      \"action_name\": \"Baseline PSA for ATM-carrier prostate cancer screening\",\n      \"type\": \"screening\",\n      \"domain\": \"cancer\",\n      \"trigger\": {\n        \"kind\": \"domain_finding\",\n        \"ref_id\": \"cancer.atm_prostate_or\",\n        \"summary\": \"ATM het ~2x prostate OR; NCCN recommends earlier-onset PSA discussion for ATM/BRCA carriers at 40+.\"\n      },\n      \"guideline_anchor\": \"NCCN Prostate Cancer Early Detection v1.2024 (ATM/BRCA carriers — consider baseline PSA at age 40, annual thereafter); Philadelphia Prostate Cancer Consensus 2019\",\n      \"mechanism\": \"ATM-deficient prostate cancers occur earlier and trend more aggressive. Baseline PSA at 40+ in carriers enables velocity tracking and earlier biopsy threshold; supported by IMPACT study cohort data in BRCA2/ATM carriers.\",\n      \"intervention\": \"Serum PSA now; if <1.0 ng/mL repeat annually, if ≥1.0 ng/mL annual + urology referral threshold lowered.\",\n      \"tracking_metric\": \"PSA result on file; annual cadence established\",\n      \"urgency\": \"within 3 months\",\n      \"evoi_status\": \"pass\",\n      \"evoi_reasoning\": \"Result changes management: triggers urology referral / MRI pathway if elevated; establishes baseline velocity reference even if low.\",\n      \"spareq\": {\n        \"s\": 4, \"s_reason\": \"ATM P/LP carrier age 47 — direct guideline trigger\",\n        \"p\": 3, \"p_reason\": \"NCCN-anchored carrier pathway; less universal than population PSA debate\",\n        \"a\": 3, \"a_reason\": \"Stage-shift potential for ATM-associated prostate cancer; outcome-redirect via earlier biopsy threshold\",\n        \"r\": 4, \"r_reason\": \"Single venipuncture, low cost, included in standard chem panels\",\n        \"e\": 4, \"e_reason\": \"No procedural harm; downstream overdiagnosis risk mitigated by carrier-specific pathway\",\n        \"q\": 3, \"q_reason\": \"Single-society (NCCN) carrier-pathway recommendation + Philadelphia consensus + IMPACT cohort\"\n      },\n      \"dependencies\": [\"ACMG-SF-ATM\"],\n      \"citations\": [\n        {\"pmid\": \"37202470\", \"doi\": \"\", \"supports\": \"Guidelines for genetic testing and PSA screening in prostate cancer (Philadelphia consensus + NCCN review)\"},\n        {\"pmid\": \"41440226\", \"doi\": \"10.3390/curroncol32120698\", \"supports\": \"Hereditary urologic cancer surveillance including ATM PSA pathway\"},\n        {\"pmid\": \"41590381\", \"doi\": \"10.3390/curroncol33010061\", \"supports\": \"Multidisciplinary consensus on germline-driven prostate screening\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\",\n      \"classification\": \"standard_of_care\"\n    },\n    {\n      \"id\": \"S3\",\n      \"action_name\": \"Cystatin C-based eGFR confirmation\",\n      \"type\": \"diagnostic\",\n      \"domain\": \"ckd\",\n      \"trigger\": {\n        \"kind\": \"domain_finding\",\n        \"ref_id\": \"ckd.egfr_72_athletic\",\n        \"summary\": \"eGFR 72 with Cr 1.25 in muscular phenotype likely overestimates CKD risk; KDIGO 2024 recommends cystatin C confirmation when creatinine-based eGFR is discordant with clinical context.\"\n      },\n      \"guideline_anchor\": \"KDIGO 2024 CKD Evaluation & Management Guideline (cystatin C confirmation for borderline / discordant eGFR)\",\n      \"mechanism\": \"Cystatin C is independent of muscle mass; combined creatinine–cystatin C eGFR (eGFRcr-cys) reduces bias in athletic/high-muscle phenotypes and reclassifies many borderline-Stage 2 patients to true GFR ≥90.\",\n      \"intervention\": \"Order serum cystatin C; calculate eGFRcr-cys (CKD-EPI 2021).\",\n      \"tracking_metric\": \"eGFRcr-cys result documented; CKD staging finalized\",\n      \"urgency\": \"next lab draw\",\n      \"evoi_status\": \"pass\",\n      \"evoi_reasoning\": \"Result resolves whether eGFR 72 represents true mild reduction vs muscle-mass artifact; changes whether annual eGFR/UACR monitoring vs no further follow-up is indicated.\",\n      \"spareq\": {\n        \"s\": 3, \"s_reason\": \"Single discordant signal (eGFR 72 + Cr 1.25 high-normal) in muscular phenotype\",\n        \"p\": 3, \"p_reason\": \"KDIGO-recommended confirmatory test in this exact scenario\",\n        \"a\": 3, \"a_reason\": \"Trajectory-anchor: avoids mislabeling as Stage 2 CKD; redirects monitoring intensity\",\n        \"r\": 4, \"r_reason\": \"Single add-on serum test, low cost\",\n        \"e\": 4, \"e_reason\": \"No harm; pure information gain\",\n        \"q\": 3, \"q_reason\": \"Single guideline body (KDIGO) + multiple cohort/validation studies\"\n      },\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"37928862\", \"doi\": \"\", \"supports\": \"Cystatin C as GFR estimation marker — systematic review\"},\n        {\"pmid\": \"41516239\", \"doi\": \"10.3390/ijms27010364\", \"supports\": \"Comparison of creatinine, cystatin C, and combined equations in real-world CKD\"},\n        {\"pmid\": \"40973716\", \"doi\": \"10.1038/s41416-025-03190-3\", \"supports\": \"Accuracy of GFR estimates — cystatin C reduces bias\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\",\n      \"classification\": \"standard_of_care\"\n    },\n    {\n      \"id\": \"S4\",\n      \"action_name\": \"hs-CRP measurement as ASCVD risk-enhancer\",\n      \"type\": \"diagnostic\",\n      \"domain\": \"cvd\",\n      \"trigger\": {\n        \"kind\": \"data_gap\",\n        \"ref_id\": \"cvd.hs_crp_missing\",\n        \"summary\": \"hs-CRP not in panel; ACC/AHA 2018/2019 lists hs-CRP ≥2.0 mg/L as a risk-enhancing factor that informs borderline statin decisions.\"\n      },\n      \"guideline_anchor\": \"ACC/AHA 2018 Cholesterol Guideline + 2019 Primary Prevention Guideline (hs-CRP listed risk enhancer; Class IIb)\",\n      \"mechanism\": \"hs-CRP reflects residual inflammatory risk; in this patient with CAC=0 and ApoB borderline, an elevated hs-CRP would shift the borderline ApoB conversation, while a low hs-CRP further supports continued statin deferral.\",\n      \"intervention\": \"Add hs-CRP to next fasting lipid panel.\",\n      \"tracking_metric\": \"hs-CRP value documented; lipid management plan updated\",\n      \"urgency\": \"next lab draw (within 6 months)\",\n      \"evoi_status\": \"pass\",\n      \"evoi_reasoning\": \"In a CAC=0 patient with borderline ApoB 96 and LDL 121, hs-CRP is the lowest-cost risk-enhancer that meaningfully informs whether to revisit statin initiation before the CAC warranty expires (~5–7y).\",\n      \"spareq\": {\n        \"s\": 3, \"s_reason\": \"Borderline ApoB + LDL in patient with CAC=0; missing risk-enhancer\",\n        \"p\": 3, \"p_reason\": \"Guideline-listed enhancer; impact moderated by CAC=0 protective context\",\n        \"a\": 2, \"a_reason\": \"Trajectory-anchor: low likelihood of changing immediate management given CAC=0 power-of-zero\",\n        \"r\": 4, \"r_reason\": \"Single add-on serum test, ~$10–30\",\n        \"e\": 4, \"e_reason\": \"No harm\",\n        \"q\": 3, \"q_reason\": \"ACC/AHA 2018/2019 Class IIb risk enhancer; supportive cohort evidence\"\n      },\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"35342890\", \"doi\": \"10.1016/j.ajpc.2022.100335\", \"supports\": \"ASPC clinical practice statement reaffirming hs-CRP as ACC/AHA risk enhancer\"},\n        {\"pmid\": \"40579058\", \"doi\": \"10.1016/j.jacadv.2025.101823\", \"supports\": \"Critical appraisal of lipid management — biomarker-enhanced risk stratification\"},\n        {\"pmid\": \"40213037\", \"doi\": \"10.1016/j.ajpc.2025.100965\", \"supports\": \"Integrating biomarkers including hs-CRP into ASCVD risk stratification\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\",\n      \"classification\": \"standard_of_care\"\n    }\n  ],\n  \"dropped_diagnostics_evoi\": [],\n  \"considered_and_excluded\": [\n    {\"action_name\": \"Statin initiation for primary prevention\", \"reason\": \"no_signal — PREVENT very-low-risk band, CAC=0 power-of-zero, BP 116/76, A1c 5.3, optimal Lp(a); ACC/AHA 2018 supports deferral. Revisit at CAC warranty expiration.\"},\n    {\"action_name\": \"Annual breast MRI for ATM male carrier\", \"reason\": \"contraindicated — NCCN does not recommend male breast MRI screening for ATM carriers; clinical breast exam education only.\"},\n    {\"action_name\": \"Low-dose CT lung cancer screening\", \"reason\": \"no_signal — patient does not meet USPSTF 2021 eligibility (no ≥20 pack-year smoking history).\"},\n    {\"action_name\": \"USPSTF HCV one-time screening\", \"reason\": \"covered_by_register_pin: separate routine universal screen; if not yet completed should be ordered at next primary-care visit per USPSTF Grade B 2020 — flagged for PCP routine but not load-bearing here.\"},\n    {\"action_name\": \"DEXA bone density\", \"reason\": \"no_signal — age 47 male, no risk factors; below USPSTF/Endocrine Society thresholds.\"},\n    {\"action_name\": \"APOE genotyping\", \"reason\": \"belongs_in_adjuncts_bucket — no guideline body endorses APOE testing for asymptomatic primary-prevention neurodegeneration risk; informative but not SoC.\"},\n    {\"action_name\": \"Aspirin primary prevention\", \"reason\": \"contraindicated — USPSTF 2022 recommends against initiating aspirin for primary ASCVD prevention in adults ≥40 absent clear high-risk indication; this patient is very-low-risk band.\"},\n    {\"action_name\": \"UACR (urine albumin-creatinine ratio)\", \"reason\": \"covered_by_register_pin: bundled with S3 follow-up — KDIGO recommends UACR alongside eGFR; will be ordered concurrent with cystatin C, not a separate scored candidate.\"}\n  ]\n}\n```"
+}
