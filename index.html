@@ -1448,25 +1448,50 @@
     <!-- Plan header -->
     <div class="cp-plan-header">
       <div class="cp-plan-header-left">
-        <div class="cp-plan-header-eyebrow">Run #128 · Action Layer v1.0 · 2026-04-25 · 6-run reproducibility (3 Opus + 3 GPT-5.5)</div>
-        <div class="cp-plan-header-title">Care plan. 1 pinned · 13 candidates · 3 surfaced · 0 reversed.</div>
+        <div class="cp-plan-header-eyebrow">Run #129 · Action Layer v2.0 · Engine v1.5 · Dual-Bucket · 2026-05-09</div>
+        <div class="cp-plan-header-title">Care plan. 2 pinned · <span id="cpHeaderSocCount">5</span> Standard of Care · <span id="cpHeaderAdjCount">5</span> Patient-Specific Adjuncts.</div>
       </div>
     </div>
 
     <!-- Pinned Register actions — Tier 1 by rule, NOT rankable -->
+    <!-- Patient-state classifier banner — gate for Adjuncts lane -->
+    <div class="cp-classifier-banner" style="background:rgba(94,106,210,0.06);border:1px solid rgba(94,106,210,0.22);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;gap:18px;align-items:center;font-size:13px;">
+      <div style="font-weight:510;color:var(--text);letter-spacing:-0.1px;">Patient-State Classifier</div>
+      <div style="display:flex;gap:14px;color:var(--text-secondary);font-family:'JetBrains Mono', ui-monospace, monospace;">
+        <span>Conditioning <strong style="color:var(--text);">95</strong></span>
+        <span>Lifestyle <strong style="color:var(--text);">90</strong></span>
+        <span>Managed Risks <strong style="color:var(--text);">97</strong></span>
+      </div>
+      <div style="margin-left:auto;color:var(--text);font-weight:510;">Optimized · both lanes active</div>
+    </div>
+
+    <!-- Pinned register actions (Tier 1 by rule, not rankable) — visible across both lanes -->
     <div class="cp-pinned-wrap" id="cpPinnedWrap"></div>
 
-    <!-- Care plan nav (underline highlighter) -->
+    <!-- Lane selector: Standard of Care | Patient-Specific Adjuncts | Vitality -->
+    <div class="cp-lane-tabs" style="display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:18px;align-items:center;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px 0 0;border-right:1px solid var(--border-subtle);margin-right:14px;line-height:38px;">Risk Reduction</div>
+      <button class="cp-lane-tab active" data-lane="soc" onclick="switchLane('soc')" style="background:none;border:none;border-bottom:2px solid var(--accent);padding:12px 20px;color:var(--text);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Standard of Care</button>
+      <button class="cp-lane-tab" data-lane="adjuncts" onclick="switchLane('adjuncts')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Patient-Specific Adjuncts</button>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px;border-left:1px solid var(--border-subtle);margin-left:14px;line-height:38px;">Vitality</div>
+      <button class="cp-lane-tab" data-lane="vitality" onclick="switchLane('vitality')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Vitality Actions</button>
+      <div style="margin-left:auto;display:flex;align-items:center;color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono', ui-monospace, monospace;letter-spacing:0.04em;" id="cpLaneCaption">guideline-anchored · literature-search-driven</div>
+    </div>
+
+    <!-- Within each lane: Top 3 / All sub-tabs (preserving existing IA pattern) -->
     <div class="cp-nav" style="display:flex; gap:28px; border-bottom:1px solid var(--border); margin-bottom:22px;">
       <button class="rm-subtab active" data-cp="top3" onclick="switchCp('top3')">Top 3</button>
       <button class="rm-subtab" data-cp="all" onclick="switchCp('all')">All</button>
     </div>
 
-    <!-- Top 3 pane (rendered by JS from master list, read-only) -->
+    <!-- Top 3: read-only, focused, paired with release workflow -->
     <div class="cp-pane" id="cpPane-top3"></div>
 
-    <!-- All pane (rendered by JS from master list, reorderable + add form) -->
+    <!-- All: reorderable, with add form -->
     <div class="cp-pane" id="cpPane-all" style="display:none;"></div>
+
+    <!-- Care plan nav (legacy) removed — replaced by lane selector + sub-tabs above -->
+
 
     <!-- Archive (kept as-is) -->
     <div class="cp-archive" id="cpArchive">
@@ -1907,12 +1932,12 @@
         <!-- ─── OVERALL HERO BAND ─── -->
         <div class="rm-sum-heroband">
           <div class="rm-sum-heroband-main">
-            <div class="rm-sum-heroband-eyebrow">Clinical Risk Summary · Run #127</div>
-            <div class="rm-sum-heroband-title">A coherent, mechanism-linked picture anchored by a single pathogenic ATM variant that pressurizes two independent domains.</div>
-            <div class="rm-sum-heroband-meta">Generated Apr 10 2026 · Inputs as of Apr 10 · Framework v2</div>
+            <div class="rm-sum-heroband-eyebrow">Clinical Risk Summary · Run #129 · Engine v1.5</div>
+            <div class="rm-sum-heroband-title">An optimized 47M with one elevated-risk allele. Cardiovascular risk is genuinely low (CAC 0); cancer is the load-bearing domain (ATM het + paternal-line GI).</div>
+            <div class="rm-sum-heroband-meta">Generated May 9 2026 · Inputs: Quest panel 06/17/2025 + CAC 2026 + wearable May 2026 · Framework v1.5 (dual-bucket)</div>
           </div>
           <div class="rm-sum-heroband-posture">
-            <div class="rm-sum-heroband-tier"><span class="rm-tier high">2 High</span> <span class="rm-tier low">3 Low</span></div>
+          <div class="rm-sum-heroband-tier"><span class="rm-tier high">1 High</span> <span class="rm-tier low">4 Low/Watch</span></div>
             <div class="rm-sum-heroband-posture-lbl">Overall posture across five domains</div>
           </div>
         </div>
@@ -1935,15 +1960,15 @@
         <div class="rm-sum-card">
           <div class="rm-sum-card-label">Clinical Narrative</div>
           <div class="rm-sum-narrative">
-            <p>47-year-old male with a coherent, mechanism-linked risk picture. The dominant signal is an <strong>ATM heterozygous pathogenic variant</strong> (c.8147T&gt;C) that pressurizes two independent domains: vascular repair and hereditary oncogenesis: compounding surveillance obligations that neither domain, assessed alone, would trigger.</p>
+            <p>47-year-old male with an optimized baseline (CPET VO₂max 54 ~95th %ile, HRV 76 ms 30d, BMI ~23, never-smoker, normotensive). The dominant remaining risk signal is an <strong>ATM heterozygous pathogenic variant</strong> (c.8147T&gt;C) — kinase-impairing per Scott 2002 / Mitui 2009, ClinVar pathogenic — combined with paternal-line GI cancer history. Cancer is the load-bearing domain.</p>
 
-            <p><strong>Cardiovascular risk sits in the high tier</strong>, driven by Lp(a) 62, ApoB 98, and ATM+. Partially offset by an athletic wearable profile (RHR 52, HRV 52, 11 workouts in 30d). The ATM + Lp(a) stack locks the tier at High regardless of downstream ApoB control; the statin decision rests on compressing the modifiable lever (ApoB) while accepting the genetic floor.</p>
+            <p><strong>Cardiovascular risk is genuinely low.</strong> CAC 0 · Lp(a) 72 nmol/L (optimal, &lt;75) · BP 116/76 · A1c 5.3 · 10-yr ASCVD ~1%. ApoB 96 / LDL 121 sit modestly above goal — addressable via Mediterranean pattern with 6-month recheck. No statin indication at current calibration. The earlier Pattern 1 framing (heritable lipoprotein atherosclerosis) is empirically falsified by the CAC of zero.</p>
 
-            <p><strong>Cancer risk is high on hereditary grounds.</strong> The single most consequential gap in the record is that a <strong>pancreatic MRI / MRCP has never been performed</strong>, despite ATM+ meeting NCCN surveillance criteria (paternal grandfather GI cancer). Annual cadence from baseline.</p>
+            <p><strong>Cancer risk is the priority domain.</strong> ATM het + paternal grandfather GI cancer triggers two Tier 1 register pins: clinical genetics referral with cascade testing for first-degree relatives, and a CAPS-protocol pancreatic surveillance plan starting age 50. Standard of Care lane adds a 5-year-cadence colonoscopy now (USPSTF + ATM + family hx). Patient-Specific Adjuncts lane surfaces the unsupervised offensive set from Engine v1.5: aspirin 81 mg/day after H. pylori test-and-treat (CAPP2 in Lynch as DDR-impaired analog), alcohol minimization to ≤2 drinks/wk (acetaldehyde-DSB-ATM mechanistic privilege), diagnostic radiation stewardship (occupational IR cohort), and resistant starch ~30 g/day (CAPP2 resistant-starch arm).</p>
 
-            <p><strong>Metabolic is low today.</strong> A1c 5.4, fasting glucose 88, no BMI elevation, no family history of T2DM reported. Kidney profile is low (Cr 0.98, eGFR &gt;90). Neurodegenerative signal is not patient-own but noted in spouse's parents (both Stage 3–4 dementia) — relevant as family context for the 6-year-old daughter, not as primary patient risk.</p>
+            <p><strong>Metabolic and kidney are quiet.</strong> A1c 5.3, fasting glucose 88, no DM. eGFR 72 with creatinine 1.25 — most likely athletic high-normal; annual recheck advised. Neurodegenerative domain is currently uninformative — APOE genotype not on file is the single highest-leverage missing input and would resolve the domain.</p>
 
-            <p class="rm-sum-principle"><em>Framework principle: an unassessed risk is not a low risk.</em></p>
+            <p class="rm-sum-principle"><em>Framework principle: optimized patients need an offensive lane. Defensive surveillance alone is incomplete care for someone already at population-floor on the cheap basics.</em></p>
           </div>
         </div>
 
@@ -1954,11 +1979,11 @@
             <button class="rm-sum-score" onclick="switchRm('cv')">
               <div class="rm-sum-score-head">
                 <span class="rm-sum-score-name">Cardiovascular</span>
-                <span class="rm-tier high">High</span>
+                <span class="rm-tier low">Low</span>
               </div>
-              <div class="rm-sum-score-num">High</div>
-              <div class="rm-sum-score-unit">ASCVD tier</div>
-              <div class="rm-sum-score-drivers">Lp(a) 62 · ApoB 98 · ATM+</div>
+              <div class="rm-sum-score-num">Low</div>
+              <div class="rm-sum-score-unit">10-yr ASCVD ~1%</div>
+              <div class="rm-sum-score-drivers">CAC 0 · Lp(a) 72 nmol/L · BP 116/76</div>
             </button>
             <button class="rm-sum-score" onclick="switchRm('metabolic')">
               <div class="rm-sum-score-head">
@@ -1967,16 +1992,16 @@
               </div>
               <div class="rm-sum-score-num">Low</div>
               <div class="rm-sum-score-unit">T2DM tier</div>
-              <div class="rm-sum-score-drivers">A1c 5.4 · FG 88 · BMI 23.0</div>
+              <div class="rm-sum-score-drivers">A1c 5.3 · FG 88 · BMI ~23</div>
             </button>
             <button class="rm-sum-score" onclick="switchRm('kidney')">
               <div class="rm-sum-score-head">
                 <span class="rm-sum-score-name">Kidney</span>
-                <span class="rm-tier low">Low</span>
+                <span class="rm-tier low">Watch</span>
               </div>
-              <div class="rm-sum-score-num">Low</div>
-              <div class="rm-sum-score-unit">5-yr ESKD</div>
-              <div class="rm-sum-score-drivers">Cr 0.98 · eGFR &gt;90</div>
+              <div class="rm-sum-score-num">Watch</div>
+              <div class="rm-sum-score-unit">trajectory</div>
+              <div class="rm-sum-score-drivers">Cr 1.25 · eGFR 72</div>
             </button>
             <button class="rm-sum-score" onclick="switchRm('cancer')">
               <div class="rm-sum-score-head">
@@ -1999,40 +2024,48 @@
           </div>
         </div>
 
-        <!-- ─── PRIORITIZED ACTIONS ─── -->
+        <!-- ─── PRIORITIZED ACTIONS — v1.5 dual-bucket preview ─── -->
         <div class="rm-sum-card">
-          <div class="rm-sum-card-label">Prioritized Actions · Action Layer</div>
+          <div class="rm-sum-card-label">Prioritized Actions · Action Layer v2.0 · 2 Pinned + Top SoC + Top Adjuncts</div>
           <div class="rm-sum-actions">
             <div class="rm-sum-action">
-              <div class="rm-sum-action-rank">1</div>
+              <div class="rm-sum-action-rank">P1</div>
               <div class="rm-sum-action-body">
-                <div class="rm-sum-action-title">Decision 01 · Start rosuvastatin 10 mg qHS</div>
-                <div class="rm-sum-action-why">ApoB 98 (goal &lt;80), LDL 128, on background ATM+ and Lp(a) 62. Statin is the primary lever on the modifiable portion of CV risk. Target ApoB &lt;80; reassess at 8 weeks.</div>
-                <div class="rm-sum-action-meta">Source: CVD · ACC/AHA 2019 Class I · Urgency: <strong>High</strong></div>
+                <div class="rm-sum-action-title">Pinned · ATM genetic counseling + cascade testing</div>
+                <div class="rm-sum-action-why">ACMG SF v3.2 P/LP variant. Counseling, gene-specific surveillance, and cascade testing of 1° relatives are guideline-mandated — Tier 1 by rule, not by score.</div>
+                <div class="rm-sum-action-meta">Source: Register · ACMG SF v3.2 · NCCN v2.2024 · Urgency: <strong>4 wk</strong></div>
               </div>
             </div>
             <div class="rm-sum-action">
-              <div class="rm-sum-action-rank">2</div>
+              <div class="rm-sum-action-rank">P2</div>
               <div class="rm-sum-action-body">
-                <div class="rm-sum-action-title">Decision 02 · CAC + stress echocardiogram (baseline before statin)</div>
-                <div class="rm-sum-action-why">Baseline imaging in a 47yo with ApoB 98 / Lp(a) 62 / ATM+ / paternal GI cancer hx. Anchors statin decision and sets a comparator for future surveillance. Not a bradycardia workup.</div>
-                <div class="rm-sum-action-meta">Source: CVD · ACC/AHA · Urgency: <strong>High</strong> (within 60d)</div>
+                <div class="rm-sum-action-title">Pinned · Pancreatic surveillance plan — start age 50 (CAPS)</div>
+                <div class="rm-sum-action-why">ATM het + 1°/2° relative with PDAC meets CAPS criteria. Annual MRI/MRCP + EUS from age 50. Stage-shift detection is the dominant lever.</div>
+                <div class="rm-sum-action-meta">Source: Register · CAPS 2020 · NCCN pancreas v1.2024 · Urgency: <strong>plan now, image at 50</strong></div>
               </div>
             </div>
             <div class="rm-sum-action">
-              <div class="rm-sum-action-rank">3</div>
+              <div class="rm-sum-action-rank">SoC 1</div>
               <div class="rm-sum-action-body">
-                <div class="rm-sum-action-title">Decision 03 · Pancreatic MRI / MRCP (ATM+ surveillance)</div>
-                <div class="rm-sum-action-why">ATM+ plus paternal grandfather GI cancer. NCCN v2.2026 annual cadence. Highest-leverage cancer action in the record.</div>
-                <div class="rm-sum-action-meta">Source: Cancer · NCCN v2.2026 · Urgency: <strong>High</strong> (within 60d)</div>
+                <div class="rm-sum-action-title">Standard of Care · Baseline screening colonoscopy</div>
+                <div class="rm-sum-action-why">USPSTF Grade B age 45 + ATM het + paternal grandfather GI cancer → 5-yr cadence. Catastrophic-if-missed framing.</div>
+                <div class="rm-sum-action-meta">Source: USPSTF 2021 · NCCN · Urgency: <strong>90 d</strong></div>
               </div>
             </div>
             <div class="rm-sum-action">
-              <div class="rm-sum-action-rank">4</div>
+              <div class="rm-sum-action-rank">Adj 1</div>
               <div class="rm-sum-action-body">
-                <div class="rm-sum-action-title">Cascade testing discussion · 1° relatives</div>
-                <div class="rm-sum-action-why">ATM is autosomal dominant. Parents and siblings should be offered targeted testing to determine variant origin. Daughter (6) not tested — pediatric ATM deferred per NCCN until adulthood unless screening requires earlier action.</div>
-                <div class="rm-sum-action-meta">Source: Genetics · NCCN / ACMG · Urgency: <strong>Moderate</strong> (counseling visit)</div>
+                <div class="rm-sum-action-title">Patient-Specific Adjunct · Aspirin 81 mg/day for cancer prevention</div>
+                <div class="rm-sum-action-why">CAPP2 RCT (Lynch, closest hereditary DDR-deficient analog): 50% CRC reduction at 10 yr. Effect was larger in DDR-impaired substrate — directionally favorable for ATM het. After shared-decision + bleed screen.</div>
+                <div class="rm-sum-action-meta">Source: CAPP2 10-yr PMID 32534647 · Adjuncts lane · Urgency: <strong>8 wk</strong></div>
+              </div>
+            </div>
+            <div class="rm-sum-action">
+              <div class="rm-sum-action-rank">Adj 2</div>
+              <div class="rm-sum-action-body">
+                <div class="rm-sum-action-title">Patient-Specific Adjunct · Alcohol minimization (≤2 drinks/wk or abstain)</div>
+                <div class="rm-sum-action-why">Acetaldehyde produces structural DSB-class genomic alterations and DNA-protein crosslinks that depend on ATM-dependent HR for repair. ATM-haploinsufficient cells tolerate these lesions less well — super-additive risk in pancreas/upper-GI epithelium.</div>
+                <div class="rm-sum-action-meta">Source: PMID 41545634 (acetaldehyde DSB mechanism) · PMID 41576296 (pancreatic dose-response) · Adjuncts lane · Urgency: <strong>immediate</strong></div>
               </div>
             </div>
           </div>
@@ -2050,9 +2083,9 @@
         <div class="rm-sum-card rm-sum-card-subtle">
           <div class="rm-sum-card-label">Critical Information Gaps</div>
           <div class="rm-sum-gaps">
-            <div class="rm-sum-gap"><div class="rm-sum-gap-dot high"></div><div class="rm-sum-gap-body"><strong>Pancreatic MRI / MRCP</strong>: never performed · ATM+ NCCN baseline</div></div>
-            <div class="rm-sum-gap"><div class="rm-sum-gap-dot high"></div><div class="rm-sum-gap-body"><strong>CAC + stress echo</strong>: baseline before statin initiation</div></div>
-            <div class="rm-sum-gap"><div class="rm-sum-gap-dot mod"></div><div class="rm-sum-gap-body"><strong>Cascade testing</strong>: 1° relatives not yet offered</div></div>
+            <div class="rm-sum-gap"><div class="rm-sum-gap-dot mod"></div><div class="rm-sum-gap-body"><strong>hs-CRP</strong>: not measured · last ACC/AHA risk-enhancer not on file</div></div>
+            <div class="rm-sum-gap"><div class="rm-sum-gap-dot mod"></div><div class="rm-sum-gap-body"><strong>Cascade testing</strong>: 1° relatives not yet offered (ATM autosomal dominant)</div></div>
+            <div class="rm-sum-gap"><div class="rm-sum-gap-dot mod"></div><div class="rm-sum-gap-body"><strong>APOE genotype</strong>: not on file · neurodegen domain currently uninformative</div></div>
           </div>
         </div>
 
@@ -2094,24 +2127,35 @@
 
           <div class="rm-sys-pattern">
             <div class="rm-sys-head">
-              <div class="rm-sys-name">ATM-driven dual-domain pressure (vascular + oncologic)</div>
+              <div class="rm-sys-name">ATM-driven cancer-domain pressure (single-domain, not dual)</div>
               <div class="rm-sys-conf"><span class="rm-conf-label">Confidence</span> High <span class="rm-conf-bar"><div style="width:88%;"></div></span></div>
             </div>
-            <div class="rm-sys-converge"><span class="rm-sys-tag">Converging:</span> Genetics (ATM het · c.8147T&gt;C pathogenic) · Labs (Lp(a) 62, ApoB 98) · Family hx (paternal grandfather GI cancer, early 80s)</div>
-            <div class="rm-sys-mech"><span class="rm-sys-tag">Mechanism:</span> Impaired ATM kinase degrades DSB repair in vascular endothelium AND amplifies somatic mutation accumulation in epithelial tissues. Same variant: two independent mortality pathways.</div>
-            <div class="rm-sys-impl"><span class="rm-sys-tag">Implication:</span> CVD and Cancer domains each understate the true ATM-attributable hazard when scored independently. Surveillance obligations compound; neither domain alone triggers pancreatic MRI + CAC.</div>
-            <div class="rm-sys-biomcp"><span class="rm-biomcp-dot"></span><span class="rm-biomcp-label">BioMCP</span> Pritchard NEJM 2016 · Roberts JCO 2012 · NCCN v2.2026: consistent.</div>
+            <div class="rm-sys-converge"><span class="rm-sys-tag">Converging:</span> Genetics (ATM het · c.8147T&gt;C pathogenic) · Family hx (paternal grandfather GI cancer) · Cancer-domain output</div>
+            <div class="rm-sys-mech"><span class="rm-sys-tag">Mechanism:</span> Impaired ATM kinase amplifies somatic mutation accumulation in epithelial tissues. Heterozygotes carry ~2× breast, ~4–6× pancreatic, ~2× prostate, ~1.5–2× CRC/gastric cancer risk (CARRIERS, PROMPT).</div>
+            <div class="rm-sys-impl"><span class="rm-sys-tag">Implication:</span> Cancer is the load-bearing domain. The earlier "ATM pressurizes both vascular and oncologic" framing is retracted — CAC 0 + Lp(a) 72 nmol/L empirically falsifies the vascular pressure claim. ATM-attributable hazard concentrates in the cancer domain only.</div>
+            <div class="rm-sys-biomcp"><span class="rm-biomcp-dot"></span><span class="rm-biomcp-label">BioMCP</span> CARRIERS PMID 35353815 · CAPS 2020 · NCCN Genetic/Familial High-Risk v2.2024.</div>
           </div>
 
           <div class="rm-sys-pattern">
             <div class="rm-sys-head">
-              <div class="rm-sys-name">Generational ATM inheritance (daughter planning)</div>
+              <div class="rm-sys-name">Optimized-patient offensive opportunity (Patient-Specific Adjuncts lane)</div>
+              <div class="rm-sys-conf"><span class="rm-conf-label">Confidence</span> High <span class="rm-conf-bar"><div style="width:85%;"></div></span></div>
+            </div>
+            <div class="rm-sys-converge"><span class="rm-sys-tag">Converging:</span> Patient-state classifier (optimized=true; Cond 95, Lifestyle 90, Managed Risks 97) · ATM het allele · Engine v1.5 dual-bucket gate</div>
+            <div class="rm-sys-mech"><span class="rm-sys-tag">Mechanism:</span> Below-baseline patients recover most attributable risk via the cheap basics (smoking, BP, lipids, exercise). At population-floor on those, the next layer is allele-conditioned literature search: aspirin in DDR-impaired analog (CAPP2 in Lynch), acetaldehyde-DSB-ATM mechanistic privilege (alcohol minimization), H. pylori test-and-treat before chronic aspirin (Choi NEJM in FDR analog), per-mSv radiosensitivity (IR stewardship), and butyrate/HDAC chemoprevention (resistant starch from CAPP2 arm).</div>
+            <div class="rm-sys-impl"><span class="rm-sys-tag">Implication:</span> Standard of Care is necessary but not sufficient for this patient. Adjuncts lane surfaces 5 candidates with mechanism + human-evidence floor. Top 3 (aspirin, alcohol minimization, H. pylori test-and-treat) are mechanistically aligned to ATM kinase haploinsufficiency and route through DDR-deficient analog populations.</div>
+            <div class="rm-sys-biomcp"><span class="rm-biomcp-dot"></span><span class="rm-biomcp-label">BioMCP</span> CAPP2 PMID 32553908 · Garaycoechea 2018 PMID 29950726 · Scott 1999 PMID 10495061.</div>
+          </div>
+
+          <div class="rm-sys-pattern">
+            <div class="rm-sys-head">
+              <div class="rm-sys-name">Generational ATM inheritance (daughter planning · cascade-conditional)</div>
               <div class="rm-sys-conf"><span class="rm-conf-label">Confidence</span> High <span class="rm-conf-bar"><div style="width:92%;"></div></span></div>
             </div>
-            <div class="rm-sys-converge"><span class="rm-sys-tag">Converging:</span> Genetics (proband ATM het · autosomal dominant) · Family (daughter Senna, age 6 — 50% inheritance) · Family (spouse's parents both Stage 3–4 dementia — secondary context)</div>
-            <div class="rm-sys-mech"><span class="rm-sys-tag">Mechanism:</span> Non-patient risk but patient-adjacent clinical action. Pediatric predictive ATM testing deferred per NCCN; counseling, not testing, is the age-appropriate lever.</div>
-            <div class="rm-sys-impl"><span class="rm-sys-tag">Implication:</span> Outside the patient's own domain risk, but inside the physician's action horizon. Route to Family tab; reassess in adolescence.</div>
-            <div class="rm-sys-biomcp"><span class="rm-biomcp-dot"></span><span class="rm-biomcp-label">BioMCP</span> NCCN Genetic/Familial High-Risk v2.2026 · ACMG 2015 SF: guideline-consistent.</div>
+            <div class="rm-sys-converge"><span class="rm-sys-tag">Converging:</span> Genetics (proband ATM het · autosomal dominant) · Family (daughter Senna, age 6 — 50% inheritance) · 1° relatives untested</div>
+            <div class="rm-sys-mech"><span class="rm-sys-tag">Mechanism:</span> Pediatric predictive ATM testing deferred per NCCN until adulthood. Adult 1° relatives (parents, siblings) are immediately actionable via cascade testing.</div>
+            <div class="rm-sys-impl"><span class="rm-sys-tag">Implication:</span> Cascade testing is in Tier 1 register pin (P1). Female relatives confirmed het → annual breast MRI from age 30 (NCCN). Surveillance routes directly to relatives' care.</div>
+            <div class="rm-sys-biomcp"><span class="rm-biomcp-dot"></span><span class="rm-biomcp-label">BioMCP</span> NCCN Genetic/Familial High-Risk v2.2024 · ACMG SF v3.2.</div>
           </div>
 
           <div class="rm-sect-head">
@@ -2120,12 +2164,16 @@
           </div>
 
           <div class="rm-sys-isolated">
-            <div class="rm-sys-iso-name">Lp(a) 62 mg/dL</div>
-            <div class="rm-sys-iso-why">Genetically fixed, independently atherogenic, invisible to CAC scoring. Lifetime hazard unmodifiable by standard statins. One-time measurement; escalates threshold for ApoB control. Cascade testing at family level can be discussed.</div>
+            <div class="rm-sys-iso-name">Lp(a) 72 nmol/L · OPTIMAL</div>
+            <div class="rm-sys-iso-why">Below the &lt;75 nmol/L optimal cutoff. Cleveland HeartLab molar assay (Quest panel 06/17/2025). Lifetime stable; no repeat needed. Removes Lp(a) as a CV risk driver; combined with CAC 0 it falsifies the prior "heritable lipoprotein atherosclerosis" framing entirely.</div>
           </div>
           <div class="rm-sys-isolated">
-            <div class="rm-sys-iso-name">Pancreatic MRI / MRCP: never performed</div>
-            <div class="rm-sys-iso-why">ATM+ plus paternal grandfather GI cancer meets NCCN v2.2026 surveillance criteria. Absence is not a low finding in its domain: it's an unassessed high-leverage input. Surfaced at the systemic level because the inputs driving it cross Cancer, Family, and Genetic.</div>
+            <div class="rm-sys-iso-name">CAC 0 · power-of-zero</div>
+            <div class="rm-sys-iso-why">No calcified plaque at age 47. Per MESA / CAC Consortium, 10-yr ASCVD ~1.0–1.5%; warranty period ~5–7 yr. Defers statin debate. Re-image at age 52 if ApoB drifts.</div>
+          </div>
+          <div class="rm-sys-isolated">
+            <div class="rm-sys-iso-name">APOE genotype: not on file</div>
+            <div class="rm-sys-iso-why">Single highest-leverage missing input across all domains. ε4/ε4 carries 12–15× AD risk; ε2 protective. Without it, neurodegenerative domain runs uninformative. ~$50–100 cash via Quest, one-time, lifetime stable.</div>
           </div>
 
           <div class="rm-sect-head">
@@ -2133,9 +2181,9 @@
             <div class="rm-sect-hint">How the systemic picture differs from or adds to isolated domain risks</div>
           </div>
           <div class="rm-sys-narrative">
-            <p>Domain models, read independently, yield a coherent picture: high CV, low metabolic, high cancer (hereditary), low kidney, low patient-own neuro. The systemic picture <em>adds</em> two things they miss:</p>
-            <p><strong>One variant, compounded burden.</strong> ATM is not a "cancer gene that incidentally has cardiovascular effects." It is a shared molecular lesion whose mortality pressure is the <em>sum</em> across domains — which no single Cox model captures. The action architecture should treat pancreatic MRI surveillance and CAC as one genotype-driven care block, not two.</p>
-            <p><strong>Unassessed inputs drive the urgency.</strong> Two of the three Decisions — CAC + stress echo and pancreatic MRI — are not present in the record because those tests have never been done. The systemic view names this: <em>the information gap <strong>is</strong> the risk.</em></p>
+            <p>The systemic picture for this patient differs from the v1.0 framing in two ways. <strong>First, the load is single-domain, not dual.</strong> The earlier "ATM pressurizes both vascular and oncologic" pattern is empirically falsified by CAC 0 + Lp(a) 72 nmol/L (optimal). Cancer is the load-bearing domain; CV runs at population baseline or below.</p>
+            <p><strong>Second, this patient triggers the optimized-state Adjuncts lane.</strong> The patient-state classifier returns optimized=true (Cond 95, Lifestyle 90, Managed Risks 97). Standard of Care alone is incomplete care for a 47M who has done the cheap basics and now sits on a known elevated-risk allele. The Adjuncts lane surfaces 5 mechanism-grounded candidates — top three being aspirin (CAPP2 in Lynch as DDR-impaired analog), alcohol minimization (acetaldehyde-DSB-ATM mechanistic privilege), and H. pylori test-and-treat (Choi NEJM in FDR analog; also de-risks chronic aspirin).</p>
+            <p><strong>The two register pins handle the surveillance side.</strong> Cascade testing routes risk-reduction to 1° relatives. CAPS protocol locks pancreatic surveillance from age 50. Standard of Care adds the colonoscopy that's already overdue by USPSTF + ATM + family hx.</p>
           </div>
 
           <div class="rm-prov">
@@ -2211,12 +2259,12 @@
               <table class="rm-mod-tbl">
                 <thead><tr><th>Modifier</th><th>Input</th><th>Threshold</th><th>Effect</th><th>Citation</th></tr></thead>
                 <tbody>
-                  <tr><td class="nm">Lp(a)</td><td class="val">62 mg/dL</td><td class="ref">≥50 → 1.50×</td><td class="eff"><span class="rm-dir up">↑</span> 1.50× <span class="rm-eff-lbl">genetically fixed</span></td><td class="cite">Willeit Lancet 2018 · EAS 2022</td></tr>
-                  <tr><td class="nm">ApoB</td><td class="val">98 mg/dL</td><td class="ref">≥90 → 1.40×</td><td class="eff"><span class="rm-dir up">↑</span> 1.40× <span class="rm-eff-lbl">modifiable</span></td><td class="cite">Sniderman JAMA 2019</td></tr>
-                  <tr><td class="nm">LDL-C</td><td class="val">128 mg/dL</td><td class="ref">≥160 → 1.30×</td><td class="eff"><span class="rm-dir none">·</span> 1.00× <span class="rm-eff-lbl">above goal &lt;100</span></td><td class="cite">ACC/AHA 2019 cholesterol</td></tr>
-                  <tr><td class="nm">HDL-C</td><td class="val">58 mg/dL</td><td class="ref">≥40 → 0.85×</td><td class="eff"><span class="rm-dir down">↓</span> 0.85× <span class="rm-eff-lbl">protective</span></td><td class="cite">Emerging Risk Factors JAMA 2009</td></tr>
+                  <tr><td class="nm">Lp(a)</td><td class="val">72 nmol/L</td><td class="ref">&lt;75 → 1.00× (optimal)</td><td class="eff"><span class="rm-dir none">·</span> 1.00× <span class="rm-eff-lbl">below cutoff</span></td><td class="cite">Willeit Lancet 2018 · EAS 2022</td></tr>
+                  <tr><td class="nm">ApoB</td><td class="val">96 mg/dL</td><td class="ref">≥90 → 1.05×</td><td class="eff"><span class="rm-dir up">↑</span> 1.05× <span class="rm-eff-lbl">moderate band, modifiable</span></td><td class="cite">Sniderman JAMA 2019</td></tr>
+                  <tr><td class="nm">LDL-C</td><td class="val">121 mg/dL</td><td class="ref">≥160 → 1.30×</td><td class="eff"><span class="rm-dir none">·</span> 1.00× <span class="rm-eff-lbl">above goal &lt;100</span></td><td class="cite">ACC/AHA 2019 cholesterol</td></tr>
+                  <tr><td class="nm">HDL-C</td><td class="val">69 mg/dL</td><td class="ref">≥40 → 0.85×</td><td class="eff"><span class="rm-dir down">↓</span> 0.85× <span class="rm-eff-lbl">protective</span></td><td class="cite">Emerging Risk Factors JAMA 2009</td></tr>
                 </tbody>
-                <tfoot><tr><td colspan="2" class="foot-lbl">Group A composite</td><td colspan="3" class="foot-calc mono">1.50 × 1.40 × 1.00 × 0.85 = <strong>1.79×</strong></td></tr></tfoot>
+                <tfoot><tr><td colspan="2" class="foot-lbl">Group A composite</td><td colspan="3" class="foot-calc mono">1.00 × 1.05 × 1.00 × 0.85 = <strong>0.89×</strong> (low band)</td></tr></tfoot>
               </table>
             </div>
 
@@ -2293,11 +2341,11 @@
             <table class="rm-sens">
               <thead><tr><th>Input shift</th><th>New modifier</th><th>ΔP_final</th><th>New tier</th><th>Action</th></tr></thead>
               <tbody>
-                <tr><td class="nm">ApoB 98 → 70 (statin target)</td><td class="mono">Group A 1.79 → 1.28</td><td class="mult prot">−2.9% <span class="rm-eff-lbl">largest lever</span></td><td>Intermediate</td><td>Rosuvastatin 10mg · reassess 8wk</td></tr>
-                <tr><td class="nm">ApoB 98 → 55 (intensive)</td><td class="mono">Group A 1.79 → 1.01</td><td class="mult prot">−4.4%</td><td>Borderline</td><td>Rosuvastatin 20 + ezetimibe · or PCSK9i</td></tr>
-                <tr class="inactive"><td class="nm">Lp(a) 62 → &lt;30 (pipeline siRNA)</td><td class="mono">Group A 1.50 → 1.00</td><td class="mult prot">−2.1%</td><td>Borderline</td><td>Olpasiran/pelacarsen (trial only)</td></tr>
-                <tr><td class="nm">CAC &gt; 100 discovered</td><td class="mono">tier-override (risk-enhancer)</td><td class="mult">P unchanged</td><td>High (locked)</td><td>Intensify LDL target · consider PCSK9i</td></tr>
-                <tr><td class="nm">CAC = 0 discovered</td><td class="mono">no downgrade (Lp(a) caveat)</td><td class="mult">P unchanged</td><td>High (Lp(a) drives soft plaque)</td><td>Proceed with statin anyway</td></tr>
+                <tr><td class="nm">ApoB 96 → 80 (lifestyle target)</td><td class="mono">Group A 1.05 → 0.85</td><td class="mult prot">−0.4% <span class="rm-eff-lbl">small lever (low base)</span></td><td>Low (unchanged)</td><td>Mediterranean pattern · 6-mo recheck</td></tr>
+                <tr><td class="nm">ApoB 96 → 70 (intensive)</td><td class="mono">Group A 1.05 → 0.70</td><td class="mult prot">−0.7%</td><td>Low (unchanged)</td><td>If ApoB drifts &gt;110 sustained · revisit</td></tr>
+                <tr class="inactive"><td class="nm">Lp(a) 72 → 50 (hypothetical)</td><td class="mono">no shift · already optimal</td><td class="mult">P unchanged</td><td>Low (unchanged)</td><td>No action — Lp(a) at optimal floor</td></tr>
+                <tr><td class="nm">CAC 0 (on file 2026)</td><td class="mono">power-of-zero · 10-yr ASCVD ~1%</td><td class="mult prot">tier locked Low · warranty 5–7 yr</td><td>Low (locked by CAC=0)</td><td>Re-image age 52 if ApoB drifts</td></tr>
+                <tr><td class="nm">If hs-CRP returns &gt;2.0 (gap)</td><td class="mono">enhancer adds +0.5–1.0% to 10-yr</td><td class="mult">+small</td><td>Low → Low-borderline</td><td>Re-evaluate ApoB lever</td></tr>
               </tbody>
             </table>
           </div>
@@ -2331,9 +2379,9 @@
             <table class="rm-miss">
               <thead><tr><th>Input</th><th>Why missing matters</th><th>If obtained · effect</th><th>Cadence</th></tr></thead>
               <tbody>
-                <tr><td class="nm">CAC + stress echocardiogram</td><td>ATM + Lp(a) 62 + ApoB 98 at age 47: baseline calcium burden anchors statin intensification. Lp(a)-driven plaque is often soft (invisible to CAC), so CAC=0 does not rule out risk — but a positive CAC locks tier High.</td><td class="mono">Any CAC &gt;0 locks high tier · CAC 0 does not downgrade (Lp(a) caveat)</td><td>Once · baseline before statin</td></tr>
-                <tr><td class="nm">Repeat ApoB + Lp(a) + hs-CRP</td><td>Reassess at 8 weeks post-statin to confirm ApoB response and hs-CRP trend.</td><td class="mono">Re-runs base + Group A with current values</td><td>q12mo · sooner on statin initiation</td></tr>
-                <tr class="inactive"><td class="nm">Carotid IMT / CIMT (optional)</td><td>Reactive only. Indicated if CAC equivocal or discordant with clinical picture.</td><td class="mono">Anatomic confirmation · no direct β hook</td><td>Reactive</td></tr>
+                <tr class="inactive"><td class="nm">CAC + stress echocardiogram</td><td>Already on file. CAC = 0 (2026). Power-of-zero anchors very-low ASCVD; no need to repeat for 5–7 yr.</td><td class="mono">Closed gap · re-image age 52</td><td>Repeat 5–7 yr</td></tr>
+                <tr><td class="nm">hs-CRP</td><td>Last ACC/AHA risk-enhancer not on file. If &gt;2.0 → updates risk picture; if &lt;2.0 → confirms low-risk band.</td><td class="mono">Trivial cost · only EVOI-positive diagnostic still open</td><td>Next blood draw · once</td></tr>
+                <tr><td class="nm">Repeat ApoB + lipid panel at 6 mo</td><td>Confirm dietary lever is moving ApoB toward goal &lt;90.</td><td class="mono">Re-runs base + Group A with current values</td><td>q12mo · sooner if intervention added</td></tr>
               </tbody>
             </table>
           </div>
@@ -2348,7 +2396,7 @@
             <div class="rm-evidence-body">
               SCORE2 / SCORE2-OP: ESC Eur Heart J 2021; US recalibration 2023. ACC/AHA Cholesterol 2019; ACC/AHA Primary Prevention 2019. Lp(a) as causal: Willeit Lancet 2018; EAS consensus 2022. ApoB primacy: Sniderman JAMA 2019. ATM vascular: Pritchard NEJM 2016; Willems Circulation 2023. VO₂max and all-cause mortality: Ross AHA 2016; Mandsager JAMA 2018. HDL meta: Emerging Risk Factors JAMA 2009. 9p21: Helgadottir Science 2007. PCSK9 GOF: Abifadel Nat Genet 2003. Bradycardia evaluation: ACC/AHA 2018. Metabolic syndrome: Grundy Circulation 2005. SPRINT BP target: NEJM 2015.
               <div style="margin-top:10px; padding-top:10px; border-top: 1px solid var(--border-subtle);">
-                <strong style="color:var(--text);">Domain note:</strong> The ATM + Lp(a) stack is the signature finding. Neither is modifiable directly; together they lock the tier at High regardless of downstream ApoB control. The statin decision therefore rests on compressing the modifiable lever (Group A ApoB) while accepting the genetic floor.
+                <strong style="color:var(--text);">Domain note:</strong> The earlier "ATM + Lp(a) stack locks high tier" framing is retracted. Lp(a) is at 72 nmol/L (optimal, &lt;75 cutoff) and CAC is 0. 10-yr ASCVD ~1%, very-low band. ApoB 96 / LDL 121 are above goal but lifestyle-modifiable; no statin indication. The Adjuncts lane (separate bucket) addresses the cancer-domain offensive moves from the unsupervised v1.5 run: aspirin (CAPP2 in Lynch as DDR-impaired analog), alcohol minimization, H. pylori test-and-treat, IR stewardship, resistant starch.
               </div>
             </div>
           </div>
@@ -2387,7 +2435,7 @@
             </div>
             <div class="rm-hero-chip">
               <div class="rm-hero-chip-lbl">Current state</div>
-              <div class="rm-hero-chip-val">A1c 5.4 · FG 88 <span class="rm-hero-chip-mult">normal</span></div>
+              <div class="rm-hero-chip-val">A1c 5.3 · FG 88 <span class="rm-hero-chip-mult">normal</span></div>
             </div>
           </div>
         </div>
@@ -2488,7 +2536,7 @@
                 <tr><td class="k">Sum log-HR</td><td class="v mono">ln(1.00) + ln(0.70) + ln(1.00) + ln(0.56) = <strong>−0.938</strong></td></tr>
                 <tr><td class="k">Composite modifier</td><td class="v mono">exp(−0.938) = <strong>0.391</strong></td></tr>
                 <tr><td class="k">Base × composite</td><td class="v mono">6.0% × 0.391 = <span class="rm-eq-val">2.3%</span>  <span style="color:var(--text-subtle);">10-yr T2DM</span></td></tr>
-                <tr><td class="k">ADA category</td><td class="v mono">HbA1c 5.4 (normal) · FG 88 (normal) → <strong>not prediabetic</strong></td></tr>
+                <tr><td class="k">ADA category</td><td class="v mono">HbA1c 5.3 (normal) · FG 88 (normal) → <strong>not prediabetic</strong></td></tr>
                 <tr><td class="k">Tier rule</td><td class="v mono">P_final &lt;5% AND HbA1c &lt;5.7 AND FG &lt;100 → <span class="rm-eq-final ok">LOW</span></td></tr>
               </tbody>
             </table>
@@ -2506,7 +2554,7 @@
               <tbody>
                 <tr class="inactive"><td class="nm">HbA1c rise 5.4 → 5.7</td><td class="mono">Group A 1.00 → 1.35</td><td class="mult">+1.5% <span class="rm-eff-lbl">watch this</span></td><td>Low → Moderate</td><td>Lifestyle first · reassess q12mo</td></tr>
                 <tr class="inactive"><td class="nm">Activity drops &lt;3 d/wk</td><td class="mono">Group D 0.56 → 0.80</td><td class="mult">+1.0%</td><td>Low</td><td>Reinforce cardio cadence</td></tr>
-                <tr class="inactive"><td class="nm">HbA1c 5.4 → 6.5 (diabetic)</td><td class="mono">Group A 1.00 → 2.10</td><td class="mult">+5.2%</td><td>High</td><td>ADA diagnostic pathway · GLP-1 consideration</td></tr>
+                <tr class="inactive"><td class="nm">HbA1c 5.3 → 6.5 (diabetic)</td><td class="mono">Group A 1.00 → 2.10</td><td class="mult">+5.2%</td><td>High</td><td>ADA diagnostic pathway · GLP-1 consideration</td></tr>
                 <tr class="inactive"><td class="nm">Waist baseline → 38" (new adiposity)</td><td class="mono">Group B 0.70 → 1.56</td><td class="mult">+5.1%</td><td>Moderate</td><td>Structured nutrition · resistance training</td></tr>
                 <tr><td class="nm">OGTT reveals IGT</td><td class="mono">Group A 1.55 → 2.17</td><td class="mult">+4.7%</td><td>High</td><td>Intensify prevention · reassess quarterly</td></tr>
               </tbody>
@@ -2559,7 +2607,7 @@
             <div class="rm-evidence-body">
               FINDRISC: Lindström J, Tuomilehto J, Diabetes Care 2003 (US cohort adaptation). HOMA-IR: Matthews Diabetologia 1985. DPP: Knowler NEJM 2002 (metformin + lifestyle). HbA1c trajectory: Tabák Lancet 2009 (Whitehall II). NAFLD screening: AASLD 2018; FIB-4 Sterling Hepatology 2006. Metformin + ATM (preclinical): Yi Cancer Res 2017. ADA Standards of Medical Care in Diabetes 2024. Adiposity and T2DM: InterAct Consortium Lancet 2011. Family history: Meigs Diabetes 2000. TCF7L2: Grant Nat Genet 2006. PNPLA3 and NAFLD: Romeo Nat Genet 2008. Thyroid: ATA 2014.
               <div style="margin-top:10px; padding-top:10px; border-top: 1px solid var(--border-subtle);">
-                <strong style="color:var(--text);">Domain note:</strong> Metabolic tier is Low. A1c 5.4 and FG 88 sit well within normal; there is no prior panel to compare against and no weight/waist drift to concern. No pharmacotherapy indicated. Watch for A1c rise on repeat panel at 12 months.
+                <strong style="color:var(--text);">Domain note:</strong> Metabolic tier is Low. A1c 5.3 and FG 88 sit well within normal; there is no prior panel to compare against and no weight/waist drift to concern. No pharmacotherapy indicated. Watch for A1c rise on repeat panel at 12 months.
               </div>
             </div>
           </div>
@@ -3392,7 +3440,7 @@
               </tr>
               <tr>
                 <td><span class="fs-dot warn"></span></td>
-                <td><div class="fs-metric"><span class="fs-metric-name">Hyperlipoproteinemia, mixed</span><span class="fs-metric-sub">Elevated ApoB 98 · LDL 128 · Lp(a) 62</span></div></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">Mild dyslipidemia (above goal, lifestyle-managed)</span><span class="fs-metric-sub">ApoB 96 · LDL 121 · Lp(a) 72 nmol/L (optimal) · CAC 0</span></div></td>
                 <td><span class="fs-val">E78.2</span></td>
                 <td><span class="fs-val warn">Active</span></td>
                 <td><span class="fs-val-sec">2026-04-10</span></td>
@@ -3402,7 +3450,7 @@
               </tr>
               <tr>
                 <td><span class="fs-dot warn"></span></td>
-                <td><div class="fs-metric"><span class="fs-metric-name">Elevated Lp(a)</span><span class="fs-metric-sub">62 mg/dL · genetically fixed · goal &lt;30</span></div></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">Lp(a) optimal</span><span class="fs-metric-sub">72 nmol/L · &lt;75 cutoff · lifetime stable</span></div></td>
                 <td><span class="fs-val">E78.8</span></td>
                 <td><span class="fs-val warn">Active</span></td>
                 <td><span class="fs-val-sec">2026-04-10</span></td>
@@ -3520,7 +3568,7 @@
               <tr>
                 <td><span class="fs-dot warn"></span></td>
                 <td><span class="fs-val-sec">Rx</span></td>
-                <td><div class="fs-metric"><span class="fs-metric-name">Rosuvastatin 10 mg PO qHS</span><span class="fs-metric-sub">Decision 01 · ApoB 98, Lp(a) 62, ATM+ · primary prevention</span></div></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">Mediterranean diet pattern (no statin)</span><span class="fs-metric-sub">SoC s02 · ApoB 96, LDL 121, CAC 0 · 6-mo lipid recheck before any pharmacology</span></div></td>
                 <td><span class="fs-val-sec">Dyslipidemia (E78.2)</span></td>
                 <td><span class="fs-val-sec">Routine</span></td>
                 <td><span class="fs-val-sec">Dr. Thompson</span></td>
@@ -3530,7 +3578,7 @@
               <tr>
                 <td><span class="fs-dot warn"></span></td>
                 <td><span class="fs-val-sec">Cardiology</span></td>
-                <td><div class="fs-metric"><span class="fs-metric-name">Coronary artery calcium (CAC) + stress echocardiogram</span><span class="fs-metric-sub">Decision 02 · baseline before statin · 47yo with ApoB 98 / Lp(a) 62 / ATM+ / paternal GI cancer hx</span></div></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">Annual screening colonoscopy (overdue · ATM + family hx)</span><span class="fs-metric-sub">SoC s01 · USPSTF Grade B age 45 · 5-yr cadence given ATM het + paternal grandfather GI cancer</span></div></td>
                 <td><span class="fs-val-sec">Dyslipidemia (E78.2)</span></td>
                 <td><span class="fs-val-sec">Routine · within 60d</span></td>
                 <td><span class="fs-val-sec">Dr. Thompson</span></td>
@@ -3648,7 +3696,7 @@
                 <td><span class="fs-val-sec">Now</span></td>
                 <td><span class="fs-val warn">Pending</span></td>
                 <td><span class="fs-val-sec">Once, baseline</span></td>
-                <td><span class="fs-val-sec">ApoB 98 · Lp(a) 62 · ATM+</span></td>
+                <td><span class="fs-val-sec">ApoB 96 · Lp(a) 72 nmol/L (optimal) · CAC 0 · ATM het</span></td>
                 <td><span class="fs-val-sec">ACC/AHA 2019</span></td>
               </tr>
             </tbody>
@@ -4959,7 +5007,7 @@
               <div style="margin-bottom:16px;">
                 <div style="font-size:12px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:510; margin-bottom:6px;">O: Objective</div>
                 <div style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:var(--text); margin-bottom:8px;">Vitals: BP 118/76 · HR 54 · RR 14 · T 36.7 · SpO₂ 98 · 72.5 kg · BMI 23.0</div>
-                <div style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:var(--text); margin-bottom:8px;">Labs (Apr 10): ApoB 98 (high, goal &lt;80) · Lp(a) 62 (high, goal &lt;30) · LDL 128 · HDL 58 · TG 85 · TC 203 · hs-CRP 1.1 (borderline) · A1c 5.4 · FG 88 · Cr 0.98 · eGFR &gt;90 · ALT 24 · AST 22 · TSH 1.8 · CBC unremarkable.</div>
+                <div style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:var(--text); margin-bottom:8px;">Labs (Quest 06/17/2025): ApoB 96 (moderate band 90–129, goal &lt;90) · Lp(a) 72 nmol/L (optimal, &lt;75) · LDL 121 · HDL 69 · TG 65 · TC 206 · A1c 5.3 · FG 88 · Cr 1.25 · eGFR 72 · ALT 18 · AST 21 · TSH 0.80 · CBC unremarkable. CAC 0 (2026). hs-CRP not measured (gap).</div>
                 <div style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:var(--text); margin-bottom:8px;">Genetic (Invitae, 163 genes, Feb 3 2026): ATM c.8147T&gt;C heterozygous (pathogenic). 2 VUS, non-actionable. All other 160 genes negative.</div>
                 <div style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:var(--text); margin-bottom:8px;">Wearable (30d, synced Apr 19): RHR 52 · HRV SDNN 52 · sleep 7h 10m (deep 1h 20m) · steps 8,400/d · 11 workouts (9 cycling, 2 walking).</div>
                 <div>Exam: well-appearing, NAD. Cardiac: RRR, no M/R/G. Lungs CTAB. Abdomen soft, NT. No peripheral edema.</div>
@@ -4969,18 +5017,18 @@
                 <div style="font-size:12px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:510; margin-bottom:6px;">A: Assessment</div>
                 <ol style="margin-left:18px; padding-left:0;">
                   <li style="margin-bottom:4px;">ATM heterozygous carrier (Z15.09), c.8147T&gt;C pathogenic — drives annual pancreatic MRI surveillance per NCCN given paternal grandfather GI cancer</li>
-                  <li style="margin-bottom:4px;">Mixed hyperlipoproteinemia (E78.2) with elevated ApoB 98, LDL 128 on background ATM+ — statin indicated</li>
-                  <li style="margin-bottom:4px;">Elevated Lp(a) 62 mg/dL (E78.8), genetically fixed — compounds vascular risk independent of ApoB</li>
+                  <li style="margin-bottom:4px;">Mild dyslipidemia (above goal): ApoB 96, LDL 121 — diet/lifestyle first; CAC 0 defers statin</li>
+                  <li style="margin-bottom:4px;">Lp(a) 72 nmol/L OPTIMAL (&lt;75 cutoff) — not a CV risk driver in this patient</li>
                   <li style="margin-bottom:4px;">hs-CRP 1.1 borderline — consistent with mild inflammatory tone; reassess after statin</li>
-                  <li style="margin-bottom:4px;">Otherwise metabolically healthy: A1c 5.4, FG 88, normal CMP/CBC/TSH, eGFR &gt;90, athletic wearable profile</li>
+                  <li style="margin-bottom:4px;">Otherwise metabolically healthy: A1c 5.3, FG 88, normal CMP/CBC/TSH, athletic wearable profile (VO₂max 54, HRV 76)</li>
                 </ol>
               </div>
 
               <div style="margin-bottom:8px;">
                 <div style="font-size:12px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:510; margin-bottom:6px;">P: Plan</div>
                 <ul style="margin-left:18px; padding-left:0; list-style-type:none;">
-                  <li style="margin-bottom:4px;"><strong>Decision 01.</strong> Start rosuvastatin 10 mg PO qHS. Target ApoB &lt;80.</li>
-                  <li style="margin-bottom:4px;"><strong>Decision 02.</strong> Order CAC + stress echocardiogram — baseline imaging before statin in a 47yo with ApoB 98, Lp(a) 62, ATM+, and paternal GI cancer hx.</li>
+                  <li style="margin-bottom:4px;"><strong>SoC s01.</strong> Baseline screening colonoscopy (USPSTF + ATM + family hx, 5-yr cadence).</li>
+                  <li style="margin-bottom:4px;"><strong>SoC s02.</strong> Mediterranean diet pattern, 6-month lipid + ApoB recheck. No statin (CAC 0 + 10-yr ASCVD ~1%).</li>
                   <li style="margin-bottom:4px;"><strong>Decision 03.</strong> Order pancreatic MRI / MRCP — ATM+ surveillance baseline per NCCN v2.2026. Annual cadence thereafter.</li>
                   <li style="margin-bottom:4px;">→ Counseling: statin rationale, Lp(a) residual risk, ATM surveillance pathway, cascade testing for 1° relatives (daughter deferred per NCCN).</li>
                   <li style="margin-bottom:4px;">→ Follow-up in 8 weeks post-CAC/stress echo to review statin tolerance + lipid response.</li>
@@ -5851,7 +5899,7 @@ const modalData = {
         <div class="rec-subtitle">
           <strong>Age:</strong> 47 · <strong>Height/Weight:</strong> 5'10" · 72.5 kg (BMI 23.0) · <strong>BP:</strong> 118/76<br>
           <strong>Genetic:</strong> ATM c.8147T&gt;C heterozygous (pathogenic missense)<br>
-          <strong>Labs (Apr 10, 2026):</strong> ApoB 98 · Lp(a) 62 · LDL 128 · HDL 58 · TG 85 · hs-CRP 1.1 · A1c 5.4 · eGFR &gt;90<br>
+          <strong>Labs (Quest 06/17/2025):</strong> ApoB 96 · Lp(a) 72 nmol/L (optimal) · LDL 121 · HDL 69 · TG 65 · A1c 5.3 · eGFR 72 · CAC 0 (2026)<br>
           <strong>Wearable (30d):</strong> HRV 52 ms · RHR 52 bpm · Sleep 7h 10m · 11 workouts logged<br>
           <strong>Family:</strong> Paternal grandfather — GI cancer, early 80s. Spouse's parents Stage 3-4 dementia. Daughter (6) — ATM cascade testing deferred per NCCN (pediatric).
         </div>
@@ -5865,10 +5913,10 @@ const modalData = {
       <div class="rec-card">
         <div class="rec-title">Unanimous Findings (4/4 Models Agreed)</div>
         <div class="rec-subtitle">
-          • <strong>Statin is the highest-leverage move</strong> — ApoB 98 + Lp(a) 62 + ATM+ in a 47yo with paternal GI cancer is a compounding risk that warrants primary prevention now.<br>
+          • <strong>No statin indication</strong> — CAC 0 + Lp(a) optimal + 10-yr ASCVD ~1%. Lifestyle-first ApoB management; reassess at 6 months.<br>
           • <strong>Baseline CAC + stress echo before statin</strong> — one-time imaging captures arterial state pre-treatment; the most durable data point we'll ever get.<br>
           • <strong>Annual pancreatic MRI per NCCN ATM+ surveillance</strong> — starts November, indefinite cadence. Early detection is the whole pathway.<br>
-          • <strong>No autonomic, metabolic, or musculoskeletal concerns on baseline</strong> — HRV 52, RHR 52, sleep 7h 10m, A1c 5.4 are all in normal range. No action indicated in those domains.<br>
+          • <strong>Optimized baseline</strong> — VO₂max 54 (~95th pct), HRV 76, sleep 7h. All elite. No action indicated in those domains.<br>
           • <strong>Data gap: no prior labs, no prior imaging</strong> — single onboarding panel. Recheck at 12 weeks post-statin establishes trajectory.
         </div>
       </div>
@@ -5888,7 +5936,7 @@ const modalData = {
           <strong>1. Pancreatic Cancer, diagnosed late</strong><br>
           ATM surveillance was initiated but cadence slipped after Year 2. A lesion grew between scans. ATM+ carriers have materially elevated pancreatic risk; MRI cadence is the only reliable protection.<br><br>
           <strong>2. Non-fatal MI despite ApoB at target</strong><br>
-          Rosuvastatin reduced ApoB below 80, but Lp(a) 62 was never directly addressed with PCSK9i or lipoprotein apheresis. Soft plaque driven by Lp(a) progressed. The CAC baseline was normal, creating false reassurance.<br><br>
+          Counterfactual retired: with Lp(a) optimal and CAC 0, the high-risk Pattern-1 trajectory does not apply to this patient. The remaining cancer-domain trajectory is what the engine now tracks.<br><br>
           <strong>3. Surveillance drift</strong><br>
           Without a written protocol handoff between Meridian and the concierge physician, annual MRI slipped to "when convenient." By Year 4, 18 months had passed without a scan. Detection window lost.
         </div>
@@ -5898,11 +5946,11 @@ const modalData = {
         <div class="rec-title">Risk Picture (Net Hazard Ratios)</div>
         <div class="rec-subtitle">
           <strong>Cardiovascular: elevated</strong><br>
-          Risk drivers: ApoB 98, Lp(a) 62, ATM+, paternal GI cancer hx. Age 47 is the window for primary prevention. Statin projected to move 10y ASCVD risk from 9.4% → ~6.2%.<br><br>
+          Risk drivers (revised): ATM het + paternal GI cancer. Age 47 is the window for cancer-domain offensive moves (Adjuncts lane). 10-yr ASCVD ~1% post CAC=0 — no CV intervention indicated.<br><br>
           <strong>Cancer: Pancreatic elevated (ATM+)</strong><br>
           ATM c.8147T&gt;C confers meaningfully elevated pancreatic cancer risk. Strategy is detection, not prevention — annual MRI is the only validated lever.<br><br>
           <strong>All other domains: at baseline</strong><br>
-          Metabolic (A1c 5.4, glucose 88, HDL 58) and autonomic (HRV 52, RHR 52, sleep 7h 10m) are in normal range. No drivers indicating intervention.
+          Metabolic (A1c 5.3, glucose 88, HDL 69, TG 65) and autonomic (HRV 76, VO₂max 54, sleep 7h) are at population-floor or elite. No drivers indicating intervention.
         </div>
       </div>
 
@@ -5982,7 +6030,7 @@ const modalData = {
       <div class="rec-card"><div class="rec-title">Why this matters</div><div class="rec-subtitle">This remains the gateway action because every downstream decision depends on a fresh lipid and inflammatory profile, not on stale labs.</div></div>
       <div class="rec-card"><div class="rec-title">Why now</div><div class="rec-subtitle">Until you know what ApoB, LDL-C, and Lp(a) look like today, you are still reasoning in the dark about the biggest modifiable vascular lever in the whole case.</div></div>
       <div class="rec-card"><div class="rec-title">What to do</div><div class="rec-subtitle">Repeat the core lipid panel and use the same moment to refresh the wider bloodwork so the plan is anchored to current truth.</div></div>
-      <div class="rec-card"><div class="rec-title">What it unlocks</div><div class="rec-subtitle">It determines how urgent rosuvastatin really is, whether escalation is needed, and how much weight the cardiovascular side should carry right now.</div></div>
+      <div class="rec-card"><div class="rec-title">What it unlocks</div><div class="rec-subtitle">CAC 0 + Lp(a) optimal already answer this: CV is genuinely low. The remaining unknown is hs-CRP. The cancer side carries the weight now.</div></div>
       <div class="rec-card"><div class="rec-title">How we know it's working</div><div class="rec-subtitle">The bottleneck is removed and the next decisions become obvious instead of hypothetical.</div></div>
       <div class="rec-card"><div class="rec-title">Dependencies / cautions</div><div class="rec-subtitle">No medication decision should be made off stale labs. This is the gateway, not the final move.</div></div>
     `
@@ -5995,7 +6043,7 @@ const modalData = {
     body: `
       <div class="rec-card"><div class="rec-title">Why this matters</div><div class="rec-subtitle">Once the current lipid picture is confirmed, this is still the cleanest evidence-backed treatment lever for your vascular risk.</div></div>
       <div class="rec-card"><div class="rec-title">Why now</div><div class="rec-subtitle">ApoB exposure is cumulative, Lp(a) is fixed, and ATM makes the cardiovascular side less forgiving than average.</div></div>
-      <div class="rec-card"><div class="rec-title">What to do</div><div class="rec-subtitle">Start with low-dose rosuvastatin, then layer in ezetimibe only if needed. The board review favored the lower-friction, lower-myopathy path.</div></div>
+      <div class="rec-card"><div class="rec-title">What to do</div><div class="rec-subtitle">No statin. Start with Mediterranean dietary pattern + 6-month ApoB recheck. The CAC 0 + Lp(a) optimal combination defers the lipid pharmacology debate by ~5 years.</div></div>
       <div class="rec-card"><div class="rec-title">What it unlocks</div><div class="rec-subtitle">A lower ApoB burden, a flatter vascular risk curve, and a treatment plan that is both real-world and evidence-based.</div></div>
       <div class="rec-card"><div class="rec-title">How we know it's working</div><div class="rec-subtitle">ApoB drops meaningfully on repeat labs without derailing training through side effects.</div></div>
       <div class="rec-card"><div class="rec-title">Dependencies / cautions</div><div class="rec-subtitle">Depends on the fresh lipid panel. If symptoms emerge, CK monitoring and dose strategy matter.</div></div>
@@ -6213,19 +6261,33 @@ if (sleepBars) {
   'use strict';
 
   // ---- Pinned Register actions (Tier 1 by rule, not rankable) ----
+  // SoC-only. Adjuncts cannot reach Tier 1 by rule per Engine v1.5.
   const REGISTER_PINS = [
     {
       id: 'reg-atm-counseling',
       trigger_id: 'ACMG-SF-ATM',
-      title: 'Genetic counseling referral for ATM heterozygous P/LP variant',
-      guideline: 'ACMG SF v3.2 — ATM listed as Tier 2 secondary-finding gene',
-      do: '<strong>Refer to genetic counselor</strong> for ATM c.8147T&gt;C heterozygous P/LP review. Cascade testing offer to first-degree relatives at age of consent.',
-      why: 'P/LP variant on ACMG Secondary Findings list. Counseling, gene-specific surveillance, and cascade testing are guideline-mandated; this is a Tier 1 floor, not a ranked candidate.',
+      title: 'Genetic counseling + cascade testing for ATM heterozygous P/LP variant',
+      guideline: 'ACMG SF v3.2 (Miller 2022) · NCCN Genetic/Familial High-Risk v2.2024',
+      do: '<strong>Refer to clinical geneticist</strong> for ATM c.8147T&gt;C heterozygous P/LP confirmation, counseling, and cascade testing of first-degree relatives (Senna, siblings, parents) and second-degree as appropriate.',
+      why: 'P/LP variant on ACMG Secondary Findings list. ATM het carries ~2× breast, ~4–6× pancreatic, ~2× prostate cancer risk. Counseling, gene-specific surveillance, and cascade testing are guideline-mandated; this is a Tier 1 floor, not a ranked candidate.',
       orders: [
         { glyph: '✚', label: 'Genetic counseling referral' },
         { glyph: '✉', label: 'Cascade testing offer (1° relatives)' }
       ],
-      evidence: 'ACMG SF v3.2 · NCCN ATM management v2.2024'
+      evidence: 'ACMG SF v3.2 · PMID 35802134 · CARRIERS PMID 35353815'
+    },
+    {
+      id: 'reg-caps-pancreas',
+      trigger_id: 'ATM-CAPS-pancreas',
+      title: 'Annual pancreatic surveillance per CAPS 2020 — start age 50',
+      guideline: 'International CAPS Consortium 2020 (Goggins et al.) · NCCN pancreas v1.2024',
+      do: '<strong>Plan pancreatic surveillance to begin at age 50</strong>: annual MRI/MRCP + endoscopic ultrasound (EUS). Document plan in chart now; first imaging at age 50.',
+      why: 'ATM het + 1°/2° relative with PDAC meets CAPS criteria. ATM carries ~5–9× lifetime PDAC risk. Stage-shift detection from late-stage PDAC (5-yr survival &lt;5%) to T1 (~80%) is the dominant lever — surveillance is the only known path.',
+      orders: [
+        { glyph: '✚', label: 'Plan: MRI/MRCP + EUS at age 50' },
+        { glyph: '✉', label: 'Patient education: ATM + pancreas' }
+      ],
+      evidence: 'CAPS 2020 · PMID 31672839'
     }
   ];
 
@@ -6233,204 +6295,340 @@ if (sleepBars) {
   // score = weighted SPAREQ avg across runs (S×0.25 + P×0.20 + A×0.20 + R×0.15 + E×0.10 + Q×0.10).
   // Higher = higher initial priority. originalRank locks the engine's order so any manual reorder
   // remains auditable against the run.
+  // ---- ITEMS — Standard of Care lane (5 candidates, all guideline-anchored) ----
+  // Engine v1.5 dual-bucket. SoC bucket: USPSTF / ACC-AHA / NCCN / KDIGO / CAPS / ACMG anchors.
+  // SPAREQ Q anchor strict (1=expert opinion through 4=multi-RCT/meta-analysis).
   const ITEMS = [
     {
-      id: 'a01',
-      score: 3.65, originalRank: 1,
-      title: 'Baseline PSA + DRE — ATM-driven prostate surveillance',
-      severity: 'High', timing: 'this visit',
-      do: '<strong>Order PSA + DRE</strong> now. ATM carriers begin enhanced prostate surveillance at 40; patient is 47 with no prior PSA. Establish annual cadence.',
-      why: 'ATM heterozygous P/LP carriers have ~2× lifetime prostate cancer risk and a higher-grade phenotype. Catastrophic-if-missed framing — late-stage prostate cancer survival delta is large. Patient is 7 years overdue for ATM-carrier start age.',
-      goal: 'Baseline PSA documented · annual cadence scheduled · prostate domain closed',
-      orders: [
-        { glyph: '✚', label: 'PSA' },
-        { glyph: '✚', label: 'DRE this visit' },
-        { glyph: '✚', label: 'Annual surveillance schedule' }
-      ],
-      evidence: 'NCCN genetic/familial high-risk v2.2024 · Meridian cancer model · Action Layer 6/6 runs',
-      author: 'meridian'
-    },
-    {
-      id: 'a02',
-      score: 3.30, originalRank: 2,
-      title: 'Initiate moderate-intensity statin (rosuvastatin 5–10 mg qd)',
-      severity: 'High', timing: 'this visit',
-      do: '<strong>Rosuvastatin 5 mg qd</strong> ×4 wk → escalate to 10 mg qd. Repeat lipid panel + ApoB + CK + LFTs at 6–8 wk. Target ApoB &lt;80.',
-      why: 'Lp(a) <span class="cp-mono">62 mg/dL ≈ 149 nmol/L</span> crosses the &gt;125 nmol/L threshold for lipid clinic + PCSK9 evaluation. ApoB <span class="cp-mono">98</span>, LDL <span class="cp-mono">128</span>. Lp(a) is genetically fixed — statin reduces the modifiable ApoB-particle arm of the atherogenic load.',
-      goal: 'ApoB &lt;80 · LDL-C &lt;100 · tolerability assessed at 12 wk',
-      orders: [
-        { glyph: '℞', label: 'Rosuvastatin 5 mg qd #90' },
-        { glyph: '✚', label: 'Lipid + ApoB + CK + CMP 6–8 wk' },
-        { glyph: '✚', label: 'Follow-up 12 wk' }
-      ],
-      evidence: 'AHA PREVENT 2024 · NLA Lp(a) 2019 · Meridian CVD model · Action Layer 6/6 runs',
-      author: 'meridian'
-    },
-    {
-      id: 'a03',
-      score: 3.20, originalRank: 3,
-      title: 'Coronary artery calcium (CAC) scan — baseline imaging',
-      severity: 'High', timing: '30 d',
-      do: '<strong>Non-contrast cardiac CT (Agatston)</strong> outpatient. Schedule within 30 days of statin start.',
-      why: 'CAC reclassifies ~50% of intermediate-risk patients (MESA). Lp(a)+ profile is exactly where CAC has the most decision-changing power — anchors the longitudinal CVD record and gates aspirin / PCSK9i decisions.',
-      goal: 'CAC &lt;100 confirms low-risk phenotype · ≥100 prompts intensification · ≥400 → cardiology referral',
-      orders: [
-        { glyph: '✚', label: 'CAC scan (outpatient)' }
-      ],
-      evidence: 'MESA · CAC Consortium · Meridian CVD model § CAC reclassifier',
-      author: 'meridian'
-    },
-    {
-      id: 'a04',
-      score: 3.15, originalRank: 4,
-      title: 'Confirmatory Lp(a) in nmol/L (molar assay)',
-      severity: 'Mod', timing: '30 d',
-      do: '<strong>Repeat Lp(a) — nmol/L isoform-independent assay</strong>, nonfasting. Lifetime-stable — single confirmation sufficient.',
-      why: 'Current value <span class="cp-mono">62 mg/dL</span> was converted to nmol/L; mg/dL is contaminated by apo(a) isoform-size variation. Lp(a) retest variation is 10–20% due to inflammation. Confirmation locks the value before lipid-clinic and cascade decisions.',
-      goal: 'Confirmed Lp(a) in nmol/L documented · isoform-size uncertainty resolved',
-      orders: [
-        { glyph: '✚', label: 'Lp(a) nmol/L' }
-      ],
-      evidence: 'NLA Lp(a) 2019 · Volgman 2024 (PMID 38879448) · Action Layer 6/6 runs',
-      author: 'meridian'
-    },
-    {
-      id: 'a05',
-      score: 3.15, originalRank: 5,
-      title: 'APOE genotyping (one-time, off-panel add-on)',
-      severity: 'High', timing: '60 d',
-      do: '<strong>Order APOE genotype</strong> (~$100 add-on, off-Invitae-panel). Trajectory anchor for Neuro and lipid metabolism.',
-      why: 'ε4/ε4 carries 12–15× AD risk; ε3/ε3 is reference. Highest-value off-panel test for Jim — reclassifies 20-yr dementia risk and informs CVD lipid metabolism. Current Neuro confidence tier is Tier 3 (base only) without it.',
-      goal: 'APOE genotype documented · Neuro model upgraded to Tier 2 · counseling per result',
-      orders: [
-        { glyph: '✚', label: 'APOE genotype' },
-        { glyph: '✉', label: 'Pre-test counseling note' }
-      ],
-      evidence: 'Lancet 2024 commission · Meridian Neuro model · Action Layer 6/6 runs',
-      author: 'meridian'
-    },
-    {
-      id: 'a06',
-      score: 3.10, originalRank: 6,
-      title: 'Pancreatic surveillance plan — start age 50 (EUS / MRI-MRCP)',
-      severity: 'High', timing: '90 d',
-      do: '<strong>Schedule pancreatic surveillance to begin at age 50</strong>: alternating EUS and MRI-MRCP annually. Document the plan in chart now; do not initiate imaging yet.',
-      why: 'ATM carrier + paternal grandfather GI cancer meets CAPS criteria for high-risk surveillance. Grandfather diagnosed at age 82 (not premature) → CAPS-recommended start age 50. Patient is 47 — plan now, image at 50 unless FHx reclassifies.',
-      goal: 'Surveillance plan documented · age-50 trigger set · revisit if FHx clarification reveals earlier onset',
-      orders: [
-        { glyph: '✚', label: 'Plan: EUS/MRCP at age 50' },
-        { glyph: '✉', label: 'Patient education: ATM + pancreas' }
-      ],
-      evidence: 'CAPS consortium 2020 · NCCN pancreas v1.2024 · Meridian cancer model',
-      author: 'meridian'
-    },
-    {
-      id: 'a07',
-      score: 3.05, originalRank: 7,
+      id: 's01', score: 3.55, originalRank: 1, lane: 'soc',
       title: 'Baseline screening colonoscopy',
-      severity: 'Mod', timing: '90 d',
-      do: '<strong>GI referral: screening colonoscopy</strong>. Repeat every 5 yr if normal (ATM modifier on standard 10-yr interval).',
-      why: 'USPSTF colonoscopy age 45–75; patient is 47 with no prior colonoscopy. ATM heterozygotes carry modestly increased CRC risk; standard 10-yr interval shortened to 5-yr per NCCN. Audit-visible gap.',
-      goal: 'Baseline colonoscopy complete · 5-yr interval documented · pathology managed',
+      severity: 'High', timing: '90 d',
+      do: '<strong>GI referral: screening colonoscopy</strong>. ATM het + 2° GI cancer hx → 5-yr cadence (vs standard 10-yr).',
+      why: 'USPSTF 2021 Grade B starting age 45; patient is 47 with no prior. ATM het CRC OR ~1.5–2.0 + paternal grandfather GI cancer. Catastrophic-if-missed framing — T1 CRC 5-yr survival 90%+ vs late-stage 14%.',
+      goal: 'Baseline colonoscopy complete · pathology read · 5-yr interval documented',
       orders: [
         { glyph: '✚', label: 'GI referral: screening colonoscopy' },
         { glyph: '✉', label: 'Bowel prep instructions' }
       ],
-      evidence: 'USPSTF 2021 · NCCN genetic/familial high-risk v2.2024',
+      evidence: 'USPSTF 2021 Grade B · NCCN Genetic/Familial High-Risk v2.2024 · PMID 34003218',
+      guideline_anchor: 'USPSTF Grade B 2021',
       author: 'meridian'
     },
     {
-      id: 'a08',
-      score: 2.95, originalRank: 8,
-      title: 'Lipid / preventive cardiology referral — PCSK9i evaluation',
-      severity: 'High', timing: '60 d',
-      do: '<strong>Refer to lipid clinic / preventive cardiology</strong> for PCSK9i candidacy assessment given Lp(a) above the 125 nmol/L threshold. Aspirin shared decision-making concurrent.',
-      why: 'Lp(a) 149 nmol/L crosses the &gt;125 threshold for specialist evaluation per Meridian CVD model § A1 clinical action triggers. PCSK9i has demonstrable Lp(a)-lowering effect (~25–30%) in addition to LDL/ApoB.',
-      goal: 'Specialist evaluation complete · PCSK9i decision documented · aspirin discussion logged',
+      id: 's02', score: 3.20, originalRank: 2, lane: 'soc',
+      title: 'Lifestyle optimization for LDL/ApoB — Mediterranean pattern, no statin',
+      severity: 'Mod', timing: 'this visit',
+      do: '<strong>Mediterranean diet pattern</strong>, saturated fat &lt;7% kcal, soluble fiber 10–25 g/day. Reassess lipids + ApoB at 6 months.',
+      why: 'LDL 121 (above &lt;100 goal); ApoB 96 (moderate band 90–129). 10-yr ASCVD ~1% post CAC=0 → no statin indication. Diet/exercise is the first-line lever; PREDIMED RCT-grade.',
+      goal: 'Repeat lipid + ApoB at 6 mo · target ApoB &lt;90',
       orders: [
-        { glyph: '✚', label: 'Lipid clinic referral' },
-        { glyph: '✉', label: 'Aspirin SDM note' }
+        { glyph: '✚', label: 'Lipid + ApoB repeat 6 mo' },
+        { glyph: '✉', label: 'MedDiet patient handout' }
       ],
-      evidence: 'NLA Lp(a) 2019 · ESC 2021 · Meridian CVD model § A1',
+      evidence: 'PREDIMED PMID 29897866 · USPSTF Grade B 2022 dietary counseling · ACC/AHA 2018',
+      guideline_anchor: 'ACC/AHA 2018 + USPSTF 2022',
       author: 'meridian'
     },
     {
-      id: 'a09',
-      score: 2.85, originalRank: 9,
-      title: 'CPET / structured ramp test for confirmed VO₂max',
+      id: 's03', score: 2.85, originalRank: 3, lane: 'soc',
+      title: 'Measure hs-CRP',
       severity: 'Mod', timing: '90 d',
-      do: '<strong>CPET or structured ramp test</strong> to confirm wearable VO₂max (52, ~80th percentile). Trajectory-anchor diagnostic; uncertainty buffer wider on wearable estimates.',
-      why: 'Wearable VO₂max correlates r=0.83 with CPET but has ±3–5 mL/kg/min individual error. Confirming the percentile band tightens the CRF cross-cutting modifier across CVD, Metabolic, and Neuro models. One-time measurement is a durable baseline.',
-      goal: 'Measured VO₂max documented · CRF percentile band confirmed · trajectory baseline established',
+      do: '<strong>Add hs-CRP</strong> to next blood draw. Closes ACC/AHA risk-enhancer gap.',
+      why: 'Last lipid-adjacent inflammatory marker not measured. If &gt;2.0 → updates risk picture; if &lt;2.0 → confirms low-risk band. Trivial cost; only EVOI-positive diagnostic still open in this profile.',
+      goal: 'hs-CRP value on file',
       orders: [
-        { glyph: '✚', label: 'CPET referral or ramp test' }
+        { glyph: '✚', label: 'hs-CRP' }
       ],
-      evidence: 'Dosis 2026 (PMID 41592155) · Meridian CRF cross-cutting modifier',
+      evidence: 'ACC/AHA 2019 risk-enhancer list · MESA',
+      guideline_anchor: 'ACC/AHA 2019',
       author: 'meridian'
     },
     {
-      id: 'a10',
-      score: 2.85, originalRank: 10,
-      title: 'Family history clarification — paternal grandfather GI cancer',
-      severity: 'Mod', timing: '30 d',
-      do: '<strong>Contact patient for FHx detail</strong>: grandfather\'s GI cancer subtype (pancreatic? colorectal? gastric?) and age at diagnosis. Reclassifies pancreatic surveillance start age.',
-      why: 'Current chart: paternal grandfather GI cancer, age at death 82, age at diagnosis unknown. If diagnosis was premature (&lt;55), CAPS criteria shift surveillance start earlier than 50. Low-effort, high-information.',
-      goal: 'Subtype + age at dx documented · pancreatic plan reconfirmed or revised',
+      id: 's04', score: 2.70, originalRank: 4, lane: 'soc',
+      title: 'Annual eGFR + urine ACR',
+      severity: 'Mod', timing: '12 mo',
+      do: '<strong>Annual eGFR + urine ACR</strong>. If eGFR drops &gt;5/yr or persistent &lt;60, refer nephrology.',
+      why: 'eGFR 72 with creatinine 1.25 (high-normal). Most likely athletic-baseline; trajectory tracking distinguishes from incipient CKD.',
+      goal: 'Annual values on file · trajectory tracked',
       orders: [
-        { glyph: '✉', label: 'Patient outreach: FHx detail' },
-        { glyph: '✚', label: 'Update pedigree' }
+        { glyph: '✚', label: 'eGFR + urine ACR annual' }
       ],
-      evidence: 'CAPS consortium 2020 · NCCN pancreas v1.2024',
+      evidence: 'KDIGO 2024 CKD',
+      guideline_anchor: 'KDIGO 2024',
       author: 'meridian'
     },
     {
-      id: 'a11',
-      score: 2.70, originalRank: 11,
-      title: 'Home blood pressure monitoring — 7-day protocol',
-      severity: 'Mod', timing: '60 d',
-      do: '<strong>Validated home cuff (Omron or Withings)</strong>, AM + PM × 7 days. Brings BP variability into the model.',
-      why: 'Currently only single in-office BP <span class="cp-mono">116/76</span> on file. CVD Domain B blood-pressure-variability modifier (B1) cannot fire without ≥7 days home cuff data. Closes a CVD model data gap.',
-      goal: '7-day series complete · variability calculated · B1 modifier evaluated',
+      id: 's05', score: 2.40, originalRank: 5, lane: 'soc',
+      title: 'Cascade-conditional breast MRI for ATM het 1° female relatives',
+      severity: 'High', timing: 'cascade-driven',
+      do: 'After cascade testing identifies ATM het female 1° relatives, schedule annual breast MRI from age 30 per NCCN.',
+      why: 'ATM het breast cancer OR ~2.0; MRI catches 80%+ vs ~50% mammography in dense breasts. Patient is the index — this surfaces because cascade results will route directly to relatives\' care.',
+      goal: 'Cascade results returned · surveillance initiated for confirmed het relatives',
       orders: [
-        { glyph: '✉', label: 'Home cuff protocol handout' },
-        { glyph: '✚', label: 'Follow-up at 30 d to review' }
+        { glyph: '✉', label: 'Cascade follow-through tracker' }
       ],
-      evidence: 'Rothwell Lancet 2010 · Meridian CVD model § Domain B',
-      author: 'meridian'
-    },
-    {
-      id: 'a12',
-      score: 2.50, originalRank: 12,
-      title: 'PHQ-9 / GAD-7 baseline screening',
-      severity: 'Mod', timing: 'next visit',
-      do: '<strong>Administer PHQ-9 + GAD-7</strong> at next visit. Standard intake screen; depression is a Lancet 2024 modifiable dementia risk factor.',
-      why: 'Mental health not yet captured. Closes a Neuro Domain C lifestyle gap and provides baseline before any prescribing.',
-      goal: 'PHQ-9 + GAD-7 scored · trajectory baseline · escalation per result',
-      orders: [
-        { glyph: '✚', label: 'PHQ-9 + GAD-7 next visit' }
-      ],
-      evidence: 'USPSTF 2023 · Lancet 2024 dementia commission',
-      author: 'meridian'
-    },
-    {
-      id: 'a13',
-      score: 2.40, originalRank: 13,
-      title: 'Baseline DEXA — body composition + bone density',
-      severity: 'Low', timing: '180 d',
-      do: '<strong>DEXA scan</strong> for baseline body composition and bone density. One-time trajectory anchor.',
-      why: 'Trajectory-anchor diagnostic. BMI 23 doesn\'t resolve lean mass vs. fat mass; BMD baseline at 47 informs decade-out fracture-risk projections.',
-      goal: 'Baseline body comp + BMD documented · 5-yr re-scan interval set',
-      orders: [
-        { glyph: '✚', label: 'DEXA referral' }
-      ],
-      evidence: 'ISCD 2019 · Meridian metabolic model · Action Layer reproducibility study',
+      evidence: 'NCCN Breast Cancer Screening 2024 · PMID 37458768',
+      guideline_anchor: 'NCCN 2024',
       author: 'meridian'
     }
+  ];
+
+  // ---- ADJUNCTS — Patient-Specific Adjuncts lane (5 candidates, optimized-patient-only) ----
+  // Engine v1.5 dual-bucket. Adjuncts bucket: literature-search-driven, allele-conditioned.
+  // Floor: mechanism + (cohort OR biomarker RCT) at minimum. Pure mechanism → research_gaps.
+  // Bucket-local Q rubric: Q=2 mechanism+single-cohort/biomarker-RCT through Q=4 mechanism+multi-RCT.
+  // Cannot reach Tier 1 by rule; max is Tier A by score.
+  const ADJUNCTS = [
+    {
+      id: 'a01', score: 3.50, originalRank: 1, lane: 'adjuncts',
+      title: 'Low-dose aspirin chemoprevention (GI cancer, ATM het + paternal-line GI cancer)',
+      severity: 'High', timing: '8 wk',
+      do: '<strong>Aspirin 81 mg PO daily</strong> after shared-decision conversation and bleed-risk review. Baseline H. pylori test (A3) first; reassess at 5 yr (CAPP2 effect emerges ~5 yr in).',
+      why: 'ATM haploinsufficiency impairs DSB repair, raising epithelial cancer risk (CRC ~1.5–2×). CAPP2 RCT in Lynch (closest hereditary DDR-impaired analog) showed ~50% CRC reduction at 10-yr; aspirin acts via COX-2/PGE2 suppression and platelet-mediated tumor-cell cloaking, with the largest absolute benefit in DDR-impaired epithelium.',
+      goal: 'Adherence at 6 mo · annual CBC · CRC outcome via colonoscopy program',
+      orders: [
+        { glyph: '✉', label: 'Aspirin shared-decision visit' },
+        { glyph: '℞', label: 'Aspirin 81 mg qd #90 (after H. pylori clear)' }
+      ],
+      evidence: 'CAPP2 10-yr PMID 32534647 · Rothwell pooled · Aspirin CRC review PMID 40573208',
+      evidence_grade: 'extrapolated_from_analog_population',
+      analog_population: 'Lynch syndrome (CAPP2 RCT) — DDR-impaired analog for ATM het',
+      spareq: { s:4, p:3, a:3, r:4, e:3, q:3 },
+      author: 'meridian'
+    },
+    {
+      id: 'a02', score: 3.40, originalRank: 2, lane: 'adjuncts',
+      title: 'Alcohol minimization (≤2 standard drinks/wk or abstain)',
+      severity: 'High', timing: 'immediate',
+      do: '<strong>Cap alcohol at ≤2 standard drinks/week</strong>; preferentially zero. No "social-drinking" rationalization given allele.',
+      why: 'Ethanol → acetaldehyde → structural DSB-class genomic alterations + DNA-protein crosslinks that depend on ATM-dependent HR for repair. ATM-haploinsufficient cells tolerate these lesions less well, magnifying per-drink absolute risk in pancreatic and upper-GI epithelium.',
+      goal: 'Self-reported weekly drinks · PEth if rigor desired',
+      orders: [
+        { glyph: '✉', label: 'Patient handout: alcohol + ATM' }
+      ],
+      evidence: 'Acetaldehyde DSB mechanism PMID 41545634 · Young-onset pancreatic dose-response PMID 41576296 · DDR in pancreatic carcinogenesis PMID 41155399',
+      evidence_grade: 'mechanism_plus_cohort',
+      analog_population: 'Young-onset pancreatic cancer cohort (alcohol dose-response)',
+      spareq: { s:3, p:3, a:2, r:4, e:4, q:2 },
+      author: 'meridian'
+    },
+    {
+      id: 'a03', score: 3.30, originalRank: 3, lane: 'adjuncts',
+      title: 'H. pylori test-and-treat (one-time, before aspirin)',
+      severity: 'High', timing: 'before A1',
+      do: '<strong>One-time stool antigen or urea breath test.</strong> If positive → triple/quadruple therapy per local resistance; confirm eradication at 4–8 wk.',
+      why: 'H. pylori is a Class I gastric carcinogen acting via chronic inflammation, atrophy, and intestinal metaplasia. Eradication in family-history-positive individuals reduces incident gastric cancer (Choi 2020 NEJM RCT in first-degree relatives ~55% reduction). In ATM-het epithelium, eliminating a chronic DSB-inducing inflammatory exposure is leverage-positive. Also de-risks aspirin GI bleeding.',
+      goal: 'Test result on file · eradication confirmation post-treatment',
+      orders: [
+        { glyph: '✚', label: 'H. pylori stool antigen or urea breath' },
+        { glyph: '℞', label: 'Triple/quad therapy if positive' }
+      ],
+      evidence: 'FDR meta-analysis PMID 36317032 · APAGE 2026 task-force PMID 41057234 · Eradication review PMID 41993703',
+      evidence_grade: 'cohort_plus_rct',
+      analog_population: 'First-degree relatives of gastric cancer patients (Choi RCT analog)',
+      spareq: { s:4, p:3, a:3, r:4, e:4, q:3 },
+      author: 'meridian'
+    },
+    {
+      id: 'a04', score: 3.10, originalRank: 4, lane: 'adjuncts',
+      title: 'Diagnostic radiation stewardship (avoid non-essential CT)',
+      severity: 'High', timing: 'standing',
+      do: '<strong>(a)</strong> Prefer MRI/US over CT where clinically equivalent. <strong>(b)</strong> Refuse low-yield CT and "while we\'re at it" add-ons. <strong>(c)</strong> For required imaging request lowest-dose protocol. <strong>(d)</strong> No whole-body CT screening packages. <strong>(e)</strong> Maintain cumulative mSv ledger.',
+      why: 'ATM is the apex DSB-sensor kinase; heterozygous loss reduces repair fidelity. IR-induced DSBs in ATM-het epithelium have higher residual misrepair rates → carcinogenic dose-per-exposure is higher than population baseline. Cohort data link low-dose occupational IR to GI cancer mortality.',
+      goal: 'Cumulative diagnostic mSv (patient log) · imaging requests reviewed for substitution',
+      orders: [
+        { glyph: '✉', label: 'mSv ledger flag in chart' }
+      ],
+      evidence: 'US radiologic technologists 1983–2021 PMID 41276304 · ATM/DDR pancreatic relevance PMID 41155399',
+      evidence_grade: 'mechanism_plus_cohort',
+      analog_population: 'US radiologic technologists cohort (low-dose IR)',
+      spareq: { s:3, p:3, a:2, r:4, e:4, q:2 },
+      author: 'meridian'
+    },
+    {
+      id: 'a05', score: 3.00, originalRank: 5, lane: 'adjuncts',
+      title: 'Resistant starch ~30 g/day (upper-GI/CRC chemoprevention)',
+      severity: 'Mod', timing: '4 wk',
+      do: '<strong>~30 g/day resistant starch</strong> (cooked-then-cooled potato/rice, green banana flour, raw oats) sustained ≥2 yr; combine with aspirin (A1), do not substitute.',
+      why: 'Colonic fermentation of resistant starch → butyrate → HDAC inhibition, anti-inflammatory and pro-apoptotic effects in DDR-stressed epithelium. CAPP2 planned 10-yr follow-up showed resistant starch reduced non-CRC Lynch cancers (HR ~0.54) — relevant signal for upper-GI in DDR-impaired carrier.',
+      goal: 'Dietary log · tolerability (gas/bloating) · couples with A1',
+      orders: [
+        { glyph: '✉', label: 'Patient handout: resistant starch sources' }
+      ],
+      evidence: 'CAPP2 resistant-starch arm 10-yr PMID 35878732',
+      evidence_grade: 'extrapolated_from_analog_population',
+      analog_population: 'Lynch syndrome (CAPP2 resistant-starch arm)',
+      spareq: { s:3, p:2, a:2, r:4, e:4, q:3 },
+      dependencies: ['a01'],
+      author: 'meridian'
+    }
+  ];
+
+  // ---- Adjuncts metadata: contraindicated and research_gaps surfaces ----
+  // Source: real v1.5 unsupervised run output (headtohead-v10-vs-v15-parsed.json)
+  const ADJUNCTS_CONTRAINDICATED = [
+    { name: 'High-dose vitamin E (α-tocopherol)', reason: 'SELECT trial — increased prostate cancer in primary prevention. ATM het already carries ~2× prostate cancer risk; direction-of-harm.' },
+    { name: 'β-carotene supplementation', reason: 'ATBC + CARET — increased lung cancer in primary prevention. No place in an optimized profile.' },
+    { name: 'Routine whole-body CT screening packages', reason: 'Net IR exposure in an ATM-haploinsufficient patient is direction-of-harm (see A4). False-positive workup adds further IR.' }
+  ];
+
+  const ADJUNCTS_RESEARCH_GAPS = [
+    'Sulforaphane / broccoli-sprout extract for NRF2-mediated chemoprevention in ATM-het carriers — mechanistically plausible (NRF2 buffers oxidative DSB load), Qidong biomarker RCT exists in aflatoxin context, but no human outcome data in ATM het. Closes with: biomarker RCT measuring urinary 8-oxo-dG and γH2AX foci over 6–12 mo on standardized dose.',
+    'Metformin chemoprevention in non-diabetic ATM het with pancreatic cancer family history. Closes with: RCT in CAPS-eligible high-risk pancreatic surveillance cohort with imaging endpoints.',
+    'Direct aspirin chemoprevention RCT in ATM heterozygotes (the present recommendation extrapolates from Lynch). Closes with: CAPP-style RCT enrolling ATM/CHEK2/PALB2 carriers with CRC and pancreatic endpoints.'
+  ];
+
+  // Engine surfaced these and excluded with reason — kept for audit trail
+  const ADJUNCTS_CONSIDERED_EXCLUDED = [
+    { name: 'Vitamin D for cancer prevention', reason: 'below_evidence_floor — VITAL did not show pancreatic/CRC incidence benefit in primary prevention; not specific to ATM.' },
+    { name: 'Mesalamine for CRC chemoprevention', reason: 'below_evidence_floor — MesaCAPP is an ongoing protocol, no outcome data yet.' },
+    { name: 'Statin for primary prevention', reason: 'below_evidence_floor for an Adjunct — CAC=0, Lp(a) optimal, 10-yr ASCVD ~1–1.5%; appropriately deferred per SoC bucket logic.' }
+  ];
+
+  // ---- VITALITY — Vitality Action Layer (separate from Risk; single ranked list) ----
+  // Source: real BioMCP-grounded run (jason-real-vitality-action-layer.json),
+  // model claude-opus-4-7, 12 BioMCP queries, no SoC/Adjuncts split (vitality has no
+  // guideline floor that supports it). Inline evidence-grade tags + N-of-1 lifecycle
+  // primitive replace tier system. risk_interaction flagged against active Risk Adjuncts.
+  const VITALITY_SIGNAL = {
+    load_bearing: ['autonomic_recovery', 'sleep_architecture', 'subjective_life', 'social_physical_recovery'],
+    deflecting: ['autonomic_recovery (May 2026 dip 76→61, low 50)', 'subjective_life (75, below personal baseline)'],
+    elite_to_protect: ['VO₂max 54 (~95th)', 'HRV 30d avg 76ms (elite when not in dip)'],
+    lost_valves: ['BJJ — sympathetic discharge + social channel + skill-acquisition novelty + structured combat-sport recovery valve'],
+    subjective_life: 75
+  };
+
+  const VITALITY_ACTIONS = [
+    {
+      id: 'v01', score: 3.45, originalRank: 1, lane: 'vitality',
+      title: 'Resonance-frequency HRV biofeedback (paced breathing ~6 bpm, 0.1 Hz)',
+      severity: 'High', timing: '4-wk trial',
+      do: '<strong>10–20 min/day paced breathing at ~6 breaths/min (0.1 Hz)</strong>, ideally morning. Free apps (Breathwrk, Awesome Breathing) or no-app cadence. Track via Eight Sleep HRV 30d avg.',
+      why: 'May 2026 HRV dip (76→61, low 50) is the load-bearing deflection. Resonance-frequency breathing at the patient\'s baroreflex resonance produces the largest measurable autonomic gain in the literature; effect size on HRV in 4–8 wks is the cleanest in the vitality space.',
+      goal: 'HRV 30d avg recovers to ≥70ms by week 4',
+      orders: [
+        { glyph: '✚', label: 'Eight Sleep HRV trend (auto)' },
+        { glyph: '✉', label: 'Patient handout: 6-bpm cadence' }
+      ],
+      evidence: 'Resonance breathing 0.1 Hz → functional connectivity PMID 41731917 · Home-based HRV biofeedback PMID 41745654',
+      evidence_grade: 'single_rct',
+      n_of_1: { window_wk: 4, signal: 'Eight Sleep HRV 30d avg (ms) + morning RMSSD trend', decide: 'Continue if HRV 30d avg ≥70ms by wk 4; iterate (extend to 15 min, add evening session) if 65–70ms; drop if ≤63ms.' },
+      primary_axis: 'autonomic',
+      risk_interaction: 'none — orthogonal to all active Risk Adjuncts',
+      spareq: { s:3, p:3, a:4, r:4, e:4, q:3 },
+      author: 'meridian'
+    },
+    {
+      id: 'v02', score: 3.20, originalRank: 2, lane: 'vitality',
+      title: 'Replace BJJ with judo or no-gi wrestling club (modified intensity)',
+      severity: 'High', timing: '8-wk trial',
+      do: '<strong>Join judo (ne-waza emphasis) or no-gi wrestling club, 1–2×/wk.</strong> Targets the lost-recovery-valve composite: sympathetic discharge + social channel + skill-acquisition novelty.',
+      why: 'BJJ sidelining removed four named functions at once. Subjective Life dropped from personal baseline. Replacing with grappling-adjacent practice that preserves combat-sport mechanics + social-channel + novelty has the best fit. Judo data shows measurable hormonal/psychological effects similar to the lost modality.',
+      goal: 'Subjective Life ≥80 by wk 8 + post-session HRV recovers within 5ms of baseline within 24h',
+      orders: [
+        { glyph: '✉', label: 'Local club shortlist (judo / no-gi)' }
+      ],
+      evidence: 'Judo training hormonal/psychological effects PMID 39590912 · Special Judo Fitness Test validation PMID 41517747',
+      evidence_grade: 'mechanism_plus_n_of_1_protocol',
+      n_of_1: { window_wk: 8, signal: 'Subjective Life slider (0–100) · Eight Sleep next-morning HRV post-session · count of named training partners', decide: 'Continue if Life ≥80 AND HRV recovers <24h; iterate (change club / format) if Life 75–80 and recovery >24h; drop if Life unchanged or HRV chronically suppressed >7 days.' },
+      primary_axis: 'recovery_valve',
+      risk_interaction: 'none — does not contradict any active Risk Adjunct. Note: prefer ne-waza-only if any prior concussion hx (head-impact exposure).',
+      spareq: { s:3, p:3, a:3, r:3, e:4, q:2 },
+      author: 'meridian'
+    },
+    {
+      id: 'v03', score: 3.10, originalRank: 3, lane: 'vitality',
+      title: 'Sleep-restriction + stimulus-control (CBT-I core) targeted at sub-5h nights',
+      severity: 'Mod', timing: '6-wk trial',
+      do: '<strong>Fixed wake time, restrict time-in-bed to actual sleep need + 30 min, no-screen wind-down 60 min before bed.</strong> Bedroom = sleep only (stimulus control). Track via Eight Sleep.',
+      why: '2–3 sub-5h nights/month is the load-bearing sleep-architecture defect (deep + REM are above floor; the issue is regularity). CBT-I core elements have RCT meta-analysis support specifically on sleep efficiency and irregularity.',
+      goal: '≤1 sub-5h night/4 wks AND sleep efficiency ≥88% by wk 6',
+      orders: [
+        { glyph: '✉', label: 'CBT-I core protocol handout' }
+      ],
+      evidence: 'CBT-I network meta-analysis PMID 36027795 · CBT-I efficacy RCT meta-analysis PMID 39628800',
+      evidence_grade: 'rct_meta_analysis',
+      n_of_1: { window_wk: 6, signal: 'Eight Sleep: count of sub-5h nights / 4-wk window · sleep efficiency %', decide: 'Continue if sub-5h ≤1/mo AND efficiency ≥88% by wk 6; iterate if 2 sub-5h and efficiency 85–88%; drop if no change.' },
+      primary_axis: 'sleep',
+      risk_interaction: 'none',
+      spareq: { s:2, p:4, a:4, r:4, e:4, q:4 },
+      author: 'meridian'
+    },
+    {
+      id: 'v04', score: 2.85, originalRank: 4, lane: 'vitality',
+      title: 'Add 2×/wk heavy resistance block (lower body + posterior chain)',
+      severity: 'Mod', timing: '8-wk trial',
+      do: '<strong>2×/wk heavy compound work</strong>: deadlift, squat, hip hinge, row variants. 3–5 sets × 4–6 reps, RPE 7–8. Pair with existing aerobic.',
+      why: 'VO₂max 54 (~95th) is in elite-protect band, not chase band. Lean-mass and grip strength preservation is the highest-leverage longevity-vitality lever for a 47M; both grip strength and resistance-training dose carry strong all-cause mortality signals. Reinforces ATM/cancer-domain healthspan robustness.',
+      goal: '5RM lower-body lift ↑ ≥10% by wk 8 · grip strength stable/up · VO₂max stable at 12-mo CPET retest',
+      orders: [
+        { glyph: '✉', label: 'Strength program (4 wk + reassess)' },
+        { glyph: '✚', label: 'Grip dynamometer baseline' }
+      ],
+      evidence: 'Grip strength dose-response all-cause mortality PMID 41895225 · Sarcopenia + respiratory mortality PMID 41936572',
+      evidence_grade: 'rct_meta_analysis',
+      n_of_1: { window_wk: 8, signal: '5RM lower-body lift (kg) · grip strength (kg) · VO₂max stability', decide: 'Continue if 5RM ≥+10% AND grip stable/up; iterate (programming change) if 5RM <+10%; drop if no progress AND HRV chronically suppressed.' },
+      primary_axis: 'conditioning',
+      risk_interaction: 'reinforces — strength preservation supports long-horizon ATM/cancer-domain healthspan via lean-mass maintenance',
+      spareq: { s:2, p:4, a:3, r:4, e:4, q:4 },
+      author: 'meridian'
+    },
+    {
+      id: 'v05', score: 2.55, originalRank: 5, lane: 'vitality',
+      title: 'Finnish-style sauna 4×/wk, 15–20 min, post-workout',
+      severity: 'Mod', timing: '8-wk trial',
+      do: '<strong>4×/wk Finnish sauna 15–20 min</strong>, post-workout where possible. Hydrate. Track HRV + overnight resting HR via Eight Sleep.',
+      why: 'Finnish sauna cohorts show consistent autonomic + cardiovascular signal at 4+ sessions/wk. In an elite-VO₂max patient, sauna is the cleanest passive-stressor for cardiovascular conditioning beyond what training already delivers.',
+      goal: 'HRV 30d avg ≥75ms AND overnight resting HR ↓ ≥3 bpm by wk 8',
+      orders: [
+        { glyph: '✉', label: 'Sauna routine handout (timing + hydration)' }
+      ],
+      evidence: 'Finnish sauna healthspan review PMID 38577299 · Heat therapy across health/disease PMID 41559866',
+      evidence_grade: 'multi_cohort',
+      n_of_1: { window_wk: 8, signal: 'Eight Sleep HRV 30d avg · resting HR (overnight)', decide: 'Continue if HRV ≥75ms AND resting HR ↓ ≥3 bpm by wk 8; iterate frequency/duration if partial; drop if no movement and tolerance issues.' },
+      primary_axis: 'autonomic',
+      risk_interaction: 'none',
+      spareq: { s:2, p:3, a:3, r:3, e:4, q:3 },
+      author: 'meridian'
+    },
+    {
+      id: 'v06', score: 2.35, originalRank: 6, lane: 'vitality',
+      title: 'Lock evening device-use cutoff 60 min before sleep',
+      severity: 'Mod', timing: '4-wk trial',
+      do: '<strong>No screens 60 min before sleep.</strong> Phone out of bedroom or grayscale + DND. Substitute: paper book, conversation, light stretch.',
+      why: 'Sleep-onset latency and TST are the most movable sleep variables; the dominant evening exposure for this patient is device use. Crossover RCT data on evening device cutoff shows objective gain.',
+      goal: 'Onset latency ↓ ≥5 min AND TST ↑ ≥15 min by wk 4',
+      orders: [
+        { glyph: '✉', label: 'Patient handout: 60-min cutoff substitutes' }
+      ],
+      evidence: 'Evening tech-use crossover RCT PMID 41616128 · Sleep intervention systematic review PMID 41535804',
+      evidence_grade: 'single_rct',
+      n_of_1: { window_wk: 4, signal: 'Eight Sleep sleep-onset latency (min) · total sleep time', decide: 'Continue if onset ↓ ≥5 min AND TST ↑ ≥15 min by wk 4; iterate (extend cutoff to 90 min) if partial; drop if no change.' },
+      primary_axis: 'sleep',
+      risk_interaction: 'none',
+      spareq: { s:1, p:3, a:4, r:4, e:3, q:3 },
+      author: 'meridian'
+    }
+  ];
+
+  const VITALITY_BELOW_FLOOR = [
+    { name: 'Cold plunge as routine recovery', reason: 'no_evidence_floor — review-level evidence is mechanistic/narrative; small heterogeneous RCTs on HRV/wellbeing; post-strength-training cold plunge can blunt hypertrophy adaptation conflicting with V4.' },
+    { name: 'Wine for "social vitality" at gym/social channel', reason: 'contradicts_risk_adjunct — alcohol-minimization is an active Risk Adjunct (≤2 drinks/wk or abstain) given ATM het + GI cancer family history.' },
+    { name: 'Additional zone-2 aerobic volume to push VO₂max higher', reason: 'already_baseline — VO₂max 54 (~95th %ile) is in elite-protect band, not chase band; competes with V4 strength block for recovery budget.' },
+    { name: 'Generic meditation app for subjective Life', reason: 'subsumed_by_v01 — resonance breathing has tighter axis-specific evidence and a concrete measurable signal; standalone app would duplicate without adding signal.' }
+  ];
+
+  const VITALITY_LOST_VALVES = [
+    { name: 'BJJ', function_lost: 'high-intensity sympathetic discharge (live rolling) · social channel (training partners) · skill-acquisition novelty (belt/technique progression) · structured combat-sport recovery valve', replacement: 'V2 (judo / no-gi wrestling club)' }
   ];
 
   // ---- State ----
   const state = {
     items: ITEMS.slice(),
+    adjuncts: ADJUNCTS.slice(),
+    vitality: VITALITY_ACTIONS.slice(),
+    lane: 'soc',             // 'soc' | 'adjuncts' | 'vitality' — which lane is currently shown
+    cpView: 'top3',          // 'top3' | 'all' — sub-view within the lane
     expanded: null,          // item id currently expanded (accordion)
     drag: null,              // { id, srcIndex, startY, curDy, step, pointerId }
     kbdLift: null,           // { id, index } keyboard-lifted grip
@@ -6458,7 +6656,7 @@ if (sleepBars) {
   };
 
   // AI-drafted overview (patient voice, written from the top 3 cards)
-  const OVERVIEW_DRAFT = "Hey Jim, it's Dr. Thompson. Quick update on what we found and what we're going to do.\n\nThe short version: three things rose to the top, and one of them is non-negotiable because of your genetics.\n\nFirst, your ATM gene result triggered a guideline-mandated genetic counseling referral. That's a separate item from the rest — we don't rank it, we just do it. Counseling will also walk you through cascade testing for first-degree relatives.\n\nThen, three actions stood out from the engine's analysis:\n\nNumber one is a baseline PSA today. As an ATM carrier you should have started prostate surveillance at 40, and you're seven years overdue. This is a single blood test plus a brief exam, and it sets up your annual cadence.\n\nNumber two is a low-dose statin. Your Lp(a) came back high — that's a lifetime, genetically determined cardiovascular risk factor. Lifestyle won't lower it, but a statin lowers the modifiable side of the equation. We'll recheck cholesterol and ApoB in eight weeks.\n\nNumber three is a coronary artery calcium scan. It's the single most informative cardiac diagnostic for someone with your profile, and it tells us whether to push harder on the lipid plan or hold steady. Outpatient, ten minutes.\n\nEverything else on your chart is being tracked or already in a good range. I'll see you in twelve weeks. Message me directly if anything feels off before then. Take care.";
+  const OVERVIEW_DRAFT = "Hey Jason, it's Dr. Mizani. Quick update on what the engine surfaced and what we're going to do.\n\nFirst, the genetics-driven items are non-negotiable. Your ATM heterozygous result triggered two pinned actions: a clinical-genetics referral for counseling and cascade testing of your first-degree relatives, plus a pancreatic surveillance plan that begins at age 50 with annual MRI/MRCP and EUS. Those are guideline floors, not ranked recommendations.\n\nFrom the Standard of Care lane, the top three are: a baseline screening colonoscopy now — you're past the USPSTF age-45 trigger and ATM plus your paternal grandfather's GI history shortens the cadence to five years; a Mediterranean diet pattern with a six-month lipid recheck targeting ApoB under 90 — your CAC of zero and 10-year ASCVD around 1% mean no statin yet; and an hs-CRP at the next blood draw to close the last enhancer gap.\n\nThe Patient-Specific Adjuncts lane is the offensive set, gated on your optimized profile. Five candidates from the unsupervised engine run. Top three: aspirin 81 mg daily after a shared-decision visit and bleed screen — CAPP2 in Lynch is the closest hereditary analog and showed 50% colorectal cancer reduction at ten years; alcohol minimization to two standard drinks per week or abstain — acetaldehyde creates the exact double-strand breaks ATM is supposed to repair, and the pancreatic dose-response cohort shows a threshold effect; and a one-time H. pylori stool antigen test — Choi NEJM showed about 55% gastric cancer reduction in family-history-positive individuals, and it also de-risks the chronic aspirin. Behind those: a standing IR-stewardship protocol and resistant starch around 30 grams a day from the CAPP2 resistant-starch arm.\n\nEverything else on your chart is being tracked or already in a strong range. I'll see you in twelve weeks.";
 
   const SUGGESTIONS = [
     'Re-rank by cost to impact',
@@ -6495,7 +6693,7 @@ if (sleepBars) {
     } else if (/evidence|study|source|confidence/.test(q)) {
       body = 'Backed by the cited guideline plus internal cohort evidence (n=2,412 matched ATM-het + pre-diabetic). Confidence: moderate-high. Heterogeneity is low on primary endpoints; modest on patient-reported tolerability. See the source bundle for effect sizes, 95% CIs, and the sensitivity analyses.';
     } else if (/rank|order|re.?rank|cost|impact/.test(q)) {
-      body = 'Re-ranked by cost-to-impact: actions 02 (rosuvastatin, low cost, high ΔApoB), 01 (autonomic, low cost, broad), 05 (Lp(a), one-time), then 08 (MRCP, high cost but closes cancer domain). Actions 07 and 09 move to the lower half on pure leverage per unit effort.';
+      body = 'Re-ranked by cost-to-impact across both lanes: SoC s01 (colonoscopy, single appointment, catastrophic-if-missed), Adj 3 (H. pylori test-and-treat, $50 one-time, RCT-anchored Choi NEJM ~55% gastric reduction, also clears the path for aspirin), Adj 1 (aspirin, low cost, CAPP2 50% CRC reduction in DDR analog), Adj 2 (alcohol minimization, zero cost, mechanistically privileged for ATM het). SoC s02 (lifestyle ApoB) and Adj 4 (IR stewardship) follow.';
     } else if (/missing|gap|what.?else/.test(q)) {
       body = 'Gaps worth considering: vitamin D and iron studies (never drawn), a 24-hour ambulatory BP given the autonomic picture, and confirming HPV status before the next well-woman visit. None rise to top-3 but they close audit gaps.';
     } else if (/patient.?facing|plain|explain|simplif/.test(q)) {
@@ -6507,16 +6705,36 @@ if (sleepBars) {
     return { body, source };
   }
 
+  // ---- Active-lane helper ----
+  function activeItems(){
+    if (state.lane === 'adjuncts') return state.adjuncts;
+    if (state.lane === 'vitality') return state.vitality;
+    return state.items;
+  }
+
   // ---- Render: TOP 3 (read-only) ----
   function renderTop3(){
     const root = document.getElementById('cpPane-top3');
     if (!root) return;
     root.innerHTML = '';
-    state.items.slice(0, 3).forEach((item, i) => {
+    const list = activeItems();
+    list.slice(0, 3).forEach((item, i) => {
       root.appendChild(buildCard(item, i, { readonly: true, work: true }));
     });
-    // Release workflow lives below the 3 work cards
-    root.appendChild(buildReleaseWorkflow());
+    // Adjuncts lane: surface contraindicated + research_gaps panels at the bottom.
+    if (state.lane === 'adjuncts') {
+      root.appendChild(buildAdjunctsExtras());
+    }
+    // Vitality lane: signal banner above + below-floor / lost-valves panels at bottom
+    if (state.lane === 'vitality') {
+      root.insertBefore(buildVitalitySignalBanner(), root.firstChild);
+      root.appendChild(buildVitalityExtras());
+    }
+    // Release workflow only attaches to SoC top-3 (the physician releases SoC plans;
+    // Adjuncts items are agency-driven and travel with the SoC release).
+    if (state.lane === 'soc') {
+      root.appendChild(buildReleaseWorkflow());
+    }
   }
 
   // ---- Render: ALL (reorderable + add form) ----
@@ -6524,28 +6742,137 @@ if (sleepBars) {
     const root = document.getElementById('cpPane-all');
     if (!root) return;
     root.innerHTML = '';
-    state.items.forEach((item, i) => {
+    const list = activeItems();
+    list.forEach((item, i) => {
       root.appendChild(buildCard(item, i, { readonly: false }));
     });
-    // add form / add row
-    if (state.addFormOpen) {
-      root.appendChild(buildAddForm());
-    } else {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'cp-add-row';
-      btn.textContent = '+ Add action candidate';
-      btn.addEventListener('click', () => {
-        state.addFormOpen = true;
-        state.addFormDraft = { do: '', why: '', goal: '', evidence: '', severity: 'Mod', timing: 'next visit' };
-        renderAll();
-        const form = document.querySelector('.cp-add-form');
-        const ta = form && form.querySelector('textarea');
-        if (ta) ta.focus();
-      });
-      root.appendChild(btn);
+    if (state.lane === 'adjuncts') {
+      root.appendChild(buildAdjunctsExtras());
+    }
+    if (state.lane === 'vitality') {
+      root.insertBefore(buildVitalitySignalBanner(), root.firstChild);
+      root.appendChild(buildVitalityExtras());
+    }
+    // Add-form only on SoC lane (Adjuncts + Vitality candidates are engine-generated, not physician-added).
+    if (state.lane === 'soc') {
+      if (state.addFormOpen) {
+        root.appendChild(buildAddForm());
+      } else {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'cp-add-row';
+        btn.textContent = '+ Add action candidate';
+        btn.addEventListener('click', () => {
+          state.addFormOpen = true;
+          state.addFormDraft = { do: '', why: '', goal: '', evidence: '', severity: 'Mod', timing: 'next visit' };
+          renderAll();
+          const form = document.querySelector('.cp-add-form');
+          const ta = form && form.querySelector('textarea');
+          if (ta) ta.focus();
+        });
+        root.appendChild(btn);
+      }
     }
   }
+
+  // ---- Adjuncts-only extras: contraindicated + research gaps ----
+  function buildAdjunctsExtras(){
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-top:32px;display:flex;flex-direction:column;gap:18px;';
+
+    const ci = document.createElement('div');
+    ci.style.cssText = 'background:rgba(220,90,80,0.05);border:1px solid rgba(220,90,80,0.28);border-radius:10px;padding:18px 20px;';
+    ci.innerHTML = '<div style="font-size:13px;font-weight:590;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px;">Contraindicated in optimized patients</div>' +
+      ADJUNCTS_CONTRAINDICATED.map(c =>
+        '<div style="font-size:14px;color:var(--text);line-height:1.55;margin-bottom:10px;padding-left:14px;border-left:2px solid rgba(220,90,80,0.35);"><strong style="color:var(--text);font-weight:590;">' + esc(c.name) + '</strong> <span style="color:var(--text-secondary);">— ' + esc(c.reason) + '</span></div>'
+      ).join('');
+    wrap.appendChild(ci);
+
+    const rg = document.createElement('div');
+    rg.style.cssText = 'background:rgba(94,106,210,0.05);border:1px solid rgba(94,106,210,0.28);border-radius:10px;padding:18px 20px;';
+    rg.innerHTML = '<div style="font-size:13px;font-weight:590;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px;">Research gaps — fundable studies</div>' +
+      '<ul style="margin:0;padding-left:20px;color:var(--text);font-size:14px;line-height:1.6;">' +
+      ADJUNCTS_RESEARCH_GAPS.map(g => '<li style="margin-bottom:8px;">' + esc(g) + '</li>').join('') +
+      '</ul>';
+    wrap.appendChild(rg);
+
+    return wrap;
+  }
+
+  // ---- Vitality-only extras: signal banner, below-floor, lost-recovery-valve notes ----
+  function buildVitalitySignalBanner(){
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'background:rgba(120,180,140,0.06);border:1px solid rgba(120,180,140,0.30);border-radius:10px;padding:14px 18px;margin-bottom:18px;';
+    wrap.innerHTML =
+      '<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">' +
+        '<div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text);text-transform:uppercase;">Vitality Signal</div>' +
+        '<div style="font-size:12px;color:var(--text-muted);font-family:\'JetBrains Mono\', ui-monospace, monospace;letter-spacing:0.04em;">single ranked list · inline evidence-grade · N-of-1 lifecycle</div>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;font-size:13px;color:var(--text);line-height:1.55;">' +
+        '<div><strong style="color:var(--text);font-weight:590;">Deflecting:</strong> ' + VITALITY_SIGNAL.deflecting.map(esc).join(' · ') + '</div>' +
+        '<div><strong style="color:var(--text);font-weight:590;">Elite — protect:</strong> ' + VITALITY_SIGNAL.elite_to_protect.map(esc).join(' · ') + '</div>' +
+        '<div><strong style="color:var(--text);font-weight:590;">Lost recovery valves:</strong> ' + VITALITY_SIGNAL.lost_valves.map(esc).join(' · ') + '</div>' +
+        '<div><strong style="color:var(--text);font-weight:590;">Subjective Life:</strong> ' + VITALITY_SIGNAL.subjective_life + '/100 (below personal baseline)</div>' +
+      '</div>';
+    return wrap;
+  }
+
+  function buildVitalityExtras(){
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-top:32px;display:flex;flex-direction:column;gap:18px;';
+
+    // Lost recovery valves (unique to vitality)
+    const lv = document.createElement('div');
+    lv.style.cssText = 'background:rgba(94,106,210,0.05);border:1px solid rgba(94,106,210,0.28);border-radius:10px;padding:18px 20px;';
+    lv.innerHTML = '<div style="font-size:13px;font-weight:590;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px;">Lost recovery valves — function map</div>' +
+      VITALITY_LOST_VALVES.map(v =>
+        '<div style="font-size:14px;color:var(--text);line-height:1.55;margin-bottom:10px;padding-left:14px;border-left:2px solid rgba(94,106,210,0.45);">' +
+        '<strong style="color:var(--text);font-weight:590;">' + esc(v.name) + '</strong> ' +
+        '<span style="color:var(--text-secondary);">— function lost: ' + esc(v.function_lost) + '</span>' +
+        '<div style="margin-top:4px;font-family:\'JetBrains Mono\', ui-monospace, monospace;font-size:12px;color:var(--text-muted);letter-spacing:0.03em;">→ Replacement candidate: ' + esc(v.replacement) + '</div>' +
+        '</div>'
+      ).join('');
+    wrap.appendChild(lv);
+
+    // Below floor (no_evidence_floor / contradicts_risk_adjunct / already_baseline / subsumed)
+    const bf = document.createElement('div');
+    bf.style.cssText = 'background:rgba(220,160,80,0.05);border:1px solid rgba(220,160,80,0.28);border-radius:10px;padding:18px 20px;';
+    bf.innerHTML = '<div style="font-size:13px;font-weight:590;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px;">Below evidence floor / excluded</div>' +
+      VITALITY_BELOW_FLOOR.map(c =>
+        '<div style="font-size:14px;color:var(--text);line-height:1.55;margin-bottom:10px;padding-left:14px;border-left:2px solid rgba(220,160,80,0.45);"><strong style="color:var(--text);font-weight:590;">' + esc(c.name) + '</strong> <span style="color:var(--text-secondary);">— ' + esc(c.reason) + '</span></div>'
+      ).join('');
+    wrap.appendChild(bf);
+
+    return wrap;
+  }
+
+  // ---- Lane switcher ----
+  function switchLane(lane){
+    if (lane !== 'soc' && lane !== 'adjuncts' && lane !== 'vitality') return;
+    state.lane = lane;
+    state.expanded = null;
+    state.addFormOpen = false;
+    // Toggle the lane-tab pills
+    document.querySelectorAll('.cp-lane-tab').forEach(btn => {
+      const isActive = btn.dataset.lane === lane;
+      btn.classList.toggle('active', isActive);
+      btn.style.borderBottom = isActive ? '2px solid var(--accent)' : '2px solid transparent';
+      btn.style.color = isActive ? 'var(--text)' : 'var(--text-muted)';
+    });
+    // Update the right-side caption per lane
+    const caption = document.getElementById('cpLaneCaption');
+    if (caption) {
+      if (lane === 'soc')        caption.textContent = 'guideline-anchored · USPSTF / ACC / ACMG';
+      else if (lane === 'adjuncts') caption.textContent = 'literature-search-driven · allele-conditioned';
+      else                       caption.textContent = 'vitality-model-seeded · N-of-1 lifecycle · single ranked list';
+    }
+    renderTop3();
+    renderAll();
+    const labels = { soc: 'Standard of Care', adjuncts: 'Patient-Specific Adjuncts', vitality: 'Vitality Actions' };
+    announce('Switched to ' + labels[lane] + ' lane');
+  }
+  // Expose globally for inline onclick
+  window.switchLane = switchLane;
 
   // ---- Build a card element ----
   function buildCard(item, index, opts){
@@ -6608,6 +6935,30 @@ if (sleepBars) {
     metaEl.className = 'cp-action-meta';
     metaEl.textContent = item.severity + ' · ' + item.timing;
     metaRow.appendChild(metaEl);
+    // Vitality lane: inline evidence-grade chip + N-of-1 window pill + risk-interaction badge
+    if (item.lane === 'vitality' && item.evidence_grade) {
+      const gradeChip = document.createElement('span');
+      gradeChip.style.cssText = 'font-family:\'JetBrains Mono\', ui-monospace, monospace;font-size:10.5px;letter-spacing:0.04em;color:var(--text-secondary);background:rgba(120,180,140,0.10);border:1px solid rgba(120,180,140,0.35);border-radius:4px;padding:2px 6px;margin-left:8px;text-transform:uppercase;';
+      gradeChip.textContent = item.evidence_grade.replace(/_/g, ' ');
+      metaRow.appendChild(gradeChip);
+    }
+    if (item.lane === 'vitality' && item.n_of_1) {
+      const win = document.createElement('span');
+      win.style.cssText = 'font-family:\'JetBrains Mono\', ui-monospace, monospace;font-size:10.5px;letter-spacing:0.04em;color:var(--text-secondary);background:rgba(94,106,210,0.08);border:1px solid rgba(94,106,210,0.30);border-radius:4px;padding:2px 6px;margin-left:6px;';
+      win.textContent = 'N-OF-1 · ' + item.n_of_1.window_wk + 'WK';
+      metaRow.appendChild(win);
+    }
+    if (item.lane === 'vitality' && item.risk_interaction && !/^none/i.test(item.risk_interaction)) {
+      const ri = document.createElement('span');
+      const reinforces = /reinforces/i.test(item.risk_interaction);
+      ri.style.cssText = 'font-family:\'JetBrains Mono\', ui-monospace, monospace;font-size:10.5px;letter-spacing:0.04em;border-radius:4px;padding:2px 6px;margin-left:6px;text-transform:uppercase;' +
+        (reinforces
+          ? 'color:#5a8a5f;background:rgba(120,180,140,0.10);border:1px solid rgba(120,180,140,0.40);'
+          : 'color:#b86a5a;background:rgba(220,90,80,0.08);border:1px solid rgba(220,90,80,0.40);');
+      ri.textContent = reinforces ? 'reinforces risk plan' : 'check risk interaction';
+      ri.title = item.risk_interaction;
+      metaRow.appendChild(ri);
+    }
     // Score chip — initial engine ranking, persists after manual reorder
     if (typeof item.score === 'number' && typeof item.originalRank === 'number') {
       const scoreChip = document.createElement('span');
@@ -6698,6 +7049,18 @@ if (sleepBars) {
       });
       evRow.appendChild(askLink);
       el.appendChild(evRow);
+    }
+
+    // Vitality lane: N-of-1 decision-criterion block (load-bearing primitive — try, measure, decide)
+    if (item.lane === 'vitality' && item.n_of_1) {
+      const nblock = document.createElement('div');
+      nblock.style.cssText = 'margin-top:10px;padding:12px 14px;background:rgba(94,106,210,0.05);border:1px solid rgba(94,106,210,0.28);border-radius:8px;font-size:13px;color:var(--text);line-height:1.55;';
+      nblock.innerHTML =
+        '<div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text);text-transform:uppercase;margin-bottom:6px;">N-of-1 trial · ' + item.n_of_1.window_wk + ' weeks</div>' +
+        '<div style="margin-bottom:4px;"><strong style="color:var(--text);font-weight:590;">Signal:</strong> <span style="color:var(--text-secondary);">' + esc(item.n_of_1.signal) + '</span></div>' +
+        '<div><strong style="color:var(--text);font-weight:590;">Decision:</strong> <span style="color:var(--text-secondary);">' + esc(item.n_of_1.decide) + '</span></div>' +
+        (item.risk_interaction ? '<div style="margin-top:6px;font-size:12px;color:var(--text-muted);"><span style="font-family:\'JetBrains Mono\', ui-monospace, monospace;letter-spacing:0.04em;text-transform:uppercase;">Risk interaction:</span> ' + esc(item.risk_interaction) + '</div>' : '');
+      el.appendChild(nblock);
     }
 
     return el;
@@ -6862,8 +7225,9 @@ if (sleepBars) {
     }
   }
   function reorder(src, dst){
-    const [item] = state.items.splice(src, 1);
-    state.items.splice(dst, 0, item);
+    const list = activeItems();
+    const [item] = list.splice(src, 1);
+    list.splice(dst, 0, item);
     renderTop3(); renderAll();
   }
 
@@ -6889,7 +7253,7 @@ if (sleepBars) {
     // in lifted state
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (index < state.items.length - 1) {
+      if (index < activeItems().length - 1) {
         reorder(index, index + 1);
         // refocus the grip of the moved card at its new index
         setTimeout(() => refocusGrip(state.kbdLift.id, true), 0);

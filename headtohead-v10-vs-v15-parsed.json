@@ -1,0 +1,389 @@
+{
+  "v10": {
+    "label": "v1.0 Action Layer (BioMCP verification-only per prompt)",
+    "biomcp_calls": 8,
+    "biomcp_queries": [
+      "ATM heterozygous pancreatic cancer risk surveillance MRI EUS",
+      "ATM heterozygous breast cancer male prostate cancer risk",
+      "ApoB LDL primary prevention statin CAC zero warranty",
+      "colonoscopy screening ATM family history colorectal cancer age 45",
+      "VO2max all-cause mortality longitudinal predictor cardiorespiratory fitness",
+      "hs-CRP cardiovascular risk reclassification primary prevention",
+      "ATM heterozygous radiation sensitivity diagnostic imaging",
+      "eGFR cystatin C confirmation muscle mass athlete creatinine"
+    ],
+    "output": {
+      "_parse_error": "Expecting ',' delimiter: line 247 column 6 (char 18446)"
+    }
+  },
+  "v15_soc": {
+    "label": "v1.5 Standard of Care",
+    "biomcp_calls": 7,
+    "biomcp_queries": [
+      "USPSTF colorectal cancer screening recommendation age 45 2021",
+      "ATM heterozygous pathogenic breast cancer male prostate surveillance NCCN",
+      "NCCN prostate cancer early detection ATM germline PSA screening",
+      "ACC AHA 2018 cholesterol guideline CAC zero statin deferral primary prevention",
+      "KDIGO 2024 CKD eGFR confirmation albuminuria UACR screening",
+      "NCCN genetic high-risk prostate ATM BRCA2 PSA age 40 baseline screening",
+      "hs-CRP primary prevention ASCVD risk enhancer ACC AHA recommendation"
+    ],
+    "output": {
+      "_parse_error": "Expecting ',' delimiter: line 246 column 172 (char 18878)"
+    }
+  },
+  "v15_adjuncts": {
+    "label": "v1.5 Patient-Specific Adjuncts",
+    "biomcp_calls": 14,
+    "biomcp_queries": [
+      "aspirin Lynch syndrome CAPP2 colorectal cancer prevention RCT",
+      "ATM heterozygous cancer risk intervention prevention",
+      "aspirin family history gastrointestinal cancer prevention cohort",
+      "alcohol acetaldehyde DNA double strand break ATM pathway",
+      "Burn CAPP2 aspirin Lynch syndrome 10 year follow-up colorectal",
+      "sulforaphane broccoli sprout aflatoxin biomarker RCT Egner Qidong",
+      "ATM heterozygous radiation diagnostic CT cancer risk",
+      "metformin pancreatic cancer prevention high risk family history",
+      "alcohol consumption pancreatic cancer dose response cohort",
+      "Rothwell aspirin long term cancer mortality pooled trials",
+      "vitamin D pancreatic cancer prevention RCT VITAL",
+      "Helicobacter pylori screening eradication gastric cancer family history prevention",
+      "Choi Helicobacter pylori eradication family history first degree relative gastric cancer NEJM RCT",
+      "aspirin colorectal cancer ATM mutation tumor somatic chemoprevention"
+    ],
+    "output": {
+      "bucket": "patient_specific_adjuncts",
+      "compute_tier": "deep",
+      "patient_id": "jason-real",
+      "patient_state_classifier": {
+        "optimized": true,
+        "axes": {
+          "conditioning_pct": 95,
+          "lifestyle_pct": 90,
+          "managed_risks_pct": 97
+        },
+        "gate_decision": "run"
+      },
+      "adjuncts_ranked_candidates": [
+        {
+          "id": "A1",
+          "action_name": "Low-dose aspirin chemoprevention (GI cancer, ATM het + paternal-line GI cancer)",
+          "type": "adjunctive_pharmacology",
+          "domain": "cancer",
+          "trigger": {
+            "kind": "profile_composite_literature_search",
+            "ref_id": "ATM-het + paternal-grandfather-GI-cancer",
+            "summary": "DDR-impaired carrier with paternal GI cancer history; CAPP2 RCT in DDR-deficient (Lynch) population shows durable CRC reduction with daily aspirin."
+          },
+          "evidence_grade": "extrapolated_from_analog_population",
+          "analog_population": "Lynch syndrome (CAPP2 RCT) \u2014 closest hereditary DDR-impaired analog for ATM het; supplemented by Rothwell pooled data in general population.",
+          "mechanism": "ATM haploinsufficiency impairs DSB repair, raising epithelial cancer risk (CRC ~1.5-2x). Aspirin reduces CRC via COX-2/PGE2 suppression and platelet-mediated tumor-cell cloaking, with the largest absolute benefit in DDR-impaired epithelium where baseline risk is elevated.",
+          "intervention": "Aspirin 81 mg PO daily after shared decision-making; baseline H. pylori test and bleeding-risk review first; reassess at 5 yr (CAPP2 effect emerges ~5 yr in).",
+          "tracking_metric": "Adherence; annual CBC; GI bleeding symptoms; colonoscopy findings.",
+          "urgency": "Not urgent \u2014 onset of benefit is 5+ yr, so starting in the late 40s aligns benefit with the rising slope of GI-cancer risk.",
+          "spareq": {
+            "s": 4,
+            "s_reason": "GI cancer (CRC, pancreatic) is the load-bearing domain in this profile.",
+            "p": 3,
+            "p_reason": "ATM het + paternal GI cancer = composite elevation; aspirin operates on the pathway of concern.",
+            "a": 3,
+            "a_reason": "Outcome-redirect: CAPP2 showed ~50% CRC reduction in Lynch at 10-yr; even attenuated effect in ATM is meaningful absolute risk shift.",
+            "r": 4,
+            "r_reason": "$3/mo generic, OTC, daily pill.",
+            "e": 3,
+            "e_reason": "GI bleeding ~0.5-1%/yr baseline; H. pylori-negative, normotensive, no NSAID baseline \u2192 favorable. ASPREE noted no net benefit in low-risk elderly, but this patient is not the ASPREE population \u2014 he carries an elevated-risk allele.",
+            "q": 3,
+            "q_reason": "CAPP2 RCT in analog DDR-impaired population (Lynch, n=861, 10-yr f/u) + Rothwell pooled-trial data; no direct ATM RCT exists."
+          },
+          "dependencies": [],
+          "citations": [
+            {
+              "pmid": "32534647",
+              "doi": "10.1016/S0140-6736(20)30366-4",
+              "supports": "CAPP2 10-yr/20-yr registry: 600mg aspirin daily reduced CRC ~50% in Lynch syndrome \u2014 DDR-impaired analog."
+            },
+            {
+              "pmid": "38030748",
+              "doi": "10.1038/s41416-023-02506-5",
+              "supports": "Systematic review of aspirin chemoprevention/treatment evidence across cancers."
+            },
+            {
+              "pmid": "40573208",
+              "doi": "10.3390/ph18060811",
+              "supports": "Recent review of low-dose aspirin CRC chemoprevention evidence."
+            }
+          ],
+          "evidence_status": "biomcp_grounded",
+          "classification": "patient_specific_adjunct"
+        },
+        {
+          "id": "A2",
+          "action_name": "Alcohol minimization (\u22642 standard drinks/wk or abstain)",
+          "type": "lifestyle",
+          "domain": "cancer",
+          "trigger": {
+            "kind": "risk_allele_literature_search",
+            "ref_id": "ATM c.8147T>C het",
+            "summary": "Acetaldehyde produces structural DSB-class genomic alterations; ATM haploinsufficiency reduces capacity to resolve them, producing super-additive risk in DDR-deficient epithelium (esp. pancreas, upper GI)."
+          },
+          "evidence_grade": "mechanism_plus_cohort",
+          "analog_population": "Young-onset pancreatic cancer cohort (alcohol dose-response).",
+          "mechanism": "Ethanol \u2192 acetaldehyde \u2192 DNA-protein crosslinks and DSBs that depend on ATM-dependent HR for repair. ATM-haploinsufficient cells tolerate these lesions less well, magnifying per-drink absolute risk in pancreatic and GI epithelium.",
+          "intervention": "Cap alcohol at \u22642 standard drinks/wk; preferentially zero. No 'social-drinking' rationalization given allele.",
+          "tracking_metric": "Self-reported weekly drinks; PEth if rigor desired.",
+          "urgency": "Indefinite habit-level lever; benefit begins at exposure reduction.",
+          "spareq": {
+            "s": 3,
+            "s_reason": "Pancreatic and upper-GI cancer severity is high; absolute prevention value matters.",
+            "p": 3,
+            "p_reason": "ATM het amplifies acetaldehyde-DSB pathway specifically.",
+            "a": 2,
+            "a_reason": "Trajectory-anchor: dose-response cohort shows threshold effect; mechanism strong, allele-specific RCT absent.",
+            "r": 4,
+            "r_reason": "Free; behavioral.",
+            "e": 4,
+            "e_reason": "No harm signal from reduction.",
+            "q": 2,
+            "q_reason": "Mechanism (acetaldehyde structural DSBs, 2026) + cohort dose-response data; no allele-specific RCT."
+          },
+          "dependencies": [],
+          "citations": [
+            {
+              "pmid": "41545634",
+              "doi": "10.1038/s42003-026-09521-1",
+              "supports": "Long-term acetaldehyde exposure elevates structural genomic alterations (DSB-class) \u2014 mechanism."
+            },
+            {
+              "pmid": "41576296",
+              "doi": "10.1200/JCO-25-01169",
+              "supports": "Threshold dose-response between alcohol and young-onset pancreatic cancer in nationwide cohort."
+            },
+            {
+              "pmid": "41155399",
+              "doi": "10.3390/ijms262010106",
+              "supports": "DDR pathway (incl. ATM) centrality in pancreatic carcinogenesis."
+            }
+          ],
+          "evidence_status": "biomcp_grounded",
+          "classification": "patient_specific_adjunct"
+        },
+        {
+          "id": "A3",
+          "action_name": "H. pylori test-and-treat",
+          "type": "diagnostic",
+          "domain": "cancer",
+          "trigger": {
+            "kind": "profile_composite_literature_search",
+            "ref_id": "paternal-line-GI-cancer + ATM-het + planned-aspirin",
+            "summary": "Family history of GI cancer (gastric in differential) + planned chronic aspirin makes one-time H. pylori test cost-effective and modifies gastric cancer trajectory."
+          },
+          "evidence_grade": "cohort_plus_rct",
+          "analog_population": "First-degree relatives of gastric cancer patients (Choi et al. RCT analog).",
+          "mechanism": "H. pylori is a Class I gastric carcinogen acting via chronic inflammation, atrophy, and intestinal metaplasia. Eradication in family-history-positive individuals reduces incident gastric cancer; in ATM-het epithelium, eliminating a chronic DSB-inducing inflammatory exposure is leverage-positive. Also de-risks aspirin GI bleeding.",
+          "intervention": "One-time stool antigen or urea breath test; if positive \u2192 triple/quadruple therapy per local resistance; confirm eradication at 4-8 wk.",
+          "tracking_metric": "Test result; eradication confirmation post-treatment.",
+          "urgency": "Do before starting chronic aspirin (A1).",
+          "spareq": {
+            "s": 4,
+            "s_reason": "Gastric cancer is high-severity; intestinal metaplasia is silent until late.",
+            "p": 3,
+            "p_reason": "Family hx GI cancer + ATM het + planned aspirin = three independent reasons.",
+            "a": 3,
+            "a_reason": "Outcome-redirect: Choi 2020 NEJM RCT showed eradication in first-degree relatives reduced gastric cancer incidence ~55%.",
+            "r": 4,
+            "r_reason": "One-time, ~$50 stool antigen, OTC-trivial.",
+            "e": 4,
+            "e_reason": "Antibiotics if positive; no active harm signal.",
+            "q": 3,
+            "q_reason": "RCT in family-history population + multiple meta-analyses."
+          },
+          "dependencies": [],
+          "citations": [
+            {
+              "pmid": "36317032",
+              "supports": "Meta-analysis: family-history gastric cancer subjects benefit most from H. pylori screening/eradication."
+            },
+            {
+              "pmid": "41993703",
+              "doi": "10.3389/fgstr.2026.1740221",
+              "supports": "Narrative review of H. pylori eradication importance for gastric cancer prevention."
+            },
+            {
+              "pmid": "41057234",
+              "doi": "10.1136/gutjnl-2025-335823",
+              "supports": "APAGE 2026 task-force recommendations on H. pylori-associated premalignant surveillance."
+            }
+          ],
+          "evidence_status": "biomcp_grounded",
+          "classification": "patient_specific_adjunct"
+        },
+        {
+          "id": "A4",
+          "action_name": "Diagnostic radiation stewardship (avoid non-essential CT)",
+          "type": "exposure_avoidance",
+          "domain": "cancer",
+          "trigger": {
+            "kind": "risk_allele_literature_search",
+            "ref_id": "ATM het",
+            "summary": "ATM-haploinsufficient cells show measurably impaired DSB repair after ionizing radiation; cohort data link low-dose occupational radiation to GI cancer mortality."
+          },
+          "evidence_grade": "mechanism_plus_cohort",
+          "analog_population": "US radiologic technologists cohort (low-dose ionizing radiation).",
+          "mechanism": "ATM is the apex DSB-sensor kinase; heterozygous loss reduces repair fidelity. IR-induced DSBs in ATM-het epithelium have higher residual misrepair rates \u2192 carcinogenic dose-per-exposure is higher than population baseline.",
+          "intervention": "Prefer MRI/US over CT where clinically equivalent; refuse low-yield CT; for required imaging request lowest-dose protocol; avoid 'just-in-case' whole-body CT screening packages.",
+          "tracking_metric": "Cumulative diagnostic mSv (patient log).",
+          "urgency": "Standing rule, applied at point-of-imaging-decision.",
+          "spareq": {
+            "s": 3,
+            "s_reason": "Carcinogenic exposures compound over decades.",
+            "p": 3,
+            "p_reason": "Allele-specific radiosensitivity is well-mechanism-supported.",
+            "a": 2,
+            "a_reason": "Trajectory-anchor: avoids preventable lifetime DSB load; per-exposure absolute effect small but cumulative.",
+            "r": 4,
+            "r_reason": "Free; behavioral/clinician-conversation.",
+            "e": 4,
+            "e_reason": "No harm \u2014 substituting to MRI/US where appropriate.",
+            "q": 2,
+            "q_reason": "Strong mechanism + occupational cohort linking low-dose IR to GI cancer mortality; no ATM-specific RCT."
+          },
+          "dependencies": [],
+          "citations": [
+            {
+              "pmid": "41276304",
+              "doi": "10.1136/oemed-2025-110223",
+              "supports": "Low-dose occupational ionising radiation associated with GI cancer mortality in US radiologic technologists 1983-2021."
+            },
+            {
+              "pmid": "41155399",
+              "doi": "10.3390/ijms262010106",
+              "supports": "ATM-pathway DDR deficiency relevance to pancreatic cancer."
+            }
+          ],
+          "evidence_status": "biomcp_grounded",
+          "classification": "patient_specific_adjunct"
+        },
+        {
+          "id": "A5",
+          "action_name": "Resistant starch (~30 g/day) for upper-GI/CRC chemoprevention",
+          "type": "diet_pattern",
+          "domain": "cancer",
+          "trigger": {
+            "kind": "profile_composite_literature_search",
+            "ref_id": "ATM-het + GI-cancer-family-history",
+            "summary": "CAPP2 RCT planned 10-yr follow-up showed resistant starch reduced non-CRC Lynch cancers \u2014 relevant signal for upper-GI in DDR-impaired carrier."
+          },
+          "evidence_grade": "extrapolated_from_analog_population",
+          "analog_population": "Lynch syndrome (CAPP2 resistant-starch arm).",
+          "mechanism": "Colonic fermentation of resistant starch \u2192 butyrate \u2192 HDAC inhibition, anti-inflammatory and pro-apoptotic effects in DDR-stressed epithelium; possible systemic effect on upper-GI cancers seen in CAPP2.",
+          "intervention": "~30 g/day resistant starch (cooked-then-cooled potato/rice, green banana flour, raw oats) sustained \u22652 yr; combine with aspirin (A1), do not substitute.",
+          "tracking_metric": "Dietary log; tolerability (gas/bloating).",
+          "urgency": "Low \u2014 long-latency benefit.",
+          "spareq": {
+            "s": 3,
+            "s_reason": "Upper GI cancers are high-severity; CAPP2 saw signal there.",
+            "p": 2,
+            "p_reason": "DDR-deficient carrier with GI family hx \u2014 analog match imperfect.",
+            "a": 2,
+            "a_reason": "Trajectory-anchor: HR for non-CRC Lynch cancers ~0.54 in planned analysis.",
+            "r": 4,
+            "r_reason": "Free, food-based.",
+            "e": 4,
+            "e_reason": "Benign except transient GI symptoms.",
+            "q": 3,
+            "q_reason": "Single RCT in analog Lynch population (CAPP2 resistant starch arm, planned 10-yr follow-up)."
+          },
+          "dependencies": [
+            "A1"
+          ],
+          "citations": [
+            {
+              "pmid": "35878732",
+              "doi": "10.1158/1940-6207.CAPR-22-0044",
+              "supports": "CAPP2 planned 10-yr follow-up: resistant starch reduced non-CRC Lynch cancers."
+            }
+          ],
+          "evidence_status": "biomcp_grounded",
+          "classification": "patient_specific_adjunct"
+        }
+      ],
+      "contraindicated_in_optimized_patients": [
+        {
+          "action_name": "High-dose vitamin E supplementation (\u03b1-tocopherol)",
+          "reason": "SELECT trial showed increased prostate cancer incidence with \u03b1-tocopherol supplementation in primary prevention; ATM het already carries ~2x prostate cancer risk \u2014 actively harmful direction.",
+          "citations": [
+            {
+              "pmid": "32534647",
+              "doi": "",
+              "supports": "Context for ATM cancer-domain stacking; SELECT primary citation outside this run."
+            }
+          ]
+        },
+        {
+          "action_name": "\u03b2-carotene supplementation",
+          "reason": "ATBC and CARET trials showed increased lung cancer in primary prevention. No place in an optimized profile.",
+          "citations": []
+        },
+        {
+          "action_name": "Routine whole-body CT 'screening' packages",
+          "reason": "Net IR exposure in an ATM-haploinsufficient patient is direction-of-harm; see A4. False-positive workup adds further IR.",
+          "citations": [
+            {
+              "pmid": "41276304",
+              "doi": "10.1136/oemed-2025-110223",
+              "supports": "Low-dose IR\u2013GI cancer mortality link."
+            }
+          ]
+        }
+      ],
+      "research_gaps": [
+        {
+          "description": "Sulforaphane / broccoli-sprout extract for NRF2-mediated chemoprevention in ATM-het carriers \u2014 mechanistically plausible (NRF2 upregulation buffers oxidative DSB load), Qidong biomarker RCT exists in aflatoxin context, but no human outcome data in ATM het or DDR-deficient carriers.",
+          "what_would_close_it": "Biomarker RCT in ATM-het cohort measuring urinary 8-oxo-dG and \u03b3H2AX foci over 6-12 mo on standardized sulforaphane dose."
+        },
+        {
+          "description": "Metformin chemoprevention in non-diabetic ATM het with pancreatic cancer family history.",
+          "what_would_close_it": "RCT in CAPS-eligible high-risk pancreatic surveillance cohort with imaging endpoints."
+        },
+        {
+          "description": "Direct aspirin chemoprevention RCT in ATM heterozygotes (the present recommendation extrapolates from Lynch).",
+          "what_would_close_it": "CAPP-style RCT enrolling ATM/CHEK2/PALB2 carriers with CRC and pancreatic endpoints."
+        }
+      ],
+      "considered_and_excluded": [
+        {
+          "action_name": "Genetic counseling + cascade testing",
+          "reason": "covered_by_soc_bucket: ACMG-SF-ATM register action."
+        },
+        {
+          "action_name": "Annual MRI/MRCP + EUS pancreatic surveillance from age 50",
+          "reason": "covered_by_soc_bucket: ATM-CAPS-pancreas register action."
+        },
+        {
+          "action_name": "Smoking cessation",
+          "reason": "already_baseline_for_this_patient (never-smoker)."
+        },
+        {
+          "action_name": "BP control / antihypertensive",
+          "reason": "already_baseline_for_this_patient (116/76, normotensive)."
+        },
+        {
+          "action_name": "Statin for primary prevention",
+          "reason": "below_evidence_floor for an Adjunct here \u2014 CAC=0, Lp(a) optimal, PREVENT 10-yr ASCVD ~1-1.5%; statin appropriately deferred per SoC bucket logic."
+        },
+        {
+          "action_name": "Vitamin D supplementation for cancer prevention",
+          "reason": "below_evidence_floor \u2014 VITAL did not show pancreatic/CRC incidence benefit in primary prevention; not specific to ATM."
+        },
+        {
+          "action_name": "Mesalamine for CRC chemoprevention",
+          "reason": "below_evidence_floor \u2014 MesaCAPP is an ongoing protocol, no outcome data yet."
+        },
+        {
+          "action_name": "PSA screening adjustments",
+          "reason": "covered_by_soc_bucket / standard ATM-het guideline space (NCCN earlier-PSA discussion)."
+        }
+      ]
+    }
+  }
+}

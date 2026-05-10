@@ -1,0 +1,156 @@
+{
+  "_meta": {
+    "name": "Jason's Meridian Data Model (REAL)",
+    "version": "1.0",
+    "updated": "2026-05-09",
+    "scope": "Jason Yim's actual profile. Lab block is real (Quest panel 06/17/2025, same panel as jim-synthetic). Wearable, genetic, and family-history blocks are real (Eight Sleep, CPET, ATM het, paternal grandfather GI cancer). No fabricated/synthetic values.",
+    "use": "Source of truth for any Meridian work referencing Jason. Pair file: jim-synthetic.json (fictional patient sharing the same lab substrate but otherwise placeholder).",
+    "real_data_sources": ["labs", "wearable", "genetic", "family_history", "fitness"],
+    "placeholder_data_sources": []
+  },
+
+  "demographics": {
+    "name": "Jason Yim",
+    "age": 47,
+    "sex": "Male",
+    "location": "San Diego, CA"
+  },
+
+  "intake": {
+    "active_diagnoses": [],
+    "medications": [],
+    "supplements": [],
+    "allergies": "NKDA",
+    "exercise": "MTB, snowboard, BJJ (currently sidelined), gym (social)",
+    "family_history": {
+      "paternal_grandfather": "GI cancer",
+      "_note": "ATM heterozygous + paternal GI cancer hx → cancer-domain signal."
+    }
+  },
+
+  "wearable": {
+    "source": "Eight Sleep (sleep/HRV), Garmin/Apple Health (activity), CPET (lab)",
+    "as_of": "2026-05",
+    "vo2max": { "value": 54, "unit": "mL/kg/min", "method": "CPET", "percentile_age_sex": "~95th", "flag": "elite" },
+    "hrv_30d_avg_ms": { "value": 76, "source": "Eight Sleep", "flag": "elite" },
+    "sleep": {
+      "avg_hours": 7.0,
+      "deep_min": 19,
+      "rem_min": 27,
+      "note": "Above thresh; 2-3 sub-5h nights/month."
+    },
+    "may_2026_dip": {
+      "hrv_avg_ms": 61,
+      "low_ms": 50,
+      "_note": "Documented HRV dip window."
+    }
+  },
+
+  "labs": {
+    "panel_date": "2025-06-17",
+    "panel_reported": "2025-06-20",
+    "lab": "Quest Diagnostics",
+    "performing_site": "Quest Diagnostics-West Hills, CA (Lp(a) via Cleveland HeartLab)",
+    "fasting": true,
+    "source": "Patient-uploaded PDF",
+
+    "lipid_panel": {
+      "total_cholesterol": { "value": 206, "unit": "mg/dL", "ref": "<200",        "flag": "borderline" },
+      "ldl_c":             { "value": 121, "unit": "mg/dL", "ref": "<100 (goal)", "flag": "high",
+                             "note": "Martin-Hopkins calculated" },
+      "hdl_c":             { "value":  69, "unit": "mg/dL", "ref": ">=40",        "flag": "ok" },
+      "triglycerides":     { "value":  65, "unit": "mg/dL", "ref": "<150",        "flag": "ok" },
+      "non_hdl_c":         { "value": 137, "unit": "mg/dL", "ref": "<130",        "flag": "borderline" },
+      "chol_hdl_ratio":    { "value": 3.0, "unit": "ratio", "ref": "<5.0",        "flag": "ok" }
+    },
+
+    "apo_b":  { "value": 96, "unit": "mg/dL", "ref": "<90",
+                "risk_band": "Moderate (90-129)",
+                "flag": "moderate" },
+
+    "lp_a":   { "value": 72, "unit": "nmol/L", "ref": "<75",
+                "risk_band": "Optimal (<75)",
+                "flag": "ok",
+                "note": "Just below moderate cutoff (75-125). UNITS ARE nmol/L — never mg/dL for this patient." },
+
+    "hs_crp": { "_status": "not_in_panel" },
+
+    "metabolic": {
+      "a1c":             { "value": 5.3, "unit": "%",     "ref": "<5.7",  "flag": "ok" },
+      "fasting_glucose": { "value": 88,  "unit": "mg/dL", "ref": "65-99", "flag": "ok" }
+    },
+
+    "renal": {
+      "creatinine": { "value": 1.25, "unit": "mg/dL",         "ref": "0.60-1.29", "flag": "ok",
+                      "note": "High-normal" },
+      "egfr":       { "value": 72,   "unit": "mL/min/1.73m2", "ref": ">=60",     "flag": "ok",
+                      "note": "Mildly reduced; recheck advised" },
+      "bun":        { "value": 20,   "unit": "mg/dL",         "ref": "7-25",     "flag": "ok" }
+    },
+
+    "blood_pressure": {
+      "sbp": 116,
+      "dbp": 76,
+      "unit": "mmHg",
+      "context": "clinic, seated, normotensive, no antihypertensive",
+      "source": "patient-reported, Apr 2026",
+      "flag": "ok"
+    }
+  },
+
+  "imaging": {
+    "cac": {
+      "score": 0,
+      "unit": "Agatston",
+      "percentile_age_sex": "0 (no calcified plaque)",
+      "interpretation": "Power-of-zero — very low 10-yr ASCVD risk; statin generally deferred. Warranty ~5-7 yr.",
+      "date": "2026 (patient-reported)",
+      "flag": "protective"
+    }
+  },
+
+  "genetic": {
+    "atm": { "status": "heterozygous", "variant": "c.8147T>C", "classification": "pathogenic",
+             "_note": "Cancer-domain risk signal; pairs with paternal GI cancer hx." }
+  },
+
+  "qol_slider": {
+    "_note": "Self-reported QoL anchors per spec.",
+    "condition": 95,
+    "life": 75,
+    "internal_risk": 60,
+    "cpet_vo2max": 54
+  },
+
+  "derived_for_ui": {
+    "_note": "Derived from real data above only. No fabricated risk drivers.",
+    "cardiovascular_risk_drivers": [
+      "LDL-C 121 (high)",
+      "ApoB 96 (moderate band)",
+      "Non-HDL 137 (borderline)",
+      "Total chol 206 (borderline)"
+    ],
+    "cardiovascular_protective": [
+      "Lp(a) 72 nmol/L (OPTIMAL)",
+      "HDL-C 69 (good)",
+      "Triglycerides 65 (low)",
+      "HbA1c 5.3 (no insulin resistance signal)",
+      "VO₂max 54 (~95th %ile, elite athletic phenotype)",
+      "HRV 76ms 30d avg (elite)"
+    ],
+    "cancer_domain_drivers": [
+      "ATM heterozygous (pathogenic c.8147T>C)",
+      "Paternal grandfather GI cancer"
+    ],
+    "watch": [
+      "eGFR 72 — mildly reduced; correlate with creatinine 1.25 (high-normal). Recheck.",
+      "May 2026 HRV dip window (avg 61, low 50)."
+    ],
+    "data_gaps": [
+      "No hs-CRP",
+      "No blood pressure in this panel",
+      "No CAC, no imaging",
+      "No prior lab history (single panel)"
+    ]
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "_meta": {
+    "name": "Jim's Meridian Data Model",
+    "version": "1.0",
+    "updated": "2026-05-07",
+    "scope": "Fictional patient 'Jim' — lab block uses Jason's real Quest panel (06/17/2025) as the substrate; intake, wearable, genetic, and family history blocks are placeholders. Pair file: jason-real.json (Jason's actual profile with real wearable/genetic/family).",
+    "use": "Use this file when working from Jim as a fictional patient sharing Jason's real lab values. For Jason's own profile, use jason-real.json.",
+    "real_data_sources": ["labs"],
+    "placeholder_data_sources": ["intake", "wearable", "genetic", "family_history", "blood_pressure"]
+  },
+
+  "demographics": {
+    "name": "Jim",
+    "dob": "1978-12-23",
+    "age": 46,
+    "sex": "Male",
+    "height_cm": null,
+    "weight_kg": null,
+    "bmi": null
+  },
+
+  "intake": {
+    "active_diagnoses": [],
+    "medications": [],
+    "supplements": [],
+    "allergies": "NKDA",
+    "tobacco": null,
+    "alcohol": null,
+    "exercise": null,
+    "sleep_reported": null,
+    "family_history": {
+      "_status": "placeholder",
+      "_note": "Not captured in the lab PDF. Populate from intake when available."
+    }
+  },
+
+  "wearable": {
+    "_status": "placeholder",
+    "_note": "Not captured in the lab PDF. Populate when wearable ingestion runs."
+  },
+
+  "labs": {
+    "panel_date": "2025-06-17",
+    "panel_reported": "2025-06-20",
+    "lab": "Quest Diagnostics",
+    "performing_site": "Quest Diagnostics-West Hills, CA (Lp(a) via Cleveland HeartLab)",
+    "ordering_provider": "Philman, Samantha (Lemonaid Pit, San Francisco)",
+    "specimen": "ZD952588E",
+    "fasting": true,
+    "source": "Patient-uploaded PDF",
+
+    "lipid_panel": {
+      "total_cholesterol": { "value": 206, "unit": "mg/dL", "ref": "<200",        "flag": "borderline" },
+      "ldl_c":             { "value": 121, "unit": "mg/dL", "ref": "<100 (goal)", "flag": "high",
+                             "note": "Martin-Hopkins calculated" },
+      "hdl_c":             { "value":  69, "unit": "mg/dL", "ref": ">=40",        "flag": "ok" },
+      "triglycerides":     { "value":  65, "unit": "mg/dL", "ref": "<150",        "flag": "ok" },
+      "non_hdl_c":         { "value": 137, "unit": "mg/dL", "ref": "<130",        "flag": "borderline" },
+      "chol_hdl_ratio":    { "value": 3.0, "unit": "ratio", "ref": "<5.0",        "flag": "ok" }
+    },
+
+    "apo_b":  { "value": 96, "unit": "mg/dL", "ref": "<90",
+                "risk_band": "Moderate (90-129)",
+                "flag": "moderate" },
+
+    "lp_a":   { "value": 72, "unit": "nmol/L", "ref": "<75",
+                "risk_band": "Optimal (<75)",
+                "flag": "ok",
+                "note": "Just below moderate cutoff (75-125). No prior history."
+              },
+
+    "hs_crp": { "_status": "not_in_panel" },
+
+    "metabolic": {
+      "a1c":             { "value": 5.3, "unit": "%",     "ref": "<5.7",  "flag": "ok" },
+      "fasting_glucose": { "value": 88,  "unit": "mg/dL", "ref": "65-99", "flag": "ok" }
+    },
+
+    "renal": {
+      "creatinine": { "value": 1.25, "unit": "mg/dL",         "ref": "0.60-1.29", "flag": "ok",
+                      "note": "High-normal" },
+      "egfr":       { "value": 72,   "unit": "mL/min/1.73m2", "ref": ">=60",     "flag": "ok",
+                      "note": "Mildly reduced for age 46; recheck advised" },
+      "bun":        { "value": 20,   "unit": "mg/dL",         "ref": "7-25",     "flag": "ok" }
+    },
+
+    "liver": {
+      "ast":       { "value": 21,  "unit": "U/L",  "ref": "10-40", "flag": "ok" },
+      "alt":       { "value": 18,  "unit": "U/L",  "ref": "9-46",  "flag": "ok" },
+      "alp":       { "value": 75,  "unit": "U/L",  "ref": "36-130","flag": "ok" },
+      "bilirubin": { "value": 1.2, "unit": "mg/dL","ref": "0.2-1.2","flag": "borderline",
+                     "note": "Top of reference range; isolated finding, recheck if persistent" }
+    },
+
+    "thyroid": {
+      "tsh": { "value": 0.80, "unit": "mIU/L", "ref": "0.40-4.50", "flag": "ok" }
+    },
+
+    "electrolytes": {
+      "sodium":    { "value": 140, "unit": "mmol/L", "ref": "135-146", "flag": "ok" },
+      "potassium": { "value": 4.4, "unit": "mmol/L", "ref": "3.5-5.3", "flag": "ok" },
+      "chloride":  { "value": 104, "unit": "mmol/L", "ref": "98-110",  "flag": "ok" },
+      "co2":       { "value": 30,  "unit": "mmol/L", "ref": "20-32",   "flag": "ok" },
+      "calcium":   { "value": 9.8, "unit": "mg/dL",  "ref": "8.6-10.3","flag": "ok" }
+    },
+
+    "protein": {
+      "total":    { "value": 6.7, "unit": "g/dL", "ref": "6.1-8.1", "flag": "ok" },
+      "albumin":  { "value": 4.5, "unit": "g/dL", "ref": "3.6-5.1", "flag": "ok" },
+      "globulin": { "value": 2.2, "unit": "g/dL", "ref": "1.9-3.7", "flag": "ok" },
+      "a_g_ratio":{ "value": 2.0, "unit": "ratio","ref": "1.0-2.5", "flag": "ok" }
+    },
+
+    "cbc": {
+      "wbc":   { "value": 4.1,  "unit": "K/uL", "ref": "3.8-10.8", "flag": "ok" },
+      "rbc":   { "value": 4.62, "unit": "M/uL", "ref": "4.20-5.80","flag": "ok" },
+      "hgb":   { "value": 14.9, "unit": "g/dL", "ref": "13.2-17.1","flag": "ok" },
+      "hct":   { "value": 43.9, "unit": "%",    "ref": "38.5-50.0","flag": "ok" },
+      "mcv":   { "value": 95.0, "unit": "fL",   "ref": "80-100",   "flag": "ok" },
+      "mch":   { "value": 32.3, "unit": "pg",   "ref": "27-33",    "flag": "ok" },
+      "mchc":  { "value": 33.9, "unit": "g/dL", "ref": "32-36",    "flag": "ok" },
+      "rdw":   { "value": 11.5, "unit": "%",    "ref": "11-15",    "flag": "ok" },
+      "platelets": { "value": 238, "unit": "K/uL", "ref": "140-400","flag": "ok" },
+      "mpv":   { "value": 10.4, "unit": "fL",   "ref": "7.5-12.5", "flag": "ok" },
+      "differential": {
+        "neutrophils_abs": { "value": 1759, "unit": "cells/uL", "ref": "1500-7800","flag": "ok" },
+        "lymphocytes_abs": { "value": 1874, "unit": "cells/uL", "ref": "850-3900", "flag": "ok" },
+        "monocytes_abs":   { "value":  258, "unit": "cells/uL", "ref": "200-950",  "flag": "ok" },
+        "eosinophils_abs": { "value":  168, "unit": "cells/uL", "ref": "15-500",   "flag": "ok" },
+        "basophils_abs":   { "value":   41, "unit": "cells/uL", "ref": "0-200",    "flag": "ok" }
+      }
+    },
+
+    "blood_pressure": {
+      "_status": "not_in_panel",
+      "_note": "Not in the lab PDF. Populate from intake when available."
+    }
+  },
+
+  "genetic": {
+    "_status": "placeholder",
+    "_note": "No genetic panel in this dataset. Populate when run."
+  },
+
+  "derived_for_ui": {
+    "_note": "Derived from the lab block above only. Do not infer fields not present.",
+    "cardiovascular_risk_drivers": [
+      "LDL-C 121 (high)",
+      "ApoB 96 (moderate band)",
+      "Non-HDL 137 (borderline)",
+      "Total chol 206 (borderline)"
+    ],
+    "cardiovascular_protective": [
+      "Lp(a) 72 nmol/L (optimal)",
+      "HDL-C 69 (good)",
+      "Triglycerides 65 (low)",
+      "HbA1c 5.3 (no insulin resistance signal)",
+      "Fasting glucose 88"
+    ],
+    "watch": [
+      "eGFR 72 — mildly reduced for age 46; correlate with creatinine 1.25 (high-normal). Recheck.",
+      "Bilirubin 1.2 — at upper reference. Isolated finding; recheck if persistent."
+    ],
+    "data_gaps": [
+      "No hs-CRP",
+      "No blood pressure in this panel",
+      "No CAC, no imaging",
+      "No genetic panel",
+      "No prior lab history (this is a single panel)"
+    ]
+  }
+}

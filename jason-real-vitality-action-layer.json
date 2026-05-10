@@ -1,0 +1,424 @@
+{
+  "model": "claude-opus-4-7",
+  "biomcp_calls": 12,
+  "biomcp_log": [
+    {
+      "q": "HRV biofeedback slow breathing resonance frequency RCT meta-analysis",
+      "r_size": 1420
+    },
+    {
+      "q": "cognitive behavioral therapy insomnia CBT-I sleep efficiency RCT",
+      "r_size": 1516
+    },
+    {
+      "q": "grappling submission wrestling shoulder injury alternative martial arts",
+      "r_size": 1277
+    },
+    {
+      "q": "zone 2 training masters athletes VO2max preservation aging",
+      "r_size": 1265
+    },
+    {
+      "q": "heart rate variability biofeedback paced breathing 6 breaths per minute autonomic",
+      "r_size": 1471
+    },
+    {
+      "q": "resistance training sleep quality middle aged adults randomized",
+      "r_size": 1410
+    },
+    {
+      "q": "social connection physical activity group exercise wellbeing meta-analysis",
+      "r_size": 1410
+    },
+    {
+      "q": "sauna Finnish cardiovascular mortality longevity cohort",
+      "r_size": 1366
+    },
+    {
+      "q": "judo wrestling skill acquisition novelty cognitive benefit adult",
+      "r_size": 837
+    },
+    {
+      "q": "evening light exposure melatonin sleep onset latency RCT",
+      "r_size": 826
+    },
+    {
+      "q": "strength training mortality all-cause adults dose response meta-analysis",
+      "r_size": 964
+    },
+    {
+      "q": "mindfulness meditation HRV stress reduction RCT",
+      "r_size": 783
+    }
+  ],
+  "output": {
+    "bucket": "vitality_actions",
+    "compute_tier": "deep",
+    "patient_id": "jason-yim-real",
+    "vitality_signal_summary": {
+      "load_bearing_axes": [
+        "autonomic_recovery",
+        "sleep_architecture",
+        "subjective_life",
+        "social_physical_recovery"
+      ],
+      "deflecting_axes": [
+        "autonomic_recovery",
+        "subjective_life"
+      ],
+      "elite_axes": [
+        "conditioning_capacity_vo2max_54",
+        "hrv_30d_avg_76ms"
+      ],
+      "lost_recovery_valves": [
+        "BJJ"
+      ],
+      "subjective_life_value": 75
+    },
+    "vitality_ranked_candidates": [
+      {
+        "id": "V1",
+        "action_name": "Resonance-frequency HRV biofeedback (paced breathing ~6 bpm, 0.1 Hz)",
+        "type": "breathwork",
+        "primary_axis": "autonomic",
+        "trigger": {
+          "kind": "sensitivity_axis_deflection",
+          "ref_id": "autonomic_recovery.may_2026_dip",
+          "summary": "HRV dropped from 76ms baseline to 61ms avg (low 50ms) in May 2026; resonance-paced breathing has direct evidence for raising vagally-mediated HRV in athletes."
+        },
+        "evidence_grade": "single_rct",
+        "mechanism": "Paced breathing at ~0.1 Hz (resonance frequency, ~6 breaths/min) maximizes baroreflex gain and increases functional connectivity within the central autonomic network, raising vagally-mediated HRV indices (RMSSD, HF power). Effect is reproducible within days-weeks of daily practice.",
+        "intervention": "10 min/day of paced breathing at 5.5–6 breaths/min (4s in / 6s out) using a guided app (e.g., Eight Sleep / Apple Breathe / dedicated HRV biofeedback). Morning session, before training.",
+        "n_of_1": {
+          "trial_window_weeks": 4,
+          "measurable_signal": "Eight Sleep HRV 30d avg (ms) and morning RMSSD trend",
+          "decision_criterion": "Continue if HRV 30d avg recovers to ≥70ms by week 4; iterate (extend to 15 min, add evening session) if 65–70ms; drop if no movement off dip baseline (≤63ms) at week 4."
+        },
+        "spareq": {
+          "s": 3,
+          "s_reason": "Active autonomic deflection on a load-bearing axis.",
+          "p": 3,
+          "p_reason": "RCT evidence for HRV biofeedback effect in athletes; strong probability of measurable HRV response.",
+          "a": 4,
+          "a_reason": "Eight Sleep HRV 30d avg is a direct, daily-available signal in the trial window.",
+          "r": 4,
+          "r_reason": "Zero side-effect profile; 10 min/day cost.",
+          "e": 4,
+          "e_reason": "No interaction with active Risk Adjuncts; complementary to alcohol-minimization (both pro-vagal).",
+          "q": 3,
+          "q_reason": "Multiple RCTs and recent mechanistic CAN-connectivity work; effect sizes consistent."
+        },
+        "risk_interaction": "none: orthogonal to all active Risk Adjuncts.",
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "41731917",
+            "doi": "10.1111/psyp.70263",
+            "supports": "Resonance paced breathing at 0.1 Hz increases functional connectivity within the central autonomic network."
+          },
+          {
+            "pmid": "41745654",
+            "doi": "10.3390/sports14020051",
+            "supports": "One-week home-based HRV biofeedback improved autonomic and sensorimotor function vs passive relaxation in martial-arts athletes."
+          },
+          {
+            "pmid": "41918582",
+            "doi": "10.3389/fpsyt.2026.1761371",
+            "supports": "Systematic review of biofeedback interventions supports HRV biofeedback for autonomic regulation and stress resilience."
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      },
+      {
+        "id": "V2",
+        "action_name": "Replace BJJ with judo or no-gi wrestling club (modified intensity)",
+        "type": "training",
+        "primary_axis": "recovery_valve",
+        "trigger": {
+          "kind": "lost_recovery_valve_replacement",
+          "ref_id": "BJJ",
+          "summary": "BJJ valve served four functions: high-intensity sympathetic discharge, social-channel via training partners, skill-acquisition novelty, structured combat-sport recovery valve. Judo or no-gi wrestling preserve grappling-pattern, partner-based randori/live drilling, and skill novelty."
+        },
+        "evidence_grade": "mechanism_plus_n_of_1_protocol",
+        "mechanism": "Grappling-family sports share kinematic and autonomic load patterns: paired live rolling produces sympathetic discharge measurable on wearables; structured belt/skill curricula re-engage skill-acquisition novelty; club training restores the partnered social channel. Judo specifically has documented stress-hormone profiles validating it as a combat-sport recovery analog. If specific BJJ contraindications (e.g., neck/lower-back) drove the sideline, no-gi wrestling or judo nage-waza-light variants can be modulated by limiting takedown volume.",
+        "intervention": "2x/week judo or no-gi wrestling session at a local club; first 4 weeks technique + situational drilling only (no full randori), weeks 5–8 add limited live rounds based on HRV next-morning readout.",
+        "n_of_1": {
+          "trial_window_weeks": 8,
+          "measurable_signal": "Composite: subjective Life slider (0–100), Eight Sleep HRV next-morning post-session, count of named training partners (social-channel proxy)",
+          "decision_criterion": "Continue if subjective Life ≥80 by week 8 AND post-session HRV recovers to within 5ms of baseline within 24h; iterate (change club / format) if Life 75–80 and HRV recovery >24h; drop if Life unchanged or HRV chronically suppressed >7 days."
+        },
+        "spareq": {
+          "s": 3,
+          "s_reason": "Subjective Life below personal baseline; social channel narrowed.",
+          "p": 3,
+          "p_reason": "Direct functional analog; high probability of restoring at least 2 of 4 lost functions.",
+          "a": 3,
+          "a_reason": "Subjective Life + HRV recovery curve readable within 8 weeks.",
+          "r": 3,
+          "r_reason": "Injury risk non-zero (grappling); mitigated by graded ramp; review whatever drove the BJJ sideline first.",
+          "e": 4,
+          "e_reason": "No risk-adjunct conflict; complementary to alcohol-minimization (replaces a social-bonding context that often involves drinking).",
+          "q": 2,
+          "q_reason": "Mechanistic + cohort-grade only; no head-to-head RCT of grappling-replacement on subjective vitality."
+        },
+        "risk_interaction": "none: does not contradict any active Risk Adjunct. Note: grappling can increase head-impact exposure; if any prior concussion history, prefer judo ne-waza-only or wrestling.",
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "39590912",
+            "doi": null,
+            "supports": "Judo training and grading produce measurable hormonal/psychological stress-adaptation responses in adult practitioners, supporting grappling as a structured combat-sport stimulus."
+          },
+          {
+            "pmid": "41517747",
+            "doi": "10.1097/md.0000000000044255",
+            "supports": "Validated test (juji-gatame within Special Judo Fitness Test) demonstrates grappling-fitness measurability across grappling sports — supports cross-modality functional analog."
+          },
+          {
+            "pmid": "41425155",
+            "doi": "10.3389/fbioe.2025.1663592",
+            "supports": "Wearable-sensor biomechanics work in combat sports establishes that load and sympathetic discharge in grappling can be tracked objectively."
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      },
+      {
+        "id": "V3",
+        "action_name": "Sleep-restriction + stimulus-control protocol (CBT-I core elements) targeted at sub-5h nights",
+        "type": "sleep",
+        "primary_axis": "sleep",
+        "trigger": {
+          "kind": "sleep_architecture_protection",
+          "ref_id": "sleep_architecture.sub_5h_nights_per_month",
+          "summary": "2–3 sub-5h nights/month is the disruption pocket. CBT-I core elements (stimulus control, sleep restriction, fixed wake time) have the strongest RCT evidence for compressing variability in sleep duration and improving efficiency."
+        },
+        "evidence_grade": "rct_meta_analysis",
+        "mechanism": "Stimulus control + sleep restriction tightens homeostatic sleep pressure and conditions the bed-as-sleep-cue, reducing sleep-onset latency variability and the frequency of short nights. Network meta-analyses rank CBT-I components above pharmacotherapy for sustained improvement.",
+        "intervention": "Fixed wake time (07:00) 7 days/week, no-bed-unless-sleepy rule, leave-bed-after-20-min-awake rule. Run for 6 weeks. No new pharmacotherapy.",
+        "n_of_1": {
+          "trial_window_weeks": 6,
+          "measurable_signal": "Eight Sleep: count of sub-5h nights per 4-week window, sleep efficiency %",
+          "decision_criterion": "Continue if sub-5h nights drop to ≤1/month AND sleep efficiency ≥88% by week 6; iterate (extend, add wind-down protocol) if 2 sub-5h nights and efficiency 85–88%; drop if no change."
+        },
+        "spareq": {
+          "s": 2,
+          "s_reason": "Sleep is above-floor on average; pocket disruption is the target.",
+          "p": 4,
+          "p_reason": "CBT-I has the strongest RCT effect-size profile of any sleep intervention.",
+          "a": 4,
+          "a_reason": "Eight Sleep gives nightly objective signal on the exact target metric.",
+          "r": 4,
+          "r_reason": "Behavioral, no pharmacology, no equipment cost.",
+          "e": 4,
+          "e_reason": "No risk-adjunct conflict.",
+          "q": 4,
+          "q_reason": "Network meta-analysis evidence base."
+        },
+        "risk_interaction": "none.",
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "36027795",
+            "doi": null,
+            "supports": "Network meta-analysis: CBT-I and component psychotherapies most effective and acceptable for adult insomnia, ranking above pharmacotherapy for durability."
+          },
+          {
+            "pmid": "39628800",
+            "doi": null,
+            "supports": "RCT meta-analysis confirms CBT-I efficacy for sleep efficiency and onset latency outcomes."
+          },
+          {
+            "pmid": "41773671",
+            "doi": "10.2196/81542",
+            "supports": "Active midlife/older-adult RCT (ASLEEP) deploying CBT-I infrastructure for prevention of insomnia symptoms."
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      },
+      {
+        "id": "V4",
+        "action_name": "Add 2x/week heavy resistance training block (lower body + posterior chain)",
+        "type": "training",
+        "primary_axis": "conditioning",
+        "trigger": {
+          "kind": "elite_axis_protection",
+          "ref_id": "conditioning_capacity.vo2max_54",
+          "summary": "VO2max 54 (~95th %ile) is elite — protect, don't chase. Resistance training at age 47 protects against sarcopenia-driven VO2max decline and adds independent all-cause mortality benefit beyond aerobic training."
+        },
+        "evidence_grade": "rct_meta_analysis",
+        "mechanism": "Resistance training preserves lean mass and neuromuscular function; muscle strength (handgrip and lower-limb) shows dose-response inverse association with all-cause mortality independent of cardiorespiratory fitness. In adults with elite VO2max, the marginal lifespan/healthspan return is greater on the strength axis than on additional aerobic volume.",
+        "intervention": "2x/week, 45 min: deadlift or trap-bar variant, split squat, hip hinge, push/pull, in 3–5 rep range, RPE 7–8. Progressive overload tracked.",
+        "n_of_1": {
+          "trial_window_weeks": 8,
+          "measurable_signal": "5RM lower-body lift (kg), grip strength (kg), VO2max stability at 12-month CPET retest",
+          "decision_criterion": "Continue if 5RM up ≥10% by week 8 AND grip strength stable/up; iterate (programming change) if 5RM up <10%; drop if no progress AND HRV chronically suppressed."
+        },
+        "spareq": {
+          "s": 2,
+          "s_reason": "Protective rather than corrective; no current strength deficit signaled.",
+          "p": 4,
+          "p_reason": "Strong RCT and dose-response cohort evidence for strength → mortality.",
+          "a": 3,
+          "a_reason": "5RM and grip readable in 8 weeks; VO2max preservation is a 12-month signal.",
+          "r": 4,
+          "r_reason": "Standard injury risk; mitigated by Jason's existing training base.",
+          "e": 4,
+          "e_reason": "No risk-adjunct conflict; complements MTB/snowboard load tolerance.",
+          "q": 4,
+          "q_reason": "Meta-analytic evidence on strength–mortality dose-response."
+        },
+        "risk_interaction": "reinforces: strength preservation supports long-horizon ATM/cancer-domain healthspan robustness via lean-mass maintenance.",
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "41895225",
+            "doi": "10.1002/jcsm.70272",
+            "supports": "Dose-response association between handgrip strength and all-cause mortality across inflammation strata."
+          },
+          {
+            "pmid": "41936572",
+            "doi": "10.1002/jcsm.70275",
+            "supports": "Sarcopenia + impaired respiratory function jointly predict all-cause death — supports preserving both strength and aerobic capacity."
+          },
+          {
+            "pmid": "41566419",
+            "doi": "10.1186/s11556-025-00399-2",
+            "supports": "Resistance-training prescription meta-analysis for body composition, muscle strength, and physical performance."
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      },
+      {
+        "id": "V5",
+        "action_name": "Regular Finnish-style sauna (4x/week, 15–20 min, post-workout)",
+        "type": "recovery",
+        "primary_axis": "autonomic",
+        "trigger": {
+          "kind": "sensitivity_axis_deflection",
+          "ref_id": "autonomic_recovery",
+          "summary": "Passive heat exposure improves vagal tone, lowers resting HR, and (in cohort data) associates inversely with cardiovascular and all-cause mortality at 4+ sessions/week."
+        },
+        "evidence_grade": "multi_cohort",
+        "mechanism": "Repeated heat stress drives heat-shock-protein expression, improves endothelial function, raises plasma volume, and produces parasympathetic rebound that elevates HRV in subsequent days. Best-characterized in Finnish KIHD-cohort dose-response data.",
+        "intervention": "Finnish-style dry sauna (or comparable home unit) 80–90°C, 15–20 min × 4 sessions/week, ideally post-MTB/strength.",
+        "n_of_1": {
+          "trial_window_weeks": 8,
+          "measurable_signal": "Eight Sleep HRV 30d avg, resting HR (overnight)",
+          "decision_criterion": "Continue if HRV 30d avg ≥75ms AND overnight resting HR drops ≥3 bpm by week 8; iterate (frequency or duration) if partial; drop if no movement and tolerance issues."
+        },
+        "spareq": {
+          "s": 2,
+          "s_reason": "Adjunctive autonomic support; HRV deflection already addressed by V1.",
+          "p": 3,
+          "p_reason": "Cohort-grade dose-response with mechanistic plausibility.",
+          "a": 3,
+          "a_reason": "HRV and resting HR readable in 8 weeks.",
+          "r": 3,
+          "r_reason": "Generally safe; hydration and post-workout BP attention required.",
+          "e": 4,
+          "e_reason": "No risk-adjunct conflict; non-radiation, non-pharmacologic.",
+          "q": 3,
+          "q_reason": "Strong observational + recent narrative reviews; few large RCTs."
+        },
+        "risk_interaction": "none.",
+        "dependencies": [],
+        "citations": [
+          {
+            "pmid": "38577299",
+            "doi": "10.1080/23328940.2023.2300623",
+            "supports": "Comprehensive review of Finnish sauna for healthspan extension; covers autonomic, cardiovascular, and longevity endpoints."
+          },
+          {
+            "pmid": "41559866",
+            "doi": "10.1002/cph4.70089",
+            "supports": "Heat therapy review across health, disease, and disability outcomes."
+          },
+          {
+            "pmid": "41426898",
+            "doi": "10.7759/cureus.98162",
+            "supports": "Sauna bathing in ischemic-heart-disease prevention context — mechanisms and emerging clinical applications."
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      },
+      {
+        "id": "V6",
+        "action_name": "Lock evening device-use cutoff 60 min before sleep",
+        "type": "sleep",
+        "primary_axis": "sleep",
+        "trigger": {
+          "kind": "sleep_architecture_protection",
+          "ref_id": "sleep_architecture.sub_5h_nights_per_month",
+          "summary": "Evening device use prolongs sleep-onset latency and is implicated in short-night clustering; behavioral cutoff is a low-cost adjunct to V3."
+        },
+        "evidence_grade": "single_rct",
+        "mechanism": "Evening short-wavelength light + cognitive arousal from devices delays melatonin onset and lengthens sleep-onset latency; removing devices in the hour before bed advances sleep onset and improves objective sleep metrics in crossover RCTs.",
+        "intervention": "No phone/laptop/TV after 21:30; replace with reading or partner conversation. Phone charges outside bedroom.",
+        "n_of_1": {
+          "trial_window_weeks": 4,
+          "measurable_signal": "Eight Sleep sleep-onset latency (min), total sleep time",
+          "decision_criterion": "Continue if onset latency drops ≥5 min AND TST up ≥15 min by week 4; iterate (extend cutoff to 90 min) if partial; drop if no change."
+        },
+        "spareq": {
+          "s": 1,
+          "s_reason": "Low-severity adjunct.",
+          "p": 3,
+          "p_reason": "RCT-supported behavioral lever.",
+          "a": 4,
+          "a_reason": "Onset latency is direct nightly Eight Sleep metric.",
+          "r": 4,
+          "r_reason": "Zero cost, zero side effect.",
+          "e": 3,
+          "e_reason": "Compatible with all Risk Adjuncts; possible household friction.",
+          "q": 3,
+          "q_reason": "Crossover RCT and systematic review evidence."
+        },
+        "risk_interaction": "none.",
+        "dependencies": [
+          "V3"
+        ],
+        "citations": [
+          {
+            "pmid": "41616128",
+            "doi": "10.2196/84512",
+            "supports": "Crossover RCT protocol on evening technology use → objective sleep in older adults; method establishes measurable effect on objective sleep."
+          },
+          {
+            "pmid": "41535804",
+            "doi": "10.1186/s12889-026-26239-1",
+            "supports": "Systematic review of sleep interventions including evening light/device hygiene as effective behavioral levers."
+          }
+        ],
+        "evidence_status": "biomcp_grounded"
+      }
+    ],
+    "below_floor": [
+      {
+        "action_name": "Cold plunge / cold-water immersion as routine recovery",
+        "reason": "no_evidence_floor: review-level evidence is mechanistic/narrative, RCTs on HRV/wellbeing are small and heterogeneous, and post-strength-training cold plunge can blunt hypertrophy adaptation conflicting with V4."
+      },
+      {
+        "action_name": "Wine for 'social vitality' at gym/social channel",
+        "reason": "contradicts_risk_adjunct: alcohol-minimization is an active Risk Adjunct (≤2 drinks/wk or abstain) given ATM het + GI cancer family history."
+      },
+      {
+        "action_name": "Additional zone-2 aerobic volume to push VO2max higher",
+        "reason": "already_baseline: VO2max 54 (~95th %ile) is in elite-protect band, not chase band; marginal return on additional aerobic volume is low and competes with V4 strength block for recovery budget."
+      },
+      {
+        "action_name": "Generic 'meditation app' for subjective Life",
+        "reason": "other: subsumed by V1 (resonance breathing) which has tighter axis-specific evidence and a concrete measurable signal; standalone mindfulness app would duplicate without adding measurable signal."
+      }
+    ],
+    "lost_recovery_valve_notes": [
+      {
+        "named_valve": "BJJ",
+        "function_lost": "high-intensity sympathetic discharge (live rolling), social channel (training partners), skill-acquisition novelty (belt/technique progression), structured combat-sport recovery valve (scheduled outlet)",
+        "candidate_replacements": [
+          "V2"
+        ]
+      }
+    ]
+  },
+  "raw_text_full": "I have sufficient evidence to ground the candidate set. Generating the JSON output now.\n\n```json\n{\n  \"bucket\": \"vitality_actions\",\n  \"compute_tier\": \"deep\",\n  \"patient_id\": \"jason-yim-real\",\n  \"vitality_signal_summary\": {\n    \"load_bearing_axes\": [\"autonomic_recovery\", \"sleep_architecture\", \"subjective_life\", \"social_physical_recovery\"],\n    \"deflecting_axes\": [\"autonomic_recovery\", \"subjective_life\"],\n    \"elite_axes\": [\"conditioning_capacity_vo2max_54\", \"hrv_30d_avg_76ms\"],\n    \"lost_recovery_valves\": [\"BJJ\"],\n    \"subjective_life_value\": 75\n  },\n  \"vitality_ranked_candidates\": [\n    {\n      \"id\": \"V1\",\n      \"action_name\": \"Resonance-frequency HRV biofeedback (paced breathing ~6 bpm, 0.1 Hz)\",\n      \"type\": \"breathwork\",\n      \"primary_axis\": \"autonomic\",\n      \"trigger\": {\n        \"kind\": \"sensitivity_axis_deflection\",\n        \"ref_id\": \"autonomic_recovery.may_2026_dip\",\n        \"summary\": \"HRV dropped from 76ms baseline to 61ms avg (low 50ms) in May 2026; resonance-paced breathing has direct evidence for raising vagally-mediated HRV in athletes.\"\n      },\n      \"evidence_grade\": \"single_rct\",\n      \"mechanism\": \"Paced breathing at ~0.1 Hz (resonance frequency, ~6 breaths/min) maximizes baroreflex gain and increases functional connectivity within the central autonomic network, raising vagally-mediated HRV indices (RMSSD, HF power). Effect is reproducible within days-weeks of daily practice.\",\n      \"intervention\": \"10 min/day of paced breathing at 5.5–6 breaths/min (4s in / 6s out) using a guided app (e.g., Eight Sleep / Apple Breathe / dedicated HRV biofeedback). Morning session, before training.\",\n      \"n_of_1\": {\n        \"trial_window_weeks\": 4,\n        \"measurable_signal\": \"Eight Sleep HRV 30d avg (ms) and morning RMSSD trend\",\n        \"decision_criterion\": \"Continue if HRV 30d avg recovers to ≥70ms by week 4; iterate (extend to 15 min, add evening session) if 65–70ms; drop if no movement off dip baseline (≤63ms) at week 4.\"\n      },\n      \"spareq\": {\n        \"s\": 3, \"s_reason\": \"Active autonomic deflection on a load-bearing axis.\",\n        \"p\": 3, \"p_reason\": \"RCT evidence for HRV biofeedback effect in athletes; strong probability of measurable HRV response.\",\n        \"a\": 4, \"a_reason\": \"Eight Sleep HRV 30d avg is a direct, daily-available signal in the trial window.\",\n        \"r\": 4, \"r_reason\": \"Zero side-effect profile; 10 min/day cost.\",\n        \"e\": 4, \"e_reason\": \"No interaction with active Risk Adjuncts; complementary to alcohol-minimization (both pro-vagal).\",\n        \"q\": 3, \"q_reason\": \"Multiple RCTs and recent mechanistic CAN-connectivity work; effect sizes consistent.\"\n      },\n      \"risk_interaction\": \"none: orthogonal to all active Risk Adjuncts.\",\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"41731917\", \"doi\": \"10.1111/psyp.70263\", \"supports\": \"Resonance paced breathing at 0.1 Hz increases functional connectivity within the central autonomic network.\"},\n        {\"pmid\": \"41745654\", \"doi\": \"10.3390/sports14020051\", \"supports\": \"One-week home-based HRV biofeedback improved autonomic and sensorimotor function vs passive relaxation in martial-arts athletes.\"},\n        {\"pmid\": \"41918582\", \"doi\": \"10.3389/fpsyt.2026.1761371\", \"supports\": \"Systematic review of biofeedback interventions supports HRV biofeedback for autonomic regulation and stress resilience.\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    },\n    {\n      \"id\": \"V2\",\n      \"action_name\": \"Replace BJJ with judo or no-gi wrestling club (modified intensity)\",\n      \"type\": \"training\",\n      \"primary_axis\": \"recovery_valve\",\n      \"trigger\": {\n        \"kind\": \"lost_recovery_valve_replacement\",\n        \"ref_id\": \"BJJ\",\n        \"summary\": \"BJJ valve served four functions: high-intensity sympathetic discharge, social-channel via training partners, skill-acquisition novelty, structured combat-sport recovery valve. Judo or no-gi wrestling preserve grappling-pattern, partner-based randori/live drilling, and skill novelty.\"\n      },\n      \"evidence_grade\": \"mechanism_plus_n_of_1_protocol\",\n      \"mechanism\": \"Grappling-family sports share kinematic and autonomic load patterns: paired live rolling produces sympathetic discharge measurable on wearables; structured belt/skill curricula re-engage skill-acquisition novelty; club training restores the partnered social channel. Judo specifically has documented stress-hormone profiles validating it as a combat-sport recovery analog. If specific BJJ contraindications (e.g., neck/lower-back) drove the sideline, no-gi wrestling or judo nage-waza-light variants can be modulated by limiting takedown volume.\",\n      \"intervention\": \"2x/week judo or no-gi wrestling session at a local club; first 4 weeks technique + situational drilling only (no full randori), weeks 5–8 add limited live rounds based on HRV next-morning readout.\",\n      \"n_of_1\": {\n        \"trial_window_weeks\": 8,\n        \"measurable_signal\": \"Composite: subjective Life slider (0–100), Eight Sleep HRV next-morning post-session, count of named training partners (social-channel proxy)\",\n        \"decision_criterion\": \"Continue if subjective Life ≥80 by week 8 AND post-session HRV recovers to within 5ms of baseline within 24h; iterate (change club / format) if Life 75–80 and HRV recovery >24h; drop if Life unchanged or HRV chronically suppressed >7 days.\"\n      },\n      \"spareq\": {\n        \"s\": 3, \"s_reason\": \"Subjective Life below personal baseline; social channel narrowed.\",\n        \"p\": 3, \"p_reason\": \"Direct functional analog; high probability of restoring at least 2 of 4 lost functions.\",\n        \"a\": 3, \"a_reason\": \"Subjective Life + HRV recovery curve readable within 8 weeks.\",\n        \"r\": 3, \"r_reason\": \"Injury risk non-zero (grappling); mitigated by graded ramp; review whatever drove the BJJ sideline first.\",\n        \"e\": 4, \"e_reason\": \"No risk-adjunct conflict; complementary to alcohol-minimization (replaces a social-bonding context that often involves drinking).\",\n        \"q\": 2, \"q_reason\": \"Mechanistic + cohort-grade only; no head-to-head RCT of grappling-replacement on subjective vitality.\"\n      },\n      \"risk_interaction\": \"none: does not contradict any active Risk Adjunct. Note: grappling can increase head-impact exposure; if any prior concussion history, prefer judo ne-waza-only or wrestling.\",\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"39590912\", \"doi\": null, \"supports\": \"Judo training and grading produce measurable hormonal/psychological stress-adaptation responses in adult practitioners, supporting grappling as a structured combat-sport stimulus.\"},\n        {\"pmid\": \"41517747\", \"doi\": \"10.1097/md.0000000000044255\", \"supports\": \"Validated test (juji-gatame within Special Judo Fitness Test) demonstrates grappling-fitness measurability across grappling sports — supports cross-modality functional analog.\"},\n        {\"pmid\": \"41425155\", \"doi\": \"10.3389/fbioe.2025.1663592\", \"supports\": \"Wearable-sensor biomechanics work in combat sports establishes that load and sympathetic discharge in grappling can be tracked objectively.\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    },\n    {\n      \"id\": \"V3\",\n      \"action_name\": \"Sleep-restriction + stimulus-control protocol (CBT-I core elements) targeted at sub-5h nights\",\n      \"type\": \"sleep\",\n      \"primary_axis\": \"sleep\",\n      \"trigger\": {\n        \"kind\": \"sleep_architecture_protection\",\n        \"ref_id\": \"sleep_architecture.sub_5h_nights_per_month\",\n        \"summary\": \"2–3 sub-5h nights/month is the disruption pocket. CBT-I core elements (stimulus control, sleep restriction, fixed wake time) have the strongest RCT evidence for compressing variability in sleep duration and improving efficiency.\"\n      },\n      \"evidence_grade\": \"rct_meta_analysis\",\n      \"mechanism\": \"Stimulus control + sleep restriction tightens homeostatic sleep pressure and conditions the bed-as-sleep-cue, reducing sleep-onset latency variability and the frequency of short nights. Network meta-analyses rank CBT-I components above pharmacotherapy for sustained improvement.\",\n      \"intervention\": \"Fixed wake time (07:00) 7 days/week, no-bed-unless-sleepy rule, leave-bed-after-20-min-awake rule. Run for 6 weeks. No new pharmacotherapy.\",\n      \"n_of_1\": {\n        \"trial_window_weeks\": 6,\n        \"measurable_signal\": \"Eight Sleep: count of sub-5h nights per 4-week window, sleep efficiency %\",\n        \"decision_criterion\": \"Continue if sub-5h nights drop to ≤1/month AND sleep efficiency ≥88% by week 6; iterate (extend, add wind-down protocol) if 2 sub-5h nights and efficiency 85–88%; drop if no change.\"\n      },\n      \"spareq\": {\n        \"s\": 2, \"s_reason\": \"Sleep is above-floor on average; pocket disruption is the target.\",\n        \"p\": 4, \"p_reason\": \"CBT-I has the strongest RCT effect-size profile of any sleep intervention.\",\n        \"a\": 4, \"a_reason\": \"Eight Sleep gives nightly objective signal on the exact target metric.\",\n        \"r\": 4, \"r_reason\": \"Behavioral, no pharmacology, no equipment cost.\",\n        \"e\": 4, \"e_reason\": \"No risk-adjunct conflict.\",\n        \"q\": 4, \"q_reason\": \"Network meta-analysis evidence base.\"\n      },\n      \"risk_interaction\": \"none.\",\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"36027795\", \"doi\": null, \"supports\": \"Network meta-analysis: CBT-I and component psychotherapies most effective and acceptable for adult insomnia, ranking above pharmacotherapy for durability.\"},\n        {\"pmid\": \"39628800\", \"doi\": null, \"supports\": \"RCT meta-analysis confirms CBT-I efficacy for sleep efficiency and onset latency outcomes.\"},\n        {\"pmid\": \"41773671\", \"doi\": \"10.2196/81542\", \"supports\": \"Active midlife/older-adult RCT (ASLEEP) deploying CBT-I infrastructure for prevention of insomnia symptoms.\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    },\n    {\n      \"id\": \"V4\",\n      \"action_name\": \"Add 2x/week heavy resistance training block (lower body + posterior chain)\",\n      \"type\": \"training\",\n      \"primary_axis\": \"conditioning\",\n      \"trigger\": {\n        \"kind\": \"elite_axis_protection\",\n        \"ref_id\": \"conditioning_capacity.vo2max_54\",\n        \"summary\": \"VO2max 54 (~95th %ile) is elite — protect, don't chase. Resistance training at age 47 protects against sarcopenia-driven VO2max decline and adds independent all-cause mortality benefit beyond aerobic training.\"\n      },\n      \"evidence_grade\": \"rct_meta_analysis\",\n      \"mechanism\": \"Resistance training preserves lean mass and neuromuscular function; muscle strength (handgrip and lower-limb) shows dose-response inverse association with all-cause mortality independent of cardiorespiratory fitness. In adults with elite VO2max, the marginal lifespan/healthspan return is greater on the strength axis than on additional aerobic volume.\",\n      \"intervention\": \"2x/week, 45 min: deadlift or trap-bar variant, split squat, hip hinge, push/pull, in 3–5 rep range, RPE 7–8. Progressive overload tracked.\",\n      \"n_of_1\": {\n        \"trial_window_weeks\": 8,\n        \"measurable_signal\": \"5RM lower-body lift (kg), grip strength (kg), VO2max stability at 12-month CPET retest\",\n        \"decision_criterion\": \"Continue if 5RM up ≥10% by week 8 AND grip strength stable/up; iterate (programming change) if 5RM up <10%; drop if no progress AND HRV chronically suppressed.\"\n      },\n      \"spareq\": {\n        \"s\": 2, \"s_reason\": \"Protective rather than corrective; no current strength deficit signaled.\",\n        \"p\": 4, \"p_reason\": \"Strong RCT and dose-response cohort evidence for strength → mortality.\",\n        \"a\": 3, \"a_reason\": \"5RM and grip readable in 8 weeks; VO2max preservation is a 12-month signal.\",\n        \"r\": 4, \"r_reason\": \"Standard injury risk; mitigated by Jason's existing training base.\",\n        \"e\": 4, \"e_reason\": \"No risk-adjunct conflict; complements MTB/snowboard load tolerance.\",\n        \"q\": 4, \"q_reason\": \"Meta-analytic evidence on strength–mortality dose-response.\"\n      },\n      \"risk_interaction\": \"reinforces: strength preservation supports long-horizon ATM/cancer-domain healthspan robustness via lean-mass maintenance.\",\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"41895225\", \"doi\": \"10.1002/jcsm.70272\", \"supports\": \"Dose-response association between handgrip strength and all-cause mortality across inflammation strata.\"},\n        {\"pmid\": \"41936572\", \"doi\": \"10.1002/jcsm.70275\", \"supports\": \"Sarcopenia + impaired respiratory function jointly predict all-cause death — supports preserving both strength and aerobic capacity.\"},\n        {\"pmid\": \"41566419\", \"doi\": \"10.1186/s11556-025-00399-2\", \"supports\": \"Resistance-training prescription meta-analysis for body composition, muscle strength, and physical performance.\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    },\n    {\n      \"id\": \"V5\",\n      \"action_name\": \"Regular Finnish-style sauna (4x/week, 15–20 min, post-workout)\",\n      \"type\": \"recovery\",\n      \"primary_axis\": \"autonomic\",\n      \"trigger\": {\n        \"kind\": \"sensitivity_axis_deflection\",\n        \"ref_id\": \"autonomic_recovery\",\n        \"summary\": \"Passive heat exposure improves vagal tone, lowers resting HR, and (in cohort data) associates inversely with cardiovascular and all-cause mortality at 4+ sessions/week.\"\n      },\n      \"evidence_grade\": \"multi_cohort\",\n      \"mechanism\": \"Repeated heat stress drives heat-shock-protein expression, improves endothelial function, raises plasma volume, and produces parasympathetic rebound that elevates HRV in subsequent days. Best-characterized in Finnish KIHD-cohort dose-response data.\",\n      \"intervention\": \"Finnish-style dry sauna (or comparable home unit) 80–90°C, 15–20 min × 4 sessions/week, ideally post-MTB/strength.\",\n      \"n_of_1\": {\n        \"trial_window_weeks\": 8,\n        \"measurable_signal\": \"Eight Sleep HRV 30d avg, resting HR (overnight)\",\n        \"decision_criterion\": \"Continue if HRV 30d avg ≥75ms AND overnight resting HR drops ≥3 bpm by week 8; iterate (frequency or duration) if partial; drop if no movement and tolerance issues.\"\n      },\n      \"spareq\": {\n        \"s\": 2, \"s_reason\": \"Adjunctive autonomic support; HRV deflection already addressed by V1.\",\n        \"p\": 3, \"p_reason\": \"Cohort-grade dose-response with mechanistic plausibility.\",\n        \"a\": 3, \"a_reason\": \"HRV and resting HR readable in 8 weeks.\",\n        \"r\": 3, \"r_reason\": \"Generally safe; hydration and post-workout BP attention required.\",\n        \"e\": 4, \"e_reason\": \"No risk-adjunct conflict; non-radiation, non-pharmacologic.\",\n        \"q\": 3, \"q_reason\": \"Strong observational + recent narrative reviews; few large RCTs.\"\n      },\n      \"risk_interaction\": \"none.\",\n      \"dependencies\": [],\n      \"citations\": [\n        {\"pmid\": \"38577299\", \"doi\": \"10.1080/23328940.2023.2300623\", \"supports\": \"Comprehensive review of Finnish sauna for healthspan extension; covers autonomic, cardiovascular, and longevity endpoints.\"},\n        {\"pmid\": \"41559866\", \"doi\": \"10.1002/cph4.70089\", \"supports\": \"Heat therapy review across health, disease, and disability outcomes.\"},\n        {\"pmid\": \"41426898\", \"doi\": \"10.7759/cureus.98162\", \"supports\": \"Sauna bathing in ischemic-heart-disease prevention context — mechanisms and emerging clinical applications.\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    },\n    {\n      \"id\": \"V6\",\n      \"action_name\": \"Lock evening device-use cutoff 60 min before sleep\",\n      \"type\": \"sleep\",\n      \"primary_axis\": \"sleep\",\n      \"trigger\": {\n        \"kind\": \"sleep_architecture_protection\",\n        \"ref_id\": \"sleep_architecture.sub_5h_nights_per_month\",\n        \"summary\": \"Evening device use prolongs sleep-onset latency and is implicated in short-night clustering; behavioral cutoff is a low-cost adjunct to V3.\"\n      },\n      \"evidence_grade\": \"single_rct\",\n      \"mechanism\": \"Evening short-wavelength light + cognitive arousal from devices delays melatonin onset and lengthens sleep-onset latency; removing devices in the hour before bed advances sleep onset and improves objective sleep metrics in crossover RCTs.\",\n      \"intervention\": \"No phone/laptop/TV after 21:30; replace with reading or partner conversation. Phone charges outside bedroom.\",\n      \"n_of_1\": {\n        \"trial_window_weeks\": 4,\n        \"measurable_signal\": \"Eight Sleep sleep-onset latency (min), total sleep time\",\n        \"decision_criterion\": \"Continue if onset latency drops ≥5 min AND TST up ≥15 min by week 4; iterate (extend cutoff to 90 min) if partial; drop if no change.\"\n      },\n      \"spareq\": {\n        \"s\": 1, \"s_reason\": \"Low-severity adjunct.\",\n        \"p\": 3, \"p_reason\": \"RCT-supported behavioral lever.\",\n        \"a\": 4, \"a_reason\": \"Onset latency is direct nightly Eight Sleep metric.\",\n        \"r\": 4, \"r_reason\": \"Zero cost, zero side effect.\",\n        \"e\": 3, \"e_reason\": \"Compatible with all Risk Adjuncts; possible household friction.\",\n        \"q\": 3, \"q_reason\": \"Crossover RCT and systematic review evidence.\"\n      },\n      \"risk_interaction\": \"none.\",\n      \"dependencies\": [\"V3\"],\n      \"citations\": [\n        {\"pmid\": \"41616128\", \"doi\": \"10.2196/84512\", \"supports\": \"Crossover RCT protocol on evening technology use → objective sleep in older adults; method establishes measurable effect on objective sleep.\"},\n        {\"pmid\": \"41535804\", \"doi\": \"10.1186/s12889-026-26239-1\", \"supports\": \"Systematic review of sleep interventions including evening light/device hygiene as effective behavioral levers.\"}\n      ],\n      \"evidence_status\": \"biomcp_grounded\"\n    }\n  ],\n  \"below_floor\": [\n    {\"action_name\": \"Cold plunge / cold-water immersion as routine recovery\", \"reason\": \"no_evidence_floor: review-level evidence is mechanistic/narrative, RCTs on HRV/wellbeing are small and heterogeneous, and post-strength-training cold plunge can blunt hypertrophy adaptation conflicting with V4.\"},\n    {\"action_name\": \"Wine for 'social vitality' at gym/social channel\", \"reason\": \"contradicts_risk_adjunct: alcohol-minimization is an active Risk Adjunct (≤2 drinks/wk or abstain) given ATM het + GI cancer family history.\"},\n    {\"action_name\": \"Additional zone-2 aerobic volume to push VO2max higher\", \"reason\": \"already_baseline: VO2max 54 (~95th %ile) is in elite-protect band, not chase band; marginal return on additional aerobic volume is low and competes with V4 strength block for recovery budget.\"},\n    {\"action_name\": \"Generic 'meditation app' for subjective Life\", \"reason\": \"other: subsumed by V1 (resonance breathing) which has tighter axis-specific evidence and a concrete measurable signal; standalone mindfulness app would duplicate without adding measurable signal.\"}\n  ],\n  \"lost_recovery_valve_notes\": [\n    {\n      \"named_valve\": \"BJJ\",\n      \"function_lost\": \"high-intensity sympathetic discharge (live rolling), social channel (training partners), skill-acquisition novelty (belt/technique progression), structured combat-sport recovery valve (scheduled outlet)\",\n      \"candidate_replacements\": [\"V2\"]\n    }\n  ]\n}\n```"
+}
