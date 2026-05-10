@@ -1,0 +1,549 @@
+{
+  "method": "deterministic_register_then_llm_scoring_v1",
+  "scorer": "gpt-5.5 via Hermes delegate_task corrected SPAREQ semantics",
+  "patient_id": "Jason Yim",
+  "register_pinned_actions": [
+    {
+      "id": "SOC-GEN-ATM-CASCADE",
+      "action_name": "Genetic counseling and cascade testing for ATM pathogenic variant",
+      "type": "referral",
+      "domain": "cancer",
+      "mandatory": true,
+      "trigger": {
+        "kind": "genotype_register",
+        "summary": "ATM c.8147T>C heterozygous pathogenic variant documented."
+      },
+      "guideline_anchor": "ACMG Secondary Findings v3.2 / NCCN Genetic-Familial High-Risk Assessment",
+      "intervention": "Refer to cancer genetics for variant counseling, gene-specific surveillance review, and cascade testing offer to adult first-degree relatives.",
+      "tracking_metric": "Genetics visit completed; cascade offer documented for adult first-degree relatives.",
+      "urgency": "this visit",
+      "rationale": "A pathogenic ATM finding is a heritable cancer-risk result with implications for the patient and relatives. The standard action is counseling and cascade testing, not LLM ranking.",
+      "source_rule": "ATM_PLP_REGISTER",
+      "citations": [
+        {
+          "pmid": "36260238",
+          "doi": "",
+          "title": "InSiGHT 2022 Abstract Publishing and Best Abstract Awards",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        }
+      ],
+      "classification": "standard_of_care"
+    }
+  ],
+  "soc_ranked_candidates": [
+    {
+      "id": "SOC-INF-HCV-ONE-TIME",
+      "action_name": "One-time hepatitis C screening",
+      "type": "screening",
+      "domain": "systemic",
+      "trigger": {
+        "kind": "age_universal_data_gap",
+        "summary": "Age 47; HCV screen not documented."
+      },
+      "guideline_anchor": "USPSTF hepatitis C virus infection screening adults 18–79, Grade B",
+      "intervention": "Order one-time HCV antibody with reflex RNA if positive, unless prior documented result exists.",
+      "tracking_metric": "HCV screen result documented.",
+      "urgency": "next routine lab draw",
+      "rationale": "Universal adult preventive service with no result in source data.",
+      "spareq": {
+        "s": 4,
+        "s_reason": "Untreated chronic HCV can progress to cirrhosis, hepatocellular carcinoma, liver failure, and ongoing transmission.",
+        "p": 4,
+        "p_reason": "Age 47 is squarely within the universal adult screening band and no prior HCV result is documented, so the patient-specific trigger is active.",
+        "a": 4,
+        "a_reason": "A positive screen directly redirects outcomes through confirmatory RNA testing and curative antiviral treatment; a negative result closes the one-time SoC gap.",
+        "r": 4,
+        "r_reason": "The action is ready and feasible at the next routine lab draw with standard antibody testing and reflex RNA workflow.",
+        "e": 4,
+        "e_reason": "Expected burden is very low: one blood test, minimal risk, and no invasive procedure unless follow-up is clinically indicated.",
+        "q": 4,
+        "q_reason": "The retrieved candidate citations include a direct USPSTF recommendation statement for HCV screening."
+      },
+      "score": 4.0,
+      "citations": [
+        {
+          "pmid": "40177455",
+          "doi": "10.7759/cureus.79963",
+          "title": "Evidence-Based Periodic Health Examinations for Adults: A Practical Guide",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "secondary_guideline_summary"
+        },
+        {
+          "pmid": "41869237",
+          "doi": "10.7759/cureus.103848",
+          "title": "Barriers to Buprenorphine Prescribing for Opioid Use Disorder Among Louisiana Family Physicians: A Pilot Survey Study With Narrative Review.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        },
+        {
+          "pmid": "32119076",
+          "doi": "10.1001/jama.2020.1123",
+          "title": "Screening for Hepatitis C Virus Infection in Adolescents and Adults: US Preventive Services Task Force Recommendation Statement.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "direct_guideline"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-INF-HIV-ONE-TIME",
+      "action_name": "One-time HIV screening",
+      "type": "screening",
+      "domain": "systemic",
+      "trigger": {
+        "kind": "age_universal_data_gap",
+        "summary": "Age 47; HIV screen not documented."
+      },
+      "guideline_anchor": "USPSTF HIV screening adolescents and adults 15–65, Grade A",
+      "intervention": "Order HIV-1/2 antigen-antibody screen unless prior documented result exists.",
+      "tracking_metric": "HIV screen result documented.",
+      "urgency": "next routine lab draw",
+      "rationale": "Universal adult preventive service with no result in source data.",
+      "spareq": {
+        "s": 4,
+        "s_reason": "Undiagnosed HIV has major morbidity, mortality, and transmission implications when missed.",
+        "p": 4,
+        "p_reason": "Age 47 falls within the universal adult screening range and no prior HIV result is documented, so the patient-specific trigger is active.",
+        "a": 4,
+        "a_reason": "A positive screen enables confirmatory diagnosis, antiretroviral therapy, transmission reduction, and linkage to longitudinal HIV care; a negative result closes the SoC gap.",
+        "r": 4,
+        "r_reason": "The action is highly feasible as a standard HIV-1/2 antigen-antibody blood test bundled with routine labs.",
+        "e": 4,
+        "e_reason": "Expected burden is very low: a single blood test with minimal physical risk and clear follow-up pathways.",
+        "q": 2,
+        "q_reason": "The guideline anchor is strong, but the retrieved citations for this candidate are secondary/indirect or weak rather than a direct USPSTF HIV recommendation statement."
+      },
+      "score": 3.8,
+      "citations": [
+        {
+          "pmid": "40177455",
+          "doi": "10.7759/cureus.79963",
+          "title": "Evidence-Based Periodic Health Examinations for Adults: A Practical Guide",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "secondary_guideline_summary"
+        },
+        {
+          "pmid": "40131575",
+          "doi": "10.1007/s10903-025-01674-1",
+          "title": "Policy Impediments to Tuberculosis Elimination: Consequences of an Absent Medicare National Coverage Determination for Tuberculosis Prevention",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        },
+        {
+          "pmid": "40078864",
+          "doi": "",
+          "title": "Sunscreen Coverage as Preventive Care Under the Affordable Care Act: A Low-Cost Way to Reduce the Prevalence of the Most Common Cancer.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-PREV-CRC-45",
+      "action_name": "Colorectal cancer screening now",
+      "type": "screening",
+      "domain": "cancer",
+      "trigger": {
+        "kind": "age_universal",
+        "summary": "Age 47; no prior colorectal screening documented."
+      },
+      "guideline_anchor": "USPSTF colorectal cancer screening adults 45–75, Grade A/B",
+      "intervention": "Complete colorectal cancer screening now. Colonoscopy is preferred if family-history clarification may change interval; stool-based options acceptable if average-risk pathway chosen.",
+      "tracking_metric": "CRC screening completed; modality and next interval documented.",
+      "urgency": "within 3 months",
+      "rationale": "Age alone triggers CRC screening. ATM may affect risk discussion, but the guideline-safe trigger is universal age 45+ screening unless confirmed syndrome-specific criteria apply.",
+      "spareq": {
+        "s": 4,
+        "s_reason": "Colorectal cancer screening addresses cancer prevention and cancer-death prevention, including detection/removal of precancerous lesions or earlier-stage cancer.",
+        "p": 4,
+        "p_reason": "Age 47 meets universal CRC screening criteria and no prior colorectal screening is documented, so this patient truly triggers the action.",
+        "a": 4,
+        "a_reason": "Screening is outcome-redirecting and stage-shifting: colonoscopy can remove premalignant lesions, and stool-based or endoscopic strategies can detect cancer earlier.",
+        "r": 4,
+        "r_reason": "Multiple standard pathways are ready now; colonoscopy is feasible if family-history clarification may affect interval, while stool-based testing remains an acceptable average-risk option.",
+        "e": 3,
+        "e_reason": "Expected burden is low-to-moderate rather than minimal because colonoscopy requires preparation/sedation/logistics and stool testing requires completion and follow-up if positive.",
+        "q": 2,
+        "q_reason": "The guideline anchor is direct standard-of-care, but the retrieved candidate citations are implementation/rationale literature rather than a direct USPSTF recommendation statement."
+      },
+      "score": 3.7,
+      "citations": [
+        {
+          "pmid": "41186951",
+          "doi": "10.1001/jamanetworkopen.2025.41330",
+          "title": "Facility-Based Uptake of Colorectal Cancer Screening in 45- to 49-Year-Olds After US Guideline Changes.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        },
+        {
+          "pmid": "41679770",
+          "doi": "10.1158/1055-9965.epi-25-1512",
+          "title": "Colorectal Cancer Test Completion among Adults Aged 45 to 75 in an Integrated Healthcare System: A Retrospective Analysis",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        },
+        {
+          "pmid": "41047137",
+          "doi": "10.1093/jnci/djaf277",
+          "title": "Comparative benefits, burdens, and harms of emerging blood-based tests for colorectal cancer screening.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-CANCER-PSA-ATM",
+      "action_name": "Baseline PSA discussion and test for ATM carrier",
+      "type": "screening",
+      "domain": "cancer",
+      "trigger": {
+        "kind": "genotype_age_sex",
+        "summary": "Male, age 47, ATM pathogenic variant; no PSA value documented."
+      },
+      "guideline_anchor": "NCCN Prostate Cancer Early Detection high-risk germline pathway / Philadelphia consensus",
+      "intervention": "Shared-decision discussion and baseline serum PSA now; set follow-up cadence from result and high-risk pathway.",
+      "tracking_metric": "PSA value documented; repeat interval or urology threshold recorded.",
+      "urgency": "within 3 months",
+      "rationale": "High-risk germline prostate pathways begin earlier than population-average PSA discussions. This is a true missed SoC candidate in the prior run.",
+      "spareq": {
+        "s": 4,
+        "s_reason": "The action addresses potentially lethal prostate cancer in a germline ATM carrier, where earlier detection can materially change stage at diagnosis.",
+        "p": 4,
+        "p_reason": "Male sex, age 47, documented pathogenic ATM variant, and no PSA value documented make the patient-specific high-risk screening trigger active.",
+        "a": 3,
+        "a_reason": "Baseline PSA and shared decision-making can trajectory-anchor future surveillance and may stage-shift prostate cancer if detected, but benefits depend on result, interval, and downstream evaluation.",
+        "r": 4,
+        "r_reason": "The next step is readily feasible: a serum PSA plus documented shared-decision discussion and follow-up threshold/cadence.",
+        "e": 3,
+        "e_reason": "Expected burden is modest because PSA testing is simple, but false positives, anxiety, urology referral, MRI/biopsy, and preference-sensitive tradeoffs are possible.",
+        "q": 2,
+        "q_reason": "The retrieved citations are secondary consensus/review/rationale literature rather than a direct NCCN early-detection pathway citation."
+      },
+      "score": 3.5,
+      "citations": [
+        {
+          "pmid": "41590381",
+          "doi": "10.3390/curroncol33010061",
+          "title": "SOGUG Multidisciplinary Expert Panel Consensus on Updated Diagnosis and Characterization of Prostate Cancer Patients.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "secondary_guideline_summary"
+        },
+        {
+          "pmid": "40134022",
+          "doi": "10.1186/s13053-025-00310-1",
+          "title": "Prostate Cancer: genetics in practice now and in the future.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "secondary_guideline_summary"
+        },
+        {
+          "pmid": "40313693",
+          "doi": "10.5173/ceju.2024.0049",
+          "title": "Prostate cancer genetic background. The introduction of genetic testing in the determination of high-risk prostate cancer cases and selection of targeted chemotherapy in advanced prostate cancer patients.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-IMM-FLU-COVID",
+      "action_name": "Seasonal influenza and current COVID vaccination status check",
+      "type": "immunization",
+      "domain": "systemic",
+      "trigger": {
+        "kind": "universal_data_gap",
+        "summary": "Seasonal influenza/COVID vaccination status not documented."
+      },
+      "guideline_anchor": "CDC/ACIP adult immunization schedule",
+      "intervention": "Verify current-season influenza and current COVID vaccination; vaccinate if due.",
+      "tracking_metric": "Current-season flu/COVID status documented.",
+      "urgency": "seasonal / next preventive visit",
+      "rationale": "Routine adult preventive care item absent from source data.",
+      "spareq": {
+        "s": 3,
+        "s_reason": "Seasonal influenza and COVID vaccination reduce clinically important respiratory morbidity and, less commonly in a healthy 47-year-old, severe outcomes.",
+        "p": 3,
+        "p_reason": "Vaccination status is undocumented, but true due status depends on the current season, current CDC formulation, and prior vaccination timing.",
+        "a": 3,
+        "a_reason": "Vaccination can prevent infection severity and complications if due, but it is a seasonal risk-reduction action rather than a diagnostic stage-shift.",
+        "r": 4,
+        "r_reason": "Verification and administration are highly feasible through primary care or pharmacy workflows.",
+        "e": 4,
+        "e_reason": "Expected burden is very low: brief status check and vaccination if due, with typical transient vaccine side effects.",
+        "q": 4,
+        "q_reason": "The retrieved candidate citations include a direct ACIP adult immunization schedule citation."
+      },
+      "score": 3.35,
+      "citations": [
+        {
+          "pmid": "41597712",
+          "doi": "10.3390/microorganisms14010194",
+          "title": "The Role of Vaccination in Adult Solid Organ Transplantation: Updated Reviews with Recent Guidelines.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        },
+        {
+          "pmid": "41855160",
+          "doi": "10.1371/journal.ppat.1014065",
+          "title": "What is driving the resurgence and persistence of vaccine-targeted pneumococcal serotypes?-Serotype 19F as the paradigm.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        },
+        {
+          "pmid": "38206880",
+          "doi": "10.15585/mmwr.mm7301a3",
+          "title": "Advisory Committee on Immunization Practices Recommended Immunization Schedule for Adults Aged 19 Years or Older — United States, 2024",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "direct_guideline"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-IMM-HBV",
+      "action_name": "Hepatitis B vaccination status check and completion",
+      "type": "immunization",
+      "domain": "systemic",
+      "trigger": {
+        "kind": "age_universal_data_gap",
+        "summary": "Age 47; hepatitis B vaccination or immunity not documented."
+      },
+      "guideline_anchor": "CDC/ACIP universal hepatitis B vaccination adults 19–59",
+      "intervention": "Verify HepB vaccine series or immunity; vaccinate if incomplete/nonimmune.",
+      "tracking_metric": "HepB immune/series-complete status documented.",
+      "urgency": "next preventive visit",
+      "rationale": "Universal adult immunization rule; not a risk-model insight, but true SoC.",
+      "spareq": {
+        "s": 3,
+        "s_reason": "HBV vaccination prevents hepatitis B infection and downstream chronic hepatitis, cirrhosis, and hepatocellular carcinoma.",
+        "p": 4,
+        "p_reason": "Age 47 falls within the ACIP universal adult HepB vaccination recommendation and vaccination/immunity status is undocumented.",
+        "a": 3,
+        "a_reason": "Completing vaccination prevents future HBV infection and anchors immunization status, though there is no current infection or exposure event documented.",
+        "r": 4,
+        "r_reason": "Vaccine-history review, immunity testing if chosen, and starting/completing vaccination are routine and feasible at a preventive visit or pharmacy.",
+        "e": 4,
+        "e_reason": "Expected burden is low: vaccination series logistics and typical minor vaccine side effects.",
+        "q": 1,
+        "q_reason": "The standard-of-care anchor is clear, but the retrieved citations for this candidate are weak or not directly about universal adult HepB vaccination."
+      },
+      "score": 3.25,
+      "citations": [
+        {
+          "pmid": "40412331",
+          "doi": "10.1016/j.vaccine.2025.127256",
+          "title": "Challenges in coverage of future hepatitis C vaccines: Review and potential solutions.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        },
+        {
+          "pmid": "41557604",
+          "doi": "10.1080/21645515.2025.2554010",
+          "title": "Safety Surveillance for Hepatitis A Vaccine using the U.S. Vaccine Adverse Event Reporting System (VAERS) database.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        },
+        {
+          "pmid": "41379943",
+          "doi": "10.15585/mmwr.mm7440a1",
+          "title": "Effectiveness of 2024-2025 COVID-19 Vaccines in Children in the United States - VISION, August 29, 2024-September 2, 2025.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-CANCER-FH-CLARIFY-PDAC",
+      "action_name": "Clarify paternal GI cancer primary site before pancreatic-surveillance pin",
+      "type": "diagnostic",
+      "domain": "cancer",
+      "trigger": {
+        "kind": "data_gap",
+        "summary": "Family history says paternal grandfather “GI cancer” but does not document pancreatic primary."
+      },
+      "guideline_anchor": "NCCN/CAPS high-risk pancreatic surveillance requires mutation-specific family-history details",
+      "intervention": "Obtain structured three-generation family history: cancer primary site, age at diagnosis, lineage, and pathology if available.",
+      "tracking_metric": "Family-history primary site documented as pancreatic vs non-pancreatic GI; pancreas surveillance eligibility recomputed.",
+      "urgency": "this visit",
+      "rationale": "The prior prototype pinned pancreatic surveillance from an ambiguous GI-cancer note. The real method should not convert unspecified GI cancer into PDAC eligibility without confirmation.",
+      "spareq": {
+        "s": 4,
+        "s_reason": "If the paternal GI cancer was pancreatic cancer, the downstream outcome addressed is high-severity pancreatic cancer risk and surveillance eligibility.",
+        "p": 3,
+        "p_reason": "The family-history data gap is real and actionable, but current source data only says paternal grandfather “GI cancer” and does not confirm pancreatic primary.",
+        "a": 3,
+        "a_reason": "Structured family-history clarification is a trajectory-anchor: it can prevent inappropriate pancreatic surveillance and can also unlock correct high-risk surveillance if PDAC is confirmed.",
+        "r": 3,
+        "r_reason": "The action is feasible during the visit, but may require family contact or records/pathology to resolve the primary site with confidence.",
+        "e": 3,
+        "e_reason": "Expected burden is modest: history-taking and possible records retrieval, without immediate invasive testing or pancreatic surveillance being ordered.",
+        "q": 2,
+        "q_reason": "The retrieved citations are secondary review/rationale literature about pancreatic surveillance criteria rather than a direct NCCN/CAPS guideline source."
+      },
+      "score": 3.15,
+      "citations": [
+        {
+          "pmid": "39932614",
+          "doi": "10.1007/s12029-025-01184-1",
+          "title": "Current Approaches of Pancreatic Cancer Surveillance in High-Risk Individuals",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "secondary_guideline_summary"
+        },
+        {
+          "pmid": "41899580",
+          "doi": "10.3390/cancers18060976",
+          "title": "Genetic Predisposition to Pancreatic Cancer: A Systematic Review of Hereditary Syndromes and Familial Aggregation.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        },
+        {
+          "pmid": "41691430",
+          "doi": "10.1002/ueg2.70187",
+          "title": "Discovering Hereditary Risk Through Surveillance: A Prospective Genetic Analysis of Individuals With Familial Pancreatic Cancer.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-CKD-CYSTATIN-UACR",
+      "action_name": "Confirm kidney status with cystatin C eGFR and urine ACR",
+      "type": "diagnostic",
+      "domain": "ckd",
+      "trigger": {
+        "kind": "domain_finding_data_gap",
+        "summary": "eGFRcr 72 with creatinine 1.25; cystatin C and urine ACR not documented."
+      },
+      "guideline_anchor": "KDIGO 2024 CKD evaluation: confirm GFR when creatinine may be biased; assess albuminuria",
+      "intervention": "Order serum cystatin C for eGFRcr-cys and urine albumin-creatinine ratio.",
+      "tracking_metric": "eGFRcr-cys and UACR documented; CKD category confirmed or removed.",
+      "urgency": "next lab draw",
+      "rationale": "Creatinine-based eGFR can be biased by muscle mass. UACR is required to stage kidney risk; cystatin C resolves whether eGFRcr 72 is true G2 or phenotype artifact.",
+      "spareq": {
+        "s": 3,
+        "s_reason": "Incorrect kidney-risk classification can affect long-term CKD monitoring, cardiovascular/kidney risk assessment, and medication decisions.",
+        "p": 3,
+        "p_reason": "eGFRcr 72 with creatinine 1.25 and missing UACR/cystatin C creates a plausible patient-specific staging uncertainty, though true CKD is not established.",
+        "a": 3,
+        "a_reason": "Cystatin C eGFR and urine ACR are trajectory-anchoring diagnostics that can confirm, reclassify, or remove CKD risk status and set monitoring intensity.",
+        "r": 4,
+        "r_reason": "Both tests are ready and feasible as standard serum/urine labs at the next draw.",
+        "e": 4,
+        "e_reason": "Expected burden is very low: one blood test and one urine sample with minimal risk.",
+        "q": 2,
+        "q_reason": "The retrieved citations provide secondary KDIGO/rationale support but not a clean direct KDIGO guideline citation."
+      },
+      "score": 3.15,
+      "citations": [
+        {
+          "pmid": "41793402",
+          "doi": "10.1016/j.jchf.2026.102943",
+          "title": "Kidney Disease and Heart Failure: Recent Advances and Current Challenges: Conclusions From a Kidney Disease: Improving Global Outcomes (KDIGO) Controversies Conference.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "secondary_guideline_summary"
+        },
+        {
+          "pmid": "41024961",
+          "doi": "10.5527/wjn.v14.i3.102756",
+          "title": "Cystatin C-based equations: Enhancing accuracy in kidney function tests for type 2 diabetes.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        },
+        {
+          "pmid": "41608452",
+          "doi": "10.3389/fmed.2025.1671990",
+          "title": "Prevalence and prognostic value of baseline and post-treatment renal insufficiency in colorectal cancer patients: a large retrospective cohort study of 10,581 patients in Shanghai, China (2019-2023).",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        }
+      ],
+      "classification": "standard_of_care"
+    },
+    {
+      "id": "SOC-IMM-TDAP",
+      "action_name": "Tdap/Td vaccination status check and booster if due",
+      "type": "immunization",
+      "domain": "systemic",
+      "trigger": {
+        "kind": "universal_data_gap",
+        "summary": "Tdap/Td status not documented."
+      },
+      "guideline_anchor": "CDC/ACIP adult immunization schedule: Tdap once, Td/Tdap every 10 years",
+      "intervention": "Verify Tdap history and Td/Tdap booster date; vaccinate if no adult Tdap or booster overdue.",
+      "tracking_metric": "Tdap/Td date documented.",
+      "urgency": "next preventive visit",
+      "rationale": "Universal adult immunization maintenance.",
+      "spareq": {
+        "s": 2,
+        "s_reason": "Tdap/Td maintenance prevents tetanus, diphtheria, and pertussis, but near-term severity for this patient is lower absent wound/exposure or special risk context.",
+        "p": 3,
+        "p_reason": "Tdap/Td status is undocumented, so the gap may be active, but true due status depends on prior adult Tdap and the last booster date.",
+        "a": 2,
+        "a_reason": "A booster closes a preventive-care gap and reduces future infectious risk, but it is less outcome-redirecting or stage-shifting than cancer screening or major infection detection.",
+        "r": 4,
+        "r_reason": "Verification and booster if due are highly feasible in routine primary-care or pharmacy workflows.",
+        "e": 4,
+        "e_reason": "Expected burden is very low: brief status check and vaccination if due, with typical transient vaccine side effects.",
+        "q": 4,
+        "q_reason": "The retrieved candidate citations include a direct ACIP/MMWR recommendation citation."
+      },
+      "score": 2.9,
+      "citations": [
+        {
+          "pmid": "42007366",
+          "doi": "10.1016/j.lrr.2026.100575",
+          "title": "\"Catch-Up Vaccinations Post-Stem Cell Transplant: A case series and review of the literature\".",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "weak"
+        },
+        {
+          "pmid": "41597712",
+          "doi": "10.3390/microorganisms14010194",
+          "title": "The Role of Vaccination in Adult Solid Organ Transplantation: Updated Reviews with Recent Guidelines.",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "rationale_literature"
+        },
+        {
+          "pmid": "31971933",
+          "doi": "10.15585/mmwr.mm6903a5",
+          "title": "Use of Tetanus Toxoid, Reduced Diphtheria Toxoid, and Acellular Pertussis Vaccines: Updated Recommendations of the Advisory Committee on Immunization Practices — United States, 2019",
+          "supports": "retrieved_for_guideline_or_rationale",
+          "citation_quality": "direct_guideline"
+        }
+      ],
+      "classification": "standard_of_care"
+    }
+  ],
+  "considered_and_excluded": [
+    {
+      "action_name": "Statin initiation for primary prevention",
+      "reason": "Not automatically eligible: age 47, CAC=0, normotensive, A1c 5.3, Lp(a) 72 nmol/L optimal, estimated 10-year ASCVD ~low. Revisit if risk estimate/risk enhancers change.",
+      "source_rule": "ACC_AHA_STATIN_NOT_TRIGGERED_LOW_RISK_CAC0"
+    },
+    {
+      "action_name": "hs-CRP as a standalone SoC action",
+      "reason": "ACC/AHA uses hs-CRP as a risk-enhancer when statin decision is uncertain in borderline/intermediate risk. Current CAC=0 and very-low estimated risk make EVOI low; can be bundled with future lipids but should not rank above true universal gaps.",
+      "source_rule": "ACC_AHA_HSCRP_EVOI_FAIL_CURRENT_STATE"
+    },
+    {
+      "action_name": "Pancreatic MRI/MRCP + EUS pinned now",
+      "reason": "Not pinned from current source data because family history documents “GI cancer,” not confirmed pancreatic cancer. Needs family-history clarification first.",
+      "source_rule": "CAPS_PIN_BLOCKED_BY_UNSPECIFIED_GI_FH"
+    }
+  ],
+  "qa_omissions_for_register_update": [],
+  "method_notes": [
+    "Corrected SPAREQ semantics: S=severity, P=patient-specific priority/likelihood trigger is real, A=outcome-redirect/stage-shift/trajectory-anchor actionability, R=readiness/feasibility, E=expected harm/burden with 4=lowest burden, Q=evidence/guideline quality.",
+    "Scored only candidates present in the deterministic grounded register; no ranked candidates were invented or removed.",
+    "SOC-GEN-ATM-CASCADE was kept as mandatory=true in register_pinned_actions rather than ranked.",
+    "Ambiguous paternal grandfather GI cancer was not converted to confirmed pancreatic cancer; pancreatic surveillance remains excluded pending family-history clarification, and SOC-CANCER-FH-CLARIFY-PDAC remains a ranked diagnostic/data-quality action.",
+    "Lp(a) retained as 72 nmol/L in exclusions/risk context; no alternate-unit conversion was made.",
+    "Citation quality labels use only citations already present in each candidate record; weak labels reflect irrelevant or indirect retrieved citations rather than a judgment that the guideline anchor is false.",
+    "Weighted score formula: S*0.25 + P*0.20 + A*0.20 + R*0.15 + E*0.10 + Q*0.10, with integer dimensions 1-4."
+  ]
+}
