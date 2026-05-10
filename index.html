@@ -1448,8 +1448,8 @@
     <!-- Plan header -->
     <div class="cp-plan-header">
       <div class="cp-plan-header-left">
-        <div class="cp-plan-header-eyebrow">Run #129 · Action Layer v2.0 · Engine v1.5 · Dual-Bucket · 2026-05-09</div>
-        <div class="cp-plan-header-title">Care plan. 2 pinned · <span id="cpHeaderSocCount">5</span> Standard of Care · <span id="cpHeaderAdjCount">5</span> Patient-Specific Adjuncts.</div>
+        <div class="cp-plan-header-eyebrow">Run #130 · Action Candidate Evaluation v0.1 · Candidate Discovery v0.7 · 2026-05-10</div>
+        <div class="cp-plan-header-title">Care plan. <span id="cpHeaderSocCount">10</span> Standard of Care · <span id="cpHeaderRiskCount">10</span> Risk Maintenance · <span id="cpHeaderAdjCount">10</span> Patient-Specific Adjuncts.</div>
       </div>
     </div>
 
@@ -1472,10 +1472,11 @@
     <div class="cp-lane-tabs" style="display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:18px;align-items:center;">
       <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px 0 0;border-right:1px solid var(--border-subtle);margin-right:14px;line-height:38px;">Risk Reduction</div>
       <button class="cp-lane-tab active" data-lane="soc" onclick="switchLane('soc')" style="background:none;border:none;border-bottom:2px solid var(--accent);padding:12px 20px;color:var(--text);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Standard of Care</button>
+      <button class="cp-lane-tab" data-lane="riskMaintenance" onclick="switchLane('riskMaintenance')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Risk Maintenance</button>
       <button class="cp-lane-tab" data-lane="adjuncts" onclick="switchLane('adjuncts')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Patient-Specific Adjuncts</button>
       <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px;border-left:1px solid var(--border-subtle);margin-left:14px;line-height:38px;">Vitality</div>
       <button class="cp-lane-tab" data-lane="vitality" onclick="switchLane('vitality')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Vitality Actions</button>
-      <div style="margin-left:auto;display:flex;align-items:center;color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono', ui-monospace, monospace;letter-spacing:0.04em;" id="cpLaneCaption">guideline-anchored · literature-search-driven</div>
+      <div style="margin-left:auto;display:flex;align-items:center;color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono', ui-monospace, monospace;letter-spacing:0.04em;" id="cpLaneCaption">monitoring schedule · not SPAREQ-scored</div>
     </div>
 
     <!-- Within each lane: Top 3 / All sub-tabs (preserving existing IA pattern) -->
@@ -1526,7 +1527,7 @@
 
     <!-- Trace footer -->
     <div class="cp-trace">
-      Framework v2 · Run #127 · 2026-04-17 · prev #124 (03-08) · 2 new · 0 reversed · 3 sustained
+      Action Candidate Evaluation v0.1 · Candidate Discovery v0.7 · 2026-05-10 · 10 SoC · 10 Risk Maintenance · 10 Adjunct
     </div>
 
     <!-- Aria-live region for reorder announcements -->
@@ -6260,36 +6261,10 @@ if (sleepBars) {
 (function(){
   'use strict';
 
-  // ---- Pinned Register actions (Tier 1 by rule, not rankable) ----
-  // SoC-only. Adjuncts cannot reach Tier 1 by rule per Engine v1.5.
-  const REGISTER_PINS = [
-    {
-      id: 'reg-atm-counseling',
-      trigger_id: 'ACMG-SF-ATM',
-      title: 'Genetic counseling + cascade testing for ATM heterozygous P/LP variant',
-      guideline: 'ACMG SF v3.2 (Miller 2022) · NCCN Genetic/Familial High-Risk v2.2024',
-      do: '<strong>Refer to clinical geneticist</strong> for ATM c.8147T&gt;C heterozygous P/LP confirmation, counseling, and cascade testing of first-degree relatives (Senna, siblings, parents) and second-degree as appropriate.',
-      why: 'P/LP variant on ACMG Secondary Findings list. ATM het carries ~2× breast, ~4–6× pancreatic, ~2× prostate cancer risk. Counseling, gene-specific surveillance, and cascade testing are guideline-mandated; this is a Tier 1 floor, not a ranked candidate.',
-      orders: [
-        { glyph: '✚', label: 'Genetic counseling referral' },
-        { glyph: '✉', label: 'Cascade testing offer (1° relatives)' }
-      ],
-      evidence: 'ACMG SF v3.2 · PMID 35802134 · CARRIERS PMID 35353815'
-    },
-    {
-      id: 'reg-caps-pancreas',
-      trigger_id: 'ATM-CAPS-pancreas',
-      title: 'Annual pancreatic surveillance per CAPS 2020 — start age 50',
-      guideline: 'International CAPS Consortium 2020 (Goggins et al.) · NCCN pancreas v1.2024',
-      do: '<strong>Plan pancreatic surveillance to begin at age 50</strong>: annual MRI/MRCP + endoscopic ultrasound (EUS). Document plan in chart now; first imaging at age 50.',
-      why: 'ATM het + 1°/2° relative with PDAC meets CAPS criteria. ATM carries ~5–9× lifetime PDAC risk. Stage-shift detection from late-stage PDAC (5-yr survival &lt;5%) to T1 (~80%) is the dominant lever — surveillance is the only known path.',
-      orders: [
-        { glyph: '✚', label: 'Plan: MRI/MRCP + EUS at age 50' },
-        { glyph: '✉', label: 'Patient education: ATM + pancreas' }
-      ],
-      evidence: 'CAPS 2020 · PMID 31672839'
-    }
-  ];
+  // ---- Mandatory Action Register ----
+  // No separate register-pin artifact was supplied for the current Jim 1.1 v0.7 run.
+  // Items that require standard clinical handling are represented inside the Standard of Care lane.
+  const REGISTER_PINS = [];
 
   // ---- Master ranked-candidate list (from 6-run Action Layer reproducibility study) ----
   // score = weighted SPAREQ avg across runs (S×0.25 + P×0.20 + A×0.20 + R×0.15 + E×0.10 + Q×0.10).
@@ -6297,171 +6272,507 @@ if (sleepBars) {
   // remains auditable against the run.
   // ---- ITEMS — Standard of Care lane (5 candidates, all guideline-anchored) ----
   // Engine v1.5 dual-bucket. SoC bucket: USPSTF / ACC-AHA / NCCN / KDIGO / CAPS / ACMG anchors.
-  // SPAREQ Q anchor strict (1=expert opinion through 4=multi-RCT/meta-analysis).
+  // SPAREQ semantics fixed: S severity, P probability for this patient, A impact, R reversibility/urgency, E effort inverted, Q evidence quality.
+  // ---- STANDARD OF CARE — Monitoring plan lane (10 candidates, ordered by due/dependency/interval) ----
   const ITEMS = [
     {
-      id: 's01', score: 3.55, originalRank: 1, lane: 'soc',
-      title: 'Baseline screening colonoscopy',
-      severity: 'High', timing: '90 d',
-      do: '<strong>GI referral: screening colonoscopy</strong>. ATM het + 2° GI cancer hx → 5-yr cadence (vs standard 10-yr).',
-      why: 'USPSTF 2021 Grade B starting age 45; patient is 47 with no prior. ATM het CRC OR ~1.5–2.0 + paternal grandfather GI cancer. Catastrophic-if-missed framing — T1 CRC 5-yr survival 90%+ vs late-stage 14%.',
-      goal: 'Baseline colonoscopy complete · pathology read · 5-yr interval documented',
-      orders: [
-        { glyph: '✚', label: 'GI referral: screening colonoscopy' },
-        { glyph: '✉', label: 'Bowel prep instructions' }
-      ],
-      evidence: 'USPSTF 2021 Grade B · NCCN Genetic/Familial High-Risk v2.2024 · PMID 34003218',
-      guideline_anchor: 'USPSTF Grade B 2021',
-      author: 'meridian'
-    },
+      id: "SOCMP-02",
+      lane: "soc",
+      originalRank: 1,
+      title: "Reconcile colorectal screening interval using prior records and family-history clarification",
+      severity: "Std",
+      timing: "Do now or at the next preventive-c",
+      do: "<strong>Reconcile colorectal screening interval using prior records and family-history clarification</strong>. Do now or at the next preventive-care contact; request prior colonoscopy/pathology/stool-test records and clarify family cancer site and age at diagnosis before assigning interval when possible.",
+      why: "Highest dependency value because colorectal screening status is missing at age 47 and family GI cancer primary is uncertain; this determines whether routine or altered colorectal screening intervals apply.",
+      goal: "Feeds SOCMP-01 by determining whether prior colonoscopy/stool testing exists and whether family history changes risk category; also helps clarify that the paternal grandfather’s GI cancer is not confirmed PDAC.",
+      orders: [{ glyph: "✚", label: "Reconcile colorectal screening interval using prior records and family-history clarification" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
     {
-      id: 's02', score: 3.20, originalRank: 2, lane: 'soc',
-      title: 'Lifestyle optimization for LDL/ApoB — Mediterranean pattern, no statin',
-      severity: 'Mod', timing: 'this visit',
-      do: '<strong>Mediterranean diet pattern</strong>, saturated fat &lt;7% kcal, soluble fiber 10–25 g/day. Reassess lipids + ApoB at 6 months.',
-      why: 'LDL 121 (above &lt;100 goal); ApoB 96 (moderate band 90–129). 10-yr ASCVD ~1% post CAC=0 → no statin indication. Diet/exercise is the first-line lever; PREDIMED RCT-grade.',
-      goal: 'Repeat lipid + ApoB at 6 mo · target ApoB &lt;90',
-      orders: [
-        { glyph: '✚', label: 'Lipid + ApoB repeat 6 mo' },
-        { glyph: '✉', label: 'MedDiet patient handout' }
-      ],
-      evidence: 'PREDIMED PMID 29897866 · USPSTF Grade B 2022 dietary counseling · ACC/AHA 2018',
-      guideline_anchor: 'ACC/AHA 2018 + USPSTF 2022',
-      author: 'meridian'
-    },
+      id: "SOCMP-01",
+      lane: "soc",
+      originalRank: 2,
+      title: "Initiate or document age-appropriate colorectal cancer screening",
+      severity: "Std",
+      timing: "If no completed prior screening is",
+      do: "<strong>Initiate or document age-appropriate colorectal cancer screening</strong>. If no completed prior screening is confirmed promptly, select an accepted modality now; any abnormal noninvasive test requires diagnostic colonoscopy, and future interval depends on modality and findings.",
+      why: "Due-now preventive screening because the patient is 47M and colorectal screening status is missing, with age above usual starting threshold.",
+      goal: "Should use SOCMP-02 records if quickly available, but lack of records should not indefinitely delay offering a guideline-accepted screening pathway.",
+      orders: [{ glyph: "✚", label: "Initiate or document age-appropriate colorectal cancer screening" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
     {
-      id: 's03', score: 2.85, originalRank: 3, lane: 'soc',
-      title: 'Measure hs-CRP',
-      severity: 'Mod', timing: '90 d',
-      do: '<strong>Add hs-CRP</strong> to next blood draw. Closes ACC/AHA risk-enhancer gap.',
-      why: 'Last lipid-adjacent inflammatory marker not measured. If &gt;2.0 → updates risk picture; if &lt;2.0 → confirms low-risk band. Trivial cost; only EVOI-positive diagnostic still open in this profile.',
-      goal: 'hs-CRP value on file',
-      orders: [
-        { glyph: '✚', label: 'hs-CRP' }
-      ],
-      evidence: 'ACC/AHA 2019 risk-enhancer list · MESA',
-      guideline_anchor: 'ACC/AHA 2019',
-      author: 'meridian'
-    },
+      id: "SOCMP-04",
+      lane: "soc",
+      originalRank: 3,
+      title: "Schedule hereditary cancer genetics follow-up for ATM carrier surveillance review",
+      severity: "Std",
+      timing: "Schedule in the near term, ideally",
+      do: "<strong>Schedule hereditary cancer genetics follow-up for ATM carrier surveillance review</strong>. Schedule in the near term, ideally before or alongside risk-adapted screening decisions that depend on ATM-associated cancer-risk interpretation.",
+      why: "High dependency action because known pathogenic heterozygous ATM c.8147T>C status affects cancer surveillance counseling, cascade testing, and eligibility review for other pathways.",
+      goal: "Supports SOCMP-03 prostate-risk discussion and SOCMP-05 pancreatic-surveillance eligibility assessment; requires updated three-generation pedigree and confirmation of prior genetic counseling/documentation.",
+      orders: [{ glyph: "✚", label: "Schedule hereditary cancer genetics follow-up for ATM carrier surveillance review" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
     {
-      id: 's04', score: 2.70, originalRank: 4, lane: 'soc',
-      title: 'Annual eGFR + urine ACR',
-      severity: 'Mod', timing: '12 mo',
-      do: '<strong>Annual eGFR + urine ACR</strong>. If eGFR drops &gt;5/yr or persistent &lt;60, refer nephrology.',
-      why: 'eGFR 72 with creatinine 1.25 (high-normal). Most likely athletic-baseline; trajectory tracking distinguishes from incipient CKD.',
-      goal: 'Annual values on file · trajectory tracked',
-      orders: [
-        { glyph: '✚', label: 'eGFR + urine ACR annual' }
-      ],
-      evidence: 'KDIGO 2024 CKD',
-      guideline_anchor: 'KDIGO 2024',
-      author: 'meridian'
-    },
+      id: "SOCMP-03",
+      lane: "soc",
+      originalRank: 4,
+      title: "Obtain baseline PSA with shared decision-making",
+      severity: "Std",
+      timing: "Discuss now and obtain baseline PS",
+      do: "<strong>Obtain baseline PSA with shared decision-making</strong>. Discuss now and obtain baseline PSA if the patient elects screening after reviewing false positives, downstream testing, biopsy risk, and uncertainty around individual ATM-related risk.",
+      why: "Due-now or near-term screening discussion because PSA is missing in a 47M and hereditary cancer context may affect risk assessment, while benefits and harms require shared decision-making.",
+      goal: "Can be informed by SOCMP-04 genetics review, but does not necessarily need to wait if primary-care shared decision-making is available; no family history of prostate cancer is provided.",
+      orders: [{ glyph: "✚", label: "Obtain baseline PSA with shared decision-making" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
     {
-      id: 's05', score: 2.40, originalRank: 5, lane: 'soc',
-      title: 'Cascade-conditional breast MRI for ATM het 1° female relatives',
-      severity: 'High', timing: 'cascade-driven',
-      do: 'After cascade testing identifies ATM het female 1° relatives, schedule annual breast MRI from age 30 per NCCN.',
-      why: 'ATM het breast cancer OR ~2.0; MRI catches 80%+ vs ~50% mammography in dense breasts. Patient is the index — this surfaces because cascade results will route directly to relatives\' care.',
-      goal: 'Cascade results returned · surveillance initiated for confirmed het relatives',
-      orders: [
-        { glyph: '✉', label: 'Cascade follow-through tracker' }
-      ],
-      evidence: 'NCCN Breast Cancer Screening 2024 · PMID 37458768',
-      guideline_anchor: 'NCCN 2024',
-      author: 'meridian'
-    }
+      id: "SOCMP-05",
+      lane: "soc",
+      originalRank: 5,
+      title: "Determine pancreatic cancer surveillance eligibility rather than automatically initiating surveillance",
+      severity: "Std",
+      timing: "Clarify cancer site, degree of rel",
+      do: "<strong>Determine pancreatic cancer surveillance eligibility rather than automatically initiating surveillance</strong>. Clarify cancer site, degree of relation, age at diagnosis, and local high-risk pancreas clinic criteria before ordering MRI/MRCP or EUS surveillance.",
+      why: "Dependency-sensitive eligibility check because ATM pathogenic status plus uncertain paternal grandfather GI cancer does not by itself confirm pancreatic surveillance indication.",
+      goal: "Depends on SOCMP-04 genetics review and family-history clarification; specifically preserve that paternal grandfather’s GI cancer primary is uncertain and not confirmed pancreatic ductal adenocarcinoma.",
+      orders: [{ glyph: "✚", label: "Determine pancreatic cancer surveillance eligibility rather than automatically initiating surveillance" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
+    {
+      id: "SOCMP-08",
+      lane: "soc",
+      originalRank: 6,
+      title: "Confirm kidney function with repeat creatinine, cystatin C eGFR, and urine albumin-creatinine ratio",
+      severity: "Std",
+      timing: "Repeat kidney markers and obtain c",
+      do: "<strong>Confirm kidney function with repeat creatinine, cystatin C eGFR, and urine albumin-creatinine ratio</strong>. Repeat kidney markers and obtain cystatin C eGFR and UACR on a non-acute, well-hydrated baseline; chronicity requires persistence over at least 3 months if abnormal.",
+      why: "Near-term confirmation is appropriate because creatinine-based eGFR about 72 with Cr 1.25 may be confounded by athletic phenotype, and albuminuria status is unknown.",
+      goal: "Does not depend on other listed pathways, but accurate kidney classification can affect medication choices, cardiovascular risk interpretation, and whether CKD monitoring is needed.",
+      orders: [{ glyph: "✚", label: "Confirm kidney function with repeat creatinine, cystatin C eGFR, and urine albumin-creatinine ratio" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
+    {
+      id: "SOCMP-10",
+      lane: "soc",
+      originalRank: 7,
+      title: "Review and update adult immunizations",
+      severity: "Std",
+      timing: "Check records now and update indic",
+      do: "<strong>Review and update adult immunizations</strong>. Check records now and update indicated vaccines; zoster, pneumococcal, hepatitis B, travel, occupational, and other indications should follow age/comorbidity/local-schedule criteria.",
+      why: "Routine due-status reconciliation because immunization records are missing and several adult vaccines may be indicated based on age, prior vaccination, season, country schedule, and risk factors.",
+      goal: "No major dependency on other candidates; can be performed during the same preventive-care visit as cancer screening reconciliation and laboratory monitoring.",
+      orders: [{ glyph: "✚", label: "Review and update adult immunizations" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
+    {
+      id: "SOCMP-06",
+      lane: "soc",
+      originalRank: 8,
+      title: "Repeat lipid panel with ApoB and periodic ASCVD risk reassessment",
+      severity: "Std",
+      timing: "Repeat at a routine preventive int",
+      do: "<strong>Repeat lipid panel with ApoB and periodic ASCVD risk reassessment</strong>. Repeat at a routine preventive interval or sooner if risk factors, medications, weight, diet, or family history change; include ApoB if used by the treating clinician.",
+      why: "Periodic cardiometabolic monitoring rather than urgent action because LDL-C=121 and ApoB=96 warrant longitudinal risk reassessment, while Lp(a)=72 nmol/L is described as optimal and CAC=0 lowers near-term subclinical atherosclerosis concern.",
+      goal: "Interpreted with BP, glycemia, smoking status, family premature ASCVD history, and CAC=0; does not need to precede cancer-screening or genetic-surveillance actions.",
+      orders: [{ glyph: "✚", label: "Repeat lipid panel with ApoB and periodic ASCVD risk reassessment" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
+    {
+      id: "SOCMP-09",
+      lane: "soc",
+      originalRank: 9,
+      title: "Continue blood pressure surveillance with out-of-office confirmation if readings rise",
+      severity: "Std",
+      timing: "Continue periodic office BP measur",
+      do: "<strong>Continue blood pressure surveillance with out-of-office confirmation if readings rise</strong>. Continue periodic office BP measurement with proper technique; use home or ambulatory BP monitoring if readings become elevated or clinical suspicion changes.",
+      why: "Low immediate urgency because current BP is normal at 116/76, but routine adult surveillance remains standard of care.",
+      goal: "No dependency on other candidates; out-of-office confirmation becomes relevant only if office readings rise or masked/white-coat hypertension is suspected.",
+      orders: [{ glyph: "✚", label: "Continue blood pressure surveillance with out-of-office confirmation if readings rise" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  },
+    {
+      id: "SOCMP-07",
+      lane: "soc",
+      originalRank: 10,
+      title: "Plan CAC=0 follow-up interval reassessment",
+      severity: "Std",
+      timing: "Document CAC=0 and plan repeat con",
+      do: "<strong>Plan CAC=0 follow-up interval reassessment</strong>. Document CAC=0 and plan repeat consideration only after a guideline-consistent interval or sooner if there is a major risk-profile change; avoid short-interval repeat scanning.",
+      why: "Lowest near-term priority because the CAC test is already completed and CAC=0 generally supports deferring repeat imaging unless risk profile changes materially.",
+      goal: "Depends on date/quality of the prior CAC scan and evolving ASCVD risk profile; should be interpreted alongside lipid trends, ApoB, family history, smoking status, and other risk enhancers.",
+      orders: [{ glyph: "✚", label: "Plan CAC=0 follow-up interval reassessment" }],
+      evidence: "Standard-of-care monitoring plan · ordered by due/dependency/interval logic",
+      guideline_anchor: "monitoring schedule",
+      author: "meridian"
+  }
   ];
 
-  // ---- ADJUNCTS — Patient-Specific Adjuncts lane (5 candidates, optimized-patient-only) ----
-  // Engine v1.5 dual-bucket. Adjuncts bucket: literature-search-driven, allele-conditioned.
-  // Floor: mechanism + (cohort OR biomarker RCT) at minimum. Pure mechanism → research_gaps.
-  // Bucket-local Q rubric: Q=2 mechanism+single-cohort/biomarker-RCT through Q=4 mechanism+multi-RCT.
-  // Cannot reach Tier 1 by rule; max is Tier A by score.
+  // ---- RISK MAINTENANCE — Risk-changing actions lane (10 candidates, canonical SPAREQ within-lane evaluation) ----
+  const RISK_MAINTENANCE = [
+    {
+      id: "RM-003",
+      score: 3.2,
+      originalRank: 1,
+      lane: "riskMaintenance",
+      title: "Maintain high cardiorespiratory fitness with sustainable aerobic programming",
+      severity: "High",
+      timing: "routine",
+      do: "<strong>Maintain high cardiorespiratory fitness with sustainable aerobic programming</strong>.",
+      why: "Current training volume, intensity distribution, recovery status, injury history, and sport-specific risks are not provided.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Maintain high cardiorespiratory fitness with sustainable aerobic programming" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 4, p: 3, a: 4, r: 2, e: 2, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-009",
+      score: 3.2,
+      originalRank: 2,
+      lane: "riskMaintenance",
+      title: "Keep adult immunizations current",
+      severity: "Mod",
+      timing: "next visit",
+      do: "<strong>Keep adult immunizations current</strong>.",
+      why: "Immunization record, contraindications, prior infections, occupational exposure, travel, hepatitis B immunity, and risk-based vaccine indications are not provided.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Keep adult immunizations current" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 3, p: 2, a: 4, r: 3, e: 4, q: 4 },
+      author: "meridian"
+  },
+    {
+      id: "RM-005",
+      score: 3.05,
+      originalRank: 3,
+      lane: "riskMaintenance",
+      title: "Use periodic home blood pressure monitoring to detect masked hypertension",
+      severity: "High",
+      timing: "next visit",
+      do: "<strong>Use periodic home blood pressure monitoring to detect masked hypertension</strong>.",
+      why: "No home BP data, sleep apnea status, sodium intake, alcohol intake, family hypertension history, or measurement protocol is supplied.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Use periodic home blood pressure monitoring to detect masked hypertension" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 4, p: 2, a: 3, r: 3, e: 3, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-007",
+      score: 3.05,
+      originalRank: 4,
+      lane: "riskMaintenance",
+      title: "Limit alcohol dose and avoid evening alcohol when possible",
+      severity: "High",
+      timing: "next visit",
+      do: "<strong>Limit alcohol dose and avoid evening alcohol when possible</strong>.",
+      why: "Current alcohol quantity, frequency, binge pattern, timing, liver markers, dependence risk, and patient preferences are not supplied.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Limit alcohol dose and avoid evening alcohol when possible" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 4, p: 2, a: 3, r: 3, e: 3, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-002",
+      score: 3.0,
+      originalRank: 5,
+      lane: "riskMaintenance",
+      title: "Create a thresholded shared-decision plan for pharmacologic LDL/ApoB lowering",
+      severity: "High",
+      timing: "routine",
+      do: "<strong>Create a thresholded shared-decision plan for pharmacologic LDL/ApoB lowering</strong>.",
+      why: "A complete 10-year ASCVD risk estimate, HDL-C, triglycerides, parental premature ASCVD history, hs-CRP, and repeat ApoB/LDL-C are missing.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Create a thresholded shared-decision plan for pharmacologic LDL/ApoB lowering" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 4, p: 2, a: 3, r: 2, e: 3, q: 4 },
+      author: "meridian"
+  },
+    {
+      id: "RM-001",
+      score: 2.9,
+      originalRank: 6,
+      lane: "riskMaintenance",
+      title: "Implement an ApoB/LDL-lowering dietary pattern",
+      severity: "High",
+      timing: "routine",
+      do: "<strong>Implement an ApoB/LDL-lowering dietary pattern</strong>.",
+      why: "Magnitude of ApoB response depends on baseline diet, saturated fat intake, genetics, weight goals, adherence, and timing of follow-up lipid testing.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Implement an ApoB/LDL-lowering dietary pattern" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 4, p: 2, a: 3, r: 2, e: 3, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-008",
+      score: 2.8,
+      originalRank: 7,
+      lane: "riskMaintenance",
+      title: "Use kidney-protective exposure precautions",
+      severity: "Mod",
+      timing: "next visit",
+      do: "<strong>Use kidney-protective exposure precautions</strong>.",
+      why: "Cystatin C, urine albumin-creatinine ratio, NSAID frequency, supplement use, hydration practices, prior AKI, and contrast exposure history are unknown.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Use kidney-protective exposure precautions" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 3, p: 2, a: 3, r: 3, e: 3, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-004",
+      score: 2.75,
+      originalRank: 8,
+      lane: "riskMaintenance",
+      title: "Add or maintain progressive resistance training",
+      severity: "Mod",
+      timing: "routine",
+      do: "<strong>Add or maintain progressive resistance training</strong>.",
+      why: "Current lifting frequency, exercise technique, orthopedic limitations, recovery capacity, and goals are unknown.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Add or maintain progressive resistance training" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 3, p: 3, a: 3, r: 2, e: 2, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-006",
+      score: 2.65,
+      originalRank: 9,
+      lane: "riskMaintenance",
+      title: "Adopt a sleep regularity and duration protection plan",
+      severity: "Mod",
+      timing: "routine",
+      do: "<strong>Adopt a sleep regularity and duration protection plan</strong>.",
+      why: "Actual sleep duration, chronotype, insomnia symptoms, snoring, apnea risk, work schedule, alcohol timing, and wearable data are unknown.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Adopt a sleep regularity and duration protection plan" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 3, p: 2, a: 3, r: 2, e: 3, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "RM-010",
+      score: 2.6,
+      originalRank: 10,
+      lane: "riskMaintenance",
+      title: "Avoid chronic excessive endurance-load patterns and overtraining",
+      severity: "Mod",
+      timing: "next visit",
+      do: "<strong>Avoid chronic excessive endurance-load patterns and overtraining</strong>.",
+      why: "Training hours, event history, arrhythmia symptoms, resting heart-rate trends, HRV, sleep, ferritin, injury history, and recovery practices are not provided.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Avoid chronic excessive endurance-load patterns and overtraining" }],
+      evidence: "Canonical SPAREQ evaluation v0.1",
+      evidence_grade: "standard_or_direct_human",
+      spareq: { s: 3, p: 2, a: 3, r: 3, e: 2, q: 2 },
+      author: "meridian"
+  }
+  ];
+
+  // ---- ADJUNCTS — Patient-Specific Adjuncts lane (10 candidates, adjunct-calibrated Q) ----
   const ADJUNCTS = [
     {
-      id: 'a01', score: 3.50, originalRank: 1, lane: 'adjuncts',
-      title: 'Low-dose aspirin chemoprevention (GI cancer, ATM het + paternal-line GI cancer)',
-      severity: 'High', timing: '8 wk',
-      do: '<strong>Aspirin 81 mg PO daily</strong> after shared-decision conversation and bleed-risk review. Baseline H. pylori test (A3) first; reassess at 5 yr (CAPP2 effect emerges ~5 yr in).',
-      why: 'ATM haploinsufficiency impairs DSB repair, raising epithelial cancer risk (CRC ~1.5–2×). CAPP2 RCT in Lynch (closest hereditary DDR-impaired analog) showed ~50% CRC reduction at 10-yr; aspirin acts via COX-2/PGE2 suppression and platelet-mediated tumor-cell cloaking, with the largest absolute benefit in DDR-impaired epithelium.',
-      goal: 'Adherence at 6 mo · annual CBC · CRC outcome via colonoscopy program',
-      orders: [
-        { glyph: '✉', label: 'Aspirin shared-decision visit' },
-        { glyph: '℞', label: 'Aspirin 81 mg qd #90 (after H. pylori clear)' }
-      ],
-      evidence: 'CAPP2 10-yr PMID 32534647 · Rothwell pooled · Aspirin CRC review PMID 40573208',
-      evidence_grade: 'extrapolated_from_analog_population',
-      analog_population: 'Lynch syndrome (CAPP2 RCT) — DDR-impaired analog for ATM het',
-      spareq: { s:4, p:3, a:3, r:4, e:3, q:3 },
-      author: 'meridian'
-    },
+      id: "AA-004",
+      score: 3.55,
+      originalRank: 1,
+      lane: "adjuncts",
+      title: "Colonoscopy-status retrieval and age-appropriate colorectal screening closure",
+      severity: "High",
+      timing: "next visit",
+      do: "<strong>Colonoscopy-status retrieval and age-appropriate colorectal screening closure</strong>.",
+      why: "The uncertainty concerns prior colonoscopy or stool-test completion and the grandfather’s true cancer primary, not the general value of colorectal screening at this age.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Colonoscopy-status retrieval and age-appropriate colorectal screening closure" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 4, p: 3, a: 4, r: 3, e: 3, q: 4 },
+      author: "meridian"
+  },
     {
-      id: 'a02', score: 3.40, originalRank: 2, lane: 'adjuncts',
-      title: 'Alcohol minimization (≤2 standard drinks/wk or abstain)',
-      severity: 'High', timing: 'immediate',
-      do: '<strong>Cap alcohol at ≤2 standard drinks/week</strong>; preferentially zero. No "social-drinking" rationalization given allele.',
-      why: 'Ethanol → acetaldehyde → structural DSB-class genomic alterations + DNA-protein crosslinks that depend on ATM-dependent HR for repair. ATM-haploinsufficient cells tolerate these lesions less well, magnifying per-drink absolute risk in pancreatic and upper-GI epithelium.',
-      goal: 'Self-reported weekly drinks · PEth if rigor desired',
-      orders: [
-        { glyph: '✉', label: 'Patient handout: alcohol + ATM' }
-      ],
-      evidence: 'Acetaldehyde DSB mechanism PMID 41545634 · Young-onset pancreatic dose-response PMID 41576296 · DDR in pancreatic carcinogenesis PMID 41155399',
-      evidence_grade: 'mechanism_plus_cohort',
-      analog_population: 'Young-onset pancreatic cancer cohort (alcohol dose-response)',
-      spareq: { s:3, p:3, a:2, r:4, e:4, q:2 },
-      author: 'meridian'
-    },
+      id: "AA-007",
+      score: 3.25,
+      originalRank: 2,
+      lane: "adjuncts",
+      title: "Document and minimize tobacco, vaping, and excess alcohol exposure",
+      severity: "High",
+      timing: "next visit",
+      do: "<strong>Document and minimize tobacco, vaping, and excess alcohol exposure</strong>.",
+      why: "The key unknown is whether the patient currently uses tobacco, vaping products, cannabis, or excess alcohol and whether reduction support is needed.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Document and minimize tobacco, vaping, and excess alcohol exposure" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 4, p: 2, a: 4, r: 3, e: 3, q: 3 },
+      author: "meridian"
+  },
     {
-      id: 'a03', score: 3.30, originalRank: 3, lane: 'adjuncts',
-      title: 'H. pylori test-and-treat (one-time, before aspirin)',
-      severity: 'High', timing: 'before A1',
-      do: '<strong>One-time stool antigen or urea breath test.</strong> If positive → triple/quadruple therapy per local resistance; confirm eradication at 4–8 wk.',
-      why: 'H. pylori is a Class I gastric carcinogen acting via chronic inflammation, atrophy, and intestinal metaplasia. Eradication in family-history-positive individuals reduces incident gastric cancer (Choi 2020 NEJM RCT in first-degree relatives ~55% reduction). In ATM-het epithelium, eliminating a chronic DSB-inducing inflammatory exposure is leverage-positive. Also de-risks aspirin GI bleeding.',
-      goal: 'Test result on file · eradication confirmation post-treatment',
-      orders: [
-        { glyph: '✚', label: 'H. pylori stool antigen or urea breath' },
-        { glyph: '℞', label: 'Triple/quad therapy if positive' }
-      ],
-      evidence: 'FDR meta-analysis PMID 36317032 · APAGE 2026 task-force PMID 41057234 · Eradication review PMID 41993703',
-      evidence_grade: 'cohort_plus_rct',
-      analog_population: 'First-degree relatives of gastric cancer patients (Choi RCT analog)',
-      spareq: { s:4, p:3, a:3, r:4, e:4, q:3 },
-      author: 'meridian'
-    },
+      id: "AA-003",
+      score: 3.1,
+      originalRank: 3,
+      lane: "adjuncts",
+      title: "Baseline PSA acquisition with ATM-informed prostate-screening discussion",
+      severity: "Mod",
+      timing: "next visit",
+      do: "<strong>Baseline PSA acquisition with ATM-informed prostate-screening discussion</strong>.",
+      why: "The benefit depends on baseline PSA, prostate-cancer family history, ancestry, symptoms, and patient preferences regarding downstream MRI or biopsy risks.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Baseline PSA acquisition with ATM-informed prostate-screening discussion" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 3, p: 3, a: 3, r: 3, e: 4, q: 3 },
+      author: "meridian"
+  },
     {
-      id: 'a04', score: 3.10, originalRank: 4, lane: 'adjuncts',
-      title: 'Diagnostic radiation stewardship (avoid non-essential CT)',
-      severity: 'High', timing: 'standing',
-      do: '<strong>(a)</strong> Prefer MRI/US over CT where clinically equivalent. <strong>(b)</strong> Refuse low-yield CT and "while we\'re at it" add-ons. <strong>(c)</strong> For required imaging request lowest-dose protocol. <strong>(d)</strong> No whole-body CT screening packages. <strong>(e)</strong> Maintain cumulative mSv ledger.',
-      why: 'ATM is the apex DSB-sensor kinase; heterozygous loss reduces repair fidelity. IR-induced DSBs in ATM-het epithelium have higher residual misrepair rates → carcinogenic dose-per-exposure is higher than population baseline. Cohort data link low-dose occupational IR to GI cancer mortality.',
-      goal: 'Cumulative diagnostic mSv (patient log) · imaging requests reviewed for substitution',
-      orders: [
-        { glyph: '✉', label: 'mSv ledger flag in chart' }
-      ],
-      evidence: 'US radiologic technologists 1983–2021 PMID 41276304 · ATM/DDR pancreatic relevance PMID 41155399',
-      evidence_grade: 'mechanism_plus_cohort',
-      analog_population: 'US radiologic technologists cohort (low-dose IR)',
-      spareq: { s:3, p:3, a:2, r:4, e:4, q:2 },
-      author: 'meridian'
-    },
+      id: "AA-001",
+      score: 3.0,
+      originalRank: 4,
+      lane: "adjuncts",
+      title: "Genetics-clinic ATM risk update and pedigree clarification",
+      severity: "High",
+      timing: "routine",
+      do: "<strong>Genetics-clinic ATM risk update and pedigree clarification</strong>.",
+      why: "The main uncertainty is not the presence of the ATM pathogenic variant but the variant-specific penetrance, ancestry context, and whether the paternal grandfather’s GI cancer was pancreatic or another primary.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Genetics-clinic ATM risk update and pedigree clarification" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 4, p: 3, a: 3, r: 2, e: 2, q: 3 },
+      author: "meridian"
+  },
     {
-      id: 'a05', score: 3.00, originalRank: 5, lane: 'adjuncts',
-      title: 'Resistant starch ~30 g/day (upper-GI/CRC chemoprevention)',
-      severity: 'Mod', timing: '4 wk',
-      do: '<strong>~30 g/day resistant starch</strong> (cooked-then-cooled potato/rice, green banana flour, raw oats) sustained ≥2 yr; combine with aspirin (A1), do not substitute.',
-      why: 'Colonic fermentation of resistant starch → butyrate → HDAC inhibition, anti-inflammatory and pro-apoptotic effects in DDR-stressed epithelium. CAPP2 planned 10-yr follow-up showed resistant starch reduced non-CRC Lynch cancers (HR ~0.54) — relevant signal for upper-GI in DDR-impaired carrier.',
-      goal: 'Dietary log · tolerability (gas/bloating) · couples with A1',
-      orders: [
-        { glyph: '✉', label: 'Patient handout: resistant starch sources' }
-      ],
-      evidence: 'CAPP2 resistant-starch arm 10-yr PMID 35878732',
-      evidence_grade: 'extrapolated_from_analog_population',
-      analog_population: 'Lynch syndrome (CAPP2 resistant-starch arm)',
-      spareq: { s:3, p:2, a:2, r:4, e:4, q:3 },
-      dependencies: ['a01'],
-      author: 'meridian'
-    }
+      id: "AA-008",
+      score: 2.95,
+      originalRank: 5,
+      lane: "adjuncts",
+      title: "Cystatin C or combined creatinine-cystatin C eGFR confirmation",
+      severity: "Mod",
+      timing: "routine",
+      do: "<strong>Cystatin C or combined creatinine-cystatin C eGFR confirmation</strong>.",
+      why: "Interpretation depends on muscle mass, creatine or protein supplementation, hydration, urinalysis, albuminuria, prior creatinine trend, and the cystatin C result.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Cystatin C or combined creatinine-cystatin C eGFR confirmation" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 3, p: 3, a: 3, r: 2, e: 4, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "AA-005",
+      score: 2.75,
+      originalRank: 6,
+      lane: "adjuncts",
+      title: "Family-record request for paternal grandfather GI cancer primary",
+      severity: "Mod",
+      timing: "routine",
+      do: "<strong>Family-record request for paternal grandfather GI cancer primary</strong>.",
+      why: "Records may be unavailable or ambiguous, and family recollection may not reliably distinguish colorectal, gastric, pancreatic, biliary, or metastatic cancer.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Family-record request for paternal grandfather GI cancer primary" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 3, p: 3, a: 3, r: 2, e: 2, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "AA-002",
+      score: 2.7,
+      originalRank: 7,
+      lane: "adjuncts",
+      title: "High-risk pancreatic surveillance eligibility consult",
+      severity: "High",
+      timing: "routine",
+      do: "<strong>High-risk pancreatic surveillance eligibility consult</strong>.",
+      why: "Eligibility hinges on whether the grandfather’s cancer was actually pancreatic and on current high-risk pancreas program thresholds for ATM carriers.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "High-risk pancreatic surveillance eligibility consult" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 4, p: 2, a: 3, r: 2, e: 2, q: 2 },
+      author: "meridian"
+  },
+    {
+      id: "AA-009",
+      score: 2.7,
+      originalRank: 8,
+      lane: "adjuncts",
+      title: "ApoB/LDL-focused lifestyle optimization with repeat lipid marker check",
+      severity: "High",
+      timing: "routine",
+      do: "<strong>ApoB/LDL-focused lifestyle optimization with repeat lipid marker check</strong>.",
+      why: "The expected benefit depends on baseline diet, saturated-fat intake, family premature ASCVD history, lipid trend, thyroid status, hsCRP, and preferences about medication if lifestyle response is limited.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "ApoB/LDL-focused lifestyle optimization with repeat lipid marker check" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 4, p: 2, a: 2, r: 2, e: 3, q: 3 },
+      author: "meridian"
+  },
+    {
+      id: "AA-010",
+      score: 2.35,
+      originalRank: 9,
+      lane: "adjuncts",
+      title: "Recovery-preserving fitness maintenance plan using sleep/HRV signals",
+      severity: "Mod",
+      timing: "routine",
+      do: "<strong>Recovery-preserving fitness maintenance plan using sleep/HRV signals</strong>.",
+      why: "The value depends on current training load, injury history, sleep quality, HRV baseline, recovery constraints, and whether tracking improves rather than worsens behavior.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Recovery-preserving fitness maintenance plan using sleep/HRV signals" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 3, p: 2, a: 2, r: 2, e: 3, q: 2 },
+      author: "meridian"
+  },
+    {
+      id: "AA-006",
+      score: 2.15,
+      originalRank: 10,
+      lane: "adjuncts",
+      title: "Ionizing-radiation exposure stewardship note for medical imaging",
+      severity: "Mod",
+      timing: "routine",
+      do: "<strong>Ionizing-radiation exposure stewardship note for medical imaging</strong>.",
+      why: "The action is framed as prudent imaging stewardship, not avoidance of clinically necessary CT or nuclear imaging, because the magnitude of added risk in ATM heterozygotes is not established.",
+      goal: "Track completion and reassess with the next risk-model refresh.",
+      orders: [{ glyph: "✚", label: "Ionizing-radiation exposure stewardship note for medical imaging" }],
+      evidence: "Adjunct-calibrated evidence evaluation v0.1",
+      evidence_grade: "mechanism_plus_human_signal",
+      spareq: { s: 3, p: 1, a: 2, r: 2, e: 4, q: 1 },
+      author: "meridian"
+  }
   ];
 
   // ---- Adjuncts metadata: contraindicated and research_gaps surfaces ----
@@ -6625,9 +6936,10 @@ if (sleepBars) {
   // ---- State ----
   const state = {
     items: ITEMS.slice(),
+    riskMaintenance: RISK_MAINTENANCE.slice(),
     adjuncts: ADJUNCTS.slice(),
     vitality: VITALITY_ACTIONS.slice(),
-    lane: 'soc',             // 'soc' | 'adjuncts' | 'vitality' — which lane is currently shown
+    lane: 'soc',             // 'soc' | 'riskMaintenance' | 'adjuncts' | 'vitality' — active swim lane
     cpView: 'top3',          // 'top3' | 'all' — sub-view within the lane
     expanded: null,          // item id currently expanded (accordion)
     drag: null,              // { id, srcIndex, startY, curDy, step, pointerId }
@@ -6707,6 +7019,7 @@ if (sleepBars) {
 
   // ---- Active-lane helper ----
   function activeItems(){
+    if (state.lane === 'riskMaintenance') return state.riskMaintenance;
     if (state.lane === 'adjuncts') return state.adjuncts;
     if (state.lane === 'vitality') return state.vitality;
     return state.items;
@@ -6753,7 +7066,7 @@ if (sleepBars) {
       root.insertBefore(buildVitalitySignalBanner(), root.firstChild);
       root.appendChild(buildVitalityExtras());
     }
-    // Add-form only on SoC lane (Adjuncts + Vitality candidates are engine-generated, not physician-added).
+    // Add-form only on SoC lane (Risk Maintenance, Adjuncts + Vitality candidates are engine-generated, not physician-added).
     if (state.lane === 'soc') {
       if (state.addFormOpen) {
         root.appendChild(buildAddForm());
@@ -6848,7 +7161,7 @@ if (sleepBars) {
 
   // ---- Lane switcher ----
   function switchLane(lane){
-    if (lane !== 'soc' && lane !== 'adjuncts' && lane !== 'vitality') return;
+    if (lane !== 'soc' && lane !== 'riskMaintenance' && lane !== 'adjuncts' && lane !== 'vitality') return;
     state.lane = lane;
     state.expanded = null;
     state.addFormOpen = false;
@@ -6862,13 +7175,14 @@ if (sleepBars) {
     // Update the right-side caption per lane
     const caption = document.getElementById('cpLaneCaption');
     if (caption) {
-      if (lane === 'soc')        caption.textContent = 'guideline-anchored · USPSTF / ACC / ACMG';
-      else if (lane === 'adjuncts') caption.textContent = 'literature-search-driven · allele-conditioned';
+      if (lane === 'soc')        caption.textContent = 'monitoring schedule · due/dependency/interval';
+      else if (lane === 'riskMaintenance') caption.textContent = 'risk-changing actions · canonical SPAREQ within lane';
+      else if (lane === 'adjuncts') caption.textContent = 'optimized-patient options · adjunct-calibrated evidence';
       else                       caption.textContent = 'vitality-model-seeded · N-of-1 lifecycle · single ranked list';
     }
     renderTop3();
     renderAll();
-    const labels = { soc: 'Standard of Care', adjuncts: 'Patient-Specific Adjuncts', vitality: 'Vitality Actions' };
+    const labels = { soc: 'Standard of Care', riskMaintenance: 'Risk Maintenance', adjuncts: 'Patient-Specific Adjuncts', vitality: 'Vitality Actions' };
     announce('Switched to ' + labels[lane] + ' lane');
   }
   // Expose globally for inline onclick
