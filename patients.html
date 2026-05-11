@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Meridian MD · Patients</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #08090a;
+    --bg-panel: #17181b;
+    --bg-surface: #24262a;
+    --bg-hover: #30333a;
+    --bg-warm: #17181b;
+    --card: #17181b;
+
+    --border-subtle: #24262a;
+    --border: #35383e;
+    --border-strong: #42464d;
+
+    --text: #f7f8f8;
+    --text-secondary: #d0d6e0;
+    --text-muted: #a8adb7;
+    --text-subtle: #a8adb7;
+
+    --accent: #5e6ad2;
+    --accent-hover: #7170ff;
+    --accent-bright: #828fff;
+    --accent-light: rgba(113,112,255,0.08);
+    --accent-tint: rgba(113,112,255,0.12);
+
+    --status-ok: #27a644;
+    --status-warn: #e09b2d;
+    --status-crit: #e8604c;
+    --status-info: #7170ff;
+
+    --radius: 8px;
+    --radius-sm: 6px;
+    --radius-xs: 4px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-feature-settings: "cv01", "ss03";
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .app { display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* HEADER */
+  .header {
+    padding: 28px 48px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .wordmark {
+    font-size: 17px; letter-spacing: -0.01em; color: var(--text);
+    font-feature-settings: "cv01","ss03";
+  }
+  .wordmark .wm-meridian { font-weight: 400; color: var(--text-secondary); }
+  .wordmark .wm-md       { font-weight: 600; color: var(--text); margin-left: 2px; }
+  .header-right {
+    display: flex; align-items: center; gap: 16px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; color: var(--text-muted);
+  }
+  .clinician-pill {
+    padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+  }
+
+  /* PAGE TITLE */
+  .page-title {
+    padding: 28px 48px 8px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+  }
+  .page-title h1 {
+    font-size: 22px; font-weight: 500; letter-spacing: -0.015em;
+    color: var(--text);
+  }
+  .page-title .sub {
+    font-size: 13px; color: var(--text-muted);
+    margin-top: 4px;
+    font-feature-settings: "cv01","ss03";
+  }
+  .page-title .meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; color: var(--text-muted);
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    padding: 16px 48px 12px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .search {
+    flex: 1; max-width: 420px;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg-panel); border: 1px solid var(--border-subtle);
+    padding: 8px 12px; border-radius: var(--radius-sm);
+  }
+  .search input {
+    flex: 1; background: transparent; border: 0; outline: 0;
+    color: var(--text); font: inherit; font-size: 13px;
+  }
+  .search input::placeholder { color: var(--text-muted); }
+  .search .kbd {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; color: var(--text-muted);
+    padding: 2px 6px; border: 1px solid var(--border-subtle); border-radius: 4px;
+  }
+  .seg {
+    display: flex; gap: 2px;
+    background: var(--bg-panel); border: 1px solid var(--border-subtle);
+    padding: 2px; border-radius: var(--radius-sm);
+  }
+  .seg button {
+    background: transparent; border: 0; color: var(--text-muted);
+    font: inherit; font-size: 12px; font-weight: 500;
+    padding: 6px 10px; border-radius: 4px; cursor: pointer;
+  }
+  .seg button.active { background: var(--bg-surface); color: var(--text); }
+  .toolbar .spacer { flex: 1; }
+  .toolbar .count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; color: var(--text-muted);
+  }
+
+  /* PATIENT LIST */
+  .list {
+    padding: 16px 48px 48px;
+    display: grid; gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1100px) {
+    .list { grid-template-columns: 1fr; }
+  }
+
+  .pcard {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: 48px 280px 230px 1fr 130px;
+    gap: 18px; align-items: center;
+    cursor: pointer;
+    transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+    text-decoration: none; color: inherit;
+  }
+  .pcard:hover { border-color: var(--border-strong); background: #1a1c20; }
+
+  .pavatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 15px;
+    color: var(--text);
+    font-feature-settings: "cv01","ss03";
+  }
+  .pavatar.j { background: linear-gradient(135deg, rgba(113,112,255,0.18), rgba(113,112,255,0.06)); color: #cfceff; border-color: rgba(113,112,255,0.35); }
+  .pavatar.k { background: linear-gradient(135deg, rgba(224,155,45,0.18), rgba(224,155,45,0.06)); color: #f4d9a8; border-color: rgba(224,155,45,0.35); }
+
+  .pcol-label {
+    font-size: 11px; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .pname {
+    font-size: 17px; font-weight: 510; letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .pdemo {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .pmrn {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px; color: var(--text-subtle);
+    margin-top: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  .pmetric {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px; color: var(--text); line-height: 1.55;
+  }
+  .pmetric .dim { color: var(--text-muted); }
+
+  .pchips { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+  .chip {
+    font-size: 11px; font-weight: 500;
+    padding: 4px 8px; border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+    letter-spacing: 0.01em;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .chip.ok       { color: #b5e8c2; border-color: rgba(39,166,68,0.35); }
+  .chip.ok .dot     { background: var(--status-ok); }
+  .chip.warn     { color: #f4d9a8; border-color: rgba(224,155,45,0.45); }
+  .chip.warn .dot   { background: var(--status-warn); }
+  .chip.crit     { color: #f7c4ba; border-color: rgba(232,96,76,0.45); }
+  .chip.crit .dot   { background: var(--status-crit); }
+  .chip.info     { color: #cfceff; border-color: rgba(113,112,255,0.5); }
+  .chip.info .dot   { background: var(--status-info); }
+
+  .pcta {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 500;
+    color: var(--text);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+  }
+  .pcard:hover .pcta { border-color: var(--accent-hover); color: var(--text); }
+  .pcta .arrow { color: var(--accent-hover); font-weight: 600; }
+
+  /* FOOTNOTE */
+  .footnote {
+    padding: 0 48px 32px;
+    font-size: 11px; color: var(--text-subtle);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="wordmark"><span class="wm-meridian">Meridian</span><span class="wm-md">MD</span></div>
+    <div class="header-right">
+      <div class="clinician-pill">Dr. Yim · Mizani</div>
+    </div>
+  </div>
+
+  <div class="page-title">
+    <div>
+      <h1>Patients</h1>
+      <div class="sub">Select a patient to open their chart. Synthetic fixtures used for engine end-to-end testing.</div>
+    </div>
+    <div class="meta">Engine v1.4 · Candidate v0.9 · Ranking v0.2</div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">
+      <span style="color:var(--text-muted); font-size:13px;">⌕</span>
+      <input id="q" placeholder="Search patients by name or MRN" />
+      <span class="kbd">⌘K</span>
+    </div>
+    <div class="seg">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="synthetic">Synthetic</button>
+      <button data-filter="real">Real</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="count" id="count">2 patients</div>
+  </div>
+
+  <div class="list" id="list">
+
+    <!-- JIM -->
+    <a class="pcard" href="index.html?patient=jim" data-name="yason jim sp-jim-001" data-kind="synthetic">
+      <div class="pavatar j">JY</div>
+      <div>
+        <div class="pcol-label">Patient</div>
+        <div class="pname">Yason, Jim</div>
+        <div class="pdemo">M · 47y · Asian (East Asian)</div>
+        <div class="pmrn">MRN 00418592 · Synthetic SP-JIM-001</div>
+      </div>
+      <div>
+        <div class="pcol-label">Biometrics &amp; BP</div>
+        <div class="pmetric">
+          5'10" <span class="dim">·</span> 160 lb <span class="dim">·</span> 23.0 kg/m²<br/>
+          BP 118/76 <span class="dim">· Apr 2026</span><br/>
+          <span class="dim">VO₂max</span> 54 mL/kg/min <span class="dim">(95th)</span>
+        </div>
+      </div>
+      <div>
+        <div class="pcol-label">Risk signal</div>
+        <div class="pchips">
+          <span class="chip crit"><span class="dot"></span>ATM het pathogenic</span>
+          <span class="chip warn"><span class="dot"></span>Cancer driver</span>
+          <span class="chip ok"><span class="dot"></span>CV low · CAC 0</span>
+          <span class="chip info"><span class="dot"></span>Capacity F1</span>
+        </div>
+      </div>
+      <div class="pcta">Open chart <span class="arrow">→</span></div>
+    </a>
+
+    <!-- KAREN -->
+    <a class="pcard" href="index.html?patient=karen" data-name="chen karen sp-karen-001" data-kind="synthetic">
+      <div class="pavatar k">KC</div>
+      <div>
+        <div class="pcol-label">Patient</div>
+        <div class="pname">Chen, Karen</div>
+        <div class="pdemo">F · 52y · Asian (Chinese-American)</div>
+        <div class="pmrn">MRN 00521407 · Synthetic SP-KAREN-001</div>
+      </div>
+      <div>
+        <div class="pcol-label">Biometrics &amp; BP</div>
+        <div class="pmetric">
+          5'5" <span class="dim">·</span> 149 lb <span class="dim">·</span> 24.8 kg/m²<br/>
+          BP 131/80 <span class="dim">· home avg</span><br/>
+          <span class="dim">VO₂max</span> 28 mL/kg/min <span class="dim">(35th)</span>
+        </div>
+      </div>
+      <div>
+        <div class="pcol-label">Risk signal</div>
+        <div class="pchips">
+          <span class="chip warn"><span class="dot"></span>Metabolic driver · ~35% 10y T2D</span>
+          <span class="chip warn"><span class="dot"></span>CVD intermediate</span>
+          <span class="chip crit"><span class="dot"></span>CHEK2 het LP · breast MRI gap</span>
+          <span class="chip info"><span class="dot"></span>Postmenopausal</span>
+        </div>
+      </div>
+      <div class="pcta">Open chart <span class="arrow">→</span></div>
+    </a>
+
+  </div>
+
+  <div class="footnote">
+    Synthetic fixtures: Jim (locked May 2026, rigorous risk-engine target) · Karen (May 2026, second pipeline test, full end-to-end run completed). Source data only. Risk-band chips render the engine output, not pre-flagged signals.
+  </div>
+
+</div>
+
+<script>
+  const list = document.getElementById('list');
+  const cards = Array.from(list.querySelectorAll('.pcard'));
+  const q = document.getElementById('q');
+  const count = document.getElementById('count');
+  const segBtns = document.querySelectorAll('.seg button');
+  let activeFilter = 'all';
+
+  function applyFilter() {
+    const term = (q.value || '').trim().toLowerCase();
+    let n = 0;
+    cards.forEach(c => {
+      const matchTerm = !term || c.dataset.name.includes(term);
+      const matchKind = activeFilter === 'all' || c.dataset.kind === activeFilter;
+      const show = matchTerm && matchKind;
+      c.style.display = show ? '' : 'none';
+      if (show) n++;
+    });
+    count.textContent = `${n} patient${n === 1 ? '' : 's'}`;
+  }
+
+  q.addEventListener('input', applyFilter);
+  segBtns.forEach(b => {
+    b.addEventListener('click', () => {
+      segBtns.forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      activeFilter = b.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  // ⌘K / Ctrl+K focuses search
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      q.focus();
+    }
+  });
+</script>
+</body>
+</html>
