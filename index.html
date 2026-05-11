@@ -3395,6 +3395,9 @@
       <div class="tab" data-tab="notes">
         <span>Notes</span>
       </div>
+      <div class="tab" data-tab="symptoms">
+        <span>Symptoms</span>
+      </div>
     </div>
   </div>
 
@@ -5044,6 +5047,250 @@
 
     </div>
 
+  
+    <!-- ===== SYMPTOMS ===== -->
+    <div class="panel" id="panel-symptoms">
+
+      <div class="fs-wrap">
+
+        <div class="fs-meta">
+          <div class="fs-meta-left">Patient narrative · symptom capture · cross-domain pattern detection</div>
+          <div class="fs-meta-right">Captured May 11 2026 · Extractor symptom-spec v0.1 · Systemic v0.2 (symptom-aware)</div>
+        </div>
+
+        <!-- NARRATIVE -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Patient narrative (verbatim)</div>
+          </div>
+          <div style="padding: 16px 20px; background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 6px;">
+            <p style="font-size:13px; line-height:1.6; color:var(--text-secondary); font-feature-settings:cv01,ss03; white-space:pre-wrap; margin:0;">Overall I would say I&#x27;m feeling better than I was a few years ago. Multiple reasons. Five years ago I had a one-year-old daughter, she&#x27;s now six, so things are probably a little easier for me now. Five years ago I was technically unemployed and looking for work after a failed startup, so I was pretty damn stressed at that time.
+
+A couple recurrent things I used to experience have decreased recently. One is I used to get the occasional gout attack — big left toe, maybe 3 or 4 times a year. Ever since I started supplementing with magnesium, that has essentially disappeared. I came across a paper showing that magnesium serum levels were inversely proportional to uric acid, so I thought that might be a good mitigation strategy, and it&#x27;s proved pretty damn good.
+
+I used to get a recurring knot under my left scapula, sometimes turning into muscle cramps in the upper left trapezius and neck muscles. Used to always rub that knot. I think that&#x27;s disappeared.
+
+I used to get a little lightheadedness standing up too quick sometimes, to the point where I&#x27;d have to sit down. That doesn&#x27;t happen nearly as much, but it does happen occasionally — maybe a couple times a year. Orthostatic lightheadedness, I guess.
+
+The one thing probably worse now is some chronic low back pain. I&#x27;m figuring it out, I think it&#x27;s almost addressed but not 100% resolved. The tightness has shifted from my lower back — the surrounding muscles are working better — but my hip-flexor/glute insertion points are always sore. I&#x27;m guessing this is because I&#x27;m finally using my glutes the right way and the tendon insertion points aren&#x27;t adapting as quickly as the muscle itself. So it&#x27;s not muscle soreness, it&#x27;s tendon insertion point tenderness. Overall I&#x27;m on the right path, just not remodeling as quickly as I&#x27;d like.
+
+Still feel like I have a good libido, but I don&#x27;t have sex as often as I would like to. Not sure if that&#x27;s because I need novelty (different partner) or because I&#x27;m just not that attracted to my wife anymore. Honestly, I don&#x27;t know. However, I do still have a high sex drive and manage it myself. I think that&#x27;s it.</p>
+          </div>
+        </div>
+
+        <!-- EXTRACTED SYMPTOMS -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Extracted symptoms · 8 entries</div>
+          </div>
+          <table class="fs-table">
+            <thead>
+              <tr>
+                <th class="col-status"></th>
+                <th style="width:30%;">Symptom · quote</th>
+                <th style="width:9%;">Onset</th>
+                <th style="width:11%;">Pattern</th>
+                <th style="width:9%;">Severity</th>
+                <th style="width:13%;">Functional impact</th>
+                <th style="width:25%;">Systemic clusters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="fs-dot ok"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">gout history resolved</span><span class="fs-metric-sub">"I used to get the occasional gout attack — big left toe, maybe 3 or 4 times a year. Ever since I started supplementing with magnesium, that "</span></div></td>
+                <td><span class="fs-val-mut">resolved</span></td>
+                <td><span class="fs-val-mut">resolved</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">cluster.inflammatory_fatigue, cluster.metabolic_prodromal</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot ok"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">left scapular knot resolved</span><span class="fs-metric-sub">"I used to get a recurring knot under my left scapula, sometimes turning into muscle cramps in the upper left trapezius and neck muscles. Use"</span></div></td>
+                <td><span class="fs-val-mut">resolved</span></td>
+                <td><span class="fs-val-mut">resolved</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-mut">minor</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot warn"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">orthostatic lightheadedness</span><span class="fs-metric-sub">"I used to get a little lightheadedness standing up too quick sometimes, to the point where I&#x27;d have to sit down. That doesn&#x27;t happen nearly "</span></div></td>
+                <td><span class="fs-val-mut">chronic</span></td>
+                <td><span class="fs-val-mut">episodic</span></td>
+                <td><span class="fs-val-mut">mild</span></td>
+                <td><span class="fs-val-mut">minor</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">cluster.autonomic, cluster.cardiopulmonary</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot warn"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">low back pain chronic</span><span class="fs-metric-sub">"The one thing probably worse now is some chronic low back pain. I&#x27;m figuring it out, I think it&#x27;s almost addressed but not 100% resolved."</span></div></td>
+                <td><span class="fs-val-mut">chronic</span></td>
+                <td><span class="fs-val-mut">fluctuating</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot warn"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">hip flexor glute insertion tenderness</span><span class="fs-metric-sub">"my hip-flexor/glute insertion points are always sore. I&#x27;m guessing this is because I&#x27;m finally using my glutes the right way and the tendon "</span></div></td>
+                <td><span class="fs-val-mut">chronic</span></td>
+                <td><span class="fs-val-mut">constant</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot warn"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">good libido positive</span><span class="fs-metric-sub">"Still feel like I have a good libido"</span></div></td>
+                <td><span class="fs-val-mut">unknown</span></td>
+                <td><span class="fs-val-mut">constant</span></td>
+                <td><span class="fs-val-mut">n/a (positive finding)</span></td>
+                <td><span class="fs-val-mut">none</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">cluster.hormonal_andropause, cluster.mood_anxiety</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot warn"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">intimate partner frequency mismatch</span><span class="fs-metric-sub">"I don&#x27;t have sex as often as I would like to. Not sure if that&#x27;s because I need novelty (different partner) or because I&#x27;m just not that att"</span></div></td>
+                <td><span class="fs-val-mut">unknown</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-mut">unspecified</span></td>
+                <td><span class="fs-val-mut">psychosocial</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">—</span></td>
+              </tr>
+              <tr>
+                <td><span class="fs-dot ok"></span></td>
+                <td><div class="fs-metric"><span class="fs-metric-name">stress history resolved</span><span class="fs-metric-sub">"Five years ago I was technically unemployed and looking for work after a failed startup, so I was pretty damn stressed at that time."</span></div></td>
+                <td><span class="fs-val-mut">resolved</span></td>
+                <td><span class="fs-val-mut">resolved</span></td>
+                <td><span class="fs-val-mut">moderate</span></td>
+                <td><span class="fs-val-mut">psychosocial</span></td>
+                <td><span class="fs-val-sec" style="font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px;">cluster.mood_anxiety</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CLUSTERS FIRED -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Symptom clusters fired (2)</div>
+          </div>
+          <div style="padding: 0 4px;">
+            
+        <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <div style="font-weight:510; color:var(--text); font-size:14px;">cluster.musculoskeletal_load_adaptation</div>
+            <div style="font-size:11px; color:var(--text-muted); font-family:'JetBrains Mono',ui-monospace,monospace;">4 components · medium confidence</div>
+          </div>
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:6px;">Components: Chronic low back pain: &quot;some chronic low back pain&quot;, Persistent hip-flexor/glute insertion soreness: &quot;always sore&quot;, Patient localizes pain to tendon insertion rather than muscle soreness, High-load activity context: MTB, snowboarding, BJJ, gym, endurance training</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5;">This cluster is not a primary disease-domain risk marker but is systemically important because it may threaten the exercise durability that currently protects CVD, metabolic, and neuro risk.</div>
+        </div>
+        <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <div style="font-weight:510; color:var(--text); font-size:14px;">cluster.prior_recurrent_gout_urate_axis</div>
+            <div style="font-size:11px; color:var(--text-muted); font-family:'JetBrains Mono',ui-monospace,monospace;">3 components · medium confidence</div>
+          </div>
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:6px;">Components: Classic podagra location: &quot;big left toe&quot;, Recurrent prior attacks: &quot;maybe 3 or 4 times a year&quot;, Current resolution after patient-initiated magnesium: &quot;Ever since I started supplementing with magnesium, that has essentially disappeared&quot;</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5;">Historical cluster fires, but active gout cluster does not. This surfaces a urate/inflammatory axis not represented in current labs because serum uric acid, stone history, tophi history, and flare triggers are missing.</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- CLUSTERS NEAR-FIRE / PROBES -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Near-fire clusters · suggested probes (4)</div>
+          </div>
+          <div style="padding: 0 4px;">
+            
+        <div style="background: rgba(113,112,255,0.04); border: 1px solid rgba(113,112,255,0.2); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px;">
+          <div style="font-weight:500; color:var(--text); font-size:13px;">cluster.autonomic_orthostatic <span style="color:var(--text-muted); font-weight:400; font-size:11px; font-family:'JetBrains Mono',ui-monospace,monospace;">· 2 present, near-fire</span></div>
+          <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">Missing: Frequent or progressive orthostatic episodes, Syncope, Palpitations or arrhythmia symptoms, Orthostatic BP/HR measurements, Medication, dehydration, illness, or alcohol trigger pattern</div>
+          <div style="font-size:12px; color:var(--accent-hover); margin-top:6px;">→ Probe: <em>Ask about true fainting, palpitations, hydration/salt intake, post-exercise episodes, heat exposure, and collect lying/sitting/standing BP and HR.</em></div>
+        </div>
+        <div style="background: rgba(113,112,255,0.04); border: 1px solid rgba(113,112,255,0.2); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px;">
+          <div style="font-weight:500; color:var(--text); font-size:13px;">cluster.mood_anxiety_current <span style="color:var(--text-muted); font-weight:400; font-size:11px; font-family:'JetBrains Mono',ui-monospace,monospace;">· 1 present, near-fire</span></div>
+          <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">Missing: Current persistent anxiety, Depressed mood or anhedonia, Sleep disruption from stress, Functional impairment, Panic symptoms</div>
+          <div style="font-size:12px; color:var(--accent-hover); margin-top:6px;">→ Probe: <em>Prior stress was clearly contextual and resolved; only screen further if current distress, sleep disruption, or relationship stress is affecting function.</em></div>
+        </div>
+        <div style="background: rgba(113,112,255,0.04); border: 1px solid rgba(113,112,255,0.2); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px;">
+          <div style="font-weight:500; color:var(--text); font-size:13px;">cluster.hormonal_andropause <span style="color:var(--text-muted); font-weight:400; font-size:11px; font-family:'JetBrains Mono',ui-monospace,monospace;">· 0 present, near-fire</span></div>
+          <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">Missing: Low libido, Erectile dysfunction, Loss of morning erections, Low energy/fatigue, Low testosterone</div>
+          <div style="font-size:12px; color:var(--accent-hover); margin-top:6px;">→ Probe: <em>Cluster is actively suppressed by the positive finding &quot;Still feel like I have a good libido&quot; and testosterone 620 ng/dL; only probe erectile or ejaculatory symptoms if clinically relevant.</em></div>
+        </div>
+        <div style="background: rgba(113,112,255,0.04); border: 1px solid rgba(113,112,255,0.2); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px;">
+          <div style="font-weight:500; color:var(--text); font-size:13px;">cluster.cardiopulmonary_exertional <span style="color:var(--text-muted); font-weight:400; font-size:11px; font-family:'JetBrains Mono',ui-monospace,monospace;">· 0 present, near-fire</span></div>
+          <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">Missing: Exertional chest pain, Exertional dyspnea, Exercise intolerance, Syncope with exertion, Palpitations</div>
+          <div style="font-size:12px; color:var(--accent-hover); margin-top:6px;">→ Probe: <em>No exertional cardiopulmonary symptoms were heard despite high activity; continue routine surveillance rather than escalation.</em></div>
+        </div>
+          </div>
+        </div>
+
+        <!-- PATIENT-GENERATED KNOWLEDGE -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Patient-generated knowledge (4)</div>
+          </div>
+          <div style="padding: 0 4px;">
+            
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; margin-bottom:8px;">
+          <div style="font-size:13px; color:var(--text); margin-bottom:4px;">Magnesium supplementation temporally associated with disappearance of recurrent gout attacks.</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5; margin-bottom:6px;">"Ever since I started supplementing with magnesium, that has essentially disappeared."</div>
+          <div style="font-size:11px; color:var(--accent-hover); font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.05em; text-transform:uppercase;">→ preserve_in_care_plan</div>
+        </div>
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; margin-bottom:8px;">
+          <div style="font-size:13px; color:var(--text); margin-bottom:4px;">Patient believes back/hip symptoms are related to glute recruitment and tendon adaptation rather than generalized muscle soreness.</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5; margin-bottom:6px;">"I&#x27;m guessing this is because I&#x27;m finally using my glutes the right way and the tendon insertion points aren&#x27;t adapting as quickly as the muscle itself."</div>
+          <div style="font-size:11px; color:var(--accent-hover); font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.05em; text-transform:uppercase;">→ document</div>
+        </div>
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; margin-bottom:8px;">
+          <div style="font-size:13px; color:var(--text); margin-bottom:4px;">Prior scapular/trapezius/neck knot-cramping pattern appears resolved.</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5; margin-bottom:6px;">"I used to get a recurring knot under my left scapula... I think that&#x27;s disappeared."</div>
+          <div style="font-size:11px; color:var(--accent-hover); font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.05em; text-transform:uppercase;">→ document</div>
+        </div>
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; margin-bottom:8px;">
+          <div style="font-size:13px; color:var(--text); margin-bottom:4px;">Orthostatic lightheadedness has substantially decreased and is now rare.</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5; margin-bottom:6px;">"That doesn&#x27;t happen nearly as much, but it does happen occasionally — maybe a couple times a year."</div>
+          <div style="font-size:11px; color:var(--accent-hover); font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.05em; text-transform:uppercase;">→ verify</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- PSYCHOSOCIAL SIGNALS -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Psychosocial signals (2)</div>
+          </div>
+          <div style="padding: 0 4px;">
+            
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; margin-bottom:8px;">
+          <div style="font-size:13px; color:var(--text); margin-bottom:4px;">Sexual-frequency and attraction mismatch within relationship, with preserved libido.</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5; margin-bottom:6px;">"I don&#x27;t have sex as often as I would like to. Not sure if that&#x27;s because I need novelty (different partner) or because I&#x27;m just not that attracted to my wife anymore. Honestly, I don&#x27;t know."</div>
+          <div style="font-size:11px; color:var(--accent-hover); font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.05em; text-transform:uppercase;">→ handoff_acknowledgment_only</div>
+        </div>
+        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; margin-bottom:8px;">
+          <div style="font-size:13px; color:var(--text); margin-bottom:4px;">Resolved high-stress period related to unemployment and failed startup.</div>
+          <div style="font-size:12px; color:var(--text-muted); font-style:italic; line-height:1.5; margin-bottom:6px;">"Five years ago I was technically unemployed and looking for work after a failed startup, so I was pretty damn stressed at that time."</div>
+          <div style="font-size:11px; color:var(--accent-hover); font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:0.05em; text-transform:uppercase;">→ no_action</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- EXPECTED BUT NOT HEARD -->
+        <div class="fs-group">
+          <div class="fs-group-head">
+            <div class="fs-group-title">Expected but not heard · next-capture probes (7)</div>
+          </div>
+          <ul style="margin: 8px 4px 4px; padding-left: 22px; font-size:13px; line-height:1.55;">
+            <li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given ATM pathogenic variant and paternal-line GI cancer history, no report was heard about unexplained weight loss, jaundice, persistent abdominal pain, pale stools, early satiety, or new bowel habit changes.</li><li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given cardiometabolic prevention context, no report was heard about exertional chest pain, dyspnea, palpitations, syncope, or exercise intolerance despite occasional orthostatic lightheadedness.</li><li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given prior recurrent gout, no report was heard about current uric acid level, kidney stone history, tophi, current joint swelling, or active flare frequency.</li><li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given chronic low back pain and cancer-genetic context, no report was heard about night pain, fever, unexplained weight loss, progressive neurologic deficits, bowel/bladder dysfunction, or saddle anesthesia.</li><li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given libido/intimacy concerns, no report was heard about erectile dysfunction, orgasm/ejaculatory changes, depressive symptoms, sleep deterioration, relationship safety concerns, or coercion.</li><li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given creatinine/cystatin discordance, no report was heard about edema, foamy urine, hematuria, urinary obstruction symptoms, NSAID overuse, or supplement/creatine use.</li><li style="margin-bottom:6px; color:var(--text-secondary); line-height:1.55;">Given May 2026 HRV dip, no symptom explanation was heard such as infection, travel, overreaching, alcohol, sleep disruption, or device artifact.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
 </div>
@@ -6140,7 +6387,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // Keyboard nav
 document.addEventListener('keydown', e => {
-  const tabs = ['problems', 'orders', 'screening', 'meds', 'labs', 'digital', 'genetic', 'family', 'notes'];
+  const tabs = ['problems', 'orders', 'screening', 'meds', 'labs', 'digital', 'genetic', 'family', 'notes', 'symptoms'];
   if (e.key >= '1' && e.key <= '9') {
     const idx = parseInt(e.key)-1;
     if (idx < tabs.length) document.querySelector(`[data-tab="${tabs[idx]}"]`).click();
@@ -6275,1137 +6522,912 @@ if (sleepBars) {
   // ---- SOC SCREENING & SURVEILLANCE · v0.9 candidates, v0.2 downstream order ----
   const ITEMS = [
   {
-    "id": "SOCS-001",
+    "id": "SOCM-001",
     "lane": "soc",
     "originalRank": 1,
-    "title": "Colorectal cancer screening status reconciliation and age-appropriate screening initiation",
+    "title": "Complete age-appropriate colorectal cancer screening or reconcile prior colonoscopy record",
     "severity": "SoC Monitoring",
-    "timing": "Due now for status determination",
-    "do": "<strong>Colorectal cancer screening status reconciliation and age-appropriate screening initiation</strong>. Age 47 with colonoscopy status/date not collected; no documented first-degree colorectal cancer history in the payload. Reconcile prior colorectal screening records. If no valid prior screening is documented, use an accepted colorectal cancer screening modality selected through clinical counseling, such as colonoscopy or an approved stool-based screening test with colonoscopy follow-up for positive non-colonoscopy tests.. Due for status determination now; due for screening now if no prior valid colorectal screening is confirmed.",
-    "why": "At age 47, colorectal cancer screening is an active standard preventive-care requirement, and the fixture lacks prior colonoscopy or stool-test documentation. Record reconciliation directly determines whether screening should be initiated and what interval applies.",
-    "goal": "Interval: If colonoscopy is normal, typical interval is 10 years for average-risk screening. Stool-based test intervals depend on the selected test. Any polyp, cancer, inadequate preparation, incomplete exam, or positive stool-based test changes the interval and follow-up pathway.. Escalation: Positive stool-based test, abnormal colonoscopy finding, inadequate or incomplete colonoscopy, iron-deficiency anemia, rectal bleeding, unexplained weight loss, change in bowel habits, or newly clarified family history meeting higher-risk criteria.. Stop/de-intensify: Avoid duplicate colonoscopy if a valid recent exam is documented. Screening later in life should be individualized based on health status, prior screening, life expectancy, and patient preference; discontinue when expected benefit is outweighed by harm or when guideline stop criteria are met..",
+    "timing": "Highest priority standard screening gap: age 47 makes colorectal cancer screening currently due unless a prior completed test can be reconciled; delay could miss an interval-defining finding, and family history clarification may further affect interval.",
+    "do": "<strong>Complete age-appropriate colorectal cancer screening or reconcile prior colonoscopy record</strong>. At age 47, colorectal cancer screening is a standard preventive monitoring pathway. The payload shows colonoscopy status as not collected, so the immediate monitoring job is to determine whether screening has already occurred and, if not, complete an accepted colorectal screening modality and set the next interval from the result.",
+    "why": "Standard preventive care supports colorectal cancer screening beginning in mid-adulthood, with interval determined by modality and findings. Family history details can modify urgency or interval if a colorectal primary or early age at diagnosis is confirmed.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Colorectal cancer screening status reconciliation and age-appropriate screening "
+        "glyph": "\u271a",
+        "label": "Complete age-appropriate colorectal cancer screening or reco"
       }
     ],
-    "evidence": "Care-maintenance order · Guideline-supported age-based colorectal cancer screening for adults beginning in midlife, with modality-specific intervals and escalation after positive or incomplete testing.",
-    "author": "meridian"
+    "evidence": "Standard preventive care supports colorectal cancer screening beginning in mid-adulthood, with interval determined by modality and findings. Family history details can modify urgency or interval if a colorectal primary or early age at diagnosis is confirmed.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-005",
+    "id": "SOCM-003",
     "lane": "soc",
     "originalRank": 2,
-    "title": "Adult immunization record reconciliation and schedule closure",
+    "title": "Hereditary cancer genetics follow-up to translate ATM result into a surveillance schedule",
     "severity": "SoC Monitoring",
-    "timing": "Due now for record reconciliation",
-    "do": "<strong>Adult immunization record reconciliation and schedule closure</strong>. No immunization record is provided for a 47-year-old male in the United States; NKDA documented. Reconcile vaccine history through state immunization registry, pharmacy records, primary care records, occupational records if applicable, and patient-held documentation. Mark each adult immunization as complete, due, deferred, contraindicated, or scheduled, then close gaps using the adult immunization schedule.. Due for record reconciliation now; specific vaccine doses are due only after prior documentation, contraindications, and schedule eligibility are reviewed.",
-    "why": "No immunization record is provided, so routine adult preventive-care schedule closure cannot be confirmed. Reconciliation can identify age-indicated, seasonal, booster, or risk-based vaccine gaps.",
-    "goal": "Interval: Use the adult immunization schedule for vaccine-specific intervals, including recurring seasonal vaccines and booster intervals where applicable.. Escalation: Absent documentation for age-indicated vaccines, high-risk exposure, travel, outbreak context, immunocompromising condition, uncertain primary series completion, wound management need for tetanus-containing vaccine, or new occupational risk.. Stop/de-intensify: Avoid unnecessary duplicate vaccination when valid records confirm completion. Defer or avoid vaccines when contraindications, precautions, acute illness, or product-specific restrictions apply..",
+    "timing": "Pathogenic ATM status is a standing eligibility driver for organ-specific surveillance decisions; a documented genetics-informed plan is needed before deciding what surveillance is indicated versus unnecessary.",
+    "do": "<strong>Hereditary cancer genetics follow-up to translate ATM result into a surveillance schedule</strong>. The payload includes a pathogenic heterozygous ATM variant. A standard monitoring need is confirmation that the result has been reviewed by a genetics-informed clinician and converted into a documented surveillance plan, including which organs require routine screening, which do not, and what family-history details would change the plan.",
+    "why": "Hereditary cancer management commonly requires gene-specific counseling, cascade-family-history assessment, and surveillance planning. The evidence basis is standard genetics-informed risk management rather than symptom-triggered diagnostic workup.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Adult immunization record reconciliation and schedule closure"
+        "glyph": "\u271a",
+        "label": "Hereditary cancer genetics follow-up to translate ATM result"
       }
     ],
-    "evidence": "Care-maintenance order · CDC/ACIP adult immunization schedules support age-, risk-, and history-based vaccination with documentation and catch-up rules when records are missing.",
-    "author": "meridian"
+    "evidence": "Hereditary cancer management commonly requires gene-specific counseling, cascade-family-history assessment, and surveillance planning. The evidence basis is standard genetics-informed risk management rather than symptom-triggered diagnostic workup.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-013",
+    "id": "SOCM-004",
     "lane": "soc",
     "originalRank": 3,
-    "title": "Adult viral-hepatitis screening documentation and repeat-testing gate",
+    "title": "Clarify paternal grandfather\u2019s GI cancer primary site and age at diagnosis",
     "severity": "SoC Monitoring",
-    "timing": "HBV screening documentation is incomplete because only HBsAg is ",
-    "do": "<strong>Adult viral-hepatitis screening documentation and repeat-testing gate</strong>. Patient is a 47-year-old adult male with HBsAg negative and HCV antibody negative in the payload, but HBV immunity and prior-exposure markers are not provided. Verify whether HBV triple-panel screening has been completed; document existing HCV antibody negative result and perform reflex or repeat testing only if indicated by exposure, symptoms, abnormal liver tests, or incomplete records.. HBV status is incomplete from supplied data; HCV antibody appears completed if the Quest result is accepted as valid.",
-    "why": "Adult viral-hepatitis screening is a standard preventive-care documentation item. HBV triple-panel status affects infection history, immunity interpretation, and possible vaccine-pathway handling.",
-    "goal": "Interval: Generally one-time adult screening documentation, with repeat testing only when new exposure or clinical indication appears.. Escalation: Positive HBsAg, positive total anti-HBc requiring interpretation, absent HBV immunity requiring vaccine-pathway handling, positive HCV antibody needing RNA confirmation, abnormal liver enzymes, or new exposure history.. Stop/de-intensify: Do not continue routine repeat HCV testing after a documented negative result unless exposure or clinical indications change; close HBV screening once infection and immunity status are documented..",
+    "timing": "This is an upstream dependency for cancer-risk interval setting and pancreatic/colorectal eligibility adjudication; missing primary site and age can materially change surveillance recommendations.",
+    "do": "<strong>Clarify paternal grandfather\u2019s GI cancer primary site and age at diagnosis</strong>. The family history lists a paternal grandfather with GI cancer, but the primary site and age at diagnosis are unknown. This is a standard data-quality monitoring candidate because clarifying the family history can change colorectal, gastric, pancreatic, or other hereditary cancer surveillance decisions.",
+    "why": "Family-history-based surveillance depends on the cancer type, degree of relation, and age at diagnosis. Record reconciliation and family history clarification are standard inputs for inherited-risk surveillance planning.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Adult viral-hepatitis screening documentation and repeat-testing gate"
+        "glyph": "\u271a",
+        "label": "Clarify paternal grandfather\u2019s GI cancer primary site and ag"
       }
     ],
-    "evidence": "Care-maintenance order · Guideline-grade adult preventive infection screening supports viral-hepatitis status documentation and exposure-gated repeat testing.",
-    "author": "meridian"
+    "evidence": "Family-history-based surveillance depends on the cancer type, degree of relation, and age at diagnosis. Record reconciliation and family history clarification are standard inputs for inherited-risk surveillance planning.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-002",
+    "id": "SOCM-005",
     "lane": "soc",
     "originalRank": 4,
-    "title": "Prostate cancer screening shared-decision gate with PSA if elected",
+    "title": "Genetics-informed pancreatic surveillance eligibility gate",
     "severity": "SoC Monitoring",
-    "timing": "Due now for shared-decision discussion and documentation",
-    "do": "<strong>Prostate cancer screening shared-decision gate with PSA if elected</strong>. Age 47 male with PSA status/date/value not collected and a pathogenic germline ATM variant; no prostate cancer family history is documented. Clinician-patient shared decision-making about PSA-based screening, including benefits, false positives, overdiagnosis, biopsy harms, and downstream treatment tradeoffs. If screening is elected, obtain PSA and document baseline value.. Due for screening discussion and documentation now; PSA due only if the patient elects screening after counseling.",
-    "why": "PSA status is missing in a 47-year-old male with a pathogenic germline ATM variant. The immediate maintenance task is not automatic testing but completion of the screening decision gate and baseline documentation if elected.",
-    "goal": "Interval: If PSA screening is elected, repeat interval should be based on baseline PSA, risk context, guideline pathway, and shared decision-making; shorter interval if PSA is abnormal or risk context changes.. Escalation: PSA above the lab- and age-contextual threshold, confirmed PSA rise on repeat testing, abnormal digital rectal exam if performed, urinary symptoms concerning for malignancy, or clarified high-risk family history.. Stop/de-intensify: Do not continue PSA testing if the patient declines after informed discussion. Discontinue or de-intensify when life expectancy, comorbidity, age, or patient preference makes expected benefit smaller than harm..",
+    "timing": "Pancreatic surveillance should not be assumed, but ATM status plus uncertain GI family history makes eligibility adjudication a near-term documentation need; harm of delay is highest if eligibility is present, while harm of overuse is avoided by gating.",
+    "do": "<strong>Genetics-informed pancreatic surveillance eligibility gate</strong>. The patient has a pathogenic ATM variant and an unknown paternal GI cancer primary, but no documented pancreatic cancer family history and no pancreatic alarm symptoms. The standard monitoring action is not to assume pancreatic surveillance is indicated, but to document eligibility review and, if criteria are met, track MRI/MRCP or EUS surveillance cadence through a high-risk program.",
+    "why": "Hereditary pancreatic surveillance is generally handled through genetics-informed high-risk criteria using gene, family history, and clinical context. In the absence of clear eligibility, the standard action is eligibility adjudication and documentation rather than automatic imaging.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Prostate cancer screening shared-decision gate with PSA if elected"
+        "glyph": "\u271a",
+        "label": "Genetics-informed pancreatic surveillance eligibility gate"
       }
     ],
-    "evidence": "Care-maintenance order · Guidelines support shared decision-making for PSA-based screening, with earlier discussion often considered for people with increased-risk features; the payload includes a germline cancer-risk signal but not a prostate cancer diagnosis.",
-    "author": "meridian"
+    "evidence": "Hereditary pancreatic surveillance is generally handled through genetics-informed high-risk criteria using gene, family history, and clinical context. In the absence of clear eligibility, the standard action is eligibility adjudication and documentation rather than automatic imaging.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-012",
+    "id": "SOCM-014",
     "lane": "soc",
     "originalRank": 5,
-    "title": "Unknown-primary GI cancer family-history clarification gate",
+    "title": "Immunization record reconciliation and preventive vaccine schedule closure",
     "severity": "SoC Monitoring",
-    "timing": "Due now because the paternal grandfather’s GI cancer primary sit",
-    "do": "<strong>Unknown-primary GI cancer family-history clarification gate</strong>. Paternal grandfather had GI cancer with unknown primary site and unknown age at diagnosis; patient also has a pathogenic heterozygous ATM variant. Update three-generation pedigree and attempt to verify primary site, age at diagnosis, pathology, death certificate, or family-record details if feasible.. Due because current family-history phenotype is insufficiently specific to determine whether additional site-specific surveillance rules apply.",
-    "why": "Clarifying the family-history phenotype is a key dependency for determining whether site-specific cancer surveillance pathways apply, especially in the setting of a known pathogenic ATM variant.",
-    "goal": "Interval: Review family-history updates at preventive visits and whenever new family records or diagnoses become available.. Escalation: Confirmed pancreatic, colorectal, gastric, biliary, or other specific hereditary-syndrome-relevant cancer pattern; early age at diagnosis; multiple affected relatives; or a closer-degree affected relative.. Stop/de-intensify: If records confirm a late-onset sporadic-appearing cancer not linked to a standard surveillance pathway, close intensified family-history surveillance escalation and retain routine updates only..",
+    "timing": "The immunization record is completely missing, so routine adult preventive schedule closure is due from a documentation standpoint and may reveal immediately due vaccines.",
+    "do": "<strong>Immunization record reconciliation and preventive vaccine schedule closure</strong>. The payload does not include immunization dates or status. Standard monitoring is to reconcile vaccine history and close age-appropriate preventive immunization gaps, documenting completed, due, declined, or contraindicated vaccines.",
+    "why": "Adult preventive care includes routine immunization status review and schedule closure based on age, prior vaccination, medical conditions, exposures, and contraindications.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Unknown-primary GI cancer family-history clarification gate"
+        "glyph": "\u271a",
+        "label": "Immunization record reconciliation and preventive vaccine sc"
       }
     ],
-    "evidence": "Care-maintenance order · Standard hereditary-cancer assessment practice uses verified cancer type, degree of relationship, and age at diagnosis to determine surveillance eligibility.",
-    "author": "meridian"
+    "evidence": "Adult preventive care includes routine immunization status review and schedule closure based on age, prior vaccination, medical conditions, exposures, and contraindications.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-003",
+    "id": "SOCM-002",
     "lane": "soc",
     "originalRank": 6,
-    "title": "ATM carrier hereditary-cancer surveillance pathway clarification",
+    "title": "PSA screening shared-decision documentation and baseline PSA if chosen",
     "severity": "SoC Monitoring",
-    "timing": "Due now because the pathogenic ATM genotype is known but family ",
-    "do": "<strong>ATM carrier hereditary-cancer surveillance pathway clarification</strong>. Invitae panel reported heterozygous pathogenic ATM c.8147T&gt;C variant; paternal grandfather had GI cancer of unknown primary site and age at diagnosis unknown. Cancer genetics review with pedigree update, verification of the paternal grandfather&#x27;s cancer primary site and age at diagnosis, and documentation of which ATM-associated surveillance pathways are indicated or not indicated. If pancreatic surveillance criteria are met after clarification, route to a high-risk pancreas surveillance program using guideline-supported modalities.. Due for pathway clarification now because genotype is known but family phenotype is incomplete.",
-    "why": "A genetics-informed review is needed to document which ATM-associated surveillance pathways are indicated, not indicated, or dependent on further family-history verification. This is a pathway-gating maintenance item.",
-    "goal": "Interval: Genetics and pedigree review should be updated when new family-history information becomes available. If a high-risk pancreatic surveillance pathway is opened, interval is typically program- and finding-dependent, commonly annual when no concerning findings are present.. Escalation: Confirmed pancreatic cancer in a qualifying relative, additional ATM-associated cancers in close relatives, concerning abdominal symptoms, abnormal pancreatic imaging if obtained, or genetics specialist recommendation based on updated pedigree.. Stop/de-intensify: Do not initiate pancreatic or other intensive hereditary-cancer surveillance solely from an unspecified &#x27;GI cancer&#x27; history if criteria are not met after review. Stop or de-intensify surveillance if eligibility is disproven, patient would not be a candidate for downstream intervention, or harms outweigh expected benefit..",
+    "timing": "Age- and sex-appropriate prostate screening discussion is due for documentation; urgency is lower than colorectal screening because no prostate symptoms or prostate cancer family history are reported and action depends on shared decision-making.",
+    "do": "<strong>PSA screening shared-decision documentation and baseline PSA if chosen</strong>. The patient is a 47-year-old male with no PSA date or value collected. Standard monitoring is to document a shared decision about prostate cancer screening and obtain a baseline PSA if the patient chooses screening.",
+    "why": "Standard preventive care commonly uses shared decision-making for PSA-based prostate cancer screening in adult men, with the timing and interval individualized by age, baseline value, family history, ancestry, and preferences.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "ATM carrier hereditary-cancer surveillance pathway clarification"
+        "glyph": "\u271a",
+        "label": "PSA screening shared-decision documentation and baseline PSA"
       }
     ],
-    "evidence": "Care-maintenance order · Hereditary cancer guidelines use pathogenic germline variants plus personal and family history to determine surveillance eligibility, modality, and interval; ATM is a recognized hereditary cancer gene requiring genetics-informed management.",
-    "author": "meridian"
+    "evidence": "Standard preventive care commonly uses shared decision-making for PSA-based prostate cancer screening in adult men, with the timing and interval individualized by age, baseline value, family history, ancestry, and preferences.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-004",
+    "id": "SOCM-009",
     "lane": "soc",
     "originalRank": 7,
-    "title": "Kidney-marker discordance surveillance with repeat creatinine, cystatin C, UACR, urinalysis, and blood pressure context",
+    "title": "Repeat kidney monitoring with creatinine, cystatin C, eGFR, UACR, and urinalysis",
     "severity": "SoC Monitoring",
-    "timing": "Due for longitudinal confirmation because creatinine-based eGFR ",
-    "do": "<strong>Kidney-marker discordance surveillance with repeat creatinine, cystatin C, UACR, urinalysis, and blood pressure context</strong>. Creatinine 1.25 mg/dL with creatinine eGFR 72, cystatin C 0.86 mg/L with cystatin eGFR 96, UACR 8 mg/g, negative urinalysis for protein and blood, normal blood pressure, and athletic phenotype; no serial kidney-marker trend is available. Repeat kidney surveillance panel including serum creatinine with eGFR, cystatin C with eGFR or combined eGFR if available, urine albumin-creatinine ratio, urinalysis, and blood pressure review. Interpret in relation to hydration, recent intense exercise, creatine or protein supplementation if started, NSAID exposure, intercurrent illness, and lab variability.. Due for longitudinal confirmation because the current isolated creatinine signal is discordant with cystatin C, urine, and blood pressure markers.",
-    "why": "The maintenance task is to establish persistence or benign context for an isolated creatinine signal in an athletic phenotype, using repeat kidney markers and urine testing rather than labeling CKD from one result.",
-    "goal": "Interval: Repeat to establish persistence and then monitor periodically if stable. More frequent monitoring is appropriate after nephrotoxic exposure, acute illness, abnormal repeat results, new hypertension, albuminuria, hematuria, or medication changes affecting kidney function.. Escalation: Persistent eGFR below CKD thresholds for at least 3 months, rising creatinine not explained by context, UACR at or above albuminuria thresholds, hematuria, proteinuria, electrolyte abnormalities, hypertension, or rapid decline from baseline.. Stop/de-intensify: If repeat combined kidney assessment is stable, cystatin C remains normal, UACR and urinalysis remain normal, and blood pressure remains normal, avoid labeling CKD from isolated creatinine alone and continue routine periodic surveillance..",
+    "timing": "Creatinine-cystatin discordance is reassuring but should be periodically rechecked with urine markers and BP context; interval monitoring prevents both CKD overlabeling and missed renal drift.",
+    "do": "<strong>Repeat kidney monitoring with creatinine, cystatin C, eGFR, UACR, and urinalysis</strong>. Creatinine-based eGFR is lower than cystatin C-based eGFR in a highly fit individual, while UACR and urinalysis are reassuring. Standard monitoring is periodic repeat renal assessment using both filtration markers plus urine albumin and urinalysis, ideally avoiding interpretation immediately after unusual exertion or dehydration.",
+    "why": "Standard kidney risk monitoring uses serum filtration markers, urine albumin, urinalysis, and blood pressure context. Cystatin C can help interpret creatinine in people with atypical muscle mass or high physical activity.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Kidney-marker discordance surveillance with repeat creatinine, cystatin C, UACR,"
+        "glyph": "\u271a",
+        "label": "Repeat kidney monitoring with creatinine, cystatin C, eGFR, "
       }
     ],
-    "evidence": "Care-maintenance order · Kidney evaluation standards use persistence, eGFR category, albuminuria, urinalysis, and clinical context rather than a single isolated creatinine value; cystatin C can help clarify creatinine-based estimates when creatinine is influenced by muscle or training context.",
-    "author": "meridian"
+    "evidence": "Standard kidney risk monitoring uses serum filtration markers, urine albumin, urinalysis, and blood pressure context. Cystatin C can help interpret creatinine in people with atypical muscle mass or high physical activity.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-014",
+    "id": "SOCM-010",
     "lane": "soc",
     "originalRank": 8,
-    "title": "Medication, OTC, and supplement safety-monitoring reconciliation gate",
-    "severity": "SoC Monitoring",
-    "timing": "Due at preventive encounters",
-    "do": "<strong>Medication, OTC, and supplement safety-monitoring reconciliation gate</strong>. Payload lists no current medications or supplements, NKDA, and no active diagnoses, but creatinine is higher than cystatin C in an athletic phenotype. At preventive encounters, reconcile prescription medications, OTC agents, intermittent NSAIDs, creatine, protein powders, performance supplements, and herbal products; attach safety monitoring only to disclosed or newly started agents.. Medication and supplement reconciliation is due at encounters; standing medication safety labs are not open if the no-medication/no-supplement status is confirmed.",
-    "why": "Medication, OTC, NSAID, creatine, protein, performance supplement, and herbal-product reconciliation is a standard maintenance dependency, especially because exposures could affect creatinine interpretation or create agent-specific monitoring needs.",
-    "goal": "Interval: Each clinical encounter and at least during routine preventive review; sooner when any new medication, supplement, or relevant OTC exposure starts.. Escalation: Use of nephrotoxic agents, hepatotoxic agents, lipid- or glucose-altering agents, anticoagulants, antihypertensives, statins, creatine or performance supplements affecting creatinine interpretation, or medication adverse symptoms.. Stop/de-intensify: If no relevant agents are confirmed, avoid creating medication safety lab surveillance; close any agent-specific monitoring when the agent is stopped and follow-up labs are stable..",
+    "title": "Serum uric acid and gout history monitoring",
+    "severity": "SoC Monitoring \u00b7 symptom-derived",
+    "timing": "Prior recurrent podagra-like attacks create a missing-data dependency for serum urate, tophi, stones, and flare burden; this is clinically relevant despite current symptom resolution.",
+    "do": "<strong>Serum uric acid and gout history monitoring</strong>. The symptom capture reveals prior recurrent podagra-like attacks 3\u20134 times per year, now resolved, but serum uric acid is not present. Standard monitoring is to document flare history, tophi, kidney stones, triggers, current flare frequency, and obtain serum uric acid to determine whether the urate axis remains active.",
+    "why": "Recurrent gout history is a standard indication to document urate burden, complications, flare frequency, and renal associations. Serum uric acid helps determine whether resolved symptoms reflect controlled risk or persistent asymptomatic hyperuricemia.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Medication, OTC, and supplement safety-monitoring reconciliation gate"
+        "glyph": "\u271a",
+        "label": "Serum uric acid and gout history monitoring"
       }
     ],
-    "evidence": "Care-maintenance order · Standard clinical practice supports medication and supplement reconciliation and agent-specific safety monitoring rather than untargeted lab surveillance.",
-    "author": "meridian"
+    "evidence": "Recurrent gout history is a standard indication to document urate burden, complications, flare frequency, and renal associations. Serum uric acid helps determine whether resolved symptoms reflect controlled risk or persistent asymptomatic hyperuricemia.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCS-015",
+    "id": "SOCM-011",
     "lane": "soc",
     "originalRank": 9,
-    "title": "Weight trajectory and anthropometric surveillance record setup",
-    "severity": "SoC Monitoring",
-    "timing": "Current weight and BMI are available",
-    "do": "<strong>Weight trajectory and anthropometric surveillance record setup</strong>. Patient has current weight 72.5 kg and BMI 23.0 kg/m2 with normal glycemic markers, but the payload states weight trajectory is not available on this first run. Record measured weight and BMI at preventive visits; import prior weights if available; consider waist measurement if clinically useful for metabolic context.. Current weight is available; longitudinal trajectory setup is due because serial weights are missing.",
-    "why": "Measured anthropometrics are routine preventive-care data. Establishing a trajectory helps contextualize metabolic screening, unintentional weight change, and future risk-factor interpretation.",
-    "goal": "Interval: At routine preventive visits, with earlier reassessment if unintentional weight change, symptoms, medication changes, or metabolic abnormalities appear.. Escalation: Unintentional weight loss or gain, crossing into a new BMI category, new central adiposity, abnormal glycemic markers, gastrointestinal symptoms, constitutional symptoms, or clinician concern.. Stop/de-intensify: If weight and BMI remain stable and normal without symptoms or metabolic abnormalities, avoid intensive weight surveillance beyond routine preventive measurement..",
+    "title": "Reconcile magnesium supplementation and monitor renal-electrolyte safety if ongoing",
+    "severity": "SoC Monitoring \u00b7 symptom-derived",
+    "timing": "A current supplement-list discrepancy should be closed soon because ongoing magnesium use affects symptom interpretation and renal/electrolyte safety documentation.",
+    "do": "<strong>Reconcile magnesium supplementation and monitor renal-electrolyte safety if ongoing</strong>. The intake list says no supplements, but the symptom narrative says magnesium supplementation coincided with disappearance of gout attacks. Standard monitoring is to reconcile the supplement, dose, formulation, frequency, adverse effects, and kidney/electrolyte safety if ongoing.",
+    "why": "Medication and supplement reconciliation is standard safety practice. Magnesium use is generally monitored by dose, renal function context, gastrointestinal adverse effects, and interaction review when clinically relevant.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Weight trajectory and anthropometric surveillance record setup"
+        "glyph": "\u271a",
+        "label": "Reconcile magnesium supplementation and monitor renal-electr"
       }
     ],
-    "evidence": "Care-maintenance order · Standard adult preventive care includes measured anthropometrics and longitudinal review to identify metabolic or systemic changes.",
-    "author": "meridian"
+    "evidence": "Medication and supplement reconciliation is standard safety practice. Magnesium use is generally monitored by dose, renal function context, gastrointestinal adverse effects, and interaction review when clinically relevant.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCS-006",
+    "id": "SOCM-013",
     "lane": "soc",
     "originalRank": 10,
-    "title": "Primary-prevention lipid and atherogenic-marker monitoring cadence",
-    "severity": "SoC Monitoring",
-    "timing": "Baseline lipid, ApoB, Lp(a), and CAC facts are available",
-    "do": "<strong>Primary-prevention lipid and atherogenic-marker monitoring cadence</strong>. Adult primary-prevention context with LDL-C 121 mg/dL, ApoB 96 mg/dL, non-HDL-C 137 mg/dL, triglycerides 65 mg/dL, HDL-C 69 mg/dL, Lp(a) 72 nmol/L documented, and CAC=0 completed. Repeat standard fasting or nonfasting lipid panel with optional ApoB if used for longitudinal comparison; document that Lp(a) and CAC are already completed facts unless a measurement or record-quality issue emerges.. Baseline lipid values are available from 2025-06-17; establish ongoing surveillance cadence and reconcile any prior serial lipid records if available.",
-    "why": "The main maintenance need is interval-setting and record reconciliation for serial lipid history, while avoiding unnecessary repeat Lp(a) or advanced lipid testing when no management decision is pending.",
-    "goal": "Interval: Use routine adult cardiovascular risk-factor reassessment cadence, commonly every several years when stable, with earlier repeat if treatment decisions, major weight or diet change, new hypertension, diabetes, kidney disease, inflammatory disease, or medication exposure would change interpretation.. Escalation: Escalate to formal ASCVD risk review and treatment-threshold assessment if LDL-C, ApoB, non-HDL-C, blood pressure, glycemia, kidney markers, smoking status, or family history changes into a guideline-relevant risk category.. Stop/de-intensify: Do not repeat Lp(a) routinely after a clearly documented value unless assay validity, unit confusion, or clinical circumstances require confirmation; avoid frequent advanced lipid retesting if standard markers are stable and no management decision is pending..",
+    "title": "Musculoskeletal symptom monitoring for low back and hip/glute insertion pain with red-flag escalation",
+    "severity": "SoC Monitoring \u00b7 symptom-derived",
+    "timing": "Active chronic symptoms warrant functional and red-flag monitoring, but absent neurologic/systemic red flags keep this below cancer-screening and renal/urate data dependencies.",
+    "do": "<strong>Musculoskeletal symptom monitoring for low back and hip/glute insertion pain with red-flag escalation</strong>. The patient reports chronic low back pain and persistent hip-flexor/glute insertion tenderness in the context of high activity. No red flags were reported. Standard monitoring should track pain severity, duration, neurologic symptoms, functional limitation, training impact, and red flags such as fever, unexplained weight loss, night pain, progressive weakness, bowel/bladder dysfunction, saddle anesthesia, or trauma.",
+    "why": "Standard evaluation of chronic low back and overuse-region pain uses functional assessment, conservative monitoring, and escalation for neurologic deficits, systemic symptoms, trauma, or persistent disabling symptoms.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Primary-prevention lipid and atherogenic-marker monitoring cadence"
+        "glyph": "\u271a",
+        "label": "Musculoskeletal symptom monitoring for low back and hip/glut"
       }
     ],
-    "evidence": "Care-maintenance order · Standard primary-prevention care includes periodic lipid and ASCVD risk-factor reassessment; retrieved lipid primary-prevention and CAC-context sources support using existing CAC and lipid information to guide surveillance rather than indiscriminate retesting.",
-    "author": "meridian"
+    "evidence": "Standard evaluation of chronic low back and overuse-region pain uses functional assessment, conservative monitoring, and escalation for neurologic deficits, systemic symptoms, trauma, or persistent disabling symptoms.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCS-007",
+    "id": "SOCM-006",
     "lane": "soc",
     "originalRank": 11,
-    "title": "Diabetes and prediabetes screening cadence after normal glycemic markers",
+    "title": "Periodic lipid and ApoB monitoring with CAC=0 context documented",
     "severity": "SoC Monitoring",
-    "timing": "Current normal HbA1c and fasting glucose are available",
-    "do": "<strong>Diabetes and prediabetes screening cadence after normal glycemic markers</strong>. Age 47 with East Asian ancestry documented, BMI 23.0 kg/m2, and normal current glycemic markers: HbA1c 5.3%, fasting glucose 88 mg/dL, fasting insulin 7.8 uIU/mL. HbA1c or fasting plasma glucose as standard screening tests; oral glucose tolerance testing only if standard clinical indications or discordant results arise.. Current normal screening results are available from 2025-06-17; next screening should follow routine interval unless risk state changes.",
-    "why": "Diabetes screening is already current in the supplied data. The appropriate maintenance action is interval documentation after normal results, with earlier reassessment only if metabolic risk or symptoms change.",
-    "goal": "Interval: Repeat at a standard periodic interval after normal results, commonly about every 3 years, or sooner if weight, blood pressure, lipids, symptoms, glucocorticoid exposure, or family history changes.. Escalation: Escalate if HbA1c enters prediabetes or diabetes range, fasting glucose becomes abnormal, symptoms suggest hyperglycemia, or repeated results are discordant.. Stop/de-intensify: Avoid short-interval repeat testing when HbA1c and fasting glucose remain normal and no new risk factor or symptom is present; discontinue screening only when age, life expectancy, or clinical context makes detection non-actionable..",
+    "timing": "Mild ApoB/LDL elevation warrants routine longitudinal monitoring, but CAC=0, normal BP, favorable glycemia, and high fitness reduce urgency and support interval-based follow-up.",
+    "do": "<strong>Periodic lipid and ApoB monitoring with CAC=0 context documented</strong>. LDL-C and ApoB are mildly elevated relative to an otherwise favorable vascular profile. Monitoring should follow LDL-C, non-HDL-C, ApoB, triglycerides, HDL-C, and Lp(a) unit/status documentation over time, while explicitly preserving the CAC=0 context.",
+    "why": "Standard cardiovascular prevention uses periodic lipid and ApoB-containing lipoprotein monitoring to guide risk discussion and therapy thresholds. CAC=0 is commonly used as contextual information for near-term coronary plaque burden and should be documented rather than ignored.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Diabetes and prediabetes screening cadence after normal glycemic markers"
+        "glyph": "\u271a",
+        "label": "Periodic lipid and ApoB monitoring with CAC=0 context docume"
       }
     ],
-    "evidence": "Care-maintenance order · Guideline-based adult preventive care supports periodic diabetes and prediabetes screening in adults with age and metabolic risk context, with less frequent testing after normal results.",
-    "author": "meridian"
+    "evidence": "Standard cardiovascular prevention uses periodic lipid and ApoB-containing lipoprotein monitoring to guide risk discussion and therapy thresholds. CAC=0 is commonly used as contextual information for near-term coronary plaque burden and should be documented rather than ignored.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-008",
+    "id": "SOCM-012",
     "lane": "soc",
     "originalRank": 12,
-    "title": "Routine blood pressure surveillance with home or ambulatory confirmation gate",
+    "title": "Routine metabolic surveillance with HbA1c, fasting glucose, weight, and waist or body-composition context",
     "severity": "SoC Monitoring",
-    "timing": "Ongoing routine surveillance",
-    "do": "<strong>Routine blood pressure surveillance with home or ambulatory confirmation gate</strong>. Clinic blood pressure is 116/76 mmHg, no hypertension diagnosis is present, no antihypertensive medication is used, and home blood pressure or ambulatory blood pressure data are not collected. Standardized office blood pressure measurement at routine clinical encounters; home blood pressure log or 24-hour ambulatory blood pressure monitoring if clinic readings become elevated, variable, or clinically discordant.. Ongoing; current clinic blood pressure is normal but lacks longitudinal home or ambulatory confirmation.",
-    "why": "Blood pressure should continue to be measured at routine preventive visits. The care-maintenance gate is to use home or ambulatory confirmation only if clinic readings become elevated, variable, or clinically discordant.",
-    "goal": "Interval: Measure blood pressure at routine preventive visits; if elevated readings occur, repeat with proper technique and confirm outside the clinic before diagnosing hypertension when feasible.. Escalation: Escalate to home or ambulatory confirmation if repeated office readings are elevated, if symptoms or organ findings suggest masked hypertension, or if kidney or cardiovascular markers become discordant with normal clinic readings.. Stop/de-intensify: Do not order ABPM or intensive home monitoring as a standing test when clinic blood pressure remains normal and there is no suspicion of masked hypertension; continue routine clinic surveillance..",
+    "timing": "Current metabolic markers are favorable, so routine periodic surveillance is appropriate but not urgent; East Asian ancestry and gout history support continued interval tracking.",
+    "do": "<strong>Routine metabolic surveillance with HbA1c, fasting glucose, weight, and waist or body-composition context</strong>. Current metabolic markers are favorable, but longitudinal monitoring remains standard for a 47-year-old adult, especially with East Asian ancestry and prior gout history. The monitoring job is periodic HbA1c or fasting glucose, weight trajectory, and cardiometabolic context rather than active diabetes workup.",
+    "why": "Standard adult preventive care includes periodic diabetes and metabolic risk screening using glycemic markers and weight or adiposity context. Frequency is individualized by baseline values and risk factors.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Routine blood pressure surveillance with home or ambulatory confirmation gate"
+        "glyph": "\u271a",
+        "label": "Routine metabolic surveillance with HbA1c, fasting glucose, "
       }
     ],
-    "evidence": "Care-maintenance order · Standard hypertension screening practice uses office measurement and confirms elevated readings with out-of-office measurements to reduce misclassification.",
-    "author": "meridian"
+    "evidence": "Standard adult preventive care includes periodic diabetes and metabolic risk screening using glycemic markers and weight or adiposity context. Frequency is individualized by baseline values and risk factors.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCS-011",
+    "id": "SOCM-007",
     "lane": "soc",
     "originalRank": 13,
-    "title": "CAC=0 vascular imaging interval documentation with repeat-testing gate",
-    "severity": "SoC Monitoring",
-    "timing": "CAC report reconciliation is due if the actual report/date is ab",
-    "do": "<strong>CAC=0 vascular imaging interval documentation with repeat-testing gate</strong>. CAC=0 was completed in 2026, while CCTA plaque burden and carotid IMT/plaque are not collected; patient is asymptomatic in the supplied payload and has no smoking, hypertension, diabetes, or elevated Lp(a) signal. Document the CAC=0 report date and result; do not repeat CAC or add CCTA/carotid screening unless a clinician-defined indication appears.. Report reconciliation is due if the actual CAC report/date is not in the medical record; repeat vascular imaging is not due from the supplied facts.",
-    "why": "The completed CAC=0 result should be documented and used to prevent low-yield repeat vascular imaging. Future imaging should be gated by appropriate interval or new clinical indication.",
-    "goal": "Interval: Reassess at routine ASCVD preventive reviews; repeat vascular imaging only after an appropriate multi-year interval or if new clinical indications arise.. Escalation: New exertional symptoms, confirmed ASCVD, diabetes, sustained hypertension, major lipid change, new smoking exposure, strong new family-history information, or clinician-determined change in risk context.. Stop/de-intensify: Avoid serial CAC, screening CCTA, and carotid imaging while the patient remains asymptomatic and the result would not change management; stop imaging-based surveillance when downstream action would not be clinically useful..",
+    "title": "Routine office BP plus home BP data capture if future readings vary or symptoms recur",
+    "severity": "SoC Monitoring \u00b7 symptom-derived",
+    "timing": "Clinic BP is normal and no hypertension is present; standard office BP monitoring continues, with home BP capture conditional on variability or symptom recurrence.",
+    "do": "<strong>Routine office BP plus home BP data capture if future readings vary or symptoms recur</strong>. Clinic BP is favorable, but no home BP stream exists. Standard monitoring is periodic office BP measurement and home BP capture if clinic readings become borderline, variability is suspected, or orthostatic symptoms become more frequent.",
+    "why": "Blood pressure monitoring is standard preventive care because BP affects cardiovascular, kidney, and neurologic risk. Home BP can clarify out-of-office patterns when clinic-only data are insufficient.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "CAC=0 vascular imaging interval documentation with repeat-testing gate"
+        "glyph": "\u271a",
+        "label": "Routine office BP plus home BP data capture if future readin"
       }
     ],
-    "evidence": "Care-maintenance order · Guideline-grade and standard-practice use of CAC for primary-prevention risk clarification supports documenting the completed result and avoiding low-yield repeat imaging in asymptomatic contexts.",
-    "author": "meridian"
+    "evidence": "Blood pressure monitoring is standard preventive care because BP affects cardiovascular, kidney, and neurologic risk. Home BP can clarify out-of-office patterns when clinic-only data are insufficient.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCS-009",
+    "id": "SOCM-008",
     "lane": "soc",
     "originalRank": 14,
-    "title": "Lung cancer screening non-eligibility documentation for never-smoker status",
-    "severity": "SoC Monitoring",
-    "timing": "Not due for LDCT lung cancer screening under documented never-sm",
-    "do": "<strong>Lung cancer screening non-eligibility documentation for never-smoker status</strong>. Patient is 47 years old with never-smoker status, 0 pack-years, and LDCT status marked not applicable. Document tobacco exposure history and LDCT non-eligibility; update smoking and occupational exposure history during preventive care.. Not due for low-dose CT lung cancer screening under the documented exposure history.",
-    "why": "The maintenance task is to document non-eligibility and periodically update tobacco and relevant exposure history during preventive care.",
-    "goal": "Interval: Reassess tobacco and relevant exposure history periodically during routine preventive visits; LDCT eligibility should be reconsidered only if exposure history changes or previously missing exposure data are corrected.. Escalation: Escalate to LDCT eligibility review if a qualifying cigarette pack-year history is later documented, if smoking status changes, or if a separate diagnostic indication such as symptoms or abnormal imaging appears.. Stop/de-intensify: Do not perform screening LDCT while the patient remains a never smoker without qualifying exposure history; diagnostic chest imaging remains separate if symptoms or clinical findings arise..",
+    "title": "Orthostatic vitals protocol for recurrent or worsening lightheadedness",
+    "severity": "SoC Monitoring \u00b7 symptom-derived",
+    "timing": "Orthostatic vitals are clinically appropriate if episodes recur, worsen, or add red flags; current frequency is very low, so this is conditional rather than immediately due.",
+    "do": "<strong>Orthostatic vitals protocol for recurrent or worsening lightheadedness</strong>. The patient reports rare episodes of lightheadedness after standing quickly, previously severe enough to require sitting down but now only a couple times per year. Standard monitoring is to capture lying/sitting/standing BP and HR if symptoms recur, worsen, occur with exertion, or are associated with syncope or palpitations.",
+    "why": "Orthostatic vital signs are a standard clinical evaluation for postural lightheadedness. Escalation is based on frequency, injury, syncope, arrhythmia symptoms, exertional association, medication triggers, dehydration, or abnormal measured BP/HR response.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Lung cancer screening non-eligibility documentation for never-smoker status"
+        "glyph": "\u271a",
+        "label": "Orthostatic vitals protocol for recurrent or worsening light"
       }
     ],
-    "evidence": "Care-maintenance order · Standard lung cancer screening recommendations restrict LDCT to defined age and smoking-exposure groups; never-smoker status supports non-eligibility documentation and overuse avoidance.",
-    "author": "meridian"
+    "evidence": "Orthostatic vital signs are a standard clinical evaluation for postural lightheadedness. Escalation is based on frequency, injury, syncope, arrhythmia symptoms, exertional association, medication triggers, dehydration, or abnormal measured BP/HR response.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCS-010",
+    "id": "SOCM-015",
     "lane": "soc",
     "originalRank": 15,
-    "title": "Symptom-gated sleep and neurodiagnostic screening with asymptomatic advanced-test avoidance",
+    "title": "Document CAC=0 date and defer repeat coronary imaging unless risk context changes",
     "severity": "SoC Monitoring",
-    "timing": "No advanced sleep or neurodiagnostic screening is currently due ",
-    "do": "<strong>Symptom-gated sleep and neurodiagnostic screening with asymptomatic advanced-test avoidance</strong>. No neurodegenerative diagnosis or first-degree dementia family history is documented; APOE and neuro biomarkers are not collected; amyloid PET and brain MRI are marked not standard onboarding; sleep duration and efficiency are generally adequate. Periodic clinical review for cognitive, neurologic, sleep-apnea, or daytime-sleepiness symptoms; reserve sleep study, brain MRI, amyloid PET, or plasma neurobiomarkers for standard diagnostic indications rather than routine asymptomatic screening.. No advanced neurodiagnostic or sleep-study screening is currently due based on the supplied asymptomatic profile.",
-    "why": "Routine preventive care should include symptom review for cognitive, neurologic, sleep-apnea, or daytime-sleepiness concerns, while reserving sleep studies, brain MRI, amyloid PET, or neurobiomarkers for standard diagnostic indications.",
-    "goal": "Interval: Review symptoms during routine preventive care; reassess sooner if cognitive change, focal neurologic symptoms, witnessed apneas, excessive daytime sleepiness, resistant hypertension, atrial fibrillation, or other standard clinical triggers emerge.. Escalation: Escalate to diagnostic testing if symptom review, exam, family history update, or clinical findings create a standard indication for sleep or neurologic evaluation.. Stop/de-intensify: Avoid routine amyloid PET, brain MRI, plasma neurobiomarker panels, or sleep studies in the absence of symptoms or a standard diagnostic indication..",
+    "timing": "Record reconciliation is useful, but the main care-maintenance logic is de-intensification: CAC=0 should be preserved and repeat imaging deferred unless risk or symptoms change.",
+    "do": "<strong>Document CAC=0 date and defer repeat coronary imaging unless risk context changes</strong>. CAC score is documented as 0 in 2026, but raw screening history also contains CAC fields marked not collected, creating a record consistency issue. Standard monitoring is to reconcile the CAC date/source, preserve CAC=0 in cardiovascular interpretation, and avoid near-term repeat CAC, CCTA, or carotid imaging unless symptoms or risk status change.",
+    "why": "Coronary calcium scoring is used as a risk-context tool in selected adults. A CAC=0 result generally supports lower near-term calcified plaque burden, and repeat imaging should be interval-based or risk-change-based rather than automatic.",
+    "goal": "",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Symptom-gated sleep and neurodiagnostic screening with asymptomatic advanced-tes"
+        "glyph": "\u271a",
+        "label": "Document CAC=0 date and defer repeat coronary imaging unless"
       }
     ],
-    "evidence": "Care-maintenance order · Standard care supports diagnostic evaluation when symptoms or clinical findings are present and cautions against advanced screening tests in asymptomatic adults without an accepted screening indication.",
-    "author": "meridian"
+    "evidence": "Coronary calcium scoring is used as a risk-context tool in selected adults. A CAC=0 result generally supports lower near-term calcified plaque burden, and repeat imaging should be interval-based or risk-change-based rather than automatic.",
+    "author": "meridian",
+    "symptom_derived": false
   }
 ];
 
   // ---- SOC RISK REDUCTION · canonical SPAREQ v0.1 ----
   const RISK_MAINTENANCE = [
   {
-    "id": "SOCR-014",
-    "lane": "riskMaintenance",
+    "id": "RMA-003",
+    "lane": "risk",
     "originalRank": 1,
-    "score": 3.8,
-    "spareq": {
-      "s": 5,
-      "p": 3,
-      "a": 4,
-      "r": 3,
-      "e": 3,
-      "q": 4
-    },
-    "title": "Genetics counseling for ATM-informed risk-reduction boundaries and cascade testing",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.80",
-    "do": "<strong>Complete genetics professional counseling to confirm variant interpretation, document which risk-reduction actions are standard versus unsupported, guide family cascade testing, and clarify the paternal grandfather’s GI cancer primary site if possible.</strong>. Target: Appropriate hereditary-risk management, avoidance of unsupported interventions, and identification of relatives who may benefit from standard testing and prevention pathways.. Threshold: Initiate when a pathogenic germline variant is documented and counseling has not been captured; escalate if family history clarification reveals a specific syndrome-relevant cancer pattern..",
-    "why": "SPAREQ 3.80. Driver: A pathogenic heterozygous ATM variant creates an inherited cancer-risk management context, while the family GI cancer phenotype is incompletely characterized.. Paternal grandfather’s GI cancer primary site is uncertain, and variant-specific recommendations may differ by guideline and family history.",
-    "goal": "Follow-up metric: Genetics consultation note, confirmed variant-management recommendations, family-history update, relatives offered cascade testing where appropriate, and documented boundaries against non-indicated actions.. Harm/tradeoff: Potential harms include anxiety, privacy concerns, insurance or family communication issues, and over-treatment if the variant is applied beyond evidence-supported indications..",
+    "title": "Preserve high cardiorespiratory fitness with planned periodization rather than continuous high load",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 4.15",
+    "do": "<strong>Preserve high cardiorespiratory fitness with planned periodization rather than continuous high load</strong>. His fitness is a major protective driver across CVD, metabolic, neuro, and possibly kidney risk, but chronic low back and hip/glute insertion symptoms may threaten training continuity. Periodized training can protect the beneficial exercise exposure while reducing overuse risk.",
+    "why": "High fitness is a major cross-domain protective driver, and active back/hip symptoms make training durability highly relevant; periodization is actionable, reversible, and well supported by exercise and sports-medicine principles.",
+    "goal": "S=3, P=5, A=5, R=4, E=4, Q=4 \u00b7 Exercise is strongly supported for cardiometabolic and neuro risk reduction. Sports-medicine practice supports periodization and load management to reduce overuse injury and maintain long-term adherence.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Genetics counseling for ATM-informed risk-reduction boundaries and cascade testi"
+        "glyph": "\u271a",
+        "label": "Preserve high cardiorespiratory fitness with planned periodi"
       }
     ],
-    "evidence": "Canonical SPAREQ · S5 P3 A4 R3 E3 Q4 · Standard inherited-risk practice supports professional counseling and cascade-testing workflows for pathogenic germline findings; retrieval included germline-variant and prostate-cancer germline testing implementation literature.",
-    "author": "meridian"
+    "evidence": "Exercise is strongly supported for cardiometabolic and neuro risk reduction. Sports-medicine practice supports periodization and load management to reduce overuse injury and maintain long-term adherence.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-008",
-    "lane": "riskMaintenance",
+    "id": "RMA-004",
+    "lane": "risk",
     "originalRank": 2,
-    "score": 3.65,
-    "spareq": {
-      "s": 4,
-      "p": 3,
-      "a": 4,
-      "r": 3,
-      "e": 3,
-      "q": 5
-    },
-    "title": "Adult immunization record reconciliation and indicated vaccination",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.65",
-    "do": "<strong>Reconcile state registry, pharmacy, employer, travel, and prior-clinic vaccine records; administer age- and risk-indicated adult vaccines per the current official adult immunization schedule after contraindication review.</strong>. Target: Close vaccine-preventable infection gaps appropriate for a 47-year-old male and documented clinical risk profile.. Threshold: Begin with record reconciliation because vaccine history is missing; administer vaccines when prior completion cannot be verified and current guidance indicates vaccination..",
-    "why": "SPAREQ 3.65. Driver: Immunization history is absent, leaving preventable infection risk unresolved.. Actual prior vaccine completion, contraindications, hepatitis B immunity, and travel-related needs are unknown.",
-    "goal": "Follow-up metric: Updated immunization record with vaccine name, date, lot if available, series status, contraindications, and next due date.. Harm/tradeoff: Potential harms include local reactions, fever, rare allergic or immune-mediated adverse events, unnecessary repeat dosing when prior records exist, and inappropriate administration if contraindications are missed..",
+    "title": "Physical-therapy-guided low back and hip insertional tendon rehabilitation",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 4.05",
+    "do": "<strong>Physical-therapy-guided low back and hip insertional tendon rehabilitation</strong>. The current active symptom burden is chronic low back pain plus persistent hip-flexor/glute insertion tenderness. A structured rehab plan could reduce pain, improve load tolerance, and prevent loss of protective exercise capacity.",
+    "why": "Directly targets the current symptom bottleneck most likely to erode protective activity. Effort is moderate, but outcome redirection is high because successful rehab preserves exercise continuity.",
+    "goal": "S=3, P=5, A=5, R=4, E=3, Q=4 \u00b7 For chronic mechanical low back pain and tendinopathy-like insertional symptoms without red flags, guideline-consistent management emphasizes active rehabilitation, progressive loading, movement assessment, and return-to-activity planning.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Adult immunization record reconciliation and indicated vaccination"
+        "glyph": "\u271a",
+        "label": "Physical-therapy-guided low back and hip insertional tendon "
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P3 A4 R3 E3 Q5 · Adult immunization schedules are standard preventive care and reduce infection-related morbidity; final vaccine selection must use the current official adult schedule and patient-specific contraindication review.",
-    "author": "meridian"
+    "evidence": "For chronic mechanical low back pain and tendinopathy-like insertional symptoms without red flags, guideline-consistent management emphasizes active rehabilitation, progressive loading, movement assessment, and return-to-activity planning.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-010",
-    "lane": "riskMaintenance",
+    "id": "RMA-010",
+    "lane": "risk",
     "originalRank": 3,
-    "score": 3.65,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 4,
-      "r": 3,
-      "e": 5,
-      "q": 5
-    },
-    "title": "Avoid routine aspirin for primary cardiovascular prevention without a qualifying indication",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.65",
-    "do": "<strong>Do not start daily aspirin for primary cardiovascular prevention unless a clinician documents a qualifying indication after individualized ASCVD and bleeding-risk assessment.</strong>. Target: Avoid preventable bleeding harm while preserving access to aspirin if a future secondary-prevention or other accepted indication appears.. Threshold: Current state supports non-initiation; reconsider only with a new clinician-documented indication such as established ASCVD or a future risk-benefit profile that meets accepted guidance..",
-    "why": "SPAREQ 3.65. Driver: Primary-prevention aspirin can cause bleeding harm, and the current patient state does not show prior ASCVD, diabetes, hypertension, smoking, or coronary calcium.. Formal 10-year ASCVD risk and bleeding history are not fully supplied.",
-    "goal": "Follow-up metric: Medication list review, new ASCVD diagnoses or events, bleeding-risk factors, anticoagulant/NSAID use, and clinician-calculated risk context if aspirin is reconsidered.. Harm/tradeoff: Avoiding aspirin could theoretically forgo benefit in a future higher-risk state, but starting without indication exposes the patient to gastrointestinal bleeding, hemorrhagic stroke, bruising, and interaction risks..",
+    "title": "NSAID and kidney-stressor harm-reduction plan for pain or gout-like flares",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.8",
+    "do": "<strong>NSAID and kidney-stressor harm-reduction plan for pain or gout-like flares</strong>. Musculoskeletal pain and prior gout could lead to episodic NSAID use, while creatinine is mildly high relative to age despite reassuring cystatin C and urine markers. A harm-reduction plan can reduce avoidable kidney and GI risk.",
+    "why": "Pain and prior gout make intermittent NSAID exposure plausible, while creatinine interpretation is nuanced; avoiding dehydration/illness/exertion-associated nephrotoxic exposure is easy and can prevent reversible AKI/GI harm.",
+    "goal": "S=4, P=3, A=4, R=4, E=4, Q=4 \u00b7 Standard kidney and medication-safety practice recommends caution with NSAIDs during dehydration, illness, heavy endurance exertion, or possible kidney vulnerability, and using the lowest effective exposure when clinically appropriate.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Avoid routine aspirin for primary cardiovascular prevention without a qualifying"
+        "glyph": "\u271a",
+        "label": "NSAID and kidney-stressor harm-reduction plan for pain or go"
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A4 R3 E5 Q5 · Primary-prevention guidance generally limits aspirin use because bleeding harm can outweigh benefit when ASCVD risk is not sufficiently high or bleeding risk is relevant.",
-    "author": "meridian"
+    "evidence": "Standard kidney and medication-safety practice recommends caution with NSAIDs during dehydration, illness, heavy endurance exertion, or possible kidney vulnerability, and using the lowest effective exposure when clinically appropriate.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-003",
-    "lane": "riskMaintenance",
+    "id": "RMA-001",
+    "lane": "risk",
     "originalRank": 4,
-    "score": 3.55,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 4,
-      "r": 3,
-      "e": 4,
-      "q": 5
-    },
-    "title": "Guideline-concordant exercise maintenance with recovery safeguards",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.55",
-    "do": "<strong>Maintain regular aerobic and muscle-strengthening physical activity consistent with adult guideline recommendations, with recovery-aware load management and injury prevention.</strong>. Target: Preserve high cardiorespiratory fitness, insulin sensitivity, healthy BP, healthy body composition, and functional reserve.. Threshold: Continue because current activity appears beneficial; modify if injury, overtraining symptoms, persistent HRV/resting-heart-rate deterioration with symptoms, unexplained performance decline, or inadequate recovery occurs..",
-    "why": "SPAREQ 3.55. Driver: Long-term cardiometabolic, vascular, functional, and neurocognitive risk is favorably modified by sustained physical activity; patient already has high fitness and activity signals.. Exact weekly training composition, resistance dose, injury history, and recovery constraints are not fully characterized.",
-    "goal": "Follow-up metric: Weekly activity minutes, resistance-training participation, injury events, resting HR/HRV trend interpreted with symptoms, VO2max or functional performance, BP, HbA1c/glucose, weight, and lipid markers.. Harm/tradeoff: Mountain biking, snowboarding, BJJ, gym training, and endurance activity can carry traumatic injury, overuse injury, and under-recovery risk; benefit depends on sustainable dosing..",
+    "title": "Calibrated ApoB/LDL reduction through a heart-healthy dietary pattern",
+    "severity": "Risk Mitigation",
+    "timing": "SPAREQ 3.65",
+    "do": "<strong>Calibrated ApoB/LDL reduction through a heart-healthy dietary pattern</strong>. ApoB 96 mg/dL and LDL-C 121 mg/dL are mild modifiable vascular signals, even though CAC=0, BP, glycemia, triglycerides, smoking status, and fitness are favorable. A calibrated nutrition-first approach can reduce lifetime vascular exposure without over-framing him as high near-term risk.",
+    "why": "ApoB/LDL are modifiable lifetime vascular drivers, though current near-term risk is tempered by CAC=0 and favorable physiology; nutrition-first reduction has strong evidence and proportionate intensity.",
+    "goal": "S=4, P=3, A=4, R=3, E=3, Q=5 \u00b7 Guideline-consistent cardiovascular prevention supports dietary patterns rich in unsaturated fats, minimally processed plant foods, legumes, nuts, whole grains, and fish to reduce LDL/ApoB and cardiometabolic risk. CAC=0 supports a proportionate prevention posture rather than aggressive high-risk es",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Guideline-concordant exercise maintenance with recovery safeguards"
+        "glyph": "\u271a",
+        "label": "Calibrated ApoB/LDL reduction through a heart-healthy dietar"
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A4 R3 E4 Q5 · Adult physical-activity guidelines and broad human evidence support aerobic and muscle-strengthening activity for cardiometabolic and functional risk reduction; supplied retrieval included exercise-related literature but not a direct adult-prevention guideline citation.",
-    "author": "meridian"
+    "evidence": "Guideline-consistent cardiovascular prevention supports dietary patterns rich in unsaturated fats, minimally processed plant foods, legumes, nuts, whole grains, and fish to reduce LDL/ApoB and cardiometabolic risk. CAC=0 supports a proportionate prevention posture rather than aggressive high-risk escalation.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCR-013",
-    "lane": "riskMaintenance",
+    "id": "RMA-005",
+    "lane": "risk",
     "originalRank": 5,
-    "score": 3.55,
-    "spareq": {
-      "s": 5,
-      "p": 1,
-      "a": 4,
-      "r": 2,
-      "e": 5,
-      "q": 5
-    },
-    "title": "Tobacco and nicotine non-initiation with secondhand-smoke avoidance",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.55",
-    "do": "<strong>Maintain never-smoker status; avoid combustible tobacco, vaping, nicotine products, and meaningful secondhand-smoke exposure; use cessation support only if future exposure or dependence occurs.</strong>. Target: Sustain 0 pack-year status and avoid new tobacco or nicotine exposure.. Threshold: Escalate to cessation counseling and pharmacotherapy only if active nicotine or tobacco use begins or relapse risk becomes clinically relevant..",
-    "why": "SPAREQ 3.55. Driver: Tobacco smoke and nicotine-product initiation would create avoidable cardiovascular, cancer, pulmonary, and kidney risk; the patient currently has a favorable never-smoker exposure state.. Secondhand smoke, vaping aerosol, household, social, and occupational exposure details are not provided.",
-    "goal": "Follow-up metric: Tobacco/nicotine exposure status, secondhand-smoke exposure history, and any occupational or household exposure changes.. Harm/tradeoff: Avoidance has minimal downside; unnecessary cessation medication in a non-user would be inappropriate and could cause adverse effects..",
+    "title": "Technique and exposure modification for high-impact activities during symptom flares",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.65",
+    "do": "<strong>Technique and exposure modification for high-impact activities during symptom flares</strong>. Mountain biking, snowboarding, BJJ, gym work, and endurance training are beneficial but can aggravate spine, hip, and tendon load. Temporary modification during symptom flares may prevent progression while allowing continued activity.",
+    "why": "During flares, modifying BJJ/MTB/snowboarding/gym loads is easy and reversible, reducing injury progression while preserving activity rather than forcing rest.",
+    "goal": "S=3, P=4, A=4, R=4, E=4, Q=3 \u00b7 Sports-medicine practice supports relative load modification, technique adjustment, and graded return rather than complete rest for many non-red-flag musculoskeletal complaints.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Tobacco and nicotine non-initiation with secondhand-smoke avoidance"
+        "glyph": "\u271a",
+        "label": "Technique and exposure modification for high-impact activiti"
       }
     ],
-    "evidence": "Canonical SPAREQ · S5 P1 A4 R2 E5 Q5 · Standard preventive medicine and public-health practice supports complete tobacco avoidance; bucket retrieval included the exposure-reduction family, though no direct tobacco-specific citation was returned in this chunk.",
-    "author": "meridian"
+    "evidence": "Sports-medicine practice supports relative load modification, technique adjustment, and graded return rather than complete rest for many non-red-flag musculoskeletal complaints.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-001",
-    "lane": "riskMaintenance",
+    "id": "RMA-012",
+    "lane": "risk",
     "originalRank": 6,
-    "score": 3.45,
-    "spareq": {
-      "s": 4,
-      "p": 3,
-      "a": 3,
-      "r": 3,
-      "e": 3,
-      "q": 5
-    },
-    "title": "Heart-healthy lipid-lowering dietary pattern",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.45",
-    "do": "<strong>Adopt or maintain a heart-healthy dietary pattern emphasizing saturated-fat replacement with unsaturated fats, minimally processed foods, legumes, nuts, whole grains, vegetables, and soluble-fiber-containing foods.</strong>. Target: Lower LDL-C, non-HDL-C, and ApoB while maintaining healthy body weight and training capacity.. Threshold: Appropriate now because LDL-C/ApoB/non-HDL-C are modifiable above ideal levels; escalate intensity if repeat LDL-C, non-HDL-C, or ApoB remains above individualized primary-prevention goals or worsens over serial testing..",
-    "why": "SPAREQ 3.45. Driver: Modest atherogenic lipid signal: LDL-C 121 mg/dL, ApoB 96 mg/dL, non-HDL-C 137 mg/dL, with CAC=0 and otherwise favorable metabolic profile.. No current diet history, serial lipid trend, or individualized lipid target is supplied.",
-    "goal": "Follow-up metric: Repeat fasting or nonfasting lipid panel with ApoB; track weight stability, dietary tolerance, and training recovery.. Harm/tradeoff: Excess dietary restriction may cause unwanted weight loss, inadequate energy availability, or impaired recovery in a lean, highly active adult..",
+    "title": "Maintain adult immunization protection once vaccine history is reconciled",
+    "severity": "Risk Mitigation",
+    "timing": "SPAREQ 3.65",
+    "do": "<strong>Maintain adult immunization protection once vaccine history is reconciled</strong>. No immunization history is present. Adult vaccine closure is a direct infection-risk mitigation action, especially for preventable respiratory, hepatic, and other age-appropriate infections.",
+    "why": "Adult vaccines reduce preventable infection risk with high evidence quality, but exact relevance depends on missing records and schedule status.",
+    "goal": "S=4, P=3, A=4, R=3, E=3, Q=5 \u00b7 Adult immunizations are standard preventive risk reduction. Specific products and timing require record reconciliation and clinician review rather than assumption from the payload.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Heart-healthy lipid-lowering dietary pattern"
+        "glyph": "\u271a",
+        "label": "Maintain adult immunization protection once vaccine history "
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P3 A3 R3 E3 Q5 · Guideline-supported lifestyle nutrition is standard first-line risk-factor modification for primary prevention and dyslipidemia management; supplied retrieval included dietary-pattern and guideline-alignment literature, though retrieved items were not all directly matched to this exact patient phenotype.",
-    "author": "meridian"
+    "evidence": "Adult immunizations are standard preventive risk reduction. Specific products and timing require record reconciliation and clinician review rather than assumption from the payload.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCR-006",
-    "lane": "riskMaintenance",
+    "id": "RMA-011",
+    "lane": "risk",
     "originalRank": 7,
-    "score": 3.35,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 5
-    },
-    "title": "Normotensive blood pressure preservation without antihypertensive treatment",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.35",
-    "do": "<strong>Maintain BP-supportive habits: keep regular activity, avoid progressive sodium excess, emphasize potassium-containing whole foods when clinically appropriate, avoid escalation of alcohol intake, and do not start antihypertensive medication unless hypertension is confirmed by accepted measurement standards.</strong>. Target: Maintain normotensive BP, with usual clinical target remaining below diagnostic hypertension thresholds and ideally near the current normal range if tolerated.. Threshold: Initiate preservation counseling now because BP is normal; escalate to structured home BP or ambulatory confirmation and clinician-directed treatment only if repeated office, home, or ambulatory readings meet accepted hypertension criteria..",
-    "why": "SPAREQ 3.35. Driver: Clinic BP is currently normal at 116/76 mmHg, but blood pressure is a modifiable vascular, renal, and neurovascular risk factor over time.. No home or ambulatory BP stream is available, so masked hypertension and long-term trend are unknown.",
-    "goal": "Follow-up metric: Clinic BP; validated home BP or ambulatory BP if readings rise, symptoms occur, or white-coat/masked hypertension is suspected.. Harm/tradeoff: Excessive sodium restriction or unnecessary antihypertensive therapy can cause orthostatic symptoms, impaired exercise tolerance, electrolyte disturbances, and medication adverse effects..",
+    "title": "Magnesium supplementation safety reconciliation",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.55",
+    "do": "<strong>Magnesium supplementation safety reconciliation</strong>. The patient reports magnesium use associated with gout resolution, but the supplement list says none. Reconciliation can preserve a potentially useful N-of-1 intervention while reducing dose, formulation, GI, and renal safety risks.",
+    "why": "The patient is likely using an undocumented supplement with perceived benefit; reconciliation is low effort and can prevent dose, GI, renal, or interaction blind spots.",
+    "goal": "S=3, P=4, A=3, R=4, E=4, Q=4 \u00b7 Medication/supplement reconciliation is standard safety practice. Magnesium has human physiologic relevance and common use, but it should be documented with dose and formulation, particularly when kidney function interpretation is nuanced.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Normotensive blood pressure preservation without antihypertensive treatment"
+        "glyph": "\u271a",
+        "label": "Magnesium supplementation safety reconciliation"
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A3 R3 E4 Q5 · Blood-pressure guidelines and lifestyle-prevention standards support lifestyle measures for normal or elevated BP and medication only after diagnostic thresholds and clinical context justify treatment.",
-    "author": "meridian"
+    "evidence": "Medication/supplement reconciliation is standard safety practice. Magnesium has human physiologic relevance and common use, but it should be documented with dose and formulation, particularly when kidney function interpretation is nuanced.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-007",
-    "lane": "riskMaintenance",
+    "id": "RMA-013",
+    "lane": "risk",
     "originalRank": 8,
-    "score": 3.35,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 5
-    },
-    "title": "Metabolic health maintenance with diabetes-medication threshold discipline",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.35",
-    "do": "<strong>Maintain current healthy weight and glycemic profile using existing activity and nutrition foundations; avoid metformin, GLP-1 receptor agonist therapy, or other diabetes-prevention medication unless accepted indications such as prediabetes, diabetes, obesity, or another clinician-documented indication develop.</strong>. Target: Preserve HbA1c and fasting glucose in the normal range and avoid sustained upward weight or waist trajectory.. Threshold: Lifestyle maintenance applies now; medication consideration would require a qualifying metabolic diagnosis, obesity/weight indication, or other accepted indication documented by the treating clinician..",
-    "why": "SPAREQ 3.35. Driver: Diabetes and weight gain are major modifiable long-term cardiometabolic and kidney risk drivers, but current markers are normal and the patient is lean.. No longitudinal weight, waist, fasting glucose, or HbA1c trend is supplied.",
-    "goal": "Follow-up metric: HbA1c, fasting glucose, weight trajectory, waist circumference if collected, and medication-indication review if values change.. Harm/tradeoff: Unindicated metabolic medication can create gastrointestinal effects, cost, lean-mass concerns for some weight-loss approaches, monitoring burden, and mislabeling of a normal metabolic state..",
+    "title": "Maintain sleep duration and efficiency as a cardiometabolic and neuroprotective behavior",
+    "severity": "Risk Mitigation",
+    "timing": "SPAREQ 3.55",
+    "do": "<strong>Maintain sleep duration and efficiency as a cardiometabolic and neuroprotective behavior</strong>. Sleep is currently adequate, with wearable median sleep around 7.17 hours and efficiency 88%. Maintaining this supports the low-strain phenotype and training recovery.",
+    "why": "Sleep is already favorable and highly relevant to recovery and metabolic health; action is mostly maintenance, so urgency and reversibility are lower than for active symptom bottlenecks.",
+    "goal": "S=3, P=5, A=4, R=2, E=3, Q=4 \u00b7 Adequate sleep duration and quality are standard lifestyle pillars for cardiometabolic, neurocognitive, mood, and recovery health. This is maintenance of an optimized risk-reduction behavior rather than treatment of a sleep disorder.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Metabolic health maintenance with diabetes-medication threshold discipline"
+        "glyph": "\u271a",
+        "label": "Maintain sleep duration and efficiency as a cardiometabolic "
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A3 R3 E4 Q5 · Diabetes care standards support positive health behaviors and define diagnostic categories for diabetes and prediabetes; pharmacologic prevention is not a default intervention in a lean normoglycemic adult.",
-    "author": "meridian"
+    "evidence": "Adequate sleep duration and quality are standard lifestyle pillars for cardiometabolic, neurocognitive, mood, and recovery health. This is maintenance of an optimized risk-reduction behavior rather than treatment of a sleep disorder.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCR-004",
-    "lane": "riskMaintenance",
+    "id": "RMA-008",
+    "lane": "risk",
     "originalRank": 9,
-    "score": 3.25,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 4
-    },
-    "title": "Alcohol exposure minimization for cancer and cardiometabolic prevention",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.25",
-    "do": "<strong>Keep alcohol within low-risk limits and consider reduction toward abstinence if the patient’s goal is maximal cancer-risk exposure reduction.</strong>. Target: Lower avoidable alcohol-associated cancer and cardiometabolic risk while preserving patient preference and quality of life.. Threshold: Appropriate now as exposure counseling because current intake is about 3 drinks/week; escalate counseling if intake rises, binge episodes occur, liver markers change, sleep/recovery worsens, or cancer-risk counseling favors stricter avoidance..",
-    "why": "SPAREQ 3.25. Driver: Alcohol is a modifiable carcinogenic and cardiometabolic exposure; patient reports low current intake and has an inherited ATM DNA-repair risk signal.. Drink size, binge pattern, liver markers, sleep effects, and patient willingness to reduce are not fully known.",
-    "goal": "Follow-up metric: Drinks per week, binge episodes, sleep quality, HRV/recovery context, liver enzymes, GGT, triglycerides, BP, and patient-stated goals.. Harm/tradeoff: At low intake, absolute risk reduction may be modest; counseling should avoid overstating precision for ATM-specific alcohol interactions..",
+    "title": "Hydration and heat-exposure strategy around exercise, alcohol, and travel",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.45",
+    "do": "<strong>Hydration and heat-exposure strategy around exercise, alcohol, and travel</strong>. Hydration may matter across rare orthostatic lightheadedness, prior gout, high activity, and kidney stress avoidance. This is a low-downside mitigation lever when individualized to avoid overhydration.",
+    "why": "One low-downside behavior plausibly addresses rare orthostatic symptoms, prior gout triggers, exertional kidney stress, and training performance, though evidence is largely pragmatic and context-dependent.",
+    "goal": "S=3, P=4, A=3, R=4, E=4, Q=3 \u00b7 Clinical practice supports hydration and heat-risk mitigation for orthostatic symptoms, kidney stress prevention during exertion, and gout trigger reduction. Evidence is strongest as general risk-reduction and trigger management rather than disease-specific treatment.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Alcohol exposure minimization for cancer and cardiometabolic prevention"
+        "glyph": "\u271a",
+        "label": "Hydration and heat-exposure strategy around exercise, alcoho"
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A3 R3 E4 Q4 · Standard prevention guidance recognizes alcohol reduction as modifiable risk reduction for cancer and cardiometabolic outcomes; supplied retrieval for this exact query returned weakly matched hits, so candidate rests on general guideline-grade exposure-reduction principles rather than ATM-specific intervention evidence.",
-    "author": "meridian"
+    "evidence": "Clinical practice supports hydration and heat-risk mitigation for orthostatic symptoms, kidney stress prevention during exertion, and gout trigger reduction. Evidence is strongest as general risk-reduction and trigger management rather than disease-specific treatment.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-005",
-    "lane": "riskMaintenance",
+    "id": "RMA-006",
+    "lane": "risk",
     "originalRank": 10,
-    "score": 3.25,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 4
-    },
-    "title": "Kidney-safety precautions during physiologic or medication stress",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.25",
-    "do": "<strong>Use proportional kidney-safety precautions: avoid unnecessary high-dose or prolonged NSAID use, maintain hydration during acute illness or endurance heat exposure, and ensure renal-function review before iodinated contrast or nephrotoxic medication exposure.</strong>. Target: Reduce avoidable AKI or nephrotoxic stress while not misclassifying the patient as having confirmed kidney disease from creatinine alone.. Threshold: Use now as safety counseling because creatinine-based eGFR is lower than cystatin-based eGFR and longitudinal confirmation is absent; escalate if UACR rises, urinalysis becomes abnormal, BP increases, cystatin C eGFR falls, or serial creatinine worsens outside training/dehydration context..",
-    "why": "SPAREQ 3.25. Driver: Creatinine-cystatin discordance with creatinine 1.25 mg/dL and eGFRcreatinine 72 despite cystatin C eGFR 96, normal UACR, negative urinalysis, normal BP, athletic phenotype, and absent longitudinal renal trend.. No serial renal markers, NSAID pattern, contrast history, or lab-draw hydration/training context is supplied.",
-    "goal": "Follow-up metric: Creatinine, cystatin C, eGFR estimates, UACR, urinalysis, BP, medication/NSAID exposure, hydration/illness context, and contrast exposure history.. Harm/tradeoff: Over-avoidance of appropriate analgesia or indicated imaging could cause harm; precautions should be contextual and should not imply confirmed CKD without corroborating markers..",
+    "title": "Recovery-block protocol when HRV dips or musculoskeletal symptoms worsen",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.4",
+    "do": "<strong>Recovery-block protocol when HRV dips or musculoskeletal symptoms worsen</strong>. A documented HRV dip occurred in May 2026, and current symptoms suggest musculoskeletal load strain. A predefined recovery response could prevent overreaching and protect training consistency.",
+    "why": "Recovery blocks may prevent overreaching and injury when paired with symptoms and performance, but HRV alone is not diagnostic and thresholds are less standardized.",
+    "goal": "S=3, P=4, A=4, R=3, E=3, Q=3 \u00b7 Wearable HRV is not diagnostic by itself, but in athletes it can be used pragmatically with symptoms, sleep, and performance to guide recovery and reduce overreaching. The stronger evidence basis is symptom- and performance-informed load management.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Kidney-safety precautions during physiologic or medication stress"
+        "glyph": "\u271a",
+        "label": "Recovery-block protocol when HRV dips or musculoskeletal sym"
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A3 R3 E4 Q4 · AKI prevention and nephrotoxin avoidance are standard clinical safety practices when kidney reserve is uncertain or when dehydration, NSAIDs, contrast, or acute illness could increase risk; supplied retrieval returned weakly matched abstracts but addressed the intended kidney-safety search family.",
-    "author": "meridian"
+    "evidence": "Wearable HRV is not diagnostic by itself, but in athletes it can be used pragmatically with symptoms, sleep, and performance to guide recovery and reduce overreaching. The stronger evidence basis is symptom- and performance-informed load management.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-011",
-    "lane": "riskMaintenance",
+    "id": "RMA-014",
+    "lane": "risk",
     "originalRank": 11,
-    "score": 3.25,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 4
-    },
-    "title": "Sleep adequacy preservation with symptom-triggered sleep-apnea treatment pathway",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.25",
-    "do": "<strong>Maintain a regular sleep opportunity sufficient to preserve approximately 7 or more hours/night; if snoring, witnessed apneas, excessive daytime sleepiness, resistant blood pressure elevation, atrial fibrillation, or other compatible features arise, use validated clinical evaluation and treat confirmed obstructive sleep apnea.</strong>. Target: Stable restorative sleep pattern and prompt treatment only if clinically indicated sleep-disordered breathing emerges.. Threshold: Escalate to sleep-apnea evaluation if symptoms or compatible clinical features develop; do not initiate PAP therapy or other OSA treatment without diagnostic confirmation..",
-    "why": "SPAREQ 3.25. Driver: Insufficient sleep or untreated clinically suspected obstructive sleep apnea can increase cardiometabolic, blood pressure, neurocognitive, and accident risk; current patient data instead show generally adequate sleep duration, good efficiency, lean BMI, and normal clinic blood pressure.. No formal snoring, witnessed-apnea, sleepiness, morning-headache, or drowsy-driving inventory is provided.",
-    "goal": "Follow-up metric: Sleep duration, sleep efficiency, daytime sleepiness symptoms, blood pressure pattern if available, wearable recovery trends as supportive context, and documented OSA test result if testing becomes indicated.. Harm/tradeoff: Over-testing in a low-suspicion setting can produce false positives and unnecessary treatment burden; under-recognition becomes harmful if classic symptoms or cardiometabolic triggers appear..",
+    "title": "Radiation stewardship given ATM variant and CAC=0 context",
+    "severity": "Risk Mitigation",
+    "timing": "SPAREQ 3.3",
+    "do": "<strong>Radiation stewardship given ATM variant and CAC=0 context</strong>. The patient has a pathogenic ATM variant, a DNA-repair risk signal, and already has CAC=0. Avoiding unnecessary repeat CT or whole-body imaging can reduce avoidable radiation exposure and false-positive cascades.",
+    "why": "Avoiding elective repeat CT or broad imaging is easy and aligns with ATM biology and CAC=0 context, though the evidence is stewardship/mechanism-based rather than a quantified patient-specific outcome intervention.",
+    "goal": "S=3, P=3, A=4, R=3, E=4, Q=3 \u00b7 Radiation stewardship and avoidance of unnecessary imaging are standard safety principles. For inherited DNA-repair vulnerability, prudent exposure minimization is biologically coherent, while clinical imaging should still be used when clearly indicated.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Sleep adequacy preservation with symptom-triggered sleep-apnea treatment pathway"
+        "glyph": "\u271a",
+        "label": "Radiation stewardship given ATM variant and CAC=0 context"
       }
     ],
-    "evidence": "Canonical SPAREQ · S4 P2 A3 R3 E4 Q4 · Standard sleep-health and obstructive-sleep-apnea practice supports adequate sleep maintenance and diagnostic confirmation before treatment; retrieval included adult sleep-health review and digital biomarker OSA-risk literature.",
-    "author": "meridian"
+    "evidence": "Radiation stewardship and avoidance of unnecessary imaging are standard safety principles. For inherited DNA-repair vulnerability, prudent exposure minimization is biologically coherent, while clinical imaging should still be used when clearly indicated.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCR-009",
-    "lane": "riskMaintenance",
+    "id": "RMA-009",
+    "lane": "risk",
     "originalRank": 12,
-    "score": 3.1,
-    "spareq": {
-      "s": 3,
-      "p": 3,
-      "a": 3,
-      "r": 3,
-      "e": 3,
-      "q": 4
-    },
-    "title": "Air-pollution and wildfire-smoke exposure reduction plan",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.10",
-    "do": "<strong>Use exposure-reduction steps during elevated pollution or wildfire-smoke periods: check local air-quality data, shift intense outdoor exercise indoors or to cleaner-air windows, use well-fitting respiratory protection when needed, and improve indoor filtration where feasible.</strong>. Target: Reduce inhaled PM2.5 and smoke exposure during defined high-exposure periods while preserving overall physical activity.. Threshold: Apply during local wildfire-smoke events, high AQI or PM2.5 readings, visible smoke, smoke odor, or public-health advisories; intensify measures if respiratory symptoms occur..",
-    "why": "SPAREQ 3.10. Driver: Outdoor particulate and smoke exposure can contribute to cardiopulmonary and systemic inflammatory risk; regional wildfire smoke and traffic-related pollution are plausible exposures for a San Diego resident.. Actual home/work air quality, filtration, occupational exposure, traffic proximity, and personal PM exposure are unknown.",
-    "goal": "Follow-up metric: Local AQI/PM2.5 readings, frequency of smoke-event exposure, respiratory symptoms, exercise displacement, and optional indoor PM readings if a monitor is used.. Harm/tradeoff: Potential downsides include filtration cost, respirator discomfort, anxiety about outdoor exposure, and unnecessary reduction in beneficial exercise if triggers are overly broad..",
+    "title": "Orthostatic symptom mitigation with slow transitions and trigger avoidance",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.25",
+    "do": "<strong>Orthostatic symptom mitigation with slow transitions and trigger avoidance</strong>. Episodes are rare and improved, but prior lightheadedness severe enough to sit down warrants simple safety behaviors to reduce fall or near-syncope risk.",
+    "why": "Episodes are rare, lowering probability, but slow transitions and trigger avoidance are very easy, reversible, and can reduce fall/near-syncope risk without overmedicalization.",
+    "goal": "S=3, P=2, A=3, R=4, E=5, Q=4 \u00b7 For infrequent orthostatic symptoms without red flags, standard conservative mitigation includes slower position changes, attention to hydration, avoiding abrupt standing after heat/exertion/alcohol, and escalation if syncope, palpitations, or increasing frequency occurs.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Air-pollution and wildfire-smoke exposure reduction plan"
+        "glyph": "\u271a",
+        "label": "Orthostatic symptom mitigation with slow transitions and tri"
       }
     ],
-    "evidence": "Canonical SPAREQ · S3 P3 A3 R3 E3 Q4 · Environmental cardiovascular literature and public-health practice support particulate exposure reduction during high pollution and wildfire-smoke conditions.",
-    "author": "meridian"
+    "evidence": "For infrequent orthostatic symptoms without red flags, standard conservative mitigation includes slower position changes, attention to hydration, avoiding abrupt standing after heat/exertion/alcohol, and escalation if syncope, palpitations, or increasing frequency occurs.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-012",
-    "lane": "riskMaintenance",
+    "id": "RMA-007",
+    "lane": "risk",
     "originalRank": 13,
-    "score": 3.1,
-    "spareq": {
-      "s": 3,
-      "p": 3,
-      "a": 3,
-      "r": 3,
-      "e": 3,
-      "q": 4
-    },
-    "title": "Muscle-strengthening preservation within existing high-activity pattern",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.10",
-    "do": "<strong>Maintain structured muscle-strengthening activity at least two days per week, integrated with current MTB, snowboarding, BJJ, gym, and endurance activities, using progressive loading, adequate recovery, and technique safeguards.</strong>. Target: Preserve strength, lean mass, insulin sensitivity, bone-muscle function, and long-term functional reserve without creating avoidable overuse injury.. Threshold: Proceed if not already meeting muscle-strengthening coverage; escalate to supervised programming or physical therapy if recurrent injury, pain, asymmetry, or performance-limiting weakness occurs..",
-    "why": "SPAREQ 3.10. Driver: High cardiorespiratory fitness and regular endurance/sport activity are present, but standard adult prevention also depends on maintaining strength, muscle mass, balance, and musculoskeletal resilience over time.. Current resistance-training frequency, load progression, movement limitations, and injury history are not supplied.",
-    "goal": "Follow-up metric: Weekly muscle-strengthening sessions, injury episodes, pain or function limitations, recovery quality, and periodic functional strength measures selected by the clinician or trainer.. Harm/tradeoff: Excess load, inadequate recovery, or poor technique may increase injury risk, particularly with concurrent high-skill and impact sports..",
+    "title": "Urate-conscious alcohol and fructose moderation",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.2",
+    "do": "<strong>Urate-conscious alcohol and fructose moderation</strong>. Prior recurrent podagra-like attacks suggest a historical urate axis. Current alcohol use is moderate, but alcohol and fructose-heavy intake can be gout triggers in susceptible people.",
+    "why": "Prior recurrent podagra-like attacks make trigger moderation relevant, but current alcohol intake is modest and gout is quiescent, so this is useful but not top priority.",
+    "goal": "S=3, P=3, A=3, R=3, E=4, Q=4 \u00b7 Standard gout-risk counseling commonly includes limiting known flare triggers such as heavy alcohol intake and sugar-sweetened/fructose-heavy beverages, especially in people with prior recurrent gout.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Muscle-strengthening preservation within existing high-activity pattern"
+        "glyph": "\u271a",
+        "label": "Urate-conscious alcohol and fructose moderation"
       }
     ],
-    "evidence": "Canonical SPAREQ · S3 P3 A3 R3 E3 Q4 · Standard adult physical-activity practice includes muscle-strengthening activity for health and function preservation; retrieval returned human exercise and neuro-function analog literature.",
-    "author": "meridian"
+    "evidence": "Standard gout-risk counseling commonly includes limiting known flare triggers such as heavy alcohol intake and sugar-sweetened/fructose-heavy beverages, especially in people with prior recurrent gout.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "SOCR-015",
-    "lane": "riskMaintenance",
+    "id": "RMA-002",
+    "lane": "risk",
     "originalRank": 14,
-    "score": 3.1,
-    "spareq": {
-      "s": 3,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 5,
-      "q": 4
-    },
-    "title": "Avoid non-indicated nonstatin lipid drugs and pharmacologic-dose lipid supplements",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.10",
-    "do": "<strong>Do not start niacin, fibrates, pharmacologic-dose omega-3 products, or lipid-directed supplements for primary prevention unless a qualifying indication emerges; keep lipid management anchored to evidence-based lifestyle and medication thresholds.</strong>. Target: Avoid adverse effects, interactions, unnecessary cost, and false reassurance from non-indicated lipid-directed therapies.. Threshold: Consider nonstatin lipid therapy only if future data create a standard indication, such as severe hypertriglyceridemia, established ASCVD, familial lipid disorder, medication intolerance requiring guideline-supported alternatives, or clinician-confirmed elevated risk context..",
-    "why": "SPAREQ 3.10. Driver: Modest atherogenic lipid markers are present, but triglycerides are low, HDL-C is favorable, Lp(a) is not elevated per payload, there is no diabetes or smoking, no current lipid medication, and CAC=0 is completed.. Medication/supplement list completeness, serial lipid trajectory, and formal ASCVD risk calculation are incomplete.",
-    "goal": "Follow-up metric: LDL-C, ApoB, non-HDL-C, triglycerides, medication/supplement list, adverse effects if any lipid-directed therapy is started, and future ASCVD-risk context.. Harm/tradeoff: Potential harms of non-indicated therapy include flushing or hepatotoxicity with niacin, gallstone or muscle-related concerns with fibrates, bleeding or atrial-fibrillation concerns with pharmacologic-dose omega-3 products, interactions, cost, and distraction from higher-value actions..",
+    "title": "Increase soluble-fiber exposure as a discrete lipid-lowering lever",
+    "severity": "Risk Mitigation",
+    "timing": "SPAREQ 3.05",
+    "do": "<strong>Increase soluble-fiber exposure as a discrete lipid-lowering lever</strong>. Soluble fiber is a low-risk, food-based lever that can specifically address the mild ApoB/LDL signal without medication escalation.",
+    "why": "Soluble fiber is evidence-supported and easy for modest LDL/ApoB improvement, but outcome redirection is incremental in a CAC=0, otherwise low-risk context.",
+    "goal": "S=3, P=3, A=3, R=2, E=4, Q=4 \u00b7 Human nutrition evidence supports soluble-fiber-rich foods as part of LDL-C reduction strategies. This is a standard low-downside risk-factor modification when LDL/ApoB are above ideal but global near-term risk is otherwise favorable.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Avoid non-indicated nonstatin lipid drugs and pharmacologic-dose lipid supplemen"
+        "glyph": "\u271a",
+        "label": "Increase soluble-fiber exposure as a discrete lipid-lowering"
       }
     ],
-    "evidence": "Canonical SPAREQ · S3 P2 A3 R3 E5 Q4 · Standard lipid-management practice reserves nonstatin agents for defined indications; retrieval included primary-prevention lipid and medication-threshold searches plus harm/counter-evidence search family.",
-    "author": "meridian"
+    "evidence": "Human nutrition evidence supports soluble-fiber-rich foods as part of LDL-C reduction strategies. This is a standard low-downside risk-factor modification when LDL/ApoB are above ideal but global near-term risk is otherwise favorable.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
-    "id": "SOCR-002",
-    "lane": "riskMaintenance",
+    "id": "RMA-015",
+    "lane": "risk",
     "originalRank": 15,
-    "score": 3.0,
-    "spareq": {
-      "s": 3,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 4
-    },
-    "title": "Primary-prevention statin threshold discipline with CAC=0 context",
-    "severity": "SoC Risk Reduction",
-    "timing": "SPAREQ 3.00",
-    "do": "<strong>Use accepted primary-prevention statin eligibility thresholds, shared decision-making, and CAC=0 context before initiating lipid-lowering medication.</strong>. Target: Avoid non-indicated medication exposure while retaining pharmacologic treatment if future ASCVD risk calculation, LDL-C level, ApoB trajectory, diabetes status, or other accepted risk factors justify it.. Threshold: Do not initiate solely from LDL-C 121 mg/dL or ApoB 96 mg/dL in isolation; reconsider if calculated 10-year ASCVD risk, LDL-C, diabetes status, risk enhancers, or future coronary imaging context meets guideline-supported thresholds..",
-    "why": "SPAREQ 3.00. Driver: Potential medication overtreatment risk in a primary-prevention patient with LDL-C 121 mg/dL, ApoB 96 mg/dL, CAC=0, no diabetes, no smoking, normal BP, and no current lipid-lowering therapy.. Formal ASCVD risk calculation, serial LDL-C/ApoB trend, CAC scan date, and detailed premature ASCVD family history are not fully supplied.",
-    "goal": "Follow-up metric: Updated ASCVD risk calculation when current required variables are available; repeat LDL-C, non-HDL-C, ApoB; interval reassessment of diabetes, BP, smoking status, family history, and CAC warranty context.. Harm/tradeoff: Potential statin adverse effects, lab monitoring burden, cost, and medicalization must be balanced against absolute risk reduction in a CAC=0 low-near-term-risk context..",
+    "title": "Psychosocial relationship-support option without endocrine overmedicalization",
+    "severity": "Risk Mitigation \u00b7 symptom-derived",
+    "timing": "SPAREQ 2.6",
+    "do": "<strong>Psychosocial relationship-support option without endocrine overmedicalization</strong>. The patient reports sexual-frequency and attraction mismatch but preserved libido and normal total testosterone. Relationship-focused support may reduce stress and improve wellbeing without incorrectly treating this as androgen deficiency.",
+    "why": "The concern is real and patient-specific, but it is preference-sensitive, not currently tied to endocrine disease, and has less direct medical risk redirection than the musculoskeletal, renal-safety, lipid, and vaccine actions.",
+    "goal": "S=2, P=3, A=3, R=2, E=3, Q=3 \u00b7 Psychosocial counseling, couples therapy, or structured communication support are commonly used for relationship and intimacy stressors. The payload does not support a low-testosterone treatment pathway.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Primary-prevention statin threshold discipline with CAC=0 context"
+        "glyph": "\u271a",
+        "label": "Psychosocial relationship-support option without endocrine o"
       }
     ],
-    "evidence": "Canonical SPAREQ · S3 P2 A3 R3 E4 Q4 · Standard primary-prevention lipid management uses absolute ASCVD risk, LDL-C thresholds, risk enhancers, and CAC to guide medication decisions; supplied retrieval included heart disease statistics and statin/CAC threshold search results.",
-    "author": "meridian"
+    "evidence": "Psychosocial counseling, couples therapy, or structured communication support are commonly used for relationship and intimacy stressors. The payload does not support a low-testosterone treatment pathway.",
+    "author": "meridian",
+    "symptom_derived": true
   }
 ];
 
   // ---- ADJUNCT OPTIONS · canonical SPAREQ with adjunct-calibrated Q v0.1 ----
   const ADJUNCTS = [
   {
-    "id": "ADJ-004",
-    "lane": "adjuncts",
-    "originalRank": 1,
-    "score": 3.5,
-    "spareq": {
-      "s": 4,
-      "p": 3,
-      "a": 3,
-      "r": 4,
-      "e": 4,
-      "q": 3
-    },
-    "title": "Air-quality-triggered exposure reduction plan",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 3.50",
-    "do": "<strong>Use an air-quality trigger plan: check local AQI during wildfire or pollution events, move intense outdoor sessions indoors when air quality is poor, use indoor filtration where feasible, and consider a well-fitting respirator for unavoidable outdoor exposure during smoke events.</strong>",
-    "why": "SPAREQ 3.50. Patient signal: Patient lives in San Diego, CA, is physically active with outdoor activities, and is a never-smoker with no current cardiopulmonary diagnosis.. Why not SoC: The payload does not show asthma, COPD, cardiovascular disease, occupational exposure, or a smoke-related illness requiring a medical exposure-control plan..",
-    "goal": "Monitor: AQI or local smoke alerts, respiratory symptoms, exercise location changes, sleep quality, resting heart rate or HRV during smoke events, and whether activity minutes are preserved by substitution rather than skipped.. Stop rule: Stop or simplify if the plan causes excessive restriction of physical activity, substantial cost burden, or anxiety disproportionate to actual exposure conditions.. Downside: Cost of filtration, mask discomfort, possible reduction in outdoor activity if over-applied, and uncertainty about individual clinical effect size in an asymptomatic person..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "Air-quality-triggered exposure reduction plan"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S4 P3 A3 R4 E4 Q3 · epidemiology_plus_mechanism",
-    "author": "meridian"
-  },
-  {
-    "id": "ADJ-011",
-    "lane": "adjuncts",
-    "originalRank": 2,
-    "score": 3.35,
-    "spareq": {
-      "s": 4,
-      "p": 3,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 3
-    },
-    "title": "UV-index-triggered photoprotection protocol",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 3.35",
-    "do": "<strong>Use UV-index alerts for outdoor MTB, snow, beach, or endurance days; apply broad-spectrum sunscreen to exposed skin, use UPF clothing/hat/neck coverage when practical, and emphasize burn avoidance during high-UV windows.</strong>",
-    "why": "SPAREQ 3.35. Patient signal: 47-year-old male in San Diego with outdoor activity pattern and heterozygous pathogenic ATM DNA-repair variant; never smoker and otherwise low carcinogen exposure burden.. Why not SoC: Routine sun protection counseling may be standard preventive advice, but an ATM- and sport-context-triggered UV protocol is not a guideline-grade risk-management pathway for this specific male ATM carrier state..",
-    "goal": "Monitor: Sunburn episodes, cumulative high-UV outdoor sessions without protection, skin irritation from sunscreen, and 25-OH vitamin D if substantial sun avoidance changes occur.. Stop rule: Stop or revise if the protocol causes dermatitis, materially reduces desired outdoor activity, or vitamin D becomes deficient despite reasonable dietary/supplement correction.. Downside: Inconvenience, sunscreen sensitivity, cost of UPF gear, and possible reduction in incidental vitamin D synthesis..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "UV-index-triggered photoprotection protocol"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S4 P3 A3 R3 E4 Q3 · epidemiology_plus_mechanism",
-    "author": "meridian"
-  },
-  {
-    "id": "ADJ-006",
-    "lane": "adjuncts",
-    "originalRank": 3,
-    "score": 3.3,
-    "spareq": {
-      "s": 4,
-      "p": 3,
-      "a": 3,
-      "r": 2,
-      "e": 4,
-      "q": 4
-    },
-    "title": "ApoB-response soluble fiber or plant-sterol food experiment",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 3.30",
-    "do": "<strong>Choose one defined food-based add-on for 8 to 12 weeks while keeping weight, training, and the broader diet as stable as practical; examples of the implementation class include a measured viscous-fiber serving, plant-sterol-containing food, or nut substitution rather than adding multiple changes at once.</strong>",
-    "why": "SPAREQ 3.30. Patient signal: LDL-C 121 mg/dL, ApoB 96 mg/dL, non-HDL-C 137 mg/dL, triglycerides 65 mg/dL, HDL-C 69 mg/dL, HbA1c 5.3%, BMI 23, no lipid medication, and no current supplements.. Why not SoC: General heart-healthy nutrition for lipid management can be standard care, but this is a specific optional biomarker-response experiment using a single food add-on and patient-level retesting rather than a guideline-required treatment pathway..",
-    "goal": "Monitor: Repeat ApoB, LDL-C, non-HDL-C, triglycerides, body weight, and gastrointestinal tolerance after the trial window.. Stop rule: Stop or revise if gastrointestinal symptoms, allergy concerns, unwanted weight gain, diet displacement, or no meaningful lipid-marker movement after a well-adhered trial.. Downside: GI bloating or constipation, nut allergy risk if nut-based, additional calories, cost, and uncertain individual response..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "ApoB-response soluble fiber or plant-sterol food experiment"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S4 P3 A3 R2 E4 Q4 · human_biomarker",
-    "author": "meridian"
-  },
-  {
-    "id": "ADJ-014",
-    "lane": "adjuncts",
-    "originalRank": 4,
-    "score": 3.2,
-    "spareq": {
-      "s": 3,
-      "p": 4,
-      "a": 3,
-      "r": 3,
-      "e": 3,
-      "q": 3
-    },
-    "title": "Sport-specific neuromuscular prehab microcycle",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 3.20",
-    "do": "<strong>Replace, rather than add to, part of the existing training week with a 15-25 minute prehab block 2 times weekly focused on balance, landing/cutting control, posterior-chain eccentric strength, neck/shoulder control for grappling, and hip/ankle mobility.</strong>",
-    "why": "SPAREQ 3.20. Patient signal: High activity profile includes MTB, snowboarding, BJJ, gym, and endurance; CPET VO2max is 54, wearable VO2max 52, RHR 46, HRV RMSSD 77, and activity is about 360 moderate-equivalent minutes/week.. Why not SoC: General physical activity is standard risk reduction, but a sport-specific prehab microcycle for an already highly active adult is not a standard disease-prevention guideline requirement..",
-    "goal": "Monitor: Training days lost, joint pain measures, perceived readiness, HRV/RHR deviation from baseline, and whether the prehab block displaces recovery.. Stop rule: Stop or reduce if it increases soreness, reduces desired sport participation, worsens recovery metrics, or duplicates an existing structured strength/mobility program.. Downside: Time cost, added fatigue if not substituted for other training, and possible false sense of injury-proofing..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "Sport-specific neuromuscular prehab microcycle"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S3 P4 A3 R3 E3 Q3 · close_analog_human",
-    "author": "meridian"
-  },
-  {
-    "id": "ADJ-007",
-    "lane": "adjuncts",
-    "originalRank": 5,
-    "score": 3.05,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 3,
-      "e": 4,
-      "q": 2
-    },
-    "title": "ATM-informed elective ionizing-imaging stewardship checklist",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 3.05",
-    "do": "<strong>Before discretionary CT-based screening or whole-body imaging, document the clinical question, whether a non-ionizing alternative would answer it, whether prior CAC=0 already addresses the question, and whether the result would change an action. Do not use the checklist to decline urgent or clearly indicated imaging.</strong>",
-    "why": "SPAREQ 3.05. Patient signal: Pathogenic heterozygous ATM c.8147T&gt;C variant, completed CAC=0 in 2026, future_not_collected CCTA and carotid imaging fields, and existing completed CAC/Lp(a) facts.. Why not SoC: Avoiding non-indicated imaging is standard overuse prevention, but ATM-specific elective-imaging minimization for an asymptomatic heterozygous carrier is not a guideline-grade standard-care pathway in the supplied retrieval..",
-    "goal": "Monitor: Maintain an imaging log with modality, indication, dose information when available, and whether the result changed management.. Stop rule: Do not apply the preference rule when a clinician determines that ionizing imaging is medically indicated, time-sensitive, or the best diagnostic modality.. Downside: Could cause unnecessary concern about radiation or delay appropriate diagnostic work if misapplied; exact magnitude of incremental radiation sensitivity in heterozygous adult ATM carriers is uncertain..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "ATM-informed elective ionizing-imaging stewardship checklist"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S4 P2 A3 R3 E4 Q2 · mechanism_plus_human_signal",
-    "author": "meridian"
-  },
-  {
-    "id": "ADJ-012",
-    "lane": "adjuncts",
-    "originalRank": 6,
-    "score": 2.95,
-    "spareq": {
-      "s": 3,
-      "p": 3,
-      "a": 3,
-      "r": 2,
-      "e": 4,
-      "q": 3
-    },
-    "title": "Pre-renal-lab creatinine-context standardization protocol",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.95",
-    "do": "<strong>Before the next planned renal-marker draw, avoid heavy resistance training, BJJ, long endurance sessions, unusual dehydration, cooked-meat-heavy meals, and creatine-containing products for 24-48 hours; maintain normal hydration and repeat creatinine with cystatin C, UACR, and urinalysis.</strong>",
-    "why": "SPAREQ 2.95. Patient signal: Creatinine 1.25 mg/dL with creatinine eGFR 72, cystatin C 0.86 with cystatin eGFR 96, UACR 8 mg/g, negative urine protein/blood, normal BP, no medications or supplements, and athletic phenotype.. Why not SoC: Standard kidney surveillance can include repeat renal labs, but a sport- and diet-context standardization experiment is an optional interpretation aid rather than a guideline-required pathway..",
-    "goal": "Monitor: Change in creatinine, creatinine eGFR, cystatin C eGFR, UACR, urinalysis protein/blood, and whether results converge or remain discordant.. Stop rule: Stop using pre-test standardization as an explanatory tool if cystatin C eGFR declines, UACR rises, hematuria/proteinuria appears, BP becomes elevated, or renal symptoms occur.. Downside: Minor disruption to training and diet; risk of overinterpreting one cleaner data point if longitudinal data remain absent..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "Pre-renal-lab creatinine-context standardization protocol"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S3 P3 A3 R2 E4 Q3 · mechanism_plus_human_signal",
-    "author": "meridian"
-  },
-  {
-    "id": "ADJ-005",
-    "lane": "adjuncts",
-    "originalRank": 7,
-    "score": 2.9,
-    "spareq": {
-      "s": 3,
-      "p": 3,
-      "a": 3,
-      "r": 3,
-      "e": 3,
-      "q": 2
-    },
-    "title": "Wearable-informed deload rule for recovery dips",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.90",
-    "do": "<strong>Create a simple rule before the next training block: when HRV is persistently below personal baseline with elevated resting heart rate, poor sleep, unusual fatigue, or soreness, replace high-intensity or combat-sport sessions with easy aerobic work, mobility, or rest for 24 to 72 hours. Avoid using a single wearable value alone.</strong>",
-    "why": "SPAREQ 2.90. Patient signal: Patient has high fitness and regular mixed activity, resting heart rate about 46 bpm, HRV RMSSD about 77 ms, a documented transient HRV dip, and creatinine-cystatin discordance in an athletic phenotype.. Why not SoC: The patient already exceeds usual activity targets and has no diagnosed overtraining syndrome, arrhythmia, sleep disorder, or kidney disease requiring a guideline-directed wearable protocol..",
-    "goal": "Monitor: HRV, resting heart rate, sleep duration and efficiency, perceived fatigue, soreness, performance, injury symptoms, and timing of strenuous exercise relative to renal lab draws.. Stop rule: Stop or revise if the rule leads to excessive training avoidance, anxiety, loss of desired fitness, or if symptoms suggest illness or injury needing clinical evaluation rather than self-management.. Downside: Wearable noise, false reassurance, unnecessary session changes, overattention to metrics, and missed recognition of true medical symptoms if self-tracking is overused..",
-    "orders": [
-      {
-        "glyph": "✚",
-        "label": "Wearable-informed deload rule for recovery dips"
-      }
-    ],
-    "evidence": "Adjunct-calibrated SPAREQ · S3 P3 A3 R3 E3 Q2 · very_low_downside",
-    "author": "meridian"
-  },
-  {
     "id": "ADJ-010",
-    "lane": "adjuncts",
-    "originalRank": 8,
-    "score": 2.9,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 2,
-      "e": 3,
-      "q": 3
-    },
-    "title": "Indoor combustion and VOC source-reduction audit",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.90",
-    "do": "<strong>Review indoor sources such as gas cooking without ventilation, candles, incense, fragrance products, solvents, recent renovations, and high-VOC cleaners. Prefer ventilation during cooking, low-VOC products, source removal when practical, and optional low-cost indoor PM/VOC spot checks if a decision would change.</strong>",
-    "why": "SPAREQ 2.90. Patient signal: San Diego residence, never-smoker with 0 pack-years, low alcohol exposure, no current medications or supplements, and pathogenic ATM DNA-repair variant.. Why not SoC: No asthma, COPD, occupational exposure, or acute environmental illness is present; this is not a mandated clinical intervention..",
-    "goal": "Monitor: Track identified sources removed or ventilated, symptoms if any, and optional indoor PM/VOC readings if available and actionable.. Stop rule: Stop expanding monitoring if no meaningful indoor sources are identified, costs rise, or measurements do not change behavior.. Downside: Cost of monitors or ventilation changes, false reassurance from consumer sensors, and time spent on exposures that may already be minimal..",
+    "lane": "adj",
+    "originalRank": 1,
+    "title": "Pain-minimizing aerobic modality substitution to preserve high cardiorespiratory fitness",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.65",
+    "do": "<strong>Pain-minimizing aerobic modality substitution to preserve high cardiorespiratory fitness</strong>. The patient\u2019s high VO2max and activity are strongly favorable, but back and hip/glute symptoms could threaten continuity. Optional substitution toward less provocative modalities during flares\u2014such as cycling position changes, swimming, incline walking, or controlled zone-2 work\u2014could maintain aerobic stimulus while symptoms settle.",
+    "why": "Highly patient-specific because fitness is protective and pain threatens continuity; modality substitution is easy, reversible, and plausible, though individualized rather than guideline-grade.",
+    "goal": "S=3, P=4, A=4, R=4, E=4, Q=3 \u00b7 Adjunct-level basis: human exercise physiology supports maintaining aerobic training through cross-training and load management, but exact modality substitution is individualized and not a formal guideline-grade intervention.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Indoor combustion and VOC source-reduction audit"
+        "glyph": "\u271a",
+        "label": "Pain-minimizing aerobic modality substitution to preserve hi"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S4 P2 A3 R2 E3 Q3 · epidemiology_plus_mechanism",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human exercise physiology supports maintaining aerobic training through cross-training and load management, but exact modality substitution is individualized and not a formal guideline-grade intervention.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
     "id": "ADJ-008",
-    "lane": "adjuncts",
-    "originalRank": 9,
-    "score": 2.8,
-    "spareq": {
-      "s": 4,
-      "p": 2,
-      "a": 3,
-      "r": 2,
-      "e": 3,
-      "q": 2
-    },
-    "title": "Family GI cancer primary-site clarification",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.80",
-    "do": "<strong>Use a stepwise family-history clarification process: ask relatives for exact diagnosis and age at diagnosis, seek death certificate or obituary when appropriate, and request pathology or medical records only if feasible and acceptable to the family.</strong>",
-    "why": "SPAREQ 2.80. Patient signal: Paternal grandfather had GI cancer of unknown primary site and unknown age at diagnosis; patient has a pathogenic ATM variant and incomplete family-cancer phenotyping.. Why not SoC: The known family history is a second-degree relative with GI cancer at an unclear primary site and death at 82, which does not by itself establish a standard enhanced surveillance pathway in the provided inputs..",
-    "goal": "Monitor: Document whether primary site, age at diagnosis, and pathology confirmation were obtained; update family history fields if new information is reliable.. Stop rule: Stop after reasonable attempts if records are unavailable, relatives do not consent, or information remains too uncertain to change decisions.. Downside: Time burden, possible family privacy concerns, emotional discomfort, and the possibility that the information remains non-actionable..",
+    "lane": "adj",
+    "originalRank": 2,
+    "title": "Session-level sport load and pain map across MTB, BJJ, snowboarding, gym, and endurance",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.5",
+    "do": "<strong>Session-level sport load and pain map across MTB, BJJ, snowboarding, gym, and endurance</strong>. The patient\u2019s protective high activity may also be producing mechanical load symptoms. A simple map of session type, duration, intensity, next-day pain location, stiffness, and HRV response could identify which activities or transitions drive low back and hip/glute insertion symptoms.",
+    "why": "A low-cost tracking tool can identify which high-value activities aggravate back/hip symptoms, enabling targeted substitutions without reducing total activity.",
+    "goal": "S=3, P=4, A=4, R=3, E=4, Q=3 \u00b7 Adjunct-level basis: human sports medicine practice commonly uses training-load and symptom tracking, but this is a self-management optimization tool rather than standard disease surveillance.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Family GI cancer primary-site clarification"
+        "glyph": "\u271a",
+        "label": "Session-level sport load and pain map across MTB, BJJ, snowb"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S4 P2 A3 R2 E3 Q2 · very_low_downside",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human sports medicine practice commonly uses training-load and symptom tracking, but this is a self-management optimization tool rather than standard disease surveillance.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "ADJ-013",
-    "lane": "adjuncts",
-    "originalRank": 10,
-    "score": 2.75,
-    "spareq": {
-      "s": 3,
-      "p": 2,
-      "a": 3,
-      "r": 2,
-      "e": 4,
-      "q": 3
-    },
-    "title": "Short home blood-pressure context-mapping experiment",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.75",
-    "do": "<strong>Use a validated upper-arm cuff for a bounded 7-day morning/evening log, ideally during a typical week; optionally repeat only during a clear recovery-disruption week if it would change interpretation.</strong>",
-    "why": "SPAREQ 2.75. Patient signal: Clinic BP is 116/76 with no hypertension diagnosis or antihypertensive use, but home BP and ABPM data are not collected; systemic open questions include BP-pattern validation.. Why not SoC: Because clinic BP is normal and there is no hypertension diagnosis, this is not a required standard hypertension diagnostic pathway; it is optional context clarification..",
-    "goal": "Monitor: 7-day average systolic and diastolic BP, variability, measurement conditions, caffeine/alcohol/training notes, and whether readings remain concordant with clinic normotension.. Stop rule: Stop after one technically adequate normal 7-day log unless future clinic BP, symptoms, medication changes, or systemic risk models create a new reason to repeat.. Downside: Measurement anxiety, false positives from poor technique, unnecessary repeat testing, and time burden..",
+    "id": "ADJ-004",
+    "lane": "adj",
+    "originalRank": 3,
+    "title": "Exercise-day hydration and electrolyte timing experiment for orthostatic and urate-risk context",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.45",
+    "do": "<strong>Exercise-day hydration and electrolyte timing experiment for orthostatic and urate-risk context</strong>. Rare orthostatic lightheadedness, high fitness with low resting heart rate, high activity, prior gout, and creatinine-cystatin discordance make hydration timing a plausible low-downside lever. This would be an optional self-experiment around long rides, BJJ, heat exposure, travel, and alcohol days.",
+    "why": "Mechanistically fits rare orthostasis, endurance/heat exposure, prior gout, and creatinine variability; it is low downside if overhydration is avoided, but remains an individualized experiment.",
+    "goal": "S=3, P=4, A=3, R=4, E=4, Q=3 \u00b7 Adjunct-level basis: human physiology and clinical experience support hydration and sodium balance effects on orthostatic tolerance and urate concentration, but individualized hydration timing is not a disease-specific standard-care treatment in this low-frequency symptom context.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Short home blood-pressure context-mapping experiment"
+        "glyph": "\u271a",
+        "label": "Exercise-day hydration and electrolyte timing experiment for"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S3 P2 A3 R2 E4 Q3 · very_low_downside",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human physiology and clinical experience support hydration and sodium balance effects on orthostatic tolerance and urate concentration, but individualized hydration timing is not a disease-specific standard-care treatment in this low-frequency symptom context.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "ADJ-002",
-    "lane": "adjuncts",
-    "originalRank": 11,
-    "score": 2.6,
-    "spareq": {
-      "s": 3,
-      "p": 2,
-      "a": 2,
-      "r": 3,
-      "e": 3,
-      "q": 3
-    },
-    "title": "Monitored passive heat exposure protocol",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.60",
-    "do": "<strong>If desired and medically appropriate, begin with short, conservative sauna sessions such as 10 to 15 minutes, 1 to 3 times weekly, with hydration, seated cooldown, and no use during acute illness, dehydration, alcohol exposure, or lightheadedness. Avoid combining with aggressive cold exposure initially.</strong>",
-    "why": "SPAREQ 2.60. Patient signal: Patient has high measured cardiorespiratory fitness, regular activity, resting heart rate 46 bpm, HRV RMSSD about 77 ms, normal clinic blood pressure, sleep duration about 7.17 hours/night, and a documented transient HRV dip.. Why not SoC: There is no hypertension, heart failure, chronic pain syndrome, or other diagnosis in the payload that would make passive heat exposure a standard-care therapy..",
-    "goal": "Monitor: Symptoms during and after heat exposure, resting blood pressure if available, morning resting heart rate, HRV, sleep quality, perceived recovery, hydration status, and exercise performance the following day.. Stop rule: Stop if presyncope, syncope, chest discomfort, palpitations, unusual shortness of breath, prolonged HRV suppression with fatigue, dehydration symptoms, or heat intolerance occurs.. Downside: Heat stress, dehydration, hypotension, dizziness, palpitations, burns, unsafe use during illness or after alcohol, and opportunity cost..",
+    "id": "ADJ-006",
+    "lane": "adj",
+    "originalRank": 4,
+    "title": "HRV- and pain-informed deload trigger for preserving training durability",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.4",
+    "do": "<strong>HRV- and pain-informed deload trigger for preserving training durability</strong>. The patient\u2019s high fitness is a major protective driver, but chronic low back pain, glute/hip insertion tenderness, and a documented HRV dip suggest that recovery-aware periodization could protect the exercise pattern. An optional rule could combine morning HRV/RHR deviation, sleep disruption, and pain above baseline to trigger a short deload.",
+    "why": "Combines human signal from wearables with active pain symptoms to guide recovery; useful for this athlete, but exact HRV thresholds have adjunct-level rather than standard-care evidence.",
+    "goal": "S=3, P=4, A=4, R=3, E=3, Q=3 \u00b7 Adjunct-level basis: human sports-science and biomarker evidence supports using internal load, HRV trends, sleep, and symptoms to guide training, but exact HRV-based deload thresholds are not standard medical care.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Monitored passive heat exposure protocol"
+        "glyph": "\u271a",
+        "label": "HRV- and pain-informed deload trigger for preserving trainin"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S3 P2 A2 R3 E3 Q3 · close_analog_human",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human sports-science and biomarker evidence supports using internal load, HRV trends, sleep, and symptoms to guide training, but exact HRV-based deload thresholds are not standard medical care.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "ADJ-003",
-    "lane": "adjuncts",
-    "originalRank": 12,
-    "score": 2.6,
-    "spareq": {
-      "s": 2,
-      "p": 2,
-      "a": 2,
-      "r": 4,
-      "e": 5,
-      "q": 2
-    },
-    "title": "Alcohol-timing or alcohol-free recovery experiment",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.60",
-    "do": "<strong>Run a defined experiment, such as avoiding alcohol within 3 to 4 hours of bedtime or using a 2 to 4 week alcohol-free block, while keeping training and sleep schedule as stable as feasible.</strong>",
-    "why": "SPAREQ 2.60. Patient signal: Alcohol intake is reported as about 3 drinks per week; sleep duration and efficiency are generally acceptable, but a transient HRV dip is documented without a confirmed driver.. Why not SoC: The reported alcohol intake is moderate and no alcohol-related diagnosis, liver signal, hypertension, dysglycemia, or sleep disorder is documented..",
-    "goal": "Monitor: Overnight HRV, resting heart rate, sleep duration, sleep efficiency, subjective sleep quality, morning energy, and whether any HRV dip recurs.. Stop rule: Stop the experiment if it causes undue burden, no measurable or subjective signal appears after the defined window, or confounding from illness, travel, or major training changes makes the data uninterpretable.. Downside: Social inconvenience, preference burden, and risk of overinterpreting consumer wearable sleep-stage or HRV data..",
+    "id": "ADJ-007",
+    "lane": "adj",
+    "originalRank": 5,
+    "title": "Optional tendon-focused loading refinement for hip-flexor/glute insertion tenderness",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.3",
+    "do": "<strong>Optional tendon-focused loading refinement for hip-flexor/glute insertion tenderness</strong>. The patient localizes soreness to tendon insertion points rather than generalized muscle soreness. A time-limited adjunct trial of carefully progressed isometrics and heavy-slow resistance principles could be considered alongside or after standard evaluation if red flags are absent.",
+    "why": "Patient-specific and plausible for insertional tenderness, but requires correct diagnosis and skilled progression; inappropriate loading could worsen symptoms.",
+    "goal": "S=3, P=4, A=4, R=3, E=2, Q=3 \u00b7 Adjunct-level basis: human rehabilitation evidence supports progressive tendon loading in several tendinopathy analogs, but the exact diagnosis and protocol for this patient\u2019s hip/glute region require individualized assessment and are not universal standard care.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Alcohol-timing or alcohol-free recovery experiment"
+        "glyph": "\u271a",
+        "label": "Optional tendon-focused loading refinement for hip-flexor/gl"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S2 P2 A2 R4 E5 Q2 · very_low_downside",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human rehabilitation evidence supports progressive tendon loading in several tendinopathy analogs, but the exact diagnosis and protocol for this patient\u2019s hip/glute region require individualized assessment and are not universal standard care.",
+    "author": "meridian",
+    "symptom_derived": true
+  },
+  {
+    "id": "ADJ-012",
+    "lane": "adj",
+    "originalRank": 6,
+    "title": "Soluble-fiber or portfolio-style food add-on for modest ApoB/LDL lowering",
+    "severity": "Adjunct",
+    "timing": "SPAREQ 3.25",
+    "do": "<strong>Soluble-fiber or portfolio-style food add-on for modest ApoB/LDL lowering</strong>. The patient has a mild ApoB/LDL signal in a low near-term risk context. Optional additions such as oats, barley, psyllium, legumes, nuts, or plant-sterol-containing foods could be trialed as a low-downside lipid-quality refinement rather than a high-intensity intervention.",
+    "why": "Good adjunct admissibility: mild ApoB/LDL signal, strong human biomarker evidence, low risk, and food-first implementation, but incremental outcome effect is modest.",
+    "goal": "S=3, P=4, A=3, R=2, E=4, Q=4 \u00b7 Adjunct-level basis: human feeding and biomarker studies support soluble fiber and portfolio-style dietary components for LDL/ApoB lowering, but this specific add-on approach is optional optimization rather than required standard care in a CAC=0, favorable-risk patient.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Soluble-fiber or portfolio-style food add-on for modest ApoB"
+      }
+    ],
+    "evidence": "Adjunct-level basis: human feeding and biomarker studies support soluble fiber and portfolio-style dietary components for LDL/ApoB lowering, but this specific add-on approach is optional optimization rather than required standard care in a CAC=0, favorable-risk patient.",
+    "author": "meridian",
+    "symptom_derived": false
+  },
+  {
+    "id": "ADJ-005",
+    "lane": "adj",
+    "originalRank": 7,
+    "title": "Postural-transition countermeasure routine for rare orthostatic lightheadedness",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 3.15",
+    "do": "<strong>Postural-transition countermeasure routine for rare orthostatic lightheadedness</strong>. The patient reports occasional lightheadedness on standing quickly, now only a couple times per year and without reported syncope or palpitations. A simple optional routine\u2014slower rising, calf pumps, glute contraction, brief pause after standing, and symptom notes\u2014could reduce episodes without medicalizing an infrequent symptom.",
+    "why": "Very easy and reversible with clear mechanism, but symptom frequency is only a couple times per year, lowering patient-specific probability.",
+    "goal": "S=3, P=2, A=3, R=4, E=5, Q=3 \u00b7 Adjunct-level basis: human physiologic rationale and clinical practice support physical counter-maneuvers for orthostatic intolerance, but this is below formal treatment threshold for rare, non-progressive episodes.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Postural-transition countermeasure routine for rare orthosta"
+      }
+    ],
+    "evidence": "Adjunct-level basis: human physiologic rationale and clinical practice support physical counter-maneuvers for orthostatic intolerance, but this is below formal treatment threshold for rare, non-progressive episodes.",
+    "author": "meridian",
+    "symptom_derived": true
+  },
+  {
+    "id": "ADJ-014",
+    "lane": "adj",
+    "originalRank": 8,
+    "title": "Radiation-stewardship preference for elective imaging in ATM carrier with CAC=0",
+    "severity": "Adjunct",
+    "timing": "SPAREQ 3.05",
+    "do": "<strong>Radiation-stewardship preference for elective imaging in ATM carrier with CAC=0</strong>. The patient has a pathogenic ATM variant and CAC=0 with no exertional cardiopulmonary symptoms. A preference-sensitive imaging-stewardship note could favor non-ionizing modalities when clinically equivalent and discourage elective radiation-heavy screening that is not otherwise indicated.",
+    "why": "A preference note is easy and mechanistically coherent for ATM plus CAC=0, but it must not block indicated imaging and evidence is stewardship-level.",
+    "goal": "S=3, P=3, A=3, R=2, E=5, Q=3 \u00b7 Adjunct-level basis: mechanism plus human genetic-risk rationale supports thoughtful radiation stewardship in DNA-repair vulnerability, but routine avoidance of all medically useful ionizing imaging is not standard care and must not block indicated diagnostics.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Radiation-stewardship preference for elective imaging in ATM"
+      }
+    ],
+    "evidence": "Adjunct-level basis: mechanism plus human genetic-risk rationale supports thoughtful radiation stewardship in DNA-repair vulnerability, but routine avoidance of all medically useful ionizing imaging is not standard care and must not block indicated diagnostics.",
+    "author": "meridian",
+    "symptom_derived": false
   },
   {
     "id": "ADJ-001",
-    "lane": "adjuncts",
-    "originalRank": 13,
-    "score": 2.45,
-    "spareq": {
-      "s": 3,
-      "p": 2,
-      "a": 2,
-      "r": 2,
-      "e": 3,
-      "q": 3
-    },
-    "title": "Omega-3 index-guided fish or EPA/DHA trial",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.45",
-    "do": "<strong>If desired, use a time-limited trial such as increasing oily fish intake or using a conservative EPA/DHA supplement dose, with product quality review and avoidance of high-dose escalation unless clinically indicated. Recheck omega-3 index and fasting lipids after about 8 to 12 weeks.</strong>",
-    "why": "SPAREQ 2.45. Patient signal: Omega-3 index is 5.1%; modest atherogenic lipid signal is present with LDL-C 121 mg/dL, ApoB 96 mg/dL, non-HDL-C 137 mg/dL; triglycerides are 65 mg/dL; patient reports no current supplements or medications.. Why not SoC: The patient has no ASCVD, no hypertriglyceridemia, no elevated Lp(a), and no current medication indication requiring omega-3 therapy; targeting omega-3 index for primary prevention is not standard care..",
-    "goal": "Monitor: Omega-3 index, LDL-C, ApoB or non-HDL-C, triglycerides, bruising or bleeding symptoms, palpitations or wearable-detected rhythm alerts, and gastrointestinal tolerability.. Stop rule: Stop or revise if LDL-C/ApoB rises meaningfully, bruising or bleeding occurs, palpitations or atrial fibrillation alerts appear, gastrointestinal intolerance develops, or omega-3 index does not move after an adequate adherence trial.. Downside: Uncertain primary-prevention outcome benefit, supplement quality variability, pill burden, fish-mercury considerations depending on species, gastrointestinal symptoms, possible LDL-C increase with some formulations, and bleeding or atrial-fibrillation concerns in susceptible contexts..",
+    "lane": "adj",
+    "originalRank": 9,
+    "title": "Structured magnesium-response N-of-1 documentation for resolved gout history",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 2.85",
+    "do": "<strong>Structured magnesium-response N-of-1 documentation for resolved gout history</strong>. The patient reports a strong temporal association between magnesium supplementation and disappearance of prior recurrent podagra-like attacks, while the formal supplement list says none. An optional N-of-1 log could document formulation, dose, timing, adherence, bowel effects, and any recurrent toe-joint symptoms without assuming causality.",
+    "why": "Strong patient-generated signal makes documentation admissible; it mainly clarifies causality, dose, and tolerability rather than directly providing proven gout prophylaxis.",
+    "goal": "S=2, P=4, A=2, R=3, E=4, Q=3 \u00b7 Adjunct-level basis: human biomarker and observational signals link magnesium status with metabolic and inflammatory markers, but magnesium is not a standard gout-prevention therapy. The candidate is low cost and mainly clarifies a patient-derived observation.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Omega-3 index-guided fish or EPA/DHA trial"
+        "glyph": "\u271a",
+        "label": "Structured magnesium-response N-of-1 documentation for resol"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S3 P2 A2 R2 E3 Q3 · human_biomarker",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human biomarker and observational signals link magnesium status with metabolic and inflammatory markers, but magnesium is not a standard gout-prevention therapy. The candidate is low cost and mainly clarifies a patient-derived observation.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
-    "id": "ADJ-009",
-    "lane": "adjuncts",
-    "originalRank": 14,
-    "score": 2.25,
-    "spareq": {
-      "s": 2,
-      "p": 2,
-      "a": 2,
-      "r": 3,
-      "e": 3,
-      "q": 2
-    },
-    "title": "Sleep-regularity and morning-light recovery experiment",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.25",
-    "do": "<strong>For 2 to 4 weeks, keep wake time within a narrow planned window most days, obtain outdoor morning light when feasible, reduce bright light late in the evening, and avoid changing training load or alcohol pattern during the same test window if possible.</strong>",
-    "why": "SPAREQ 2.25. Patient signal: Median sleep duration about 7.17 hours/night, sleep efficiency 88%, high baseline HRV/RHR profile, and a documented May 2026 HRV dip without corroborating illness, travel, alcohol, sleep disruption, or overreaching context.. Why not SoC: There is no insomnia, insufficient sleep, obstructive sleep apnea signal, or sleep-disorder diagnosis in the payload; this is not treatment of a standard-care sleep condition..",
-    "goal": "Monitor: Track sleep midpoint variability, total sleep time, sleep efficiency, overnight HRV/RHR, perceived recovery, and any daytime sleepiness.. Stop rule: Stop if the protocol worsens sleep, causes schedule stress, reduces quality of life, or produces no interpretable recovery signal after the test window.. Downside: Can become overly rigid, may conflict with social schedule, and wearable sleep or HRV signals may reflect noise rather than physiology..",
+    "id": "ADJ-002",
+    "lane": "adj",
+    "originalRank": 10,
+    "title": "Gout-trigger diary focused on dehydration, alcohol, high-purine meals, fructose, and post-exercise flares",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 2.85",
+    "do": "<strong>Gout-trigger diary focused on dehydration, alcohol, high-purine meals, fructose, and post-exercise flares</strong>. Because prior gout-like attacks are resolved and current urate data are absent, a trigger diary is an optional low-cost way to identify whether rare future symptoms correlate with dehydration, endurance sessions, alcohol, seafood/organ-meat intake, sugary drinks, or travel.",
+    "why": "Low-cost and appropriate if future symptoms recur, but current gout is quiescent and serum urate is unknown, so near-term action value is moderate.",
+    "goal": "S=2, P=3, A=3, R=3, E=4, Q=3 \u00b7 Adjunct-level basis: epidemiologic and clinical experience support associations between gout flares and dehydration, alcohol, purine load, and fructose, but a diary itself is not a guideline-grade treatment.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Sleep-regularity and morning-light recovery experiment"
+        "glyph": "\u271a",
+        "label": "Gout-trigger diary focused on dehydration, alcohol, high-pur"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S2 P2 A2 R3 E3 Q2 · epidemiology_plus_mechanism",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: epidemiologic and clinical experience support associations between gout flares and dehydration, alcohol, purine load, and fructose, but a diary itself is not a guideline-grade treatment.",
+    "author": "meridian",
+    "symptom_derived": true
   },
   {
     "id": "ADJ-015",
-    "lane": "adjuncts",
-    "originalRank": 15,
-    "score": 2.25,
-    "spareq": {
-      "s": 2,
-      "p": 2,
-      "a": 2,
-      "r": 3,
-      "e": 3,
-      "q": 2
-    },
-    "title": "Cold-exposure timing rule for recovery-only use",
-    "severity": "Adjunct Option",
-    "timing": "SPAREQ 2.25",
-    "do": "<strong>If used, reserve cold-water immersion or cold shower exposure for recovery-focused days, heat-stress days, or competition/event recovery; avoid routine immediate use after hypertrophy- or strength-focused sessions where adaptation is the main goal.</strong>",
-    "why": "SPAREQ 2.25. Patient signal: Patient has high fitness and regular training with wearable recovery metrics; May 2026 HRV dip was documented but not otherwise explained.. Why not SoC: Cold exposure is not a guideline-grade preventive intervention for this patient’s risk profile and should not replace standard recovery, sleep, or training-load management..",
-    "goal": "Monitor: Subjective soreness, next-day readiness, HRV/RHR trend, sleep quality, training performance, and cold intolerance symptoms.. Stop rule: Stop if cold exposure causes presyncope, chest symptoms, excessive discomfort, sleep disruption, performance decline, or worsened recovery metrics.. Downside: Cold shock response, discomfort, possible arrhythmia risk in susceptible individuals, and potential interference with strength or hypertrophy adaptations if mistimed..",
+    "lane": "adj",
+    "originalRank": 11,
+    "title": "Preference-sensitive intimacy and relationship communication intervention",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 2.7",
+    "do": "<strong>Preference-sensitive intimacy and relationship communication intervention</strong>. The patient reports preserved libido but dissatisfaction or uncertainty about sexual frequency and attraction. A low-stigma optional pathway could include structured self-reflection, couples communication exercises, or a sex therapist/couples therapist consult if desired, without treating this as low testosterone.",
+    "why": "Patient-specific psychosocial concern with acceptable human behavioral evidence; priority is limited by preference sensitivity and less direct medical risk linkage.",
+    "goal": "S=2, P=3, A=3, R=2, E=3, Q=4 \u00b7 Adjunct-level basis: human psychosocial and behavioral therapy evidence supports communication and sex-therapy approaches for relationship/intimacy concerns, but this is preference-sensitive and not a standard medical risk-reduction mandate.",
     "orders": [
       {
-        "glyph": "✚",
-        "label": "Cold-exposure timing rule for recovery-only use"
+        "glyph": "\u271a",
+        "label": "Preference-sensitive intimacy and relationship communication"
       }
     ],
-    "evidence": "Adjunct-calibrated SPAREQ · S2 P2 A2 R3 E3 Q2 · mechanism_plus_human_signal",
-    "author": "meridian"
+    "evidence": "Adjunct-level basis: human psychosocial and behavioral therapy evidence supports communication and sex-therapy approaches for relationship/intimacy concerns, but this is preference-sensitive and not a standard medical risk-reduction mandate.",
+    "author": "meridian",
+    "symptom_derived": true
+  },
+  {
+    "id": "ADJ-009",
+    "lane": "adj",
+    "originalRank": 12,
+    "title": "Collagen or gelatin plus vitamin C timing trial before tendon-loading sessions",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 2.5",
+    "do": "<strong>Collagen or gelatin plus vitamin C timing trial before tendon-loading sessions</strong>. For persistent tendon insertion tenderness, a time-limited nutrition-support experiment using collagen or gelatin with vitamin C before tendon-focused loading could be considered if compatible with diet preferences and renal context.",
+    "why": "Mechanistically plausible for tendon adaptation, but clinical outcome evidence is mixed and benefit depends on a correct loading program.",
+    "goal": "S=2, P=3, A=3, R=2, E=3, Q=2 \u00b7 Adjunct-level basis: small human biomarker and connective-tissue synthesis studies suggest collagen/gelatin plus vitamin C may support collagen turnover when paired with loading, but clinical outcome evidence is mixed and below standard-of-care threshold.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Collagen or gelatin plus vitamin C timing trial before tendo"
+      }
+    ],
+    "evidence": "Adjunct-level basis: small human biomarker and connective-tissue synthesis studies suggest collagen/gelatin plus vitamin C may support collagen turnover when paired with loading, but clinical outcome evidence is mixed and below standard-of-care threshold.",
+    "author": "meridian",
+    "symptom_derived": true
+  },
+  {
+    "id": "ADJ-011",
+    "lane": "adj",
+    "originalRank": 13,
+    "title": "Omega-3 index optimization through fatty fish or algae/fish-oil trial",
+    "severity": "Adjunct",
+    "timing": "SPAREQ 2.4",
+    "do": "<strong>Omega-3 index optimization through fatty fish or algae/fish-oil trial</strong>. Omega-3 index is 5.1%, which is not a disease diagnosis but may be a modifiable biomarker. An optional food-first or carefully dosed supplement trial could be considered with repeat omega-3 index if the patient wants biomarker-guided optimization.",
+    "why": "Omega-3 index is modifiable and patient-specific, but triglycerides are low and clinical outcome relevance is uncertain in this low-risk context.",
+    "goal": "S=2, P=3, A=2, R=2, E=3, Q=3 \u00b7 Adjunct-level basis: human biomarker evidence supports that fatty fish or omega-3 supplementation can raise omega-3 index and influence triglycerides or inflammatory mediators, but clinical outcome relevance for this low-risk, low-triglyceride patient is uncertain.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Omega-3 index optimization through fatty fish or algae/fish-"
+      }
+    ],
+    "evidence": "Adjunct-level basis: human biomarker evidence supports that fatty fish or omega-3 supplementation can raise omega-3 index and influence triglycerides or inflammatory mediators, but clinical outcome relevance for this low-risk, low-triglyceride patient is uncertain.",
+    "author": "meridian",
+    "symptom_derived": false
+  },
+  {
+    "id": "ADJ-013",
+    "lane": "adj",
+    "originalRank": 14,
+    "title": "Fiber-diversity and fermented-food experiment for gut-metabolic resilience",
+    "severity": "Adjunct",
+    "timing": "SPAREQ 2.4",
+    "do": "<strong>Fiber-diversity and fermented-food experiment for gut-metabolic resilience</strong>. Given favorable metabolic markers, prior gout history, East Asian ancestry, and paternal GI cancer of unknown primary, an optional food-diversity experiment could focus on increasing plant diversity and fermented foods if tolerated, without claiming cancer prevention or replacing screening.",
+    "why": "Plausible for gut-metabolic biomarkers and generally low downside, but evidence is nonspecific and should not distract from standard colorectal/genetics surveillance.",
+    "goal": "S=2, P=3, A=2, R=2, E=3, Q=3 \u00b7 Adjunct-level basis: human epidemiology and biomarker studies link higher fiber, plant diversity, and fermented foods with gut microbiome and inflammatory/metabolic markers, but evidence is not specific enough to be standard cancer-risk management.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Fiber-diversity and fermented-food experiment for gut-metabo"
+      }
+    ],
+    "evidence": "Adjunct-level basis: human epidemiology and biomarker studies link higher fiber, plant diversity, and fermented foods with gut microbiome and inflammatory/metabolic markers, but evidence is not specific enough to be standard cancer-risk management.",
+    "author": "meridian",
+    "symptom_derived": false
+  },
+  {
+    "id": "ADJ-003",
+    "lane": "adj",
+    "originalRank": 15,
+    "title": "Optional tart cherry or anthocyanin-rich food trial for gout-flare tendency",
+    "severity": "Adjunct \u00b7 symptom-derived",
+    "timing": "SPAREQ 2.2",
+    "do": "<strong>Optional tart cherry or anthocyanin-rich food trial for gout-flare tendency</strong>. For a patient with prior recurrent gout-like attacks now quiescent, a time-limited food-based trial of tart cherry, berries, or other anthocyanin-rich foods could be considered if flares recur or if he wants a low-downside preventive experiment.",
+    "why": "Low downside as food-based experimentation, but gout is currently resolved and the evidence is weaker than standard urate evaluation or trigger management.",
+    "goal": "S=2, P=2, A=2, R=2, E=4, Q=2 \u00b7 Adjunct-level basis: human observational and small interventional signals suggest possible gout-flare or inflammatory-marker benefit from cherry/anthocyanin intake, but this is below standard-of-care evidence and should not replace urate-directed management if gout becomes active.",
+    "orders": [
+      {
+        "glyph": "\u271a",
+        "label": "Optional tart cherry or anthocyanin-rich food trial for gout"
+      }
+    ],
+    "evidence": "Adjunct-level basis: human observational and small interventional signals suggest possible gout-flare or inflammatory-marker benefit from cherry/anthocyanin intake, but this is below standard-of-care evidence and should not replace urate-directed management if gout becomes active.",
+    "author": "meridian",
+    "symptom_derived": true
   }
 ];
 
