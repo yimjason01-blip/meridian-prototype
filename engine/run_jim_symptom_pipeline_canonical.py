@@ -126,32 +126,70 @@ def score(it):
     return round(it.get('S',0)*0.25 + it.get('P',0)*0.20 + it.get('A',0)*0.20 + it.get('R',0)*0.15 + it.get('E',0)*0.10 + it.get('Q',0)*0.10, 3)
 
 
-def biomcp_query_for_candidate(lane, item):
+BIOMCP_QUERY_HINTS = [
+    ('Mediterranean', 'portfolio diet LDL cholesterol randomized trial'),
+    ('ApoB/LDL', 'LDL cholesterol lowering primary prevention statin trial'),
+    ('pharmacologic ApoB', 'statin primary prevention LDL cholesterol cardiovascular events'),
+    ('aerobic fitness', 'cardiorespiratory fitness mortality cardiovascular risk'),
+    ('resistance training', 'resistance training insulin sensitivity cardiometabolic risk'),
+    ('physical therapy', 'exercise therapy chronic low back pain systematic review'),
+    ('BP-protective', 'blood pressure reduction cardiovascular risk meta analysis'),
+    ('healthy weight', 'waist circumference metabolic risk East Asian'),
+    ('urate-lowering', 'gout urate lowering therapy guideline'),
+    ('gout-preventive nutrition', 'gout diet alcohol fructose purine flare risk'),
+    ('NSAID', 'NSAID kidney injury chronic kidney disease risk'),
+    ('hydration and electrolytes', 'orthostatic intolerance fluid sodium exercise'),
+    ('sleep', 'sleep duration cardiometabolic risk systematic review'),
+    ('never-smoker', 'smoking cessation cardiovascular cancer risk'),
+    ('alcohol', 'alcohol intake gout flare risk'),
+    ('hepatitis B', 'hepatitis B vaccination hepatocellular carcinoma prevention'),
+    ('magnesium', 'magnesium supplementation muscle cramps randomized trial'),
+    ('Tart cherry', 'tart cherry gout flare randomized trial'),
+    ('trigger N-of-1', 'gout flare triggers alcohol dehydration fructose'),
+    ('Electrolyte preload', 'orthostatic intolerance sodium fluid compression trial'),
+    ('Compression garment', 'compression garments orthostatic intolerance trial'),
+    ('HRV-guided', 'heart rate variability guided training randomized trial'),
+    ('Collagen', 'collagen gelatin vitamin C tendon ligament exercise trial'),
+    ('Blood-flow-restriction', 'blood flow restriction training rehabilitation systematic review'),
+    ('Creatine', 'creatine monohydrate resistance training muscle strength meta analysis'),
+    ('Psyllium', 'psyllium LDL cholesterol meta analysis'),
+    ('Plant sterol', 'plant sterols LDL cholesterol meta analysis'),
+    ('Omega-3', 'omega 3 index triglycerides inflammation randomized trial'),
+    ('sauna', 'sauna cardiovascular mortality cohort'),
+    ('Resonance breathing', 'slow breathing heart rate variability blood pressure randomized trial'),
+    ('sex-therapy', 'couples sex therapy sexual dysfunction randomized trial'),
+]
+
+
+def biomcp_queries_for_candidate(lane, item):
+    title = item.get('title') or ''
+    text = ' '.join(str(item.get(k) or '') for k in [
+        'title', 'headline_intervention', 'target', 'risk_driver',
+        'mechanism_or_analog_rationale', 'patient_signal_from_inputs'
+    ])
+    queries = []
+    for needle, query in BIOMCP_QUERY_HINTS:
+        if needle.lower() in text.lower():
+            queries.append(query)
+            break
     if lane == 'SoC Risk Reduction':
-        parts = [
-            item.get('headline_intervention') or item.get('title'),
-            item.get('risk_driver'),
-            item.get('target'),
-            'risk reduction guideline trial meta-analysis'
-        ]
+        queries.append(f"{title} guideline trial meta analysis")
     else:
-        parts = [
-            item.get('title'),
-            item.get('mechanism_or_analog_rationale'),
-            item.get('patient_signal_from_inputs'),
-            'human evidence biomarker trial'
-        ]
-    query = ' '.join(str(p) for p in parts if p)
-    query = re.sub(r'[^A-Za-z0-9(),/ .:+-]+', ' ', query)
-    query = re.sub(r'\s+', ' ', query).strip()
-    return query[:240]
+        queries.append(f"{title} human trial systematic review")
+    cleaned = []
+    for q in queries:
+        q = re.sub(r'[^A-Za-z0-9(),/ .:+-]+', ' ', q)
+        q = re.sub(r'\s+', ' ', q).strip()[:180]
+        if q and q not in cleaned:
+            cleaned.append(q)
+    return cleaned[:2]
 
 
 def run_biomcp(query, max_results=5):
     try:
         proc = subprocess.run(
             ['biomcp', 'search', 'article', '-q', query, '--source', 'pubtator', '--limit', str(max_results), '--json'],
-            capture_output=True, text=True, timeout=75
+            capture_output=True, text=True, timeout=45
         )
         if proc.returncode != 0:
             return {'query': query, 'error': f'biomcp exit {proc.returncode}', 'stderr': proc.stderr[:800]}
@@ -181,13 +219,29 @@ def build_biomcp_grounding(generation):
     for lane in ['SoC Risk Reduction', 'Adjunct Options']:
         for item in generation['lanes'][lane].get('candidates', []):
             cid = item.get('id')
-            query = biomcp_query_for_candidate(lane, item)
-            log(f'  BioMCP {cid}: {query[:110]}')
+            queries = biomcp_queries_for_candidate(lane, item)
+            merged = {'query': queries[0] if queries else '', 'queries': queries, 'count': 0, 'results': []}
+            seen = set()
+            log(f'  BioMCP {cid}: {queries[0][:110] if queries else ""}')
+            for query in queries:
+                search = run_biomcp(query, 5)
+                if search.get('error'):
+                    merged.setdefault('errors', []).append(search)
+                    continue
+                for r in search.get('results', []):
+                    key = r.get('pmid') or r.get('doi') or r.get('title')
+                    if key and key not in seen:
+                        seen.add(key)
+                        merged['results'].append(r)
+                if len(merged['results']) >= 5:
+                    break
+            merged['results'] = merged['results'][:5]
+            merged['count'] = len(merged['results'])
             grounding['candidates'][cid] = {
                 'lane_label': lane,
                 'title': item.get('title'),
-                'query': query,
-                'search': run_biomcp(query, 5),
+                'query': merged.get('query'),
+                'search': merged,
             }
     return grounding
 
