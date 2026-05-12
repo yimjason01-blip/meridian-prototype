@@ -8,13 +8,13 @@ import json, os, re, sys, time, pathlib
 from datetime import datetime
 from openai import OpenAI
 
+ROOT_DIR = pathlib.Path(__file__).resolve().parents[1]
 OUT_DIR = pathlib.Path('/tmp/jim_symptom_run_canonical'); OUT_DIR.mkdir(exist_ok=True)
 LOG = OUT_DIR / 'pipeline.log'
 
 FIX_PATH = pathlib.Path('/tmp/jim_1_1_current_filled.json')
-PRIOR_SYSTEMIC = pathlib.Path('/tmp/jim_1_1_systemic_gpt55.json')
 PRIOR_RANKING = pathlib.Path('/tmp/jim_1_1_candidate_ranking_v0_1_gpt55.json')
-PROMPT_PATH = pathlib.Path('/tmp/meridian_risk_action_candidate_discovery_prompt_v1_1.md')
+PROMPT_PATH = ROOT_DIR / 'engine/prompts/meridian_risk_action_candidate_discovery_prompt_v1_1.md'
 PROMPT_V10 = PROMPT_PATH.read_text()
 NARRATIVE_PATH = pathlib.Path('/Users/jasonyim/Projects/MeridianPatient/data/jim-symptom-narrative.txt')
 NARRATIVE = NARRATIVE_PATH.read_text()
@@ -32,9 +32,12 @@ ACTIVE_LANES = ['SoC Monitoring', 'SoC Risk Reduction', 'Adjunct Options']
 
 SPAREQ_FORMULA = '(S*0.25)+(P*0.20)+(A*0.20)+(R*0.15)+(E*0.10)+(Q*0.10)'
 
-EXTRACTION_PROMPT_PATH = OUT_DIR / 'symptom_extraction_prompt_v0_1.md'
-SYSTEMIC_PROMPT_PATH = OUT_DIR / 'systemic_symptom_prompt_v0_1.md'
-RANKING_PROMPT_PATH = OUT_DIR / 'ranking_prompt_v0_2_canonical.md'
+EXTRACTION_PROMPT_PATH = ROOT_DIR / 'engine/prompts/symptom_extraction_prompt_v0_1.md'
+SYSTEMIC_PROMPT_PATH = ROOT_DIR / 'engine/prompts/systemic_symptom_prompt_v0_1.md'
+RANKING_PROMPT_PATH = ROOT_DIR / 'engine/prompts/ranking_prompt_v0_3.md'
+RUN_EXTRACTION_PROMPT_PATH = OUT_DIR / 'symptom_extraction_prompt_v0_1.md'
+RUN_SYSTEMIC_PROMPT_PATH = OUT_DIR / 'systemic_symptom_prompt_v0_1.md'
+RUN_RANKING_PROMPT_PATH = OUT_DIR / 'ranking_prompt_v0_3.md'
 
 
 def log(msg):
@@ -115,8 +118,8 @@ def score(it):
 
 log('=== STEP 1: Symptom extraction ===')
 
-EXTRACT_SYSTEM = 'You are the Meridian symptom-extraction engine.\n\nExtract patient-stated symptoms verbatim. Mark whether each symptom changes routing, risk interpretation, or action choice.\n\nReturn JSON only:\n{\n  "capture_id": "cap-jim-001",\n  "patient_id": "jim",\n  "captured_at": "2026-05-11T11:00:00-07:00",\n  "capture_mode": "narrative_text",\n  "extractor_model": "gpt-5.5",\n  "extractor_version": "symptom-spec-v0.1",\n  "raw_input_path": "/Users/jasonyim/Projects/MeridianPatient/data/jim-symptom-narrative.txt",\n  "symptoms": [SymptomEntry],\n  "narrative_themes": [string],\n  "expected_but_not_heard": [string]\n}\n\nSymptomEntry:\n{\n  "id": "sym-<n>",\n  "canonical_term": "snake_case",\n  "patient_quote": "verbatim quote",\n  "onset": "acute | subacute | chronic | lifelong | new_onset | resolved | unknown",\n  "duration_days": integer or null,\n  "severity_patient_reported": "mild | moderate | severe | n/a (positive finding) | unspecified",\n  "functional_impact": "none | minor | activity_limiting | disabling | psychosocial | unspecified",\n  "temporal_pattern": "constant | episodic | progressive | fluctuating | resolved | unspecified",\n  "associated_with": [string],\n  "red_flag": boolean,\n  "red_flag_reason": string or null,\n  "routing": {\n    "domain_models": ["cvd | metabolic | ckd | neuro | cancer"],\n    "systemic_clusters": [string],\n    "action_layer_flag": string or null\n  },\n  "extractor_confidence": "high | medium | low",\n  "needs_clarification": boolean\n}\n\nRules:\n- Every symptom needs a quote.\n- Positive findings are allowed.\n- Resolved symptoms stay resolved.\n- Psychosocial signals do not route to domain_models.\n- List 3 to 5 expected_but_not_heard probes.'
-EXTRACTION_PROMPT_PATH.write_text(EXTRACT_SYSTEM)
+EXTRACT_SYSTEM = EXTRACTION_PROMPT_PATH.read_text()
+RUN_EXTRACTION_PROMPT_PATH.write_text(EXTRACT_SYSTEM)
 symptoms = load_json_if_exists(OUT_DIR / 'jim_symptom_extraction.json')
 if symptoms is None:
     extract_user = json.dumps({'narrative': NARRATIVE, 'patient_id': 'jim'}, ensure_ascii=False)
@@ -129,16 +132,14 @@ else:
 log(f'  extracted {len(symptoms.get("symptoms",[]))} symptoms')
 
 log('=== STEP 2: Systemic risk model, symptom-aware ===')
-SYSTEMIC_SYSTEM = 'You are the Meridian Systemic Risk Model.\n\nIdentify cross-domain patterns that change risk interpretation or action choice.\n\nUse raw data, domain context, prior systemic output, and symptom capture. Treat symptoms as first-class inputs.\n\nReturn JSON only:\n{\n  "patient_id": "jim",\n  "shared_drivers": [{"driver":"","domains":[],"mechanism":"","evidence":"raw|symptom|both"}],\n  "amplifier_combinations": [{"combination":"","domains":[],"rationale":""}],\n  "multi_domain_levers": [{"lever":"","domains_affected":[],"rationale":""}],\n  "trajectory_interactions": [{"interaction":"","rationale":""}],\n  "symptom_clusters_fired": [{"cluster_id":"","components_present":0,"components":[],"confidence":"high|medium|low","systemic_note":""}],\n  "symptom_clusters_near_fire": [{"cluster_id":"","components_present":0,"missing":[],"probe_suggested":""}],\n  "symptom_domain_confirmations": [{"domain":"","symptom_signal":"","effect":"confirms|contradicts|amplifies"}],\n  "patient_generated_knowledge": [{"observation":"","quote":"","engine_action":"document|verify|repeat_test|preserve_in_care_plan"}],\n  "psychosocial_signals": [{"signal":"","quote":"","handling":"handoff_acknowledgment_only|optional_referral|no_action"}],\n  "expected_but_not_heard": [string],\n  "systemic_summary_one_paragraph": ""\n}'
-SYSTEMIC_PROMPT_PATH.write_text(SYSTEMIC_SYSTEM)
+SYSTEMIC_SYSTEM = SYSTEMIC_PROMPT_PATH.read_text()
+RUN_SYSTEMIC_PROMPT_PATH.write_text(SYSTEMIC_SYSTEM)
 systemic = load_json_if_exists(OUT_DIR / 'jim_systemic_symptom_aware.json')
 if systemic is None:
-    prior_sys = json.load(PRIOR_SYSTEMIC.open())
     systemic_user = json.dumps({
         'patient_fixture': json.load(FIX_PATH.open()),
-        'prior_systemic_output_for_reference': prior_sys.get('output') or prior_sys,
         'symptom_capture': symptoms,
-        'instruction': 'Produce a fresh systemic synthesis that integrates symptom capture as a first-class input class. Reference the prior systemic output only as context for what was previously concluded from raw and domain data alone.'
+        'instruction': 'Produce a fresh systemic synthesis from raw patient data and symptom capture only.'
     }, ensure_ascii=False)
     text = call_gpt(SYSTEMIC_SYSTEM, systemic_user, max_tokens=8000, tag='systemic')
     (OUT_DIR / 'jim_systemic_symptom_aware_raw.txt').write_text(text)
@@ -148,7 +149,7 @@ else:
     log('  reusing existing systemic artifact')
 log('  systemic done')
 
-log('=== STEP 3: Candidate generation v1.0 canonical lanes ===')
+log('=== STEP 3: Candidate generation v1.1 canonical lanes ===')
 lanes = {}
 axes_hint = []
 for label, target_n in LANES:
@@ -212,9 +213,9 @@ generation = {
 }
 (OUT_DIR / 'jim_candidates_v10_symptom_canonical.json').write_text(json.dumps(generation, indent=2, ensure_ascii=False))
 
-log('=== STEP 4: Ranking v0.2 canonical lanes ===')
-RANKING_SYSTEM = 'You are the Meridian Action Ranking pass v0.3.\n\nRank existing candidates only. Do not create, rename, omit, or move candidates.\n\nRules:\n- SoC Monitoring: order by care-maintenance logic. No SPAREQ.\n- SoC Risk Reduction: rank by expected modeled-risk reduction, then evidence, then urgency, then burden.\n- Adjunct Options: rank by patient-specific upside, evidence, reversibility, and burden.\n- Excluded / Watchlist: preserve as audit only.\n- Preserve symptom_derived.\n- Routine record closure must not outrank model-moving actions.\n\nFor ranked lanes, return S, P, A, R, E, Q as 1 to 5 integers:\nS = severity if untreated.\nP = relevance for this patient.\nA = modeled-risk impact.\nR = urgency or reversibility window.\nE = effort inverted.\nQ = evidence quality.\n\nReturn JSON only:\n{\n  "lanes": {\n    "SoC Monitoring": [{"id":"","title":"","ordering_rationale":"","symptom_derived":false}],\n    "SoC Risk Reduction": [{"id":"","title":"","S":0,"P":0,"A":0,"R":0,"E":0,"Q":0,"rationale":"","symptom_derived":false}],\n    "Adjunct Options": [{"id":"","title":"","S":0,"P":0,"A":0,"R":0,"E":0,"Q":0,"rationale":"","symptom_derived":false}]\n  },\n  "audit": {\n    "Excluded / Watchlist": [{"id":"","title":"","reason":""}]\n  },\n  "input_sufficiency": {"notes":""}\n}'
-RANKING_PROMPT_PATH.write_text(RANKING_SYSTEM)
+log('=== STEP 4: Ranking v0.3 canonical lanes ===')
+RANKING_SYSTEM = RANKING_PROMPT_PATH.read_text()
+RUN_RANKING_PROMPT_PATH.write_text(RANKING_SYSTEM)
 ranking_user = json.dumps({'generation_artifact': generation, 'patient_payload_summary': {'symptom_capture': symptoms, 'systemic': systemic}}, ensure_ascii=False)
 text = call_gpt(RANKING_SYSTEM, ranking_user, max_tokens=16000, tag='ranking')
 (OUT_DIR / 'jim_ranking_v02_raw.txt').write_text(text)
