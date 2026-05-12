@@ -81,6 +81,14 @@ DOMAIN_ORDER = [
 ]
 DOMAIN_RANK = {d['domain']: d['rank'] for d in DOMAIN_ORDER}
 DOMAIN_OPP = {d['domain']: d['domain_opportunity'] for d in DOMAIN_ORDER}
+DOMAIN_DISPLAY = {
+    'metabolic': 'Metabolic risk / diabetes prevention',
+    'cardiovascular': 'Cardiovascular risk optimization',
+    'cancer_genetics': 'Cancer / hereditary genetics prevention and screening',
+    'renal_ckd': 'Renal / CKD and medication safety',
+    'neuro': 'Neurocognitive / sleep and stress risk',
+    'prevention_general': 'Prevention-general / endocrine-medication optimization',
+}
 
 # Domain-first ordering produced from Karen's domain-risk artifacts. Numbers are
 # deterministic ordinal proxies, not legacy scalar scores.
@@ -333,19 +341,26 @@ def to_js_items(ranking):
                 goal = 'v0.5 care-maintenance ordering: due/overdue, newly indicated by risk model, then routine cadence.'
                 evidence = it['ordering_rationale']
             elif lane == 'SoC Risk Reduction':
-                timing = f"Domain #{it['domain_rank']} {it['domain'].replace('_', ' ')} · {it['expected_domain_arr']}"
+                domain_label = DOMAIN_DISPLAY[it['domain']]
+                timing = f"Risk model · {domain_label} · {it['expected_domain_arr']}"
                 goal = f"Domain opportunity: {it['domain_opportunity']}. Relative effect: {it['relative_effect_size']}. Evidence confidence: {it['evidence_confidence']}."
                 evidence = it['grounding_note'] + (f" PMIDs: {', '.join(it['evidence_pmids'])}." if it['evidence_pmids'] else '')
             else:
-                timing = f"Domain #{it['domain_rank']} {it['domain'].replace('_', ' ')} · {it['effect_size_class']} effect · {it['evidence_tier'].replace('_', ' ')}"
+                domain_label = DOMAIN_DISPLAY[it['domain']]
+                timing = f"Risk model · {domain_label} · {it['effect_size_class']} effect · {it['evidence_tier'].replace('_', ' ')}"
                 goal = f"Domain opportunity: {it['domain_opportunity']}. Downside: {it['downside']}."
                 evidence = it['grounding_note'] + (f" PMIDs: {', '.join(it['evidence_pmids'])}." if it['evidence_pmids'] else '')
-            out.append({
+            item = {
                 'id': it['id'], 'lane': key, 'originalRank': i, 'title': it['title'], 'severity': lane,
                 'timing': timing, 'do': f"<strong>{it['title']}</strong>. {it.get('rationale') or it.get('ordering_rationale')}",
                 'why': it.get('rationale') or it.get('ordering_rationale'), 'goal': goal,
                 'orders': [{'glyph': '✚', 'label': it['title']}], 'evidence': evidence, 'author': 'meridian-v0.5',
-            })
+            }
+            if lane != 'SoC Monitoring':
+                item['domain'] = domain_label
+                item['domain_key'] = it['domain']
+                item['domain_rank'] = it['domain_rank']
+            out.append(item)
     excluded = [{'name': x['title'], 'reason': x['reason']} for x in ranking['audit']['Excluded / Watchlist']]
     return out, excluded
 

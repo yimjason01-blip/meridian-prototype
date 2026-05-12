@@ -291,7 +291,7 @@
       "originalRank": 1,
       "title": "Enroll in or emulate a structured Diabetes Prevention Program",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #1 metabolic · high expected metabolic ARR: DPP-class intervention addresses the dominant ~35% 10-year diabetes opportunity",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · high expected metabolic ARR: DPP-class intervention addresses the dominant ~35% 10-year diabetes opportunity",
       "do": "<strong>Enroll in or emulate a structured Diabetes Prevention Program</strong>. Karen has prediabetes-range glycemia plus multiple amplifiers: prior gestational diabetes, Asian ancestry, paternal type 2 diabetes, elevated waist-to-height ratio, and high modeled 10-year diabetes risk.",
       "why": "Karen has prediabetes-range glycemia plus multiple amplifiers: prior gestational diabetes, Asian ancestry, paternal type 2 diabetes, elevated waist-to-height ratio, and high modeled 10-year diabetes risk.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Relative effect: large. Evidence confidence: high.",
@@ -302,7 +302,10 @@
         }
       ],
       "evidence": "Structured lifestyle programs for prediabetes are standard-of-care risk reduction, emphasizing activity, nutrition, weight/waist management, and behavioral support to reduce progression to type 2 diabetes. PMIDs: 36176003, 37955955.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "RMA-004",
@@ -310,7 +313,7 @@
       "originalRank": 2,
       "title": "Prevent further postmenopausal weight gain and reduce central adiposity",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #1 metabolic · moderate expected metabolic ARR through central-adiposity and postmenopausal weight-trajectory modification",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate expected metabolic ARR through central-adiposity and postmenopausal weight-trajectory modification",
       "do": "<strong>Prevent further postmenopausal weight gain and reduce central adiposity</strong>. Although BMI is in the normal range, waist-to-height ratio is elevated and weight has drifted upward since menopause.",
       "why": "Although BMI is in the normal range, waist-to-height ratio is elevated and weight has drifted upward since menopause.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Relative effect: moderate. Evidence confidence: medium.",
@@ -321,7 +324,10 @@
         }
       ],
       "evidence": "For people with prediabetes or central adiposity, standard lifestyle care supports preventing weight gain and reducing visceral adiposity through nutrition, activity, resistance training, and sleep optimization. PMIDs: 36700183, 41731443.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "RMA-008",
@@ -329,7 +335,7 @@
       "originalRank": 3,
       "title": "Shift carbohydrate quality and meal composition for prediabetes",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #1 metabolic · moderate expected metabolic ARR through lower postprandial glucose/insulin exposure",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate expected metabolic ARR through lower postprandial glucose/insulin exposure",
       "do": "<strong>Shift carbohydrate quality and meal composition for prediabetes</strong>. Karen’s glycemic markers are in the prediabetes range with elevated insulin resistance despite normal BMI.",
       "why": "Karen’s glycemic markers are in the prediabetes range with elevated insulin resistance despite normal BMI.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Relative effect: moderate. Evidence confidence: medium.",
@@ -340,7 +346,10 @@
         }
       ],
       "evidence": "Nutrition counseling for prediabetes commonly emphasizes high-fiber carbohydrates, reduced refined starches and added sugars, protein/fat/fiber pairing, and portion quality. PMIDs: 35928840, 39843443.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "RMA-006",
@@ -348,7 +357,7 @@
       "originalRank": 4,
       "title": "Add progressive resistance training 2 to 3 days per week",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #1 metabolic · moderate expected metabolic ARR through insulin sensitivity, lean mass, and bone/function benefits",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate expected metabolic ARR through insulin sensitivity, lean mass, and bone/function benefits",
       "do": "<strong>Add progressive resistance training 2 to 3 days per week</strong>. Resistance training is not listed among her current exercise modalities, which are indoor cycling and hiking.",
       "why": "Resistance training is not listed among her current exercise modalities, which are indoor cycling and hiking.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Relative effect: moderate. Evidence confidence: high.",
@@ -359,7 +368,10 @@
         }
       ],
       "evidence": "Standard exercise guidance supports muscle-strengthening activity for adults, with particular relevance after menopause. PMIDs: 36700183, 41731443.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "RMA-005",
@@ -367,7 +379,7 @@
       "originalRank": 5,
       "title": "Progressively increase cardiorespiratory fitness beyond current baseline",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #1 metabolic · moderate expected metabolic ARR with cross-domain CVD/neuro co-benefit from improved CRF",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate expected metabolic ARR with cross-domain CVD/neuro co-benefit from improved CRF",
       "do": "<strong>Progressively increase cardiorespiratory fitness beyond current baseline</strong>. Cardiorespiratory fitness was below average and fired modifiers in the CVD, metabolic, and neuro models.",
       "why": "Cardiorespiratory fitness was below average and fired modifiers in the CVD, metabolic, and neuro models.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Relative effect: moderate. Evidence confidence: medium.",
@@ -378,7 +390,10 @@
         }
       ],
       "evidence": "Regular aerobic activity and improved cardiorespiratory fitness are standard risk-reduction measures for cardiometabolic disease and are associated with better vascular and cognitive aging outcomes. PMIDs: 38689681, 36875358.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "RMA-001",
@@ -386,7 +401,7 @@
       "originalRank": 6,
       "title": "Clinician shared decision on lipid-lowering therapy for intermediate CVD risk",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #2 cardiovascular · moderate expected CVD ARR from ApoB/LDL-lowering shared decision in intermediate risk",
+      "timing": "Risk model · Cardiovascular risk optimization · moderate expected CVD ARR from ApoB/LDL-lowering shared decision in intermediate risk",
       "do": "<strong>Clinician shared decision on lipid-lowering therapy for intermediate CVD risk</strong>. Karen has intermediate estimated 10-year total CVD risk with elevated LDL-C, non-HDL-C, ApoB, and modestly elevated Lp(a).",
       "why": "Karen has intermediate estimated 10-year total CVD risk with elevated LDL-C, non-HDL-C, ApoB, and modestly elevated Lp(a).",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Relative effect: large. Evidence confidence: high.",
@@ -397,7 +412,10 @@
         }
       ],
       "evidence": "Guideline-based cardiovascular prevention commonly supports statin consideration for adults with intermediate estimated CVD risk and atherogenic lipid burden after shared decision-making. PMIDs: 35447841, 39679827.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "RMA-002",
@@ -405,7 +423,7 @@
       "originalRank": 7,
       "title": "Optimize blood pressure toward consistently below 130/80 if clinically appropriate",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #2 cardiovascular · moderate expected CVD ARR from moving treated BP consistently below 130/80 if tolerated",
+      "timing": "Risk model · Cardiovascular risk optimization · moderate expected CVD ARR from moving treated BP consistently below 130/80 if tolerated",
       "do": "<strong>Optimize blood pressure toward consistently below 130/80 if clinically appropriate</strong>. Her BP is treated and not frankly uncontrolled, but home and clinic values remain slightly above stricter optimal thresholds used across CVD, CKD, and neurovascular risk models.",
       "why": "Her BP is treated and not frankly uncontrolled, but home and clinic values remain slightly above stricter optimal thresholds used across CVD, CKD, and neurovascular risk models.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Relative effect: large. Evidence confidence: high.",
@@ -416,7 +434,10 @@
         }
       ],
       "evidence": "Blood pressure reduction is a standard, guideline-grade intervention for lowering stroke, coronary, kidney, and cognitive vascular risk. PMIDs: 35916147, 40772210.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "RMA-007",
@@ -424,7 +445,7 @@
       "originalRank": 8,
       "title": "Adopt a lipid-lowering dietary pattern focused on ApoB reduction",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #2 cardiovascular · small-moderate expected CVD ARR as diet-mediated ApoB/LDL reduction",
+      "timing": "Risk model · Cardiovascular risk optimization · small-moderate expected CVD ARR as diet-mediated ApoB/LDL reduction",
       "do": "<strong>Adopt a lipid-lowering dietary pattern focused on ApoB reduction</strong>. Her atherogenic lipid burden is a major CVD driver.",
       "why": "Her atherogenic lipid burden is a major CVD driver.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Relative effect: moderate. Evidence confidence: medium.",
@@ -435,7 +456,10 @@
         }
       ],
       "evidence": "Dietary patterns lower in saturated fat and higher in unsaturated fats and soluble fiber are standard nonpharmacologic therapy for LDL-C and ApoB reduction. PMIDs: 35447841, 39679827.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "RMA-009",
@@ -443,7 +467,7 @@
       "originalRank": 9,
       "title": "Use a DASH-style sodium-reduction strategy for BP control",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #2 cardiovascular · small-moderate expected CVD ARR through BP lowering; complements medication strategy",
+      "timing": "Risk model · Cardiovascular risk optimization · small-moderate expected CVD ARR through BP lowering; complements medication strategy",
       "do": "<strong>Use a DASH-style sodium-reduction strategy for BP control</strong>. BP is treated but remains slightly above optimal.",
       "why": "BP is treated but remains slightly above optimal.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Relative effect: moderate. Evidence confidence: high.",
@@ -454,7 +478,10 @@
         }
       ],
       "evidence": "DASH-style eating and sodium reduction are standard nonpharmacologic interventions for lowering blood pressure. PMIDs: 35916147, 40772210.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "RMA-010",
@@ -462,7 +489,7 @@
       "originalRank": 10,
       "title": "Reduce alcohol intake below current women’s AUDIT-C threshold pattern",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #2 cardiovascular · small-moderate expected CVD/cancer/metabolic ARR by reducing alcohol exposure at threshold AUDIT-C pattern",
+      "timing": "Risk model · Cardiovascular risk optimization · small-moderate expected CVD/cancer/metabolic ARR by reducing alcohol exposure at threshold AUDIT-C pattern",
       "do": "<strong>Reduce alcohol intake below current women’s AUDIT-C threshold pattern</strong>. Her alcohol intake is not high enough to fire cancer or neuro alcohol modifiers, but AUDIT-C is at the threshold for women and systemic output notes possible interaction with sleep, BP, glycemia, triglycerides, and breast-risk context.",
       "why": "Her alcohol intake is not high enough to fire cancer or neuro alcohol modifiers, but AUDIT-C is at the threshold for women and systemic output notes possible interaction with sleep, BP, glycemia, triglycerides, and breast-risk context.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Relative effect: small-moderate. Evidence confidence: medium.",
@@ -473,7 +500,10 @@
         }
       ],
       "evidence": "Reducing alcohol is a standard harm-reduction and prevention action when intake is at a screening threshold or interacts with sleep, BP, metabolic risk, or cancer-risk context. PMIDs: 35333364, 40179033.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "RMA-011",
@@ -481,7 +511,7 @@
       "originalRank": 11,
       "title": "Implement a sleep-extension and sleep-efficiency improvement plan",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #5 neuro · small-moderate expected neuro/metabolic ARR; mostly indirect through sleep, BP, glycemia and function",
+      "timing": "Risk model · Neurocognitive / sleep and stress risk · small-moderate expected neuro/metabolic ARR; mostly indirect through sleep, BP, glycemia and function",
       "do": "<strong>Implement a sleep-extension and sleep-efficiency improvement plan</strong>. Sleep efficiency was poor enough to fire a neuro modifier, and sleep duration is short on work nights and by wearable average.",
       "why": "Sleep efficiency was poor enough to fire a neuro modifier, and sleep duration is short on work nights and by wearable average.",
       "goal": "Domain opportunity: low-moderate. Relative effect: small-moderate. Evidence confidence: medium.",
@@ -492,7 +522,10 @@
         }
       ],
       "evidence": "Behavioral sleep interventions, consistent sleep scheduling, stimulus control, and CBT-I principles are standard approaches for insufficient or inefficient sleep. PMIDs: 39316400, 39023982.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Neurocognitive / sleep and stress risk",
+      "domain_key": "neuro",
+      "domain_rank": 5
     },
     {
       "id": "RMA-012",
@@ -500,7 +533,7 @@
       "originalRank": 12,
       "title": "Use a structured stress-reduction or behavioral health intervention",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #5 neuro · small expected neuro/metabolic ARR; indirect through stress, sleep, BP, alcohol and adherence",
+      "timing": "Risk model · Neurocognitive / sleep and stress risk · small expected neuro/metabolic ARR; indirect through stress, sleep, BP, alcohol and adherence",
       "do": "<strong>Use a structured stress-reduction or behavioral health intervention</strong>. Karen reports high perceived stress during a recent reorganization and family transition, with PSS-10 in the moderate-to-high range and mild anxiety symptoms.",
       "why": "Karen reports high perceived stress during a recent reorganization and family transition, with PSS-10 in the moderate-to-high range and mild anxiety symptoms.",
       "goal": "Domain opportunity: low-moderate. Relative effect: small-moderate. Evidence confidence: medium.",
@@ -511,7 +544,10 @@
         }
       ],
       "evidence": "Structured behavioral interventions such as CBT-based stress management, mindfulness-based stress reduction, relaxation training, and coaching are commonly used to reduce stress symptoms and improve sleep and self-management behaviors. PMIDs: 34638360, 34300237.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Neurocognitive / sleep and stress risk",
+      "domain_key": "neuro",
+      "domain_rank": 5
     },
     {
       "id": "RMA-013",
@@ -519,7 +555,7 @@
       "originalRank": 13,
       "title": "Adopt kidney-protective medication and dehydration safety practices",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #4 renal ckd · small expected renal ARR because current CKD risk is low; high safety value for ACE-inhibitor/dehydration contexts",
+      "timing": "Risk model · Renal / CKD and medication safety · small expected renal ARR because current CKD risk is low; high safety value for ACE-inhibitor/dehydration contexts",
       "do": "<strong>Adopt kidney-protective medication and dehydration safety practices</strong>. Current kidney markers are reassuring, but hypertension and prediabetes create future vulnerability.",
       "why": "Current kidney markers are reassuring, but hypertension and prediabetes create future vulnerability.",
       "goal": "Domain opportunity: low-moderate. Relative effect: small. Evidence confidence: medium.",
@@ -530,7 +566,10 @@
         }
       ],
       "evidence": "Avoiding chronic nephrotoxic medication exposure and preventing dehydration-related AKI are standard kidney-protection practices, especially in people with hypertension, ACE inhibitor use, or metabolic risk. PMIDs: 40241469, 36961036.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Renal / CKD and medication safety",
+      "domain_key": "renal_ckd",
+      "domain_rank": 4
     },
     {
       "id": "RMA-014",
@@ -538,7 +577,7 @@
       "originalRank": 14,
       "title": "Correct borderline vitamin D insufficiency and ensure adequate calcium intake",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #6 prevention general · small prevention-general ARR; mainly bone-health optimization after DEXA/vitamin D context",
+      "timing": "Risk model · Prevention-general / endocrine-medication optimization · small prevention-general ARR; mainly bone-health optimization after DEXA/vitamin D context",
       "do": "<strong>Correct borderline vitamin D insufficiency and ensure adequate calcium intake</strong>. Vitamin D is below many commonly used sufficiency targets, and she is postmenopausal.",
       "why": "Vitamin D is below many commonly used sufficiency targets, and she is postmenopausal.",
       "goal": "Domain opportunity: variable. Relative effect: small. Evidence confidence: medium.",
@@ -549,7 +588,10 @@
         }
       ],
       "evidence": "Maintaining adequate vitamin D and calcium intake is standard bone-health risk reduction, especially after menopause. PMIDs: 36700183, 41731443.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Prevention-general / endocrine-medication optimization",
+      "domain_key": "prevention_general",
+      "domain_rank": 6
     },
     {
       "id": "RMA-015",
@@ -557,7 +599,7 @@
       "originalRank": 15,
       "title": "Ensure levothyroxine is taken separately from mineral-containing supplements",
       "severity": "SoC Risk Reduction",
-      "timing": "Domain #6 prevention general · small prevention-general ARR; medication-effectiveness/safety optimization rather than risk-event reduction",
+      "timing": "Risk model · Prevention-general / endocrine-medication optimization · small prevention-general ARR; medication-effectiveness/safety optimization rather than risk-event reduction",
       "do": "<strong>Ensure levothyroxine is taken separately from mineral-containing supplements</strong>. Her thyroid labs are currently controlled, but she takes magnesium and a multivitamin, which may contain minerals that can reduce levothyroxine absorption if taken too close together.",
       "why": "Her thyroid labs are currently controlled, but she takes magnesium and a multivitamin, which may contain minerals that can reduce levothyroxine absorption if taken too close together.",
       "goal": "Domain opportunity: variable. Relative effect: small. Evidence confidence: medium.",
@@ -568,7 +610,10 @@
         }
       ],
       "evidence": "Standard medication counseling for levothyroxine includes consistent administration and separation from calcium, iron, magnesium, and multivalent cation supplements because they can impair absorption. PMIDs: 40618386, 38838713.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Prevention-general / endocrine-medication optimization",
+      "domain_key": "prevention_general",
+      "domain_rank": 6
     },
     {
       "id": "ADJ-002",
@@ -576,7 +621,7 @@
       "originalRank": 1,
       "title": "Structured post-meal walking after higher-carbohydrate meals",
       "severity": "Adjunct Options",
-      "timing": "Domain #1 metabolic · moderate effect · biomarker rct",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate effect · biomarker rct",
       "do": "<strong>Structured post-meal walking after higher-carbohydrate meals</strong>. Add brief walking bouts after meals most likely to raise glucose, especially dinner or takeout meals.",
       "why": "Add brief walking bouts after meals most likely to raise glucose, especially dinner or takeout meals.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Downside: low.",
@@ -587,7 +632,10 @@
         }
       ],
       "evidence": "Human biomarker studies show that light activity soon after meals can reduce postprandial glucose and insulin exposure. PMIDs: 40246606, 34721064.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "ADJ-001",
@@ -595,7 +643,7 @@
       "originalRank": 2,
       "title": "Short-term continuous glucose monitor experiment for post-meal pattern discovery",
       "severity": "Adjunct Options",
-      "timing": "Domain #1 metabolic · moderate effect · human observational plus mechanism",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate effect · human observational plus mechanism",
       "do": "<strong>Short-term continuous glucose monitor experiment for post-meal pattern discovery</strong>. Use a time-limited CGM trial as an optional risk-clarification tool to identify which meals, timing patterns, stress days, sleep-short nights, or alcohol-containing dinners are associated with larger glucose excursions.",
       "why": "Use a time-limited CGM trial as an optional risk-clarification tool to identify which meals, timing patterns, stress days, sleep-short nights, or alcohol-containing dinners are associated with larger glucose excursions.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Downside: low.",
@@ -606,7 +654,10 @@
         }
       ],
       "evidence": "Human biomarker evidence supports that postprandial glucose responses vary between individuals and can be modified by meal composition, timing, sleep, and activity. PMIDs: 38264192, 33068776.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "ADJ-003",
@@ -614,7 +665,7 @@
       "originalRank": 3,
       "title": "Meal-sequencing experiment: vegetables and protein before starch",
       "severity": "Adjunct Options",
-      "timing": "Domain #1 metabolic · moderate effect · biomarker rct",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate effect · biomarker rct",
       "do": "<strong>Meal-sequencing experiment: vegetables and protein before starch</strong>. Test a low-burden meal-order strategy at meals containing refined or higher-glycemic carbohydrates.",
       "why": "Test a low-burden meal-order strategy at meals containing refined or higher-glycemic carbohydrates.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Downside: low.",
@@ -625,7 +676,10 @@
         }
       ],
       "evidence": "Small human feeding and biomarker studies suggest that consuming fiber-rich vegetables and protein before carbohydrate can reduce postprandial glucose and insulin spikes. PMIDs: 41837403, 38068801.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "ADJ-008",
@@ -633,7 +687,7 @@
       "originalRank": 4,
       "title": "Resistance-training microcycle focused on postmenopausal central adiposity and insulin sensitivity",
       "severity": "Adjunct Options",
-      "timing": "Domain #1 metabolic · moderate effect · biomarker rct",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate effect · biomarker rct",
       "do": "<strong>Resistance-training microcycle focused on postmenopausal central adiposity and insulin sensitivity</strong>. Add a specific, progressive resistance-training block as an exercise-dose optimization candidate, separate from general physical-activity advice.",
       "why": "Add a specific, progressive resistance-training block as an exercise-dose optimization candidate, separate from general physical-activity advice.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Downside: low.",
@@ -644,7 +698,10 @@
         }
       ],
       "evidence": "Human intervention evidence supports resistance training effects on lean mass, insulin sensitivity, functional reserve, and waist measures. PMIDs: 36700183, 41731443.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "ADJ-004",
@@ -652,7 +709,7 @@
       "originalRank": 5,
       "title": "Viscous soluble fiber add-on, such as psyllium, if tolerated",
       "severity": "Adjunct Options",
-      "timing": "Domain #1 metabolic · small effect · biomarker rct",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · small effect · biomarker rct",
       "do": "<strong>Viscous soluble fiber add-on, such as psyllium, if tolerated</strong>. Consider a food-or-supplement soluble fiber intervention focused on LDL/non-HDL and postprandial glycemia.",
       "why": "Consider a food-or-supplement soluble fiber intervention focused on LDL/non-HDL and postprandial glycemia.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Downside: low.",
@@ -663,7 +720,10 @@
         }
       ],
       "evidence": "Human biomarker evidence supports modest LDL-C lowering and improved postprandial glycemic response with viscous soluble fibers. PMIDs: 41366295, 37163454.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "ADJ-005",
@@ -671,7 +731,7 @@
       "originalRank": 6,
       "title": "Portfolio-style food substitution focused on plant sterols, viscous fiber, nuts, and soy protein",
       "severity": "Adjunct Options",
-      "timing": "Domain #2 cardiovascular · small effect · biomarker rct",
+      "timing": "Risk model · Cardiovascular risk optimization · small effect · biomarker rct",
       "do": "<strong>Portfolio-style food substitution focused on plant sterols, viscous fiber, nuts, and soy protein</strong>. Use a defined food-substitution pattern as an optional LDL/ApoB-lowering nutrition adjunct.",
       "why": "Use a defined food-substitution pattern as an optional LDL/ApoB-lowering nutrition adjunct.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Downside: low.",
@@ -682,7 +742,10 @@
         }
       ],
       "evidence": "Human dietary-intervention evidence shows that combinations of cholesterol-lowering foods can improve LDL-related biomarkers. PMIDs: 40152922, 40879583.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "ADJ-007",
@@ -690,7 +753,7 @@
       "originalRank": 7,
       "title": "Nitrate-rich vegetable or beetroot trial for BP and exercise-response biomarkers",
       "severity": "Adjunct Options",
-      "timing": "Domain #2 cardiovascular · small effect · biomarker rct",
+      "timing": "Risk model · Cardiovascular risk optimization · small effect · biomarker rct",
       "do": "<strong>Nitrate-rich vegetable or beetroot trial for BP and exercise-response biomarkers</strong>. A short, monitored trial of nitrate-rich foods could be considered for borderline-above-optimal BP and low CRF.",
       "why": "A short, monitored trial of nitrate-rich foods could be considered for borderline-above-optimal BP and low CRF.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Downside: low.",
@@ -701,7 +764,10 @@
         }
       ],
       "evidence": "Human biomarker studies show that dietary nitrate can modestly influence nitric-oxide pathways, BP, and exercise efficiency in some populations. PMIDs: 41469734.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "ADJ-009",
@@ -709,7 +775,7 @@
       "originalRank": 8,
       "title": "Higher-intensity interval exposure trial layered onto current cycling if safe and acceptable",
       "severity": "Adjunct Options",
-      "timing": "Domain #1 metabolic · moderate effect · close analog",
+      "timing": "Risk model · Metabolic risk / diabetes prevention · moderate effect · close analog",
       "do": "<strong>Higher-intensity interval exposure trial layered onto current cycling if safe and acceptable</strong>. Evaluate a cautious interval-training option using her existing indoor cycling habit to improve VO2max.",
       "why": "Evaluate a cautious interval-training option using her existing indoor cycling habit to improve VO2max.",
       "goal": "Domain opportunity: high (~35% baseline risk × high residual opportunity). Downside: low.",
@@ -720,7 +786,10 @@
         }
       ],
       "evidence": "Human exercise studies show interval training can improve VO2max efficiently in many adults. PMIDs: 41622107, 34684080.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Metabolic risk / diabetes prevention",
+      "domain_key": "metabolic",
+      "domain_rank": 1
     },
     {
       "id": "ADJ-013",
@@ -728,7 +797,7 @@
       "originalRank": 9,
       "title": "Alcohol-free sleep and glucose n-of-1 trial",
       "severity": "Adjunct Options",
-      "timing": "Domain #2 cardiovascular · small effect · low downside only",
+      "timing": "Risk model · Cardiovascular risk optimization · small effect · low downside only",
       "do": "<strong>Alcohol-free sleep and glucose n-of-1 trial</strong>. Run a defined alcohol-free or near-alcohol-free trial period with wearable sleep and, if available, glucose markers to see whether sleep efficiency, resting HR, HRV, BP, or next-day glucose patterns improve.",
       "why": "Run a defined alcohol-free or near-alcohol-free trial period with wearable sleep and, if available, glucose markers to see whether sleep efficiency, resting HR, HRV, BP, or next-day glucose patterns improve.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Downside: low.",
@@ -739,7 +808,10 @@
         }
       ],
       "evidence": "Human epidemiology and biomarker evidence links alcohol intake with sleep fragmentation, BP, triglycerides, glycemia, and breast cancer risk in dose-dependent ways. PMIDs: 34984504, 33856043.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "ADJ-010",
@@ -747,7 +819,7 @@
       "originalRank": 10,
       "title": "Digital CBT-I or structured sleep-efficiency protocol",
       "severity": "Adjunct Options",
-      "timing": "Domain #5 neuro · moderate effect · biomarker rct",
+      "timing": "Risk model · Neurocognitive / sleep and stress risk · moderate effect · biomarker rct",
       "do": "<strong>Digital CBT-I or structured sleep-efficiency protocol</strong>. Consider a structured behavioral sleep program to improve sleep efficiency and duration.",
       "why": "Consider a structured behavioral sleep program to improve sleep efficiency and duration.",
       "goal": "Domain opportunity: low-moderate. Downside: low.",
@@ -758,7 +830,10 @@
         }
       ],
       "evidence": "Human evidence supports behavioral sleep interventions for improving sleep efficiency and insomnia symptoms, with downstream biomarker effects on mood, glucose regulation, and BP plausible but less definitive in this exact patient state. PMIDs: 39316400, 39023982.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Neurocognitive / sleep and stress risk",
+      "domain_key": "neuro",
+      "domain_rank": 5
     },
     {
       "id": "ADJ-011",
@@ -766,7 +841,7 @@
       "originalRank": 11,
       "title": "Morning bright-light and evening light-hygiene routine for circadian reinforcement",
       "severity": "Adjunct Options",
-      "timing": "Domain #5 neuro · small effect · mechanism only",
+      "timing": "Risk model · Neurocognitive / sleep and stress risk · small effect · mechanism only",
       "do": "<strong>Morning bright-light and evening light-hygiene routine for circadian reinforcement</strong>. A low-downside circadian intervention could be tested to support earlier sleep consolidation and improve sleep efficiency.",
       "why": "A low-downside circadian intervention could be tested to support earlier sleep consolidation and improve sleep efficiency.",
       "goal": "Domain opportunity: low-moderate. Downside: low.",
@@ -777,7 +852,10 @@
         }
       ],
       "evidence": "Human sleep and circadian biomarker evidence supports light timing as a regulator of circadian phase and sleep quality. PMIDs: 37754349, 23372241.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Neurocognitive / sleep and stress risk",
+      "domain_key": "neuro",
+      "domain_rank": 5
     },
     {
       "id": "ADJ-012",
@@ -785,7 +863,7 @@
       "originalRank": 12,
       "title": "HRV biofeedback or paced-breathing stress-recovery practice",
       "severity": "Adjunct Options",
-      "timing": "Domain #5 neuro · small effect · biomarker rct",
+      "timing": "Risk model · Neurocognitive / sleep and stress risk · small effect · biomarker rct",
       "do": "<strong>HRV biofeedback or paced-breathing stress-recovery practice</strong>. Use a monitorable autonomic-regulation practice given high perceived stress, mild anxiety symptoms, and low-normal wearable HRV.",
       "why": "Use a monitorable autonomic-regulation practice given high perceived stress, mild anxiety symptoms, and low-normal wearable HRV.",
       "goal": "Domain opportunity: low-moderate. Downside: low.",
@@ -796,7 +874,10 @@
         }
       ],
       "evidence": "Human biomarker studies suggest paced breathing and HRV biofeedback can influence autonomic measures, perceived stress, and sometimes BP. PMIDs: 36917418, 36831799.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Neurocognitive / sleep and stress risk",
+      "domain_key": "neuro",
+      "domain_rank": 5
     },
     {
       "id": "ADJ-006",
@@ -804,7 +885,7 @@
       "originalRank": 13,
       "title": "Food-first omega-3 assessment pathway with optional omega-3 index testing",
       "severity": "Adjunct Options",
-      "timing": "Domain #2 cardiovascular · small effect · mechanism only",
+      "timing": "Risk model · Cardiovascular risk optimization · small effect · mechanism only",
       "do": "<strong>Food-first omega-3 assessment pathway with optional omega-3 index testing</strong>. Consider measuring omega-3 index only if it would change behavior, such as increasing fatty fish intake or considering supplementation.",
       "why": "Consider measuring omega-3 index only if it would change behavior, such as increasing fatty fish intake or considering supplementation.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Downside: low.",
@@ -815,7 +896,10 @@
         }
       ],
       "evidence": "Human biomarker evidence links omega-3 status to triglyceride and inflammatory pathways, but routine omega-3 index testing and supplement decisions for primary prevention are not universally standard-of-care. PMIDs: 34680583, 34911587.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "ADJ-014",
@@ -823,7 +907,7 @@
       "originalRank": 14,
       "title": "Sauna or passive heat exposure protocol with BP precautions",
       "severity": "Adjunct Options",
-      "timing": "Domain #2 cardiovascular · uncertain effect · human observational plus mechanism",
+      "timing": "Risk model · Cardiovascular risk optimization · uncertain effect · human observational plus mechanism",
       "do": "<strong>Sauna or passive heat exposure protocol with BP precautions</strong>. A carefully monitored passive heat exposure option could be considered if she is interested and has no contraindicating symptoms.",
       "why": "A carefully monitored passive heat exposure option could be considered if she is interested and has no contraindicating symptoms.",
       "goal": "Domain opportunity: moderate-high (~7.5% baseline risk × moderate-high residual opportunity). Downside: medium.",
@@ -834,7 +918,10 @@
         }
       ],
       "evidence": "Human epidemiologic and physiologic evidence associates sauna use with vascular, BP, and stress-response markers, but causality and patient-specific outcome benefit are uncertain. PMIDs: 38577299, 37248758.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cardiovascular risk optimization",
+      "domain_key": "cardiovascular",
+      "domain_rank": 2
     },
     {
       "id": "ADJ-015",
@@ -842,7 +929,7 @@
       "originalRank": 15,
       "title": "H. pylori noninvasive testing as optional gastric-risk clarification",
       "severity": "Adjunct Options",
-      "timing": "Domain #3 cancer genetics · uncertain effect · mechanism only",
+      "timing": "Risk model · Cancer / hereditary genetics prevention and screening · uncertain effect · mechanism only",
       "do": "<strong>H. pylori noninvasive testing as optional gastric-risk clarification</strong>. Consider noninvasive H.",
       "why": "Consider noninvasive H.",
       "goal": "Domain opportunity: moderate. Downside: medium.",
@@ -853,7 +940,10 @@
         }
       ],
       "evidence": "Human evidence links H. PMIDs: 34976604, 39286646.",
-      "author": "meridian-v0.5"
+      "author": "meridian-v0.5",
+      "domain": "Cancer / hereditary genetics prevention and screening",
+      "domain_key": "cancer_genetics",
+      "domain_rank": 3
     }
   ],
   "excluded": [
