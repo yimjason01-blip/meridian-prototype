@@ -14,7 +14,7 @@ LOG = OUT_DIR / 'pipeline.log'
 FIX_PATH = pathlib.Path('/tmp/jim_1_1_current_filled.json')
 PRIOR_SYSTEMIC = pathlib.Path('/tmp/jim_1_1_systemic_gpt55.json')
 PRIOR_RANKING = pathlib.Path('/tmp/jim_1_1_candidate_ranking_v0_1_gpt55.json')
-PROMPT_PATH = pathlib.Path('/tmp/meridian_risk_action_candidate_discovery_prompt_v1_0.md')
+PROMPT_PATH = pathlib.Path('/tmp/meridian_risk_action_candidate_discovery_prompt_v1_1.md')
 PROMPT_V10 = PROMPT_PATH.read_text()
 NARRATIVE_PATH = pathlib.Path('/Users/jasonyim/Projects/MeridianPatient/data/jim-symptom-narrative.txt')
 NARRATIVE = NARRATIVE_PATH.read_text()
@@ -115,54 +115,7 @@ def score(it):
 
 log('=== STEP 1: Symptom extraction ===')
 
-EXTRACT_SYSTEM = """You are the Meridian symptom-extraction engine. You convert an unstructured patient health narrative into a structured SymptomEntry array following the symptom-capture spec v0.1.
-
-Output a SINGLE JSON object:
-{
-  "capture_id": "cap-jim-001",
-  "patient_id": "jim",
-  "captured_at": "2026-05-11T11:00:00-07:00",
-  "capture_mode": "narrative_text",
-  "extractor_model": "gpt-5.5",
-  "extractor_version": "symptom-spec-v0.1",
-  "raw_input_path": "/Users/jasonyim/Projects/MeridianPatient/data/jim-symptom-narrative.txt",
-  "symptoms": [SymptomEntry, ...],
-  "narrative_themes": [string, ...],
-  "expected_but_not_heard": [string, ...]
-}
-
-Each SymptomEntry:
-{
-  "id": "sym-<n>",
-  "canonical_term": "snake_case symptom name",
-  "patient_quote": "verbatim phrase from narrative",
-  "onset": "acute | subacute | chronic | lifelong | new_onset | resolved | unknown",
-  "duration_days": integer or null,
-  "severity_patient_reported": "mild | moderate | severe | n/a (positive finding) | unspecified",
-  "functional_impact": "none | minor | activity_limiting | disabling | psychosocial | unspecified",
-  "temporal_pattern": "constant | episodic | progressive | fluctuating | resolved | unspecified",
-  "associated_with": ["string", ...],
-  "red_flag": boolean,
-  "red_flag_reason": string or null,
-  "routing": {
-    "domain_models": ["cvd|metabolic|ckd|neuro|cancer", ...],
-    "systemic_clusters": ["cluster.autonomic|cluster.inflammatory_fatigue|cluster.hormonal_peri_postmeno|cluster.hormonal_andropause|cluster.thyroid_signature|cluster.metabolic_prodromal|cluster.cardiopulmonary|cluster.sleep_architecture|cluster.mood_anxiety|cluster.neurocognitive_decline|cluster.gi_systemic|cluster.pain_widespread", ...],
-    "action_layer_flag": string or null
-  },
-  "extractor_confidence": "high | medium | low",
-  "needs_clarification": boolean
-}
-
-Patient context for routing logic, read-only: 47M, Asian, pathogenic heterozygous DNA-repair variant, paternal-line GI cancer not confirmed pancreatic, CAC=0, Lp(a) 72 nmol/L optimal, VO2max 54, never-smoker, optimized-state patient.
-
-HARD RULES:
-- Every symptom must trace to a verbatim quote in the narrative.
-- Positive findings get captured as SymptomEntry with severity "n/a (positive finding)" and suppress false-positive cluster firing later.
-- Resolved symptoms get captured with onset="resolved".
-- Patient-generated interventions go in associated_with as "patient_generated_intervention" tag.
-- Psychosocial signals get captured but do not route to domain_models. Use action_layer_flag only.
-- expected_but_not_heard: list 3-5 follow-up probe rationales.
-- Return only JSON."""
+EXTRACT_SYSTEM = 'You are the Meridian symptom-extraction engine.\n\nExtract patient-stated symptoms verbatim. Mark whether each symptom changes routing, risk interpretation, or action choice.\n\nReturn JSON only:\n{\n  "capture_id": "cap-jim-001",\n  "patient_id": "jim",\n  "captured_at": "2026-05-11T11:00:00-07:00",\n  "capture_mode": "narrative_text",\n  "extractor_model": "gpt-5.5",\n  "extractor_version": "symptom-spec-v0.1",\n  "raw_input_path": "/Users/jasonyim/Projects/MeridianPatient/data/jim-symptom-narrative.txt",\n  "symptoms": [SymptomEntry],\n  "narrative_themes": [string],\n  "expected_but_not_heard": [string]\n}\n\nSymptomEntry:\n{\n  "id": "sym-<n>",\n  "canonical_term": "snake_case",\n  "patient_quote": "verbatim quote",\n  "onset": "acute | subacute | chronic | lifelong | new_onset | resolved | unknown",\n  "duration_days": integer or null,\n  "severity_patient_reported": "mild | moderate | severe | n/a (positive finding) | unspecified",\n  "functional_impact": "none | minor | activity_limiting | disabling | psychosocial | unspecified",\n  "temporal_pattern": "constant | episodic | progressive | fluctuating | resolved | unspecified",\n  "associated_with": [string],\n  "red_flag": boolean,\n  "red_flag_reason": string or null,\n  "routing": {\n    "domain_models": ["cvd | metabolic | ckd | neuro | cancer"],\n    "systemic_clusters": [string],\n    "action_layer_flag": string or null\n  },\n  "extractor_confidence": "high | medium | low",\n  "needs_clarification": boolean\n}\n\nRules:\n- Every symptom needs a quote.\n- Positive findings are allowed.\n- Resolved symptoms stay resolved.\n- Psychosocial signals do not route to domain_models.\n- List 3 to 5 expected_but_not_heard probes.'
 EXTRACTION_PROMPT_PATH.write_text(EXTRACT_SYSTEM)
 symptoms = load_json_if_exists(OUT_DIR / 'jim_symptom_extraction.json')
 if symptoms is None:
@@ -176,35 +129,7 @@ else:
 log(f'  extracted {len(symptoms.get("symptoms",[]))} symptoms')
 
 log('=== STEP 2: Systemic risk model, symptom-aware ===')
-SYSTEMIC_SYSTEM = """You are the Meridian Systemic Risk Model. Given a patient's raw fixture, domain risk context, prior systemic output, and structured symptom capture extracted from the patient's own narrative, identify cross-domain patterns.
-
-Symptom capture is a first-class cross-domain pattern input class, with the same status as labs, wearables, genetics, and imaging.
-
-For systemic synthesis:
-- Note where symptom signal confirms a domain output.
-- Note where symptom signal contradicts or challenges a domain output.
-- Note where symptom signal surfaces a pattern not captured in labs, wearables, or genetics.
-- Note where the patient explicitly excludes a pattern.
-- Quote verbatim patient language where it strengthens a pattern.
-- Apply n-of-m component logic for cluster firing.
-- Preserve patient-generated knowledge.
-
-Output JSON:
-{
-  "patient_id": "jim",
-  "shared_drivers": [{"driver":"...","domains":[...],"mechanism":"...","evidence":"raw|symptom|both"}],
-  "amplifier_combinations": [{"combination":"...","domains":[...],"rationale":"..."}],
-  "multi_domain_levers": [{"lever":"...","domains_affected":[...],"rationale":"..."}],
-  "trajectory_interactions": [{"interaction":"...","rationale":"..."}],
-  "symptom_clusters_fired": [{"cluster_id":"...","components_present":int,"components":[...],"confidence":"high|medium|low","systemic_note":"..."}],
-  "symptom_clusters_near_fire": [{"cluster_id":"...","components_present":int,"missing":[...],"probe_suggested":"..."}],
-  "symptom_domain_confirmations": [{"domain":"...","symptom_signal":"...","effect":"confirms|contradicts|amplifies"}],
-  "patient_generated_knowledge": [{"observation":"...","quote":"...","engine_action":"document|verify|repeat_test|preserve_in_care_plan"}],
-  "psychosocial_signals": [{"signal":"...","quote":"...","handling":"handoff_acknowledgment_only|optional_referral|no_action"}],
-  "expected_but_not_heard": [string, ...],
-  "systemic_summary_one_paragraph": "..."
-}
-Return only JSON."""
+SYSTEMIC_SYSTEM = 'You are the Meridian Systemic Risk Model.\n\nIdentify cross-domain patterns that change risk interpretation or action choice.\n\nUse raw data, domain context, prior systemic output, and symptom capture. Treat symptoms as first-class inputs.\n\nReturn JSON only:\n{\n  "patient_id": "jim",\n  "shared_drivers": [{"driver":"","domains":[],"mechanism":"","evidence":"raw|symptom|both"}],\n  "amplifier_combinations": [{"combination":"","domains":[],"rationale":""}],\n  "multi_domain_levers": [{"lever":"","domains_affected":[],"rationale":""}],\n  "trajectory_interactions": [{"interaction":"","rationale":""}],\n  "symptom_clusters_fired": [{"cluster_id":"","components_present":0,"components":[],"confidence":"high|medium|low","systemic_note":""}],\n  "symptom_clusters_near_fire": [{"cluster_id":"","components_present":0,"missing":[],"probe_suggested":""}],\n  "symptom_domain_confirmations": [{"domain":"","symptom_signal":"","effect":"confirms|contradicts|amplifies"}],\n  "patient_generated_knowledge": [{"observation":"","quote":"","engine_action":"document|verify|repeat_test|preserve_in_care_plan"}],\n  "psychosocial_signals": [{"signal":"","quote":"","handling":"handoff_acknowledgment_only|optional_referral|no_action"}],\n  "expected_but_not_heard": [string],\n  "systemic_summary_one_paragraph": ""\n}'
 SYSTEMIC_PROMPT_PATH.write_text(SYSTEMIC_SYSTEM)
 systemic = load_json_if_exists(OUT_DIR / 'jim_systemic_symptom_aware.json')
 if systemic is None:
@@ -278,7 +203,7 @@ for label, target_n in LANES:
 
 generation = {
     'patient_id': 'jim',
-    'prompt_version': 'v1.0 canonical lane labels, LLM-only, symptom-integrated',
+    'prompt_version': 'v1.1 compressed canonical lane labels, LLM-only, symptom-integrated',
     'prompt_path': str(PROMPT_PATH),
     'model': MODEL,
     'lanes': lanes,
@@ -288,37 +213,7 @@ generation = {
 (OUT_DIR / 'jim_candidates_v10_symptom_canonical.json').write_text(json.dumps(generation, indent=2, ensure_ascii=False))
 
 log('=== STEP 4: Ranking v0.2 canonical lanes ===')
-RANKING_SYSTEM = """You are the Meridian Action Ranking pass v0.2. You receive completed candidate generation output.
-
-Rules:
-- Do not generate new candidates.
-- Do not rename candidates.
-- Use existing IDs.
-- SoC Monitoring: order only by care-maintenance logic. No SPAREQ.
-- SoC Risk Reduction: apply canonical SPAREQ with integer dimensions S, P, A, R, E, Q each on 1-5.
-  S=severity of outcome if untreated.
-  P=probability/relevance of that outcome for this patient.
-  A=action impact, outcome-redirect, stage-shift, or trajectory-anchor.
-  R=reversibility or urgency window.
-  E=effort inverted. Easier or lower burden scores higher.
-  Q=evidence quality.
-- Adjunct Options: apply the same SPAREQ. Q is calibrated to adjunct admissibility but still means evidence quality.
-- Excluded / Watchlist: preserve as audit only.
-- Preserve symptom_derived flag on each candidate.
-
-Output JSON:
-{
-  "lanes": {
-    "SoC Monitoring": [{"id":"...","title":"...","ordering_rationale":"...","symptom_derived":bool}],
-    "SoC Risk Reduction": [{"id":"...","title":"...","S":int,"P":int,"A":int,"R":int,"E":int,"Q":int,"rationale":"...","symptom_derived":bool}],
-    "Adjunct Options": [{"id":"...","title":"...","S":int,"P":int,"A":int,"R":int,"E":int,"Q":int,"rationale":"...","symptom_derived":bool}]
-  },
-  "audit": {
-    "Excluded / Watchlist": [{"id":"...","title":"...","reason":"..."}]
-  },
-  "input_sufficiency": {"notes":"..."}
-}
-Return only JSON."""
+RANKING_SYSTEM = 'You are the Meridian Action Ranking pass v0.3.\n\nRank existing candidates only. Do not create, rename, omit, or move candidates.\n\nRules:\n- SoC Monitoring: order by care-maintenance logic. No SPAREQ.\n- SoC Risk Reduction: rank by expected modeled-risk reduction, then evidence, then urgency, then burden.\n- Adjunct Options: rank by patient-specific upside, evidence, reversibility, and burden.\n- Excluded / Watchlist: preserve as audit only.\n- Preserve symptom_derived.\n- Routine record closure must not outrank model-moving actions.\n\nFor ranked lanes, return S, P, A, R, E, Q as 1 to 5 integers:\nS = severity if untreated.\nP = relevance for this patient.\nA = modeled-risk impact.\nR = urgency or reversibility window.\nE = effort inverted.\nQ = evidence quality.\n\nReturn JSON only:\n{\n  "lanes": {\n    "SoC Monitoring": [{"id":"","title":"","ordering_rationale":"","symptom_derived":false}],\n    "SoC Risk Reduction": [{"id":"","title":"","S":0,"P":0,"A":0,"R":0,"E":0,"Q":0,"rationale":"","symptom_derived":false}],\n    "Adjunct Options": [{"id":"","title":"","S":0,"P":0,"A":0,"R":0,"E":0,"Q":0,"rationale":"","symptom_derived":false}]\n  },\n  "audit": {\n    "Excluded / Watchlist": [{"id":"","title":"","reason":""}]\n  },\n  "input_sufficiency": {"notes":""}\n}'
 RANKING_PROMPT_PATH.write_text(RANKING_SYSTEM)
 ranking_user = json.dumps({'generation_artifact': generation, 'patient_payload_summary': {'symptom_capture': symptoms, 'systemic': systemic}}, ensure_ascii=False)
 text = call_gpt(RANKING_SYSTEM, ranking_user, max_tokens=16000, tag='ranking')
