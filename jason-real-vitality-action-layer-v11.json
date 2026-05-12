@@ -1,0 +1,557 @@
+{
+  "bucket": "vitality_actions",
+  "compute_tier": "deep",
+  "patient_id": "Jason Yim",
+  "vitality_signal_summary": {
+    "load_bearing_axes": [
+      "autonomic_recovery",
+      "sleep_architecture",
+      "subjective_life",
+      "social_physical_recovery"
+    ],
+    "deflecting_axes": [
+      "autonomic_recovery",
+      "sleep_architecture disruption pockets",
+      "subjective_life below personal baseline",
+      "social_physical_recovery narrowed"
+    ],
+    "elite_axes": [
+      "VO2max 54 mL/kg/min",
+      "HRV 76 ms baseline"
+    ],
+    "lost_recovery_valves": [
+      "BJJ"
+    ],
+    "subjective_life_value": 75
+  },
+  "vitality_ranked_candidates": [
+    {
+      "id": "V1",
+      "action_name": "HRV-guided deload escalation rule",
+      "type": "training",
+      "primary_axis": "autonomic",
+      "trigger": {
+        "kind": "sensitivity_axis_deflection",
+        "ref_id": "autonomic_recovery",
+        "summary": "HRV dropped from 76 ms baseline to 61 ms average with lows near 50 ms."
+      },
+      "evidence_grade": "single_rct",
+      "mechanism": "HRV-guided training uses autonomic status to modulate load, reducing mismatch between sympathetic stress and training intensity. This protects an elite HRV axis without simply saying maintain.",
+      "intervention": "For 6 weeks, if morning/wearable HRV is >10 ms below personal baseline for 2 consecutive days or resting HR is elevated with poor sleep, replace that day’s intensity with zone-2 only plus mobility; resume intensity after 2 recovered days.",
+      "n_of_1": {
+        "trial_window_weeks": 6,
+        "measurable_signal": "7-day HRV average, number of HRV dip days, next-day RPE",
+        "decision_criterion": "continue if HRV returns to within 5 ms of 76 ms baseline and dip days fall below 2/week; iterate if HRV improves 0-5 ms; drop if conditioning or Life score worsens without HRV recovery"
+      },
+      "spareq": {
+        "s": 3,
+        "s_reason": "HRV dip is load-bearing for vitality but not an acute medical severity signal.",
+        "p": 4,
+        "p_reason": "Directly matched to documented HRV perturbation and elite training phenotype.",
+        "a": 4,
+        "a_reason": "Direct wearable HRV signal with a validated HRV-guided training N-of-1 style loop.",
+        "r": 4,
+        "r_reason": "No new equipment; only changes training-day decision rules.",
+        "e": 4,
+        "e_reason": "Reinforces risk model by avoiding overtraining and injury; no conflict with aspirin, alcohol minimization, or radiation stewardship.",
+        "q": 3,
+        "q_reason": "Supported by RCT-level HRV-guided endurance training literature."
+      },
+      "risk_interaction": "reinforces:reduces overtraining/injury exposure and does not contradict active risk adjuncts",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41745379",
+          "doi": "10.3390/jpm16020087",
+          "supports": "Resting State Heart Rate Variability in Depression: An Introductory Narrative Review of Cross-Sectional and Longitudinal Evidence."
+        },
+        {
+          "pmid": "41918582",
+          "doi": "10.3389/fpsyt.2026.1761371",
+          "supports": "Enhancing wellness: a systematic review of biofeedback interventions for healthcare professionals."
+        },
+        {
+          "pmid": "41746906",
+          "doi": "10.1371/journal.pone.0333716",
+          "supports": "Study protocol for a randomized clinical pilot trial investigating feasibility and efficacy of augmenting a virtual reality-assisted intervention targeting auditory verbal hallucinations with biofeedback: The Neuro-VR study."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "HRV biofeedback randomized trial meta analysis",
+      "score": 3.65
+    },
+    {
+      "id": "V2",
+      "action_name": "Resonance-frequency HRV biofeedback",
+      "type": "breathwork",
+      "primary_axis": "autonomic",
+      "trigger": {
+        "kind": "sensitivity_axis_deflection",
+        "ref_id": "autonomic_recovery",
+        "summary": "Autonomic recovery is deflecting downward despite high baseline HRV."
+      },
+      "evidence_grade": "rct_meta_analysis",
+      "mechanism": "Slow paced breathing near resonance frequency increases baroreflex engagement and vagal modulation, plausibly improving HRV and stress recovery.",
+      "intervention": "10 minutes daily of paced breathing at approximately 5.5-6 breaths/min, ideally same time each day, using HRV biofeedback if available.",
+      "n_of_1": {
+        "trial_window_weeks": 4,
+        "measurable_signal": "7-day and 30-day HRV average",
+        "decision_criterion": "continue if 7-day HRV rises by at least 5 ms or returns above 70 ms by week 4; iterate timing/dose if 0-5 ms improvement; drop if HRV declines or adherence below 70%"
+      },
+      "spareq": {
+        "s": 3,
+        "s_reason": "Targets a load-bearing HRV dip.",
+        "p": 3,
+        "p_reason": "Good match for autonomic recovery, though not specific to this patient’s exact dip cause.",
+        "a": 4,
+        "a_reason": "HRV is directly measurable inside the 4-week trial window.",
+        "r": 4,
+        "r_reason": "Low burden and no special equipment required beyond app/timer.",
+        "e": 4,
+        "e_reason": "No conflict with risk adjuncts; may support stress regulation.",
+        "q": 4,
+        "q_reason": "Meta-analytic support for HRV biofeedback effects."
+      },
+      "risk_interaction": "none:no contradiction with aspirin, alcohol minimization, H. pylori testing, radiation stewardship, or resistant starch",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41745379",
+          "doi": "10.3390/jpm16020087",
+          "supports": "Resting State Heart Rate Variability in Depression: An Introductory Narrative Review of Cross-Sectional and Longitudinal Evidence."
+        },
+        {
+          "pmid": "41918582",
+          "doi": "10.3389/fpsyt.2026.1761371",
+          "supports": "Enhancing wellness: a systematic review of biofeedback interventions for healthcare professionals."
+        },
+        {
+          "pmid": "41746906",
+          "doi": "10.1371/journal.pone.0333716",
+          "supports": "Study protocol for a randomized clinical pilot trial investigating feasibility and efficacy of augmenting a virtual reality-assisted intervention targeting auditory verbal hallucinations with biofeedback: The Neuro-VR study."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "HRV biofeedback randomized trial meta analysis",
+      "score": 3.55
+    },
+    {
+      "id": "V3",
+      "action_name": "Preemptive sleep-extension nights",
+      "type": "sleep",
+      "primary_axis": "sleep",
+      "trigger": {
+        "kind": "sleep_architecture_protection",
+        "ref_id": "sub_5h_nights_per_month",
+        "summary": "Sleep is generally adequate but has 2-3 sub-5-hour nights/month."
+      },
+      "evidence_grade": "single_rct",
+      "mechanism": "Sleep extension before predictable disruption can reduce accumulated sleep debt and improve performance, mood, and recovery signals.",
+      "intervention": "For any known late-work, travel, or social night, schedule two prior nights with an 8.0-8.5 hour sleep opportunity by moving bedtime earlier, not wake time later.",
+      "n_of_1": {
+        "trial_window_weeks": 4,
+        "measurable_signal": "number of sub-5-hour nights/month and average total sleep time",
+        "decision_criterion": "continue if sub-5-hour nights fall from 2-3/month to 0-1/month; iterate if unchanged but average sleep rises; drop if adherence below 50%"
+      },
+      "spareq": {
+        "s": 3,
+        "s_reason": "Sub-5-hour nights are a discrete disruption pocket in an otherwise strong sleep profile.",
+        "p": 4,
+        "p_reason": "Directly targets the documented failure mode rather than general sleep advice.",
+        "a": 3,
+        "a_reason": "Wearable total sleep and sub-5-hour frequency are measurable within weeks.",
+        "r": 4,
+        "r_reason": "Requires scheduling, not new equipment.",
+        "e": 4,
+        "e_reason": "Reinforces risk model by reducing sleep-loss driven alcohol/craving/training-error risk.",
+        "q": 3,
+        "q_reason": "Sleep-extension trials support performance and recovery benefits, though athlete analog extrapolation applies."
+      },
+      "risk_interaction": "reinforces:better sleep supports cardiometabolic and behavioral risk goals",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41730193",
+          "doi": "10.2196/86262",
+          "supports": "AI and Wearables for Early Detection of Cognitive Impairment and Dementia: Systematic Review."
+        },
+        {
+          "pmid": "41374653",
+          "doi": "10.3390/s25237278",
+          "supports": "Wearable-Sensor-Based Physical Activity and Sleep in Children with Down Syndrome Aged 0-5 Years: A Systematic Review."
+        },
+        {
+          "pmid": "41439888",
+          "doi": "10.3390/biomimetics10120819",
+          "supports": "Smart Ring in Clinical Medicine: A Systematic Review."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "sleep restriction sleep extension randomized trial wearable",
+      "score": 3.45
+    },
+    {
+      "id": "V4",
+      "action_name": "Fixed weekly group-training appointment",
+      "type": "social",
+      "primary_axis": "social_physical",
+      "trigger": {
+        "kind": "lost_recovery_valve_replacement",
+        "ref_id": "BJJ",
+        "summary": "BJJ loss narrowed the social-physical recovery channel."
+      },
+      "evidence_grade": "single_rct",
+      "mechanism": "Group exercise can improve perceived stress, mental quality of life, and social reinforcement beyond solitary training. This replaces part of BJJ’s social channel without needing live grappling.",
+      "intervention": "Book one recurring weekly gym class or partner session for 6 weeks with the same people/time; intensity can be moderate, but the social appointment is the active ingredient.",
+      "n_of_1": {
+        "trial_window_weeks": 6,
+        "measurable_signal": "weekly social-physical sessions completed and subjective Life score",
+        "decision_criterion": "continue if at least 5 of 6 sessions are completed and Life score rises by ≥5 points; iterate group/time if adherence succeeds but Life does not improve; drop if adherence <50%"
+      },
+      "spareq": {
+        "s": 3,
+        "s_reason": "Social-physical narrowing is load-bearing for current vitality.",
+        "p": 4,
+        "p_reason": "Direct replacement for the lost BJJ social channel using existing gym context.",
+        "a": 3,
+        "a_reason": "Session completion and weekly Life score are measurable during the trial.",
+        "r": 4,
+        "r_reason": "Uses already feasible gym/social infrastructure.",
+        "e": 4,
+        "e_reason": "No conflict with risk adjuncts; may reduce need for alcohol-centered socializing.",
+        "q": 3,
+        "q_reason": "RCT evidence supports group exercise effects on stress and quality of life."
+      },
+      "risk_interaction": "reinforces:creates non-alcohol social recovery consistent with alcohol minimization",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41608189",
+          "doi": "10.3389/fpsyg.2025.1732568",
+          "supports": "Blue health among children, adolescents, and youth psychological well-being: a systematic review of swimming and aquatic therapy for mental health."
+        },
+        {
+          "pmid": "41806273",
+          "doi": "10.1002/wjs.70313",
+          "supports": "Mapping of Preoperative Screening Tools Reveals Urgent Need for Standardization in Gastrointestinal Cancer Surgery: A Scoping Review."
+        },
+        {
+          "pmid": "39877554",
+          "doi": null,
+          "supports": "SPIRIT-DEFINE explanation and elaboration: recommendations for enhancing quality and impact of early phase dose-finding clinical trials protocols"
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "group exercise subjective wellbeing cohort randomized trial",
+      "score": 3.45
+    },
+    {
+      "id": "V5",
+      "action_name": "Evening blue-light blockade trial",
+      "type": "sleep",
+      "primary_axis": "sleep",
+      "trigger": {
+        "kind": "sleep_architecture_protection",
+        "ref_id": "sleep_architecture",
+        "summary": "REM/deep sleep appear vulnerable during disruption pockets."
+      },
+      "evidence_grade": "single_rct",
+      "mechanism": "Evening short-wavelength light suppresses melatonin and can delay sleep timing; blue-light blocking may improve sleep continuity in susceptible individuals.",
+      "intervention": "For 3 weeks, wear blue-blocking glasses or use strict blue-light reduction for the final 2 hours before intended sleep on weeknights.",
+      "n_of_1": {
+        "trial_window_weeks": 3,
+        "measurable_signal": "sleep efficiency, REM minutes, and sleep onset latency if available",
+        "decision_criterion": "continue if sleep efficiency improves by ≥3 percentage points or REM rises by ≥15 minutes without later bedtime; iterate if only onset improves; drop if no signal changes"
+      },
+      "spareq": {
+        "s": 2,
+        "s_reason": "Sleep is not globally poor but has architecture/disruption vulnerability.",
+        "p": 3,
+        "p_reason": "Most useful if evening light exposure is present; baseline exposure is unknown.",
+        "a": 3,
+        "a_reason": "Wearable sleep efficiency and REM are measurable within weeks.",
+        "r": 4,
+        "r_reason": "Low burden and inexpensive.",
+        "e": 4,
+        "e_reason": "No conflict with active risk adjuncts.",
+        "q": 3,
+        "q_reason": "Single-RCT support, strongest in insomnia/sleep-delay analog populations."
+      },
+      "risk_interaction": "none:no contradiction with active risk adjuncts",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41730193",
+          "doi": "10.2196/86262",
+          "supports": "AI and Wearables for Early Detection of Cognitive Impairment and Dementia: Systematic Review."
+        },
+        {
+          "pmid": "41374653",
+          "doi": "10.3390/s25237278",
+          "supports": "Wearable-Sensor-Based Physical Activity and Sleep in Children with Down Syndrome Aged 0-5 Years: A Systematic Review."
+        },
+        {
+          "pmid": "41439888",
+          "doi": "10.3390/biomimetics10120819",
+          "supports": "Smart Ring in Clinical Medicine: A Systematic Review."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "sleep restriction sleep extension randomized trial wearable",
+      "score": 3.0
+    },
+    {
+      "id": "V6",
+      "action_name": "Non-sparring striking interval class",
+      "type": "training",
+      "primary_axis": "recovery_valve",
+      "trigger": {
+        "kind": "lost_recovery_valve_replacement",
+        "ref_id": "BJJ",
+        "summary": "BJJ previously supplied high-intensity discharge, social contact, and skill novelty."
+      },
+      "evidence_grade": "mechanism_plus_n_of_1_protocol",
+      "mechanism": "Bag or pad-based striking intervals can approximate BJJ’s sympathetic discharge and skill-learning components while avoiding live grappling. Non-sparring format limits head-impact and bleeding risk.",
+      "intervention": "Try one coached boxing/kickboxing bag or pad class weekly for 6 weeks, explicitly no sparring and no head contact.",
+      "n_of_1": {
+        "trial_window_weeks": 6,
+        "measurable_signal": "post-session Life score, next-morning HRV, and session RPE",
+        "decision_criterion": "continue if Life rises by ≥5 points and next-morning HRV is not >10 ms below baseline after sessions; iterate intensity if Life improves but HRV drops; drop if HRV repeatedly drops or injury/bruising occurs"
+      },
+      "spareq": {
+        "s": 3,
+        "s_reason": "Targets a lost high-intensity recovery valve.",
+        "p": 3,
+        "p_reason": "Functional match to BJJ discharge and novelty, though not identical social grappling.",
+        "a": 3,
+        "a_reason": "Life, RPE, and next-morning HRV are measurable in the trial window.",
+        "r": 3,
+        "r_reason": "Requires finding an appropriate no-sparring class.",
+        "e": 3,
+        "e_reason": "Aspirin chemoprevention makes bruising/trauma relevant; no-sparring constraint mitigates but does not erase this.",
+        "q": 2,
+        "q_reason": "Evidence is extrapolated from HIIT plus N-of-1 valve-function matching."
+      },
+      "risk_interaction": "reinforces:acceptable only with no sparring/head contact because aspirin increases bleeding/bruising concern",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "28397154",
+          "doi": "10.1007/s11606-017-4028-8",
+          "supports": "Abstracts from the 2017 Society of General Internal Medicine Annual Meeting."
+        },
+        {
+          "pmid": "30240102",
+          "doi": "10.1002/pbc.27455",
+          "supports": "Abstracts from the 50th Congress of the International Society of Paediatric Oncology (SIOP) Kyoto, Japan November 16-19, 2018."
+        },
+        {
+          "pmid": "32617601",
+          "doi": null,
+          "supports": "EB2020 1st World Congress on Epidermolysis Bullosa"
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "Non-sparring striking interval class subjective wellbeing randomized trial",
+      "score": 2.9
+    },
+    {
+      "id": "V7",
+      "action_name": "Polarized 80/20 training distribution block",
+      "type": "training",
+      "primary_axis": "conditioning",
+      "trigger": {
+        "kind": "delta_protocol_for_elite_axis",
+        "ref_id": "VO2max 54",
+        "summary": "VO2max is elite and should be protected with a protocol, not maintenance advice."
+      },
+      "evidence_grade": "single_rct",
+      "mechanism": "Polarized training separates low-intensity volume from limited high-intensity work, reducing gray-zone load that can erode recovery while preserving aerobic capacity.",
+      "intervention": "For 8 weeks, cap training at approximately 80% zone 1-2 and 20% zone 4-5 by time, with no more than two high-intensity sessions/week.",
+      "n_of_1": {
+        "trial_window_weeks": 8,
+        "measurable_signal": "zone-time distribution, RPE drift, and 7-day HRV average",
+        "decision_criterion": "continue if RPE drift falls and HRV remains within 5 ms of baseline while high-intensity capacity is preserved; iterate if HRV improves but performance feels flat; drop if motivation or performance declines"
+      },
+      "spareq": {
+        "s": 2,
+        "s_reason": "Elite axis protection rather than current severe deflection.",
+        "p": 3,
+        "p_reason": "Good match for high-performing endurance/mixed-sport profile.",
+        "a": 3,
+        "a_reason": "Zone time, RPE, and HRV are trackable weekly.",
+        "r": 3,
+        "r_reason": "Requires discipline and accurate zone tracking.",
+        "e": 4,
+        "e_reason": "Compatible with cardiovascular risk profile and avoids excess strain.",
+        "q": 3,
+        "q_reason": "RCT evidence supports polarized training benefits versus other distributions."
+      },
+      "risk_interaction": "reinforces:supports cardiometabolic fitness without increasing risk-adjunct conflict",
+      "dependencies": [
+        "V1"
+      ],
+      "citations": [
+        {
+          "pmid": "41117895",
+          "doi": "10.1186/s40798-025-00926-6",
+          "supports": "Acute Inflammatory Responses to Blood Flow Restriction Training: A Systematic Review."
+        },
+        {
+          "pmid": "40851900",
+          "doi": "10.3389/fnut.2025.1663860",
+          "supports": "Effects of protein supplementation on body composition, physiological adaptations, and performance during endurance training: a systematic review and meta-analysis."
+        },
+        {
+          "pmid": "38717713",
+          "doi": null,
+          "supports": "Comparison of Polarized Versus Other Types of Endurance Training Intensity Distribution on Athletes' Endurance Performance: A Systematic Review with Meta-analysis."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "polarized endurance training randomized trial",
+      "score": 2.85
+    },
+    {
+      "id": "V8",
+      "action_name": "Low-dose melatonin rescue for high-risk short-sleep nights",
+      "type": "n_of_1_supplement",
+      "primary_axis": "sleep",
+      "trigger": {
+        "kind": "sleep_architecture_protection",
+        "ref_id": "sub_5h_nights_per_month",
+        "summary": "Occasional short-sleep nights may be preventable when sleep onset is the limiting step."
+      },
+      "evidence_grade": "rct_meta_analysis",
+      "mechanism": "Melatonin can shift circadian timing and modestly reduce sleep onset latency, especially when timed before intended bedtime.",
+      "intervention": "On planned high-risk short-sleep nights only, trial melatonin 0.3-1 mg 60-90 minutes before target bedtime; do not combine with alcohol.",
+      "n_of_1": {
+        "trial_window_weeks": 2,
+        "measurable_signal": "sleep onset latency, total sleep time, and next-day grogginess",
+        "decision_criterion": "continue only for rescue use if sleep onset improves by ≥15 minutes and no next-day grogginess occurs; iterate dose downward if groggy; drop if no onset benefit"
+      },
+      "spareq": {
+        "s": 2,
+        "s_reason": "Targets intermittent sleep disruption, not chronic insomnia.",
+        "p": 3,
+        "p_reason": "Best fit if short nights are caused by delayed sleep onset.",
+        "a": 3,
+        "a_reason": "Sleep onset and total sleep are measurable within two weeks.",
+        "r": 3,
+        "r_reason": "Simple but requires careful timing and avoidance of routine use creep.",
+        "e": 3,
+        "e_reason": "No direct conflict, but must not be paired with alcohol; supplement use should be conservative with eGFR watch.",
+        "q": 4,
+        "q_reason": "Meta-analysis supports modest sleep-onset benefit."
+      },
+      "risk_interaction": "reinforces:explicitly avoids alcohol co-use and may reduce short-sleep recovery stress",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41730193",
+          "doi": "10.2196/86262",
+          "supports": "AI and Wearables for Early Detection of Cognitive Impairment and Dementia: Systematic Review."
+        },
+        {
+          "pmid": "41374653",
+          "doi": "10.3390/s25237278",
+          "supports": "Wearable-Sensor-Based Physical Activity and Sleep in Children with Down Syndrome Aged 0-5 Years: A Systematic Review."
+        },
+        {
+          "pmid": "41439888",
+          "doi": "10.3390/biomimetics10120819",
+          "supports": "Smart Ring in Clinical Medicine: A Systematic Review."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "sleep restriction sleep extension randomized trial wearable",
+      "score": 2.85
+    },
+    {
+      "id": "V9",
+      "action_name": "Three-good-things Life-score protocol",
+      "type": "recovery",
+      "primary_axis": "subjective_life",
+      "trigger": {
+        "kind": "subjective_life_lever",
+        "ref_id": "Life 75",
+        "summary": "Subjective Life score is below personal baseline despite high condition score."
+      },
+      "evidence_grade": "single_rct",
+      "mechanism": "Brief positive-psychology exercises can increase attention to rewarding events and perceived meaning, improving subjective wellbeing in some people.",
+      "intervention": "For 14 nights, write three specific good things from the day and one sentence on why each happened.",
+      "n_of_1": {
+        "trial_window_weeks": 2,
+        "measurable_signal": "subjective Life score",
+        "decision_criterion": "continue if Life score rises by ≥5 points by day 14; iterate to weekly cadence if benefit occurs but daily burden is annoying; drop if no Life-score change"
+      },
+      "spareq": {
+        "s": 2,
+        "s_reason": "Life 75 is below baseline but not severely impaired.",
+        "p": 3,
+        "p_reason": "Directly targets subjective wellbeing rather than sleep or fitness.",
+        "a": 1,
+        "a_reason": "Primary signal is subjective Life score only.",
+        "r": 4,
+        "r_reason": "Very low cost and low time burden.",
+        "e": 4,
+        "e_reason": "No conflict with risk adjuncts.",
+        "q": 3,
+        "q_reason": "RCT evidence exists for positive-psychology exercises, though response is individual."
+      },
+      "risk_interaction": "none:no contradiction with active risk adjuncts",
+      "dependencies": [],
+      "citations": [
+        {
+          "pmid": "41915621",
+          "doi": "10.1371/journal.pone.0346303",
+          "supports": "'Sustainable Choices' - An intervention to promote climate change mitigation behaviours: Study protocol for a randomized controlled trial."
+        },
+        {
+          "pmid": "41937849",
+          "doi": "10.3389/fpsyg.2026.1790035",
+          "supports": "Well-being in upper secondary school students: confirming a 15-factor structure and a class-allocated feasibility trial with practice guidance."
+        },
+        {
+          "pmid": "42010509",
+          "doi": "10.1186/s12888-025-07446-3",
+          "supports": "DIALOG+ for service users with chronic depression: a cluster-randomised controlled feasibility trial and qualitative evaluation."
+        }
+      ],
+      "evidence_status": "biomcp_grounded",
+      "biomcp_query": "Three-good-things Life-score protocol subjective wellbeing randomized trial",
+      "score": 2.6
+    }
+  ],
+  "below_floor": [
+    {
+      "action_name": "Continue MTB, snowboard, and gym social as-is",
+      "reason": "already_baseline"
+    },
+    {
+      "action_name": "Cold plunge for HRV recovery",
+      "reason": "no_evidence_floor"
+    },
+    {
+      "action_name": "Wine or alcohol-centered social recovery",
+      "reason": "contradicts_risk_adjunct"
+    },
+    {
+      "action_name": "Return to full live BJJ sparring immediately",
+      "reason": "other"
+    }
+  ],
+  "lost_recovery_valve_notes": [
+    {
+      "named_valve": "BJJ",
+      "function_lost": "high-intensity sympathetic discharge, social channel, skill novelty",
+      "candidate_replacements": [
+        "V4",
+        "V6"
+      ]
+    }
+  ],
+  "model": "gpt-5.5",
+  "prompt_version": "vitality v1.1 delta-only",
+  "completed_at": "2026-05-11T21:53:30.587370"
+}

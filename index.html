@@ -6691,8 +6691,36 @@ if (sleepBars) {
   ];
 
   // ---- State ----
+  // v1.7 SoC Monitoring ordering rule:
+  // (a) overdue / due now, (b) newly indicated by current risk model,
+  // (c) routine on cadence. Within each tier, preserve clinical priority order.
+  function socMonitoringTier(item){
+    const t = (item && item.timing) ? item.timing.toLowerCase() : '';
+    if (t.startsWith('due now')) return 0;
+    if (t.startsWith('newly indicated')) return 1;
+    return 2;
+  }
+  // ATM-driven newly-indicated items lead the newly-indicated tier (pancreatic, cascade, PSA),
+  // then other newly-indicated (derm). due_now: CRC before sUA (cancer over flare-management).
+  const SOC_MON_PRIORITY = {
+    'SOC-MON-003': 0,  // CRC due now
+    'SOC-MON-007': 1,  // sUA due now
+    'SOC-MON-001': 2,  // pancreatic surveillance (ATM)
+    'SOC-MON-011': 3,  // cascade testing (ATM)
+    'SOC-MON-010': 4,  // PSA (ATM)
+    'SOC-MON-002': 5,  // derm
+  };
+  function socMonitoringSort(a, b){
+    const ta = socMonitoringTier(a), tb = socMonitoringTier(b);
+    if (ta !== tb) return ta - tb;
+    const pa = SOC_MON_PRIORITY[a.id], pb = SOC_MON_PRIORITY[b.id];
+    if (pa !== undefined && pb !== undefined) return pa - pb;
+    if (pa !== undefined) return -1;
+    if (pb !== undefined) return 1;
+    return (a.originalRank || 0) - (b.originalRank || 0);
+  }
   const state = {
-    items: ITEMS.slice(),
+    items: ITEMS.slice().sort(socMonitoringSort),
     socRiskReduction: SOC_RISK_REDUCTION.slice(),
     adjuncts: ADJUNCTS.slice(),
     vitality: VITALITY_ACTIONS.slice(),
