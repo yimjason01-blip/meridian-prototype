@@ -1468,11 +1468,11 @@
     <!-- Pinned register actions (Tier 1 by rule, not rankable) — visible across both lanes -->
     <div class="cp-pinned-wrap" id="cpPinnedWrap"></div>
 
-    <!-- Lane selector: SoC Screening | SoC Risk Reduction | Adjunct Options | Vitality -->
+    <!-- Lane selector: SoC Monitoring | SoC Risk Reduction | Adjunct Options | Vitality -->
     <div class="cp-lane-tabs" style="display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:18px;align-items:center;">
       <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px 0 0;border-right:1px solid var(--border-subtle);margin-right:14px;line-height:38px;">Action Plan</div>
       <button class="cp-lane-tab active" data-lane="soc" onclick="switchLane('soc')" style="background:none;border:none;border-bottom:2px solid var(--accent);padding:12px 20px;color:var(--text);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">SoC Monitoring</button>
-      <button class="cp-lane-tab" data-lane="riskMaintenance" onclick="switchLane('riskMaintenance')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">SoC Risk Reduction</button>
+      <button class="cp-lane-tab" data-lane="socRiskReduction" onclick="switchLane('socRiskReduction')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">SoC Risk Reduction</button>
       <button class="cp-lane-tab" data-lane="adjuncts" onclick="switchLane('adjuncts')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Adjunct Options</button>
       <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px;border-left:1px solid var(--border-subtle);margin-left:14px;line-height:38px;">Vitality</div>
       <button class="cp-lane-tab" data-lane="vitality" onclick="switchLane('vitality')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Vitality Actions</button>
@@ -5038,7 +5038,7 @@
               <div style="margin-bottom:8px;">
                 <div style="font-size:12px; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; font-weight:510; margin-bottom:6px;">P: Plan</div>
                 <ul style="margin-left:18px; padding-left:0; list-style-type:none;">
-                  <li style="margin-bottom:4px;"><strong>SoC Screening.</strong> Order annual breast MRI (CHEK2 LP + dense + maternal hx); order baseline DEXA; continue annual mammogram.</li>
+                  <li style="margin-bottom:4px;"><strong>SoC Monitoring.</strong> Order annual breast MRI (CHEK2 LP + dense + maternal hx); order baseline DEXA; continue annual mammogram.</li>
                   <li style="margin-bottom:4px;"><strong>SoC Risk Reduction.</strong> Metabolic prevention plan: structured lifestyle intervention, repeat HbA1c/FPG 6mo, discuss metformin eligibility. Lipid optimization: Mediterranean diet, repeat ApoB/lipids 6mo, statin discussion if persistent.</li>
                   <li style="margin-bottom:4px;"><strong>SoC Risk Reduction.</strong> Continue lisinopril for BP control; monitor renal function and lisinopril safety labs.</li>
                   <li style="margin-bottom:4px;">&rarr; Counseling: Lp(a) is optimal at 45 nmol/L; CHEK2 is moderate penetrance; breast MRI is the highest priority gap.</li>
@@ -5970,7 +5970,7 @@ const modalData = {
       <div class="rec-card">
         <div class="rec-title">Prioritized Action Tiers</div>
         <div class="rec-subtitle">
-          <strong>SoC Screening:</strong><br>
+          <strong>SoC Monitoring:</strong><br>
           Breast MRI (highest priority), DEXA, continue annual mammogram, 6-month metabolic recheck (HbA1c, FPG).<br><br>
           <strong>SoC Risk Reduction:</strong><br>
           Structured lifestyle intervention for prediabetes; metformin eligibility counseling; lipid optimization with Mediterranean diet; BP monitoring on lisinopril; repeat lipids 6mo.<br><br>
@@ -6281,9 +6281,9 @@ if (sleepBars) {
   // ---- Master ranked-candidate list (from 6-run Action Layer reproducibility study) ----
   // ---- Action candidate adjudication v0.2 ----
   // Existing v0.7 candidates reclassified into first-principles lanes:
-  // 1) SoC Screening & Surveillance = defensive cadence / modality / interval / escalation.
+  // 1) SoC Monitoring = defensive cadence / modality / interval / escalation.
   // 2) SoC Risk Reduction = offensive guideline-grade intervention / target / threshold.
-  // 3) Adjunct Risk Reduction = offensive options one evidence tier below SoC, no duplicates.
+  // 3) Adjunct Options = optional non-SoC actions one evidence tier below SoC, no duplicates.
   // ---- SOC SCREENING & SURVEILLANCE · v0.9 candidates, v0.2 downstream order ----
   const ITEMS = [
   {
@@ -6574,13 +6574,13 @@ if (sleepBars) {
 ];
 
   // ---- SOC RISK REDUCTION · canonical SPAREQ v0.1 ----
-  const RISK_MAINTENANCE = [
+  const SOC_RISK_REDUCTION = [
   {
     "id": "RMA-003",
     "lane": "risk",
     "originalRank": 1,
     "title": "Enroll in or emulate a structured Diabetes Prevention Program",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 4.4",
     "do": "<strong>Enroll in or emulate a structured Diabetes Prevention Program</strong>. Karen has prediabetes-range glycemia plus multiple amplifiers: prior gestational diabetes, Asian ancestry, paternal type 2 diabetes, elevated waist-to-height ratio, and high modeled 10-year diabetes risk. A structured diabetes prevention program is a direct risk-mitigation candidate.",
     "why": "High patient-specific relevance from prediabetes, prior gestational diabetes, Asian ancestry, paternal T2D, elevated waist-to-height ratio, and approximately 35% modeled 10-year T2D risk; DPP-style intervention can materially redirect the main upstream metabolic trajectory.",
@@ -6599,7 +6599,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 2,
     "title": "Optimize blood pressure toward consistently below 130/80 if clinically appropriate",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 4.25",
     "do": "<strong>Optimize blood pressure toward consistently below 130/80 if clinically appropriate</strong>. Her BP is treated and not frankly uncontrolled, but home and clinic values remain slightly above stricter optimal thresholds used across CVD, CKD, and neurovascular risk models. Candidate actions include reinforcing home BP technique, sodium reduction, exercise, sleep/stress work, and clinician-supervised medication adjustment if persistent.",
     "why": "BP is a cross-domain vascular driver for CVD, CKD, and neuro risk, and her treated readings remain borderline above optimal; evidence quality and outcome relevance are high.",
@@ -6618,7 +6618,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 3,
     "title": "Progressively increase cardiorespiratory fitness beyond current baseline",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 4.25",
     "do": "<strong>Progressively increase cardiorespiratory fitness beyond current baseline</strong>. Cardiorespiratory fitness was below average and fired modifiers in the CVD, metabolic, and neuro models. Karen reports some exercise but wearable active minutes are slightly below the common 150-minute target, and VO2max is at the 35th percentile.",
     "why": "Below-average CRF fired modifiers in CVD, metabolic, and neuro models; improving fitness is a high-leverage multi-domain trajectory anchor, though benefits accrue over weeks to months.",
@@ -6637,7 +6637,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 4,
     "title": "Shift carbohydrate quality and meal composition for prediabetes",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.95",
     "do": "<strong>Shift carbohydrate quality and meal composition for prediabetes</strong>. Karen\u2019s glycemic markers are in the prediabetes range with elevated insulin resistance despite normal BMI. A carbohydrate-quality intervention can target postprandial glucose and insulin demand without requiring extreme dieting.",
     "why": "Highly matched to prediabetes and insulin resistance in a normal-BMI but high-risk phenotype; evidence supports glycemic improvement, though hard-outcome evidence is less direct than DPP.",
@@ -6656,7 +6656,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 5,
     "title": "Prevent further postmenopausal weight gain and reduce central adiposity",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.95",
     "do": "<strong>Prevent further postmenopausal weight gain and reduce central adiposity</strong>. Although BMI is in the normal range, waist-to-height ratio is elevated and weight has drifted upward since menopause. A waist-focused plan is more patient-specific than BMI-only weight loss because her metabolic risk is high despite BMI 24.8.",
     "why": "Central adiposity and postmenopausal weight drift are central to her metabolic risk despite normal BMI; intervention can affect diabetes, BP, lipids, and future CKD/CVD risk.",
@@ -6675,7 +6675,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 6,
     "title": "Clinician shared decision on lipid-lowering therapy for intermediate CVD risk",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.85",
     "do": "<strong>Clinician shared decision on lipid-lowering therapy for intermediate CVD risk</strong>. Karen has intermediate estimated 10-year total CVD risk with elevated LDL-C, non-HDL-C, ApoB, and modestly elevated Lp(a). A clinician-supervised discussion of moderate-intensity statin therapy, with attention to personal preferences and potential side effects, is a coherent risk-mitigation candidate.",
     "why": "Intermediate CVD risk with LDL-C, non-HDL-C, ApoB, Lp(a), hypertension, prediabetes, and family history makes a statin shared decision guideline-grade and outcome-directed.",
@@ -6694,7 +6694,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 7,
     "title": "Use a DASH-style sodium-reduction strategy for BP control",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.75",
     "do": "<strong>Use a DASH-style sodium-reduction strategy for BP control</strong>. BP is treated but remains slightly above optimal. A DASH-style sodium-reduction intervention is a distinct BP-focused dietary action and can be implemented without assuming medication changes.",
     "why": "Borderline treated BP makes DASH/sodium reduction directly relevant, easy to pair with existing care, and supported by high-quality BP evidence.",
@@ -6713,7 +6713,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 8,
     "title": "Add progressive resistance training 2 to 3 days per week",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.7",
     "do": "<strong>Add progressive resistance training 2 to 3 days per week</strong>. Resistance training is not listed among her current exercise modalities, which are indoor cycling and hiking. It is a distinct intervention for postmenopausal muscle preservation, insulin sensitivity, central adiposity, and bone health.",
     "why": "Resistance training is specifically relevant to postmenopausal body composition, insulin sensitivity, function, and bone health; strong guideline support and relatively low implementation burden.",
@@ -6732,7 +6732,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 9,
     "title": "Adopt a lipid-lowering dietary pattern focused on ApoB reduction",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.65",
     "do": "<strong>Adopt a lipid-lowering dietary pattern focused on ApoB reduction</strong>. Her atherogenic lipid burden is a major CVD driver. A specific lipid-focused nutrition action would emphasize replacing saturated fats with unsaturated fats, increasing soluble fiber, using nuts/legumes/soy or similar plant proteins, and reducing highly refined carbohydrates where relevant.",
     "why": "Atherogenic lipid burden is a clear CVD driver, and dietary ApoB-lowering is evidence-based; effect size is usually more modest than medication but synergistic with other prevention.",
@@ -6751,7 +6751,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 10,
     "title": "Implement a sleep-extension and sleep-efficiency improvement plan",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.3",
     "do": "<strong>Implement a sleep-extension and sleep-efficiency improvement plan</strong>. Sleep efficiency was poor enough to fire a neuro modifier, and sleep duration is short on work nights and by wearable average. Improving sleep is a risk-mitigation candidate because sleep interacts with insulin resistance, BP, stress physiology, appetite, and cognitive health.",
     "why": "Sleep duration and efficiency are suboptimal and interact with glycemia, BP, stress, and neuro risk; evidence is solid for sleep outcomes, with indirect cardiometabolic outcome effects.",
@@ -6770,7 +6770,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 11,
     "title": "Use a structured stress-reduction or behavioral health intervention",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.3",
     "do": "<strong>Use a structured stress-reduction or behavioral health intervention</strong>. Karen reports high perceived stress during a recent reorganization and family transition, with PSS-10 in the moderate-to-high range and mild anxiety symptoms. Stress management is a coherent risk-mitigation lever because stress may worsen sleep, BP, alcohol use, and glycemic control.",
     "why": "PSS-10 and mild anxiety make this relevant, and stress may worsen adherence, sleep, BP, alcohol, and glycemia; outcome redirection is meaningful but less direct than BP/lipid/diabetes prevention.",
@@ -6789,7 +6789,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 12,
     "title": "Adopt kidney-protective medication and dehydration safety practices",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.15",
     "do": "<strong>Adopt kidney-protective medication and dehydration safety practices</strong>. Current kidney markers are reassuring, but hypertension and prediabetes create future vulnerability. A practical risk-mitigation action is to avoid chronic nephrotoxin exposure, especially chronic NSAID use, and to have clinician-guided sick-day guidance for dehydration or acute illness while on an ACE inhibitor.",
     "why": "Potential AKI/nephrotoxin outcomes can be serious, but current kidney risk is low and no chronic NSAID use is documented; easy safety counseling with reasonable evidence.",
@@ -6808,7 +6808,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 13,
     "title": "Reduce alcohol intake below current women\u2019s AUDIT-C threshold pattern",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 3.05",
     "do": "<strong>Reduce alcohol intake below current women\u2019s AUDIT-C threshold pattern</strong>. Her alcohol intake is not high enough to fire cancer or neuro alcohol modifiers, but AUDIT-C is at the threshold for women and systemic output notes possible interaction with sleep, BP, glycemia, triglycerides, and breast-risk context.",
     "why": "Alcohol is at the AUDIT-C threshold for women and may interact with sleep, BP, glycemia, triglycerides, and breast-risk context; current intake is not severe, so urgency is moderate.",
@@ -6827,7 +6827,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 14,
     "title": "Ensure levothyroxine is taken separately from mineral-containing supplements",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 2.95",
     "do": "<strong>Ensure levothyroxine is taken separately from mineral-containing supplements</strong>. Her thyroid labs are currently controlled, but she takes magnesium and a multivitamin, which may contain minerals that can reduce levothyroxine absorption if taken too close together. A timing intervention can reduce future thyroid instability without changing the dose.",
     "why": "Very easy and evidence-based medication counseling, but current thyroid labs are controlled and clinical severity is lower than cardiometabolic and cancer-prevention priorities.",
@@ -6846,7 +6846,7 @@ if (sleepBars) {
     "lane": "risk",
     "originalRank": 15,
     "title": "Correct borderline vitamin D insufficiency and ensure adequate calcium intake",
-    "severity": "Risk Mitigation",
+    "severity": "SoC Risk Reduction",
     "timing": "SPAREQ 2.85",
     "do": "<strong>Correct borderline vitamin D insufficiency and ensure adequate calcium intake</strong>. Vitamin D is below many commonly used sufficiency targets, and she is postmenopausal. She already takes vitamin D3, so the action is not to start blindly but to optimize dose, adherence, timing, and dietary calcium with clinician oversight.",
     "why": "Relevant to postmenopausal bone health and borderline vitamin D, but hard-outcome trajectory impact is modest without known low bone density or fracture history.",
@@ -7157,7 +7157,7 @@ if (sleepBars) {
   const ADJUNCTS_RESEARCH_GAPS = [];
   const ADJUNCTS_CONSIDERED_EXCLUDED = ADJUNCTS_CONTRAINDICATED;
   // ---- VITALITY — Vitality Action Layer (separate from Risk; single ranked list) ----
-  // Source: real BioMCP-grounded run (jason-real-vitality-action-layer.json),
+  // Source: prior BioMCP-grounded vitality run,
   // model claude-opus-4-7, 12 BioMCP queries, no SoC/Adjuncts split (vitality has no
   // guideline floor that supports it). Inline evidence-grade tags + N-of-1 lifecycle
   // primitive replace tier system. risk_interaction flagged against active Risk Adjuncts.
@@ -7174,10 +7174,10 @@ if (sleepBars) {
   // ---- State ----
   const state = {
     items: ITEMS.slice(),
-    riskMaintenance: RISK_MAINTENANCE.slice(),
+    socRiskReduction: SOC_RISK_REDUCTION.slice(),
     adjuncts: ADJUNCTS.slice(),
     vitality: VITALITY_ACTIONS.slice(),
-    lane: 'soc',             // 'soc' | 'riskMaintenance' | 'adjuncts' | 'vitality' — active swim lane
+    lane: 'soc',             // 'soc' | 'socRiskReduction' | 'adjuncts' | 'vitality' active swim lane
     cpView: 'top3',          // 'top3' | 'all' — sub-view within the lane
     expanded: null,          // item id currently expanded (accordion)
     drag: null,              // { id, srcIndex, startY, curDy, step, pointerId }
@@ -7206,7 +7206,7 @@ if (sleepBars) {
   };
 
   // AI-drafted overview (patient voice, written from the top 3 cards)
-  const OVERVIEW_DRAFT = "Hey Jason, it's Dr. Mizani. Quick update on the new candidate run.\n\nThis version separates the work into three different lanes. The first lane is Standard-of-Care Monitoring: it is not scored with SPAREQ. It is ordered by care-maintenance logic, so the top items are colorectal screening record closure, immunization and hepatitis documentation, PSA shared decision, family-history clarification, ATM surveillance pathway clarification, and kidney-marker confirmation.\n\nThe second lane is SoC Risk Reduction. This is where SPAREQ applies. The strongest current item is genetics counseling for ATM-informed risk boundaries and cascade testing, followed by immunization closure, aspirin avoidance in primary prevention, preserving the high exercise baseline, and tobacco/nicotine non-initiation.\n\nThe third lane is Adjunct Options. These are optional, lower-certainty, patient-specific experiments or guardrails. The top items are air-quality-triggered exposure reduction, UV-index photoprotection, an ApoB-response soluble fiber or plant-sterol food experiment, sport-specific prehab, and ATM-informed ionizing-imaging stewardship.\n\nThe important change is that candidate discovery gave us a wider universe, and the ranking pass now makes the tradeoff visible instead of hiding low-certainty but plausible options.";
+  const OVERVIEW_DRAFT = "Hey Karen, it's Dr. Mizani. Quick update on the new candidate run.\n\nThis version separates the work into three lanes. The first lane is SoC Monitoring. It is ordered by care-maintenance logic, so the top items are breast MRI gap closure, DEXA bone-density screening, metabolic follow-up, BP and renal-safety monitoring, and hereditary-cancer surveillance documentation.\n\nThe second lane is SoC Risk Reduction. This is where SPAREQ applies. The strongest current items focus on structured metabolic prevention, lipid and blood-pressure optimization, thyroid safety follow-up, and standard preventive-risk closure.\n\nThe third lane is Adjunct Options. These are optional, lower-certainty, patient-specific options that do not duplicate standard care. They stay separate from the standard-care lanes so the evidence bar remains clear.\n\nThe important change is that candidate discovery gave us a wider universe, and the ranking pass now makes the tradeoff visible instead of hiding lower-certainty but plausible options.";
 
   const SUGGESTIONS = [
     'Re-rank by cost to impact',
@@ -7237,27 +7237,27 @@ if (sleepBars) {
     const aLabel = anchorLabel || 'this care plan';
     let body;
     if (/why|reason|rationale/.test(q)) {
-      body = 'Rationale: this action sits at the intersection of the highest-leverage risk channels for this patient (ATM carrier, metabolic drift, autonomic load). Deferring it risks losing the gating effect on downstream actions. The composite risk model weights it in the top decile.';
+      body = "Rationale: this action sits at the intersection of this patient's hereditary-cancer, metabolic, blood-pressure, and postmenopausal bone-health risk channels. Deferring it can delay a pathway-setting decision or leave a modifiable risk driver unaddressed.";
     } else if (/defer|delay|hold|postpone/.test(q)) {
-      body = 'If deferred 60 days: expected ΔApoB +6 to +9, HRV trajectory unchanged, and the cardiac gate (action 03) remains blocking. Downstream: training intensification cannot safely advance, so the mobility rehab timeline also slips. Net: 1 slip at this node cascades to 3 others.';
+      body = 'If deferred 60 days: the main risk is not a sudden event, but loss of sequencing. Screening gaps remain unresolved, metabolic follow-up slips, and medication-safety monitoring stays open.';
     } else if (/evidence|study|source|confidence/.test(q)) {
-      body = 'Backed by the cited guideline plus internal cohort evidence (n=2,412 matched CHEK2-LP + pre-diabetic). Confidence: moderate-high. Heterogeneity is low on primary endpoints; modest on patient-reported tolerability. See the source bundle for effect sizes, 95% CIs, and the sensitivity analyses.';
+      body = "Backed by standard preventive-care guidance and the patient's current risk signals. Confidence varies by lane: SoC Monitoring and SoC Risk Reduction carry the higher evidence bar; Adjunct Options are lower-certainty by design.";
     } else if (/rank|order|re.?rank|cost|impact/.test(q)) {
-      body = 'Re-ranked by cost-to-impact: SoC s01 (breast MRI, single appointment, catastrophic-if-missed given CHEK2 + dense breasts + maternal hx), SoC s02 (DEXA, once, establishes baseline), RR s01 (structured lifestyle for prediabetes, highest near-term leverage), RR s02 (lipid optimization). Adjunct (CAC scan if patient interested) follows.';
+      body = 'Re-ranked by cost-to-impact: breast MRI gap closure, DEXA baseline, structured metabolic prevention, lipid optimization, and BP safety monitoring remain the most efficient standard-care sequence. Adjunct Options follow after standard-care gaps are closed.';
     } else if (/missing|gap|what.?else/.test(q)) {
-      body = 'Gaps worth considering: vitamin D and iron studies (never drawn), a 24-hour ambulatory BP given the autonomic picture, and confirming HPV status before the next well-woman visit. None rise to top-3 but they close audit gaps.';
+      body = 'Gaps worth considering: vitamin D status, iron studies if clinically indicated, medication-safety labs, and confirmation that breast, bone, cervical, and hereditary-cancer surveillance records are current. None should displace the top standard-care items unless new data changes the risk picture.';
     } else if (/patient.?facing|plain|explain|simplif/.test(q)) {
-      body = 'Patient-facing draft: we are starting a small-dose cholesterol medicine today, checking your heart rhythm in the next two weeks, and working on sleep and nervous-system recovery for eight weeks. Everything else is scheduled, not urgent. You stay in training; we pause intensity until the cardiac check clears.';
+      body = 'Patient-facing draft: we are closing the highest-value screening gaps, tightening metabolic and blood-pressure prevention, and keeping optional ideas separate from standard care. Nothing here assumes an emergency, but the sequence matters.';
     } else {
-      body = 'Summary: ' + aLabel + '. The plan prioritizes gated actions (cardiac, MRCP) ahead of intensification, uses lipid lowering as the single highest-yield lever, and sequences the autonomic workup as the cross-domain driver. Nothing in the top 3 is deferrable without slipping another node.';
+      body = 'Summary: ' + aLabel + '. The plan prioritizes pathway-setting monitoring first, then standard-care metabolic, lipid, and blood-pressure prevention. Adjunct Options remain optional and lower-certainty.';
     }
-    const source = 'Source: Meridian composite risk models v2.3 · Evidence bundle #127';
+    const source = 'Source: Meridian composite risk models · candidate run evidence bundle';
     return { body, source };
   }
 
   // ---- Active-lane helper ----
   function activeItems(){
-    if (state.lane === 'riskMaintenance') return state.riskMaintenance;
+    if (state.lane === 'socRiskReduction') return state.socRiskReduction;
     if (state.lane === 'adjuncts') return state.adjuncts;
     if (state.lane === 'vitality') return state.vitality;
     return state.items;
@@ -7304,7 +7304,7 @@ if (sleepBars) {
       root.insertBefore(buildVitalitySignalBanner(), root.firstChild);
       root.appendChild(buildVitalityExtras());
     }
-    // Add-form only on SoC Screening lane; other lanes are adjudicated engine candidates.
+    // Add-form only on SoC Monitoring lane; other lanes are adjudicated engine candidates.
     if (state.lane === 'soc') {
       if (state.addFormOpen) {
         root.appendChild(buildAddForm());
@@ -7414,7 +7414,7 @@ if (sleepBars) {
 
   // ---- Lane switcher ----
   function switchLane(lane){
-    if (lane !== 'soc' && lane !== 'riskMaintenance' && lane !== 'adjuncts' && lane !== 'vitality') return;
+    if (lane !== 'soc' && lane !== 'socRiskReduction' && lane !== 'adjuncts' && lane !== 'vitality') return;
     state.lane = lane;
     state.expanded = null;
     state.addFormOpen = false;
@@ -7429,13 +7429,13 @@ if (sleepBars) {
     const caption = document.getElementById('cpLaneCaption');
     if (caption) {
       if (lane === 'soc')        caption.textContent = 'defensive cadence · modality / interval / escalation';
-      else if (lane === 'riskMaintenance') caption.textContent = 'offensive standard-care · targets / thresholds / follow-up';
+      else if (lane === 'socRiskReduction') caption.textContent = 'offensive standard-care · targets / thresholds / follow-up';
       else if (lane === 'adjuncts') caption.textContent = 'offensive optional · one evidence tier below SoC';
       else                       caption.textContent = 'vitality-model-seeded · N-of-1 lifecycle · single ranked list';
     }
     renderTop3();
     renderAll();
-    const labels = { soc: 'SoC Monitoring', riskMaintenance: 'SoC Risk Reduction', adjuncts: 'Adjunct Options', vitality: 'Vitality Actions' };
+    const labels = { soc: 'SoC Monitoring', socRiskReduction: 'SoC Risk Reduction', adjuncts: 'Adjunct Options', vitality: 'Vitality Actions' };
     announce('Switched to ' + labels[lane] + ' lane');
   }
   // Expose globally for inline onclick

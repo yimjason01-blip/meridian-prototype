@@ -1,0 +1,84 @@
+{
+  "patient_id": "jim",
+  "symptom_count": 11,
+  "clusters_fired": [
+    "cluster.high_reserve_low_strain",
+    "cluster.training_load_tendon_back_pattern",
+    "cluster.autonomic_orthostatic_susceptibility",
+    "cluster.resolved_stress_recovery"
+  ],
+  "candidate_counts": {
+    "SoC Monitoring": 15,
+    "SoC Risk Reduction": 15,
+    "Adjunct Options": 15,
+    "Excluded / Watchlist": 15
+  },
+  "top_3_new": {
+    "SoC Monitoring": [
+      {
+        "id": "SOCM-001",
+        "title": "Close colorectal cancer screening gap",
+        "score": null,
+        "symptom_derived": false
+      },
+      {
+        "id": "SOCM-002",
+        "title": "Hereditary cancer genetics visit to operationalize ATM surveillance",
+        "score": null,
+        "symptom_derived": false
+      },
+      {
+        "id": "SOCM-005",
+        "title": "Determine pancreatic surveillance eligibility without defaulting to imaging",
+        "score": null,
+        "symptom_derived": false
+      }
+    ],
+    "SoC Risk Reduction": [
+      {
+        "id": "SOCR-012",
+        "title": "Receive annual influenza vaccination if not already current",
+        "score": 4.0,
+        "symptom_derived": false
+      },
+      {
+        "id": "SOCR-013",
+        "title": "Stay current with COVID-19 vaccination if not already current",
+        "score": 4.0,
+        "symptom_derived": false
+      },
+      {
+        "id": "SOCR-003",
+        "title": "Preserve regular aerobic activity as a cardiometabolic and neurovascular risk-reduction lever",
+        "score": 4.0,
+        "symptom_derived": false
+      }
+    ],
+    "Adjunct Options": [
+      {
+        "id": "ADJ-002",
+        "title": "Video-based movement mechanics review",
+        "score": 3.4,
+        "symptom_derived": true
+      },
+      {
+        "id": "ADJ-003",
+        "title": "Tendon 24-hour load-response log",
+        "score": 3.35,
+        "symptom_derived": true
+      },
+      {
+        "id": "ADJ-001",
+        "title": "Wearable-guided deload rule for tendon recovery",
+        "score": 3.3,
+        "symptom_derived": true
+      }
+    ]
+  },
+  "prior_top_3_reference": {
+    "SoC Monitoring": [],
+    "SoC Risk Reduction": [],
+    "Adjunct Options": []
+  },
+  "completed_at": "2026-05-11T17:02:40.390479"
+}
