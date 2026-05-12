@@ -40,6 +40,7 @@ LANES = [
 ACTIVE_LANES = ['SoC Monitoring', 'SoC Risk Reduction', 'Adjunct Options']
 
 SPAREQ_FORMULA = '(S*0.25)+(P*0.20)+(A*0.20)+(R*0.15)+(E*0.10)+(Q*0.10)'
+DISALLOWED_VOCAB = ['Risk Mitigation', 'Risk Maintenance', 'risk_mitigation_actions', 'risk-reduction', 'risk reduction']
 
 EXTRACTION_PROMPT_PATH = ROOT_DIR / 'engine/prompts/symptom_extraction_prompt_v0_1.md'
 SYSTEMIC_PROMPT_PATH = ROOT_DIR / 'engine/prompts/systemic_symptom_prompt_v0_1.md'
@@ -124,6 +125,27 @@ def validate_generation_fragment(label, frag, expected_n):
 
 def score(it):
     return round(it.get('S',0)*0.25 + it.get('P',0)*0.20 + it.get('A',0)*0.20 + it.get('R',0)*0.15 + it.get('E',0)*0.10 + it.get('Q',0)*0.10, 3)
+
+
+def iter_strings(obj, path=''):
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            yield from iter_strings(v, f'{path}.{k}' if path else str(k))
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            yield from iter_strings(v, f'{path}[{i}]')
+    elif isinstance(obj, str):
+        yield path, obj
+
+
+def assert_no_disallowed_vocab(obj, context):
+    hits = []
+    for path, value in iter_strings(obj):
+        for term in DISALLOWED_VOCAB:
+            if term in value:
+                hits.append(f'{path}: {term}')
+    if hits:
+        raise RuntimeError(f'{context}: disallowed vocabulary found: ' + '; '.join(hits[:20]))
 
 
 BIOMCP_QUERY_HINTS = [
@@ -288,6 +310,7 @@ for label, target_n in LANES:
     if parsed is not None:
         try:
             validate_generation_fragment(label, parsed, target_n)
+            assert_no_disallowed_vocab(parsed, f'generation {label}')
             log(f'  reusing existing valid lane artifact for {label}')
         except Exception as e:
             log(f'  existing lane artifact invalid for {label}: {e}; regenerating')
@@ -319,6 +342,7 @@ for label, target_n in LANES:
         candidate = extract_json(text)
         try:
             validate_generation_fragment(label, candidate, target_n)
+            assert_no_disallowed_vocab(candidate, f'generation {label}')
             parsed = candidate
         except Exception as e:
             last_error = str(e)
@@ -380,6 +404,7 @@ for item in rank_lanes['SoC Risk Reduction'] + rank_lanes['Adjunct Options']:
 rank_lanes['SoC Risk Reduction'] = sorted(rank_lanes['SoC Risk Reduction'], key=lambda x: x.get('spareq_score', 0), reverse=True)
 rank_lanes['Adjunct Options'] = sorted(rank_lanes['Adjunct Options'], key=lambda x: x.get('spareq_score', 0), reverse=True)
 ranking['lanes'] = rank_lanes
+assert_no_disallowed_vocab(ranking, 'ranking')
 ranking['ranking_run'] = {
     'patient_id':'jim',
     'model':MODEL,

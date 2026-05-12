@@ -11,7 +11,7 @@ Generate only candidates that fit the requested lane.
 - Adjunct Options = optional non-SoC actions with a patient-specific signal and plausible human evidence.
 - Excluded / Watchlist = audit only.
 
-Missing records belong in SoC Monitoring unless the missing fact itself blocks a risk-reduction decision.
+Missing records belong in SoC Monitoring unless the missing fact itself blocks a modeled-risk-lowering decision.
 
 ## Boundaries
 

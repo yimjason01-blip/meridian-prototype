@@ -8,7 +8,7 @@ For each candidate, evidence_pmids must be copied exactly from that candidate's 
 
 Rules:
 - SoC Monitoring: order by care-maintenance logic. No SPAREQ.
-- SoC Risk Reduction: rank by expected modeled-risk reduction, then BioMCP-grounded evidence, then urgency, then burden.
+- SoC Risk Reduction: rank by expected modeled-risk lowering, then BioMCP-grounded evidence, then urgency, then burden.
 - Adjunct Options: rank by patient-specific upside, BioMCP-grounded evidence, reversibility, and burden.
 - Excluded / Watchlist: preserve as audit only.
 - Preserve symptom_derived.
