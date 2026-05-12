@@ -25,7 +25,12 @@ SymptomEntry:
   "duration_days": integer or null,
   "severity_patient_reported": "mild | moderate | severe | n/a (positive finding) | unspecified",
   "functional_impact": "none | minor | activity_limiting | disabling | psychosocial | unspecified",
+  "current_state": "active | intermittent | improved | resolved | worse | unknown",
+  "recency": "current | days | weeks | months | years | five_year_history | unknown",
+  "trajectory": "worsening | stable | improving | resolved | unknown",
+  "current_burden": "none | low | moderate | high | unknown",
   "temporal_pattern": "constant | episodic | progressive | fluctuating | resolved | unspecified",
+  "action_scope": "active_management | monitoring | baseline_closure | watchlist_only | none",
   "associated_with": [string],
   "red_flag": boolean,
   "red_flag_reason": string or null,
@@ -42,5 +47,7 @@ Rules:
 - Every symptom needs a quote.
 - Positive findings are allowed.
 - Resolved symptoms stay resolved.
+- For resolved/improved symptoms, preserve phenotype history but set action_scope to baseline_closure or watchlist_only unless objective current risk evidence exists.
+- Do not emit an active-management action_layer_flag for a resolved symptom without recurrence, abnormal objective data, active treatment, stones/tophi, red flags, or current burden.
 - Psychosocial signals do not route to domain_models.
 - List 3 to 5 expected_but_not_heard probes.

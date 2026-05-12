@@ -18,6 +18,7 @@ Audit label:
 
 Do not use aliases.
 
+Symptom trajectory is a hard gate: resolved/improved symptoms can preserve phenotype history, but they can only generate baseline-closure or watchlist actions unless recurrence, abnormal objective data, active therapy, stones/tophi, red flags, or current burden is present.
 
 ## Maintenance exclusion rule
 
@@ -104,6 +105,8 @@ Return JSON only:
   "axis_name": "",
   "source": "raw_data | domain_risk_model | systemic_pattern | symptom_capture | genetics | family_history | data_gap | exposure | existing_plan_state | patient_state",
   "patient_signal": "",
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "possible_action_jobs": ["SoC Monitoring", "SoC Risk Reduction", "Adjunct Options", "Excluded / Watchlist"],
   "why_this_axis_may_generate_actions": ""
 }
@@ -119,6 +122,8 @@ Each broad candidate must use this schema before lane assignment:
   "title": "",
   "candidate_action": "",
   "source_axis_ids": [],
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "patient_signal_from_inputs": "",
   "candidate_job": "screen | monitor | verify | treat | reduce_exposure | change_behavior | preserve_state | optimize | symptom_support | exclude",
   "warrant_type": "standard_care | guideline_grade | standard_practice | human_outcome | human_biomarker | mechanism_plus_human_signal | close_analog | very_low_downside | harm_or_not_indicated",
@@ -172,6 +177,8 @@ Use for candidates that are speculative, not indicated, contradicted, duplicate,
   "id": "SOCM-001",
   "source_pool_id": "POOL-001",
   "lane_label": "SoC Monitoring",
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "title": "",
   "action_function": "screening | surveillance | monitoring | referral | diagnostic_gate | data_quality | counseling | deintensification",
   "trigger": "",
@@ -196,6 +203,8 @@ Use for candidates that are speculative, not indicated, contradicted, duplicate,
   "id": "SOCR-001",
   "source_pool_id": "POOL-001",
   "lane_label": "SoC Risk Reduction",
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "title": "",
   "action_function": "treatment | medication | nutrition | lifestyle | exposure_reduction | procedure | behavior_change | deprescribing | safety_precaution",
   "risk_driver": "",
@@ -220,6 +229,8 @@ Use for candidates that are speculative, not indicated, contradicted, duplicate,
   "id": "ADJ-001",
   "source_pool_id": "POOL-001",
   "lane_label": "Adjunct Options",
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "title": "",
   "action_function": "nutrition | exposure_reduction | supplement | monitoring | counseling | behavior_change | diagnostic_gate | environmental | repurposed_medication | preservation | symptom_support | other",
   "patient_signal_from_inputs": "",
@@ -243,6 +254,8 @@ Use for candidates that are speculative, not indicated, contradicted, duplicate,
   "id": "EXCL-001",
   "source_pool_id": "POOL-001",
   "lane_label": "Excluded / Watchlist",
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "title": "",
   "source_family": "",
   "rejection_reason": "",
@@ -259,5 +272,7 @@ Use for candidates that are speculative, not indicated, contradicted, duplicate,
 - Do not force a lane to reach a count by weakening its gate.
 - If SoC Risk Reduction is thin, report it as thin.
 - Do not move a candidate into SoC Risk Reduction unless it satisfies the four-part gate.
+- Resolved/improved symptom-derived candidates must have allowed_action_scope of baseline_closure or watchlist_only unless the candidate names the objective current evidence that reopens active management.
+- Reject active cadence, treatment targets, or intervention language from resolved/improved symptoms without current evidence.
 - Keep SoC Monitoring and Adjunct Options broad enough to preserve useful candidates.
 - Ranking happens downstream only after lane purity passes.

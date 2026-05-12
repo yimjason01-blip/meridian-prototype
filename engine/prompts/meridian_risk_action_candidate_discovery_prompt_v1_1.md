@@ -11,7 +11,8 @@ Generate only candidates that fit the requested lane.
 - Adjunct Options = optional non-SoC actions with a patient-specific signal and plausible human evidence.
 - Excluded / Watchlist = audit only.
 
-Missing records belong in SoC Monitoring unless the missing fact itself blocks a modeled-risk-lowering decision.
+- Missing records belong in SoC Monitoring unless the missing fact itself blocks a modeled-risk-lowering decision.
+- Symptom trajectory is a hard gate: resolved/improved symptoms can preserve phenotype history, but they can only generate baseline-closure or watchlist actions unless recurrence, abnormal objective data, active therapy, stones/tophi, red flags, or current burden is present.
 
 ## Boundaries
 
@@ -75,6 +76,8 @@ Return JSON only:
   "axis_name": "",
   "source": "raw_data | domain_risk_model | systemic_pattern | symptom_capture | genetics | family_history | data_gap | exposure | existing_plan_state | patient_state",
   "patient_signal": "",
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "possible_action_jobs": ["SoC Monitoring", "SoC Risk Reduction", "Adjunct Options", "Excluded / Watchlist"],
   "why_this_axis_may_generate_actions": ""
 }
@@ -91,6 +94,8 @@ Return JSON only:
   "title": "",
   "action_function": "screening | surveillance | monitoring | referral | diagnostic_gate | data_quality | counseling | deintensification",
   "source_axis_ids": [],
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "trigger": "",
   "modality": "",
   "due_status": "",
@@ -115,6 +120,8 @@ Return JSON only:
   "title": "",
   "action_function": "treatment | medication | nutrition | lifestyle | exposure_reduction | procedure | behavior_change | risk_factor_optimization | deprescribing | safety_precaution",
   "source_axis_ids": [],
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "risk_driver": "",
   "headline_intervention": "",
   "target": "",
@@ -139,6 +146,8 @@ Return JSON only:
   "title": "",
   "action_function": "nutrition | exposure_reduction | supplement | monitoring | counseling | behavior_change | diagnostic_gate | environmental | repurposed_medication | other",
   "source_axis_ids": [],
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "patient_signal_from_inputs": "",
   "mechanism_or_analog_rationale": "",
   "evidence_tier": "human_biomarker | close_analog_human | epidemiology_plus_mechanism | mechanism_plus_human_signal | very_low_downside",
@@ -161,6 +170,8 @@ Return JSON only:
   "lane_label": "Excluded / Watchlist",
   "title": "",
   "source_axis_ids": [],
+  "trajectory_status": "active | intermittent | improved | resolved | worse | unknown | not_symptom_derived",
+  "allowed_action_scope": "active_management | monitoring | baseline_closure | watchlist_only | not_symptom_derived",
   "source_family": "",
   "rejection_reason": "",
   "what_would_change_status": "",
@@ -175,5 +186,7 @@ Return JSON only:
 - Use required_candidate_ids exactly, in order.
 - One action per candidate.
 - Candidate order has no rank meaning.
+- Resolved/improved symptom-derived candidates must have allowed_action_scope of baseline_closure or watchlist_only unless the candidate names the objective current evidence that reopens active management.
+- Reject active cadence, treatment targets, or intervention language from resolved/improved symptoms without current evidence.
 - Do not create fake candidates to satisfy the count.
 - If the lane cannot reach the count, return workflow_incomplete.

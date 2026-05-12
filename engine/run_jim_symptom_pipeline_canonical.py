@@ -105,6 +105,38 @@ def required_ids_for(label, n):
     return [f'{prefix}-{i:03d}' for i in range(1, n+1)]
 
 
+TRAJECTORY_STATUSES = {'active', 'intermittent', 'improved', 'resolved', 'worse', 'unknown', 'not_symptom_derived'}
+ACTION_SCOPES = {'active_management', 'monitoring', 'baseline_closure', 'watchlist_only', 'not_symptom_derived'}
+RESOLVED_TRAJECTORIES = {'resolved', 'improved'}
+RESOLVED_ALLOWED_SCOPES = {'baseline_closure', 'watchlist_only'}
+ACTIVE_LANGUAGE_RE = re.compile(r'\b(quarterly|titrate|titration|target\s*<|initiate|start|increase|decrease|dose|therapy|treatment|treat-to-target)\b', re.I)
+
+
+def validate_symptom_trajectory_gate(label, item):
+    symptom_derived = bool(item.get('symptom_derived'))
+    trajectory = item.get('trajectory_status')
+    scope = item.get('allowed_action_scope')
+    item_id = item.get('id')
+    if symptom_derived:
+        if trajectory not in TRAJECTORY_STATUSES - {'not_symptom_derived'}:
+            raise RuntimeError(f'{label}: {item_id} symptom_derived requires trajectory_status')
+        if scope not in ACTION_SCOPES - {'not_symptom_derived'}:
+            raise RuntimeError(f'{label}: {item_id} symptom_derived requires allowed_action_scope')
+    else:
+        if trajectory and trajectory not in TRAJECTORY_STATUSES:
+            raise RuntimeError(f'{label}: {item_id} invalid trajectory_status {trajectory}')
+        if scope and scope not in ACTION_SCOPES:
+            raise RuntimeError(f'{label}: {item_id} invalid allowed_action_scope {scope}')
+    if trajectory in RESOLVED_TRAJECTORIES:
+        if scope not in RESOLVED_ALLOWED_SCOPES:
+            raise RuntimeError(f'{label}: {item_id} resolved/improved trajectory cannot use scope {scope}')
+        text = ' '.join(str(item.get(k) or '') for k in ['title','trigger','modality','due_status','interval','escalation_threshold','risk_driver','headline_intervention','target','initiation_or_escalation_threshold','follow_up_metric','implementation','monitoring_signal'])
+        if ACTIVE_LANGUAGE_RE.search(text):
+            raise RuntimeError(f'{label}: {item_id} resolved/improved trajectory contains active cadence/treatment language')
+        if label == 'SoC Risk Reduction':
+            raise RuntimeError(f'{label}: {item_id} resolved/improved symptom cannot enter active risk-reduction lane without current objective evidence')
+
+
 def validate_generation_fragment(label, frag, expected_n):
     if frag.get('lane_label') != label:
         raise RuntimeError(f'{label}: returned lane_label {frag.get("lane_label")}')
@@ -116,6 +148,7 @@ def validate_generation_fragment(label, frag, expected_n):
         assert_exact_lane(item.get('lane_label'))
         if item.get('lane_label') != label:
             raise RuntimeError(f'{label}: item {item.get("id")} lane {item.get("lane_label")}')
+        validate_symptom_trajectory_gate(label, item)
         ids.append(item.get('id'))
     required = required_ids_for(label, expected_n)
     if ids != required:
