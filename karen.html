@@ -1049,6 +1049,10 @@
     .cp-section-title { font-size: 13px; font-weight: 510; color: var(--text); letter-spacing: 0.02em; text-transform: uppercase; font-family: 'JetBrains Mono', ui-monospace, monospace; }
     .cp-section-title .cp-section-count { color: var(--text-subtle); font-weight: 400; margin-left: 8px; }
     .cp-section-sub { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-section-head.soc-urgent { border-bottom-color: rgba(220,90,80,0.42); background: rgba(220,90,80,0.045); border-radius: 8px 8px 0 0; padding: 12px 14px 10px; }
+    .cp-section-head.soc-urgent .cp-section-title { color: #d98778; font-weight: 590; }
+    .cp-section-head.soc-urgent .cp-section-sub { color: #d98778; }
+    .cp-family-label { margin: 10px 0 8px; font-size: 11px; font-weight: 510; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
     /* Action card · the canonical unit */
     .cp-action { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 18px; overflow: hidden; transition: border-color 0.15s; }
@@ -7325,15 +7329,80 @@ if (sleepBars) {
     }
   }
 
+  // ---- SoC Monitoring grouping ----
+  const SOC_MON_SECTIONS = [
+    { key: 'due', title: 'Due now / overdue', sub: 'requires immediate record closure or next-visit action', urgent: true },
+    { key: 'new', title: 'Newly indicated by risk model', sub: 'risk-model-triggered monitoring to adjudicate or start', urgent: false },
+    { key: 'routine', title: 'Routine on cadence', sub: 'standing surveillance, labs, vitals, prevention, and follow-up', urgent: false }
+  ];
+  const SOC_MON_DOMAIN_BY_ID = {
+    'SOC-MON-001': 'Cancer / genetics surveillance',
+    'SOC-MON-002': 'Cancer / genetics surveillance',
+    'SOC-MON-003': 'Cancer / genetics surveillance',
+    'SOC-MON-004': 'Cancer / genetics surveillance',
+    'SOC-MON-005': 'Bone / endocrine monitoring',
+    'SOC-MON-006': 'Metabolic monitoring',
+    'SOC-MON-007': 'Metabolic monitoring',
+    'SOC-MON-008': 'Cardiovascular monitoring',
+    'SOC-MON-009': 'Cardiovascular monitoring',
+    'SOC-MON-010': 'Renal / medication-safety monitoring',
+    'SOC-MON-011': 'Cardiovascular monitoring',
+    'SOC-MON-012': 'Cardiovascular monitoring',
+    'SOC-MON-013': 'Bone / endocrine monitoring',
+    'SOC-MON-014': 'Bone / endocrine monitoring',
+    'SOC-MON-015': 'Behavioral / sleep monitoring'
+  };
+  const SOC_MON_FAMILY_ORDER = {
+    'Cancer / genetics surveillance': 0,
+    'Metabolic monitoring': 1,
+    'Cardiovascular monitoring': 2,
+    'Renal / medication-safety monitoring': 3,
+    'Bone / endocrine monitoring': 4,
+    'Behavioral / sleep monitoring': 5,
+    'Medication / supplement reconciliation': 6,
+    'Preventive cadence / sensory screening': 7,
+    'Other monitoring': 8
+  };
+  function socMonitoringTier(item){
+    const t = (item && item.timing ? item.timing : '').toLowerCase();
+    if (t.startsWith('due') || t.includes('overdue')) return 0;
+    if (t.startsWith('newly indicated')) return 1;
+    return 2;
+  }
+  function socMonitoringSectionKey(item){
+    return SOC_MON_SECTIONS[socMonitoringTier(item)].key;
+  }
+  function socMonitoringFamily(item){
+    if (SOC_MON_DOMAIN_BY_ID[item.id]) return SOC_MON_DOMAIN_BY_ID[item.id];
+    const hay = ((item && item.title) ? item.title : '').toLowerCase();
+    if (/mri|mammogram|breast|chek2|colorectal|cancer|genetic|h\. pylori/.test(hay)) return 'Cancer / genetics surveillance';
+    if (/a1c|glucose|prediabetes|insulin/.test(hay)) return 'Metabolic monitoring';
+    if (/lipid|apob|blood pressure|bp|albuminuria|renal|kidney|ace/.test(hay)) return 'Cardiovascular monitoring';
+    if (/dexa|bone|vitamin d|thyroid|levothyroxine/.test(hay)) return 'Bone / endocrine monitoring';
+    return 'Other monitoring';
+  }
+  function socMonitoringSort(a, b){
+    const ta = socMonitoringTier(a), tb = socMonitoringTier(b);
+    if (ta !== tb) return ta - tb;
+    const fa = SOC_MON_FAMILY_ORDER[socMonitoringFamily(a)] || 0;
+    const fb = SOC_MON_FAMILY_ORDER[socMonitoringFamily(b)] || 0;
+    if (fa !== fb) return fa - fb;
+    return (a.originalRank || 0) - (b.originalRank || 0);
+  }
+
   // ---- Render: ALL (reorderable + add form) ----
   function renderAll(){
     const root = document.getElementById('cpPane-all');
     if (!root) return;
     root.innerHTML = '';
     const list = activeItems();
-    list.forEach((item, i) => {
-      root.appendChild(buildCard(item, i, { readonly: false }));
-    });
+    if (state.lane === 'soc') {
+      renderSocMonitoringAll(root, list);
+    } else {
+      list.forEach((item, i) => {
+        root.appendChild(buildCard(item, i, { readonly: false }));
+      });
+    }
     if (state.lane === 'adjuncts') {
       root.appendChild(buildAdjunctsExtras());
     }
@@ -7361,6 +7430,38 @@ if (sleepBars) {
         root.appendChild(btn);
       }
     }
+  }
+
+  function renderSocMonitoringAll(root, list){
+    const sorted = list.slice().sort(socMonitoringSort);
+    state.items.splice(0, state.items.length, ...sorted);
+    SOC_MON_SECTIONS.forEach(section => {
+      const items = sorted.filter(item => socMonitoringSectionKey(item) === section.key);
+      if (!items.length) return;
+      root.appendChild(buildSocMonitoringSectionHead(section, items.length));
+      let lastFamily = null;
+      items.forEach(item => {
+        const globalIndex = state.items.indexOf(item);
+        const family = socMonitoringFamily(item);
+        if (family !== lastFamily) {
+          const fam = document.createElement('div');
+          fam.className = 'cp-family-label';
+          fam.textContent = family;
+          root.appendChild(fam);
+          lastFamily = family;
+        }
+        root.appendChild(buildCard(item, globalIndex, { readonly: false }));
+      });
+    });
+  }
+
+  function buildSocMonitoringSectionHead(section, count){
+    const head = document.createElement('div');
+    head.className = 'cp-section-head' + (section.urgent ? ' soc-urgent' : '');
+    head.innerHTML =
+      '<div class="cp-section-title">' + esc(section.title) + '<span class="cp-section-count">' + count + '</span></div>' +
+      '<div class="cp-section-sub">' + esc(section.sub) + '</div>';
+    return head;
   }
 
   // ---- Adjuncts-only extras: contraindicated + research gaps ----
