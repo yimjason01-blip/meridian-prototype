@@ -4,7 +4,7 @@
 This replaces the prior symptom wrapper that used non-canonical bucket names.
 All active lane labels are exact user-facing lane labels from generation through ranking artifacts.
 """
-import json, os, re, sys, time, pathlib
+import json, os, re, sys, time, pathlib, subprocess
 from datetime import datetime
 from openai import OpenAI
 
@@ -34,10 +34,10 @@ SPAREQ_FORMULA = '(S*0.25)+(P*0.20)+(A*0.20)+(R*0.15)+(E*0.10)+(Q*0.10)'
 
 EXTRACTION_PROMPT_PATH = ROOT_DIR / 'engine/prompts/symptom_extraction_prompt_v0_1.md'
 SYSTEMIC_PROMPT_PATH = ROOT_DIR / 'engine/prompts/systemic_symptom_prompt_v0_1.md'
-RANKING_PROMPT_PATH = ROOT_DIR / 'engine/prompts/ranking_prompt_v0_3.md'
+RANKING_PROMPT_PATH = ROOT_DIR / 'engine/prompts/ranking_prompt_v0_4.md'
 RUN_EXTRACTION_PROMPT_PATH = OUT_DIR / 'symptom_extraction_prompt_v0_1.md'
 RUN_SYSTEMIC_PROMPT_PATH = OUT_DIR / 'systemic_symptom_prompt_v0_1.md'
-RUN_RANKING_PROMPT_PATH = OUT_DIR / 'ranking_prompt_v0_3.md'
+RUN_RANKING_PROMPT_PATH = OUT_DIR / 'ranking_prompt_v0_4.md'
 
 
 def log(msg):
@@ -115,6 +115,72 @@ def validate_generation_fragment(label, frag, expected_n):
 
 def score(it):
     return round(it.get('S',0)*0.25 + it.get('P',0)*0.20 + it.get('A',0)*0.20 + it.get('R',0)*0.15 + it.get('E',0)*0.10 + it.get('Q',0)*0.10, 3)
+
+
+def biomcp_query_for_candidate(lane, item):
+    if lane == 'SoC Risk Reduction':
+        parts = [
+            item.get('headline_intervention') or item.get('title'),
+            item.get('risk_driver'),
+            item.get('target'),
+            'risk reduction guideline trial meta-analysis'
+        ]
+    else:
+        parts = [
+            item.get('title'),
+            item.get('mechanism_or_analog_rationale'),
+            item.get('patient_signal_from_inputs'),
+            'human evidence biomarker trial'
+        ]
+    query = ' '.join(str(p) for p in parts if p)
+    query = re.sub(r'[^A-Za-z0-9(),/ .:+-]+', ' ', query)
+    query = re.sub(r'\s+', ' ', query).strip()
+    return query[:240]
+
+
+def run_biomcp(query, max_results=5):
+    try:
+        proc = subprocess.run(
+            ['biomcp', 'search', 'article', '-q', query, '--source', 'pubtator', '--limit', str(max_results), '--json'],
+            capture_output=True, text=True, timeout=75
+        )
+        if proc.returncode != 0:
+            return {'query': query, 'error': f'biomcp exit {proc.returncode}', 'stderr': proc.stderr[:800]}
+        data = json.loads(proc.stdout or '{}')
+        slim = []
+        for r in (data.get('results') or [])[:max_results]:
+            slim.append({
+                'pmid': r.get('pmid'),
+                'doi': r.get('doi'),
+                'title': r.get('title'),
+                'journal': r.get('journal'),
+                'date': r.get('date'),
+                'source': r.get('source'),
+                'is_retracted': r.get('is_retracted'),
+            })
+        return {'query': query, 'count': len(slim), 'results': slim}
+    except subprocess.TimeoutExpired:
+        return {'query': query, 'error': 'timeout'}
+    except FileNotFoundError:
+        return {'query': query, 'error': 'biomcp CLI not found'}
+    except Exception as e:
+        return {'query': query, 'error': str(e)}
+
+
+def build_biomcp_grounding(generation):
+    grounding = {'source': 'biomcp_cli_pubtator', 'max_results_per_candidate': 5, 'candidates': {}}
+    for lane in ['SoC Risk Reduction', 'Adjunct Options']:
+        for item in generation['lanes'][lane].get('candidates', []):
+            cid = item.get('id')
+            query = biomcp_query_for_candidate(lane, item)
+            log(f'  BioMCP {cid}: {query[:110]}')
+            grounding['candidates'][cid] = {
+                'lane_label': lane,
+                'title': item.get('title'),
+                'query': query,
+                'search': run_biomcp(query, 5),
+            }
+    return grounding
 
 log('=== STEP 1: Symptom extraction ===')
 
@@ -213,18 +279,40 @@ generation = {
 }
 (OUT_DIR / 'jim_candidates_v10_symptom_canonical.json').write_text(json.dumps(generation, indent=2, ensure_ascii=False))
 
-log('=== STEP 4: Ranking v0.3 canonical lanes ===')
+log('=== STEP 4: BioMCP grounding for ranking ===')
+grounding = load_json_if_exists(OUT_DIR / 'jim_biomcp_grounding_v01.json')
+if grounding is None:
+    grounding = build_biomcp_grounding(generation)
+    (OUT_DIR / 'jim_biomcp_grounding_v01.json').write_text(json.dumps(grounding, indent=2, ensure_ascii=False))
+else:
+    log('  reusing existing BioMCP grounding artifact')
+log(f"  grounded {len(grounding.get('candidates', {}))} candidates")
+
+log('=== STEP 5: Ranking v0.4 canonical lanes, BioMCP-grounded ===')
 RANKING_SYSTEM = RANKING_PROMPT_PATH.read_text()
 RUN_RANKING_PROMPT_PATH.write_text(RANKING_SYSTEM)
-ranking_user = json.dumps({'generation_artifact': generation, 'patient_payload_summary': {'symptom_capture': symptoms, 'systemic': systemic}}, ensure_ascii=False)
-text = call_gpt(RANKING_SYSTEM, ranking_user, max_tokens=16000, tag='ranking')
-(OUT_DIR / 'jim_ranking_v02_raw.txt').write_text(text)
+ranking_user = json.dumps({
+    'generation_artifact': generation,
+    'biomcp_grounding': grounding,
+    'patient_payload_summary': {'symptom_capture': symptoms, 'systemic': systemic}
+}, ensure_ascii=False)
+text = call_gpt(RANKING_SYSTEM, ranking_user, max_tokens=18000, tag='ranking')
+(OUT_DIR / 'jim_ranking_v04_raw.txt').write_text(text)
 ranking = extract_json(text)
 rank_lanes = ranking.get('lanes') or {}
 for label in ACTIVE_LANES:
     if label not in rank_lanes:
         raise RuntimeError(f'ranking missing lane {label}')
 for item in rank_lanes['SoC Risk Reduction'] + rank_lanes['Adjunct Options']:
+    cid = item.get('id')
+    allowed_pmids = {str(r.get('pmid')) for r in grounding.get('candidates', {}).get(cid, {}).get('search', {}).get('results', []) if r.get('pmid')}
+    cited_pmids = {str(p) for p in item.get('evidence_pmids', []) if p}
+    if not cited_pmids.issubset(allowed_pmids):
+        raise RuntimeError(f'ranking cited PMID outside BioMCP packet for {cid}: {sorted(cited_pmids - allowed_pmids)}')
+    if item.get('Q', 0) > 2 and not cited_pmids:
+        raise RuntimeError(f'ranking assigned Q>2 without cited BioMCP PMID for {cid}')
+    if not allowed_pmids and item.get('Q', 0) > 2:
+        raise RuntimeError(f'ranking assigned Q>2 without BioMCP support for {cid}')
     item['spareq_score'] = score(item)
 rank_lanes['SoC Risk Reduction'] = sorted(rank_lanes['SoC Risk Reduction'], key=lambda x: x.get('spareq_score', 0), reverse=True)
 rank_lanes['Adjunct Options'] = sorted(rank_lanes['Adjunct Options'], key=lambda x: x.get('spareq_score', 0), reverse=True)
@@ -240,13 +328,13 @@ ranking['ranking_run'] = {
         'A':'action impact / outcome-redirect / stage-shift / trajectory-anchor',
         'R':'reversibility / urgency window',
         'E':'effort inverted, easier/lower burden = higher',
-        'Q':'evidence quality'
+        'Q':'BioMCP-grounded evidence quality'
     },
     'completed_at': datetime.now().isoformat(),
 }
-(OUT_DIR / 'jim_ranking_v02_symptom_canonical.json').write_text(json.dumps(ranking, indent=2, ensure_ascii=False))
+(OUT_DIR / 'jim_ranking_v04_symptom_biomcp.json').write_text(json.dumps(ranking, indent=2, ensure_ascii=False))
 
-log('=== STEP 5: Summary ===')
+log('=== STEP 6: Summary ===')
 prior_rank = json.load(PRIOR_RANKING.open()).get('output', {})
 def short(arr):
     return [{'id':x.get('id'), 'title':x.get('title'), 'score':x.get('spareq_score'), 'symptom_derived':x.get('symptom_derived')} for x in (arr or [])[:3]]
