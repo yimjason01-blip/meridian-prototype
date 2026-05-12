@@ -4,6 +4,8 @@ Rank existing candidates only. Do not create, rename, omit, or move candidates.
 
 Use the supplied BioMCP grounding packet when assigning Q and evidence notes. Do not cite evidence outside that packet.
 
+For each candidate, evidence_pmids must be copied exactly from that candidate's BioMCP results only. Do not add PMIDs from memory or adjacent candidates. If a PMID is not present under that candidate ID in the BioMCP packet, it is forbidden.
+
 Rules:
 - SoC Monitoring: order by care-maintenance logic. No SPAREQ.
 - SoC Risk Reduction: rank by expected modeled-risk reduction, then BioMCP-grounded evidence, then urgency, then burden.
