@@ -1049,6 +1049,10 @@
     .cp-section-title { font-size: 13px; font-weight: 510; color: var(--text); letter-spacing: 0.02em; text-transform: uppercase; font-family: 'JetBrains Mono', ui-monospace, monospace; }
     .cp-section-title .cp-section-count { color: var(--text-subtle); font-weight: 400; margin-left: 8px; }
     .cp-section-sub { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .cp-section-head.soc-urgent { border-bottom-color: rgba(220,90,80,0.42); background: rgba(220,90,80,0.045); border-radius: 8px 8px 0 0; padding: 12px 14px 10px; }
+    .cp-section-head.soc-urgent .cp-section-title { color: #d98778; font-weight: 590; }
+    .cp-section-head.soc-urgent .cp-section-sub { color: #d98778; }
+    .cp-family-label { margin: 10px 0 8px; font-size: 11px; font-weight: 510; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-subtle); font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
     /* Action card · the canonical unit */
     .cp-action { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 18px; overflow: hidden; transition: border-color 0.15s; }
@@ -1476,7 +1480,7 @@
       <button class="cp-lane-tab" data-lane="adjuncts" onclick="switchLane('adjuncts')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Adjunct Options</button>
       <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;padding:0 14px;border-left:1px solid var(--border-subtle);margin-left:14px;line-height:38px;">Vitality</div>
       <button class="cp-lane-tab" data-lane="vitality" onclick="switchLane('vitality')" style="background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px;color:var(--text-muted);font-size:14px;font-weight:510;cursor:pointer;letter-spacing:-0.1px;">Vitality Actions</button>
-      <div style="margin-left:auto;display:flex;align-items:center;color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono', ui-monospace, monospace;letter-spacing:0.04em;" id="cpLaneCaption">defensive cadence · modality / interval / escalation</div>
+      <div style="margin-left:auto;display:flex;align-items:center;color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono', ui-monospace, monospace;letter-spacing:0.04em;" id="cpLaneCaption">grouped: due now / overdue → newly indicated → routine cadence</div>
     </div>
 
     <!-- Within each lane: Top 3 / All sub-tabs (preserving existing IA pattern) -->
@@ -6519,7 +6523,7 @@ if (sleepBars) {
   // 1) SoC Monitoring = defensive cadence / modality / interval / escalation.
   // 2) SoC Risk Reduction = offensive guideline-grade intervention / target / threshold.
   // 3) Adjunct Options = optional non-SoC actions one evidence tier below SoC, no duplicates.
-  // ---- SOC SCREENING & SURVEILLANCE · v0.9 candidates, v0.2 downstream order ----
+  // ---- SoC Monitoring · v0.9 candidates, v0.2 downstream order ----
   const ITEMS = [
   {"id": "SOC-MON-001", "lane": "soc", "originalRank": 1, "title": "Pancreatic surveillance discussion (MRI/MRCP plus EUS) for ATM+ with confirmed fhx of pancreatic cancer in a first/second-degree relative", "severity": "SoC Monitoring", "timing": "newly indicated | Annual MRI/MRCP starting age 50, or 10 years younger than the earliest affected relative, per CAPS consortium and NCCN Genetic/Familial High-Risk Assessment.", "do": "<strong>Pancreatic surveillance discussion (MRI/MRCP plus EUS) for ATM+ with confirmed fhx of pancreatic cancer in a first/second-degree relative</strong>. Confirm paternal grandfather primary site via records or family interview. If pancreatic, initiate annual surveillance per CAPS at age 50 (3 years from now).", "why": "Category: newly_indicated. Patient signal: ATM heterozygote (c.8147T&gt;C). Paternal grandfather GI cancer, primary site not confirmed. Harm of delay: Window of opportunity for early-stage detection is the entire rationale; missing the start age erodes benefit.", "goal": "Cadence: Annual MRI/MRCP starting age 50, or 10 years younger than the earliest affected relative, per CAPS consortium and NCCN Genetic/Familial High-Risk Assessment.. Guideline: NCCN Genetic/Familial High-Risk Assessment: Pancreatic v1.2025; CAPS Consortium Goggins et al. Gut 2020", "orders": [{"glyph": "✚", "label": "Pancreatic surveillance discussion (MRI/MRCP plus EUS) for A"}], "evidence": "Guideline: NCCN Genetic/Familial High-Risk Assessment: Pancreatic v1.2025; CAPS Consortium Goggins et al. Gut 2020", "author": "meridian", "symptom_derived": false},
   {"id": "SOC-MON-002", "lane": "soc", "originalRank": 2, "title": "Annual full-skin examination by dermatology", "severity": "SoC Monitoring", "timing": "newly indicated | Annual", "do": "<strong>Annual full-skin examination by dermatology</strong>. Dermatology referral for baseline full-body skin exam; lock annual cadence.", "why": "Category: newly_indicated. Patient signal: ATM heterozygote; baseline skin exam not on file in fixture. Harm of delay: Low per visit, cumulative over decades.", "goal": "Cadence: Annual. Guideline: AAD/ACS adult skin cancer screening guidance; NCCN Melanoma v3.2024", "orders": [{"glyph": "✚", "label": "Annual full-skin examination by dermatology"}], "evidence": "Guideline: AAD/ACS adult skin cancer screening guidance; NCCN Melanoma v3.2024", "author": "meridian", "symptom_derived": false},
@@ -6691,16 +6695,37 @@ if (sleepBars) {
   ];
 
   // ---- State ----
-  // v1.7 SoC Monitoring ordering rule:
-  // (a) overdue / due now, (b) newly indicated by current risk model,
-  // (c) routine on cadence, (d) future cadence (age-gated, defer). Within each tier, preserve clinical priority order.
+  // v1.8 SoC Monitoring display rule:
+  // (a) Due now / overdue, (b) newly indicated by current risk model,
+  // (c) routine on cadence. Future cadence stays in the routine/cadence section.
+  // Within each section, keep similar monitoring actions together by clinical family.
+  const SOC_MON_SECTIONS = [
+    { key: 'due', title: 'Due now / overdue', sub: 'requires immediate record closure or next-visit action', urgent: true },
+    { key: 'new', title: 'Newly indicated by risk model', sub: 'risk-model-triggered monitoring to adjudicate or start', urgent: false },
+    { key: 'routine', title: 'Routine on cadence', sub: 'standing surveillance, labs, vitals, prevention, and age-gated follow-up', urgent: false }
+  ];
   function socMonitoringTier(item){
     const t = (item && item.timing) ? item.timing.toLowerCase() : '';
-    if (t.startsWith('due now')) return 0;
+    if (t.startsWith('due now') || t.startsWith('overdue')) return 0;
     if (t.startsWith('newly indicated')) return 1;
-    if (t.startsWith('future cadence')) return 3;
     return 2;
   }
+  function socMonitoringSectionKey(item){
+    return SOC_MON_SECTIONS[socMonitoringTier(item)].key;
+  }
+  function socMonitoringFamily(item){
+    const hay = ((item && item.title) ? item.title : '').toLowerCase() + ' ' + ((item && item.why) ? item.why : '').toLowerCase();
+    if (/atm|pancrea|colorectal|colon|prostate|psa|skin|dermatology|cascade|genetic|cancer/.test(hay)) return 'Cancer / genetics surveillance';
+    if (/lipid|apob|ldl|lp\(a\)|blood pressure|\bbp\b|hba1c|insulin|uric acid|sua|egfr|kidney|uacr|creatinine|cystatin/.test(hay)) return 'Cardiometabolic / renal monitoring';
+    if (/immunization|tdap|influenza|covid|hpv|hearing|vision|eye|iop|audiology|ophthalmology/.test(hay)) return 'Preventive cadence / sensory screening';
+    return 'Other monitoring';
+  }
+  const SOC_MON_FAMILY_ORDER = {
+    'Cancer / genetics surveillance': 0,
+    'Cardiometabolic / renal monitoring': 1,
+    'Preventive cadence / sensory screening': 2,
+    'Other monitoring': 3
+  };
   // due_now: CRC before sUA (cancer over flare-management).
   // newly_indicated: ATM+ pancreatic and derm follow CRC, then cascade testing.
   const SOC_MON_PRIORITY = {
@@ -6713,6 +6738,9 @@ if (sleepBars) {
   function socMonitoringSort(a, b){
     const ta = socMonitoringTier(a), tb = socMonitoringTier(b);
     if (ta !== tb) return ta - tb;
+    const fa = SOC_MON_FAMILY_ORDER[socMonitoringFamily(a)] || 0;
+    const fb = SOC_MON_FAMILY_ORDER[socMonitoringFamily(b)] || 0;
+    if (fa !== fb) return fa - fb;
     const pa = SOC_MON_PRIORITY[a.id], pb = SOC_MON_PRIORITY[b.id];
     if (pa !== undefined && pb !== undefined) return pa - pb;
     if (pa !== undefined) return -1;
@@ -6841,9 +6869,13 @@ if (sleepBars) {
     if (!root) return;
     root.innerHTML = '';
     const list = activeItems();
+    if (state.lane === 'soc') {
+      renderSocMonitoringAll(root, list);
+    } else {
     list.forEach((item, i) => {
       root.appendChild(buildCard(item, i, { readonly: false }));
     });
+    }
     if (state.lane === 'adjuncts') {
       root.appendChild(buildAdjunctsExtras());
     }
@@ -6871,6 +6903,40 @@ if (sleepBars) {
         root.appendChild(btn);
       }
     }
+  }
+
+  function renderSocMonitoringAll(root, list){
+    const sorted = list.slice().sort(socMonitoringSort);
+    // Keep state order aligned with the grouped display so Top 3 and drag indexes remain coherent.
+    state.items.splice(0, state.items.length, ...sorted);
+
+    SOC_MON_SECTIONS.forEach(section => {
+      const items = sorted.filter(item => socMonitoringSectionKey(item) === section.key);
+      if (!items.length) return;
+      root.appendChild(buildSocMonitoringSectionHead(section, items.length));
+      let lastFamily = null;
+      items.forEach(item => {
+        const globalIndex = state.items.indexOf(item);
+        const family = socMonitoringFamily(item);
+        if (family !== lastFamily) {
+          const fam = document.createElement('div');
+          fam.className = 'cp-family-label';
+          fam.textContent = family;
+          root.appendChild(fam);
+          lastFamily = family;
+        }
+        root.appendChild(buildCard(item, globalIndex, { readonly: false }));
+      });
+    });
+  }
+
+  function buildSocMonitoringSectionHead(section, count){
+    const head = document.createElement('div');
+    head.className = 'cp-section-head' + (section.urgent ? ' soc-urgent' : '');
+    head.innerHTML =
+      '<div class="cp-section-title">' + esc(section.title) + '<span class="cp-section-count">' + count + '</span></div>' +
+      '<div class="cp-section-sub">' + esc(section.sub) + '</div>';
+    return head;
   }
 
   // ---- Adjuncts-only extras: contraindicated + research gaps ----
@@ -6975,7 +7041,7 @@ if (sleepBars) {
     // Update the right-side caption per lane
     const caption = document.getElementById('cpLaneCaption');
     if (caption) {
-      if (lane === 'soc')        caption.textContent = 'defensive cadence · modality / interval / escalation';
+      if (lane === 'soc')        caption.textContent = 'grouped: due now / overdue → newly indicated → routine cadence';
       else if (lane === 'socRiskReduction') caption.textContent = 'offensive standard-care · targets / thresholds / follow-up';
       else if (lane === 'adjuncts') caption.textContent = 'offensive optional · one evidence tier below SoC';
       else                       caption.textContent = 'vitality-model-seeded · N-of-1 lifecycle · single ranked list';
