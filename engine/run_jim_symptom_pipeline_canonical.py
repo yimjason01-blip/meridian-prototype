@@ -13,6 +13,7 @@ OUT_DIR = pathlib.Path('/tmp/jim_symptom_run_canonical'); OUT_DIR.mkdir(exist_ok
 LOG = OUT_DIR / 'pipeline.log'
 
 FIX_PATH = pathlib.Path('/tmp/jim_1_1_current_filled.json')
+DOMAIN_RISK_PATH = pathlib.Path('/tmp/jim_risk_outputs_from_sheet.json')
 PRIOR_RANKING = pathlib.Path('/tmp/jim_1_1_candidate_ranking_v0_1_gpt55.json')
 PROMPT_PATH = ROOT_DIR / 'engine/prompts/meridian_risk_action_candidate_discovery_prompt_v1_1.md'
 PROMPT_V10 = PROMPT_PATH.read_text()
@@ -244,7 +245,7 @@ for label, target_n in LANES:
                 'raw_patient_data': json.load(FIX_PATH.open()),
                 'symptom_capture': symptoms,
                 'systemic_risk_model': systemic,
-                'domain_risk_models': {'status':'partial_current_signals_only'},
+                'domain_risk_models': json.load(DOMAIN_RISK_PATH.open()),
                 'mandatory_action_register': {'status':'not_supplied'},
                 'existing_plan_state': {'completed_facts':['CAC=0', 'Lp(a)=72 nmol/L']},
                 'compute_tier':'deep'
