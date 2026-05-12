@@ -8,6 +8,14 @@ import json, os, re, sys, time, pathlib, subprocess
 from datetime import datetime
 from openai import OpenAI
 
+if not os.environ.get('OPENAI_API_KEY'):
+    auth_path = pathlib.Path.home() / '.hermes/auth.json'
+    if auth_path.exists():
+        auth = json.load(auth_path.open())
+        creds = auth.get('credential_pool', {}).get('openai', [])
+        if creds and creds[0].get('access_token'):
+            os.environ['OPENAI_API_KEY'] = creds[0]['access_token']
+
 ROOT_DIR = pathlib.Path(__file__).resolve().parents[1]
 OUT_DIR = pathlib.Path('/tmp/jim_symptom_run_canonical'); OUT_DIR.mkdir(exist_ok=True)
 LOG = OUT_DIR / 'pipeline.log'
