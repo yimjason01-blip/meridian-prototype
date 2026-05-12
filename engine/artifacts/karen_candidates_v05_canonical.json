@@ -1,0 +1,1161 @@
+{
+  "patient_id": "karen",
+  "prompt_version": "v0.9 source candidates canonicalized to v0.5 lane labels",
+  "source_artifact": "/tmp/karen_run/karen_candidates_v09.json",
+  "lanes": {
+    "SoC Monitoring": {
+      "lane_label": "SoC Monitoring",
+      "search_axes": [
+        {
+          "axis_id": "AX1",
+          "axis_name": "CHEK2-associated hereditary cancer surveillance",
+          "source": "genetics + cancer domain risk output",
+          "patient_signal": "Heterozygous likely pathogenic CHEK2 variant; cancer model maps this to hereditary moderate breast risk and modest colorectal risk."
+        },
+        {
+          "axis_id": "AX2",
+          "axis_name": "Dense breasts and family breast cancer history",
+          "source": "imaging_screening + family_history + systemic",
+          "patient_signal": "Breast density category C; mother with ER+ breast cancer at age 68; mammogram BIRADS 2 in 2026-01; breast MRI not done."
+        },
+        {
+          "axis_id": "AX3",
+          "axis_name": "Completed colorectal screening with hereditary-risk interval ambiguity",
+          "source": "imaging_screening + cancer domain risk output",
+          "patient_signal": "Normal colonoscopy in 2024-06 with no polyps; fixture lists next due 2034, while cancer model notes CHEK2 triggers colonoscopy from age 40 but repeat interval is indeterminate in supplied specification."
+        },
+        {
+          "axis_id": "AX4",
+          "axis_name": "Postmenopausal bone health screening gap",
+          "source": "raw_data + imaging_screening",
+          "patient_signal": "Age 52, postmenopausal, DEXA not done; fixture notes DEXA due now."
+        },
+        {
+          "axis_id": "AX5",
+          "axis_name": "Prediabetes and high metabolic trajectory risk",
+          "source": "labs + metabolic domain risk output + systemic",
+          "patient_signal": "HbA1c 5.7%, fasting glucose 102 mg/dL, HOMA-IR 2.78, prior gestational diabetes, paternal T2D, Asian ancestry, waist-to-height ratio 0.509, estimated 10-year incident T2D risk approximately 35%."
+        },
+        {
+          "axis_id": "AX6",
+          "axis_name": "Treated hypertension with borderline-above-optimal readings",
+          "source": "raw_data + CVD/CKD/neuro domain outputs + systemic",
+          "patient_signal": "On lisinopril 10 mg daily; home BP average 131/80 and clinic BP 134/82; not uncontrolled but not consistently below stricter optimal thresholds."
+        },
+        {
+          "axis_id": "AX7",
+          "axis_name": "Intermediate CVD risk and atherogenic lipid burden",
+          "source": "labs + CVD domain output + systemic",
+          "patient_signal": "LDL-C 132 mg/dL, non-HDL-C 160 mg/dL, ApoB 102 mg/dL, Lp(a) 45 nmol/L, estimated 10-year total CVD risk 7.5%."
+        },
+        {
+          "axis_id": "AX8",
+          "axis_name": "Currently normal kidney markers with cardiometabolic vulnerability",
+          "source": "labs + CKD domain output + systemic",
+          "patient_signal": "eGFR 88, UACR 12 mg/g, no CKD, low estimated incident CKD risk, but treated hypertension and prediabetes create future monitoring relevance."
+        },
+        {
+          "axis_id": "AX9",
+          "axis_name": "Hashimoto hypothyroidism on replacement therapy",
+          "source": "raw_data + labs",
+          "patient_signal": "Levothyroxine 75 mcg daily; TSH 2.1, free T4 1.2, TPO antibody positive; condition documented as controlled."
+        },
+        {
+          "axis_id": "AX10",
+          "axis_name": "Sleep, stress, anxiety, and alcohol monitoring signals",
+          "source": "raw_data + wearables + neuro/systemic outputs",
+          "patient_signal": "Wearable sleep average 6.4 hours, sleep efficiency 84%; PSS-10 19 moderate-to-high; GAD-7 6 mild; AUDIT-C 3 at threshold for women; alcohol 5 drinks/week."
+        },
+        {
+          "axis_id": "AX11",
+          "axis_name": "Medication and supplement safety monitoring",
+          "source": "raw_data + labs",
+          "patient_signal": "Lisinopril, levothyroxine, vitamin D3, magnesium glycinate, multivitamin; renal function and potassium-specific data are partly available through creatinine/eGFR but serum potassium was not supplied in the payload."
+        },
+        {
+          "axis_id": "AX12",
+          "axis_name": "Preventive screening record reconciliation",
+          "source": "raw_data + imaging_screening",
+          "patient_signal": "Cervical screening documented as up to date; lung screening not applicable; immunization records not supplied; several physiologic tests not done."
+        }
+      ],
+      "candidates": [
+        {
+          "id": "SOC-MON-001",
+          "title": "Initiate annual breast MRI surveillance in addition to mammography",
+          "rationale": "Breast MRI is the clearest unresolved standard surveillance gap in the supplied cancer model: CHEK2 likely pathogenic status maps to annual mammogram plus annual breast MRI from age 40, and her breast MRI is documented as not done.",
+          "patient_signals_used": [
+            "Age 52 female",
+            "CHEK2 likely pathogenic heterozygous variant",
+            "Breast density category C",
+            "Mother with breast cancer",
+            "Breast MRI not done",
+            "Cancer model states CHEK2 triggers annual mammogram plus MRI from age 40"
+          ],
+          "evidence_basis_prose": "Standard hereditary breast-risk surveillance commonly uses MRI as an adjunct to mammography when inherited-risk status places the patient above average risk. The patient’s domain model explicitly identifies MRI as a gap relative to the CHEK2 protocol.",
+          "risk_interaction": "Addresses the hereditary breast cancer detection gap amplified by dense breasts, which can reduce mammographic sensitivity.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-005",
+          "title": "Order baseline DEXA bone density screening",
+          "rationale": "The imaging/screening payload states DEXA is not done and notes it is due now given postmenopausal status and age 52.",
+          "patient_signals_used": [
+            "Age 52",
+            "Postmenopausal, last menstrual period 14 months ago",
+            "DEXA not done",
+            "Fixture states DEXA due now",
+            "Vitamin D 25-OH 28 ng/mL"
+          ],
+          "evidence_basis_prose": "Bone density assessment is standard surveillance when clinical risk factors or care pathways indicate early postmenopausal screening. The supplied fixture explicitly marks this as due now.",
+          "risk_interaction": "Connects menopause, vitamin D status, and future fracture-risk prevention through objective baseline measurement.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-010",
+          "title": "Monitor renal function, albuminuria, and ACE-inhibitor safety labs",
+          "rationale": "Kidney markers are currently reassuring, but she has hypertension, prediabetes risk, and lisinopril use. Monitoring should include kidney function and albuminuria, plus safety labs relevant to ACE-inhibitor therapy.",
+          "patient_signals_used": [
+            "eGFR 88",
+            "UACR 12 mg/g",
+            "No CKD diagnosis",
+            "Hypertension on lisinopril",
+            "Prediabetes-range glycemia",
+            "CKD model notes single UACR only and cystatin C not collected",
+            "Serum potassium not supplied"
+          ],
+          "evidence_basis_prose": "Standard care for hypertension treated with an ACE inhibitor includes monitoring kidney function and electrolytes; cardiometabolic risk also supports periodic urine albumin monitoring.",
+          "risk_interaction": "Protects against medication-related renal/electrolyte complications and detects early kidney effects if BP or glycemia worsens.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-006",
+          "title": "Monitor HbA1c and fasting glucose for prediabetes trajectory",
+          "rationale": "She has prediabetes-range HbA1c and fasting glucose with high estimated 10-year incident T2D risk. Serial glycemic monitoring is needed to detect progression or improvement.",
+          "patient_signals_used": [
+            "HbA1c 5.7%",
+            "Fasting glucose 102 mg/dL",
+            "Prior gestational diabetes",
+            "Father with type 2 diabetes",
+            "Asian ancestry",
+            "Metabolic model estimated approximately 35% 10-year T2D risk"
+          ],
+          "evidence_basis_prose": "Standard care for prediabetes includes periodic glycemic monitoring to detect progression to diabetes and to assess response to lifestyle or medical prevention strategies.",
+          "risk_interaction": "Glycemic progression is the major upstream fork that would amplify future CVD, CKD, and neurovascular risk.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-008",
+          "title": "Continue structured home and clinic blood pressure monitoring",
+          "rationale": "Her hypertension is treated and not uncontrolled, but readings remain slightly above stricter optimal thresholds. Ongoing BP monitoring is needed to confirm sustained control.",
+          "patient_signals_used": [
+            "Hypertension diagnosed 2023",
+            "Lisinopril 10 mg daily",
+            "Home BP average 131/80",
+            "Clinic BP 134/82",
+            "CVD, CKD, and neuro models note BP is not uncontrolled but not consistently below optimal thresholds"
+          ],
+          "evidence_basis_prose": "Standard hypertension care includes periodic clinic measurement and home BP monitoring to assess treatment control and detect worsening or overtreatment.",
+          "risk_interaction": "BP control affects heart, kidney, and brain vascular trajectories and interacts with prediabetes and lipid burden.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-011",
+          "title": "Repeat lipid panel with ApoB/non-HDL tracking for CVD risk surveillance",
+          "rationale": "She has intermediate estimated CVD risk and atherogenic lipid burden. Serial lipid monitoring is needed to track risk trajectory and response if lifestyle or medication decisions are made downstream.",
+          "patient_signals_used": [
+            "LDL-C 132 mg/dL",
+            "Non-HDL-C 160 mg/dL",
+            "ApoB 102 mg/dL",
+            "Lp(a) 45 nmol/L",
+            "Estimated 10-year total CVD risk 7.5%",
+            "Family history of MI"
+          ],
+          "evidence_basis_prose": "Standard cardiovascular prevention includes periodic lipid monitoring in adults with elevated or borderline atherogenic markers and intermediate calculated risk.",
+          "risk_interaction": "Tracks a vascular driver that interacts with hypertension, prediabetes, lower fitness, and family CVD history.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-009",
+          "title": "Use ambulatory blood pressure monitoring or a validated multi-day home BP protocol if control status remains uncertain",
+          "rationale": "The domain models flag missing data on BP variability and nocturnal dipping, and available readings are borderline. ABPM or a structured home protocol can clarify true control, masked hypertension, white-coat effect, or nocturnal patterns.",
+          "patient_signals_used": [
+            "Home BP 131/80",
+            "Clinic BP 134/82",
+            "Treated hypertension",
+            "24-hour ambulatory BP not done",
+            "CVD model data gaps for BP variability and nocturnal dipping"
+          ],
+          "evidence_basis_prose": "Standard hypertension evaluation uses validated out-of-office BP measurement when clinic and home patterns need clarification or when treatment targets are uncertain.",
+          "risk_interaction": "Clarifies whether BP is a persistent cross-domain vascular driver or adequately controlled.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-012",
+          "title": "Consider coronary artery calcium scoring as a standard CVD risk-refinement gate",
+          "rationale": "The CVD model reports intermediate 10-year risk and identifies CAC as not done, with CAC unavailable for reclassification. CAC can clarify intensity of preventive management when risk is intermediate and treatment decisions are preference-sensitive.",
+          "patient_signals_used": [
+            "Estimated 10-year total CVD risk 7.5%",
+            "LDL-C 132 mg/dL",
+            "ApoB 102 mg/dL",
+            "Treated hypertension",
+            "Prediabetes-range HbA1c",
+            "Family history of MI",
+            "CAC not done"
+          ],
+          "evidence_basis_prose": "In standard CVD prevention, CAC is commonly used as a risk-refinement tool for selected intermediate-risk adults when it would change preventive treatment decisions.",
+          "risk_interaction": "Can separate lower near-term coronary plaque burden from higher subclinical atherosclerosis burden, influencing downstream lipid and prevention decisions.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-003",
+          "title": "Reconcile CHEK2-specific colorectal surveillance interval after normal 2024 colonoscopy",
+          "rationale": "Colonoscopy was normal in 2024-06 and the fixture lists next due in 2034, but the cancer model states CHEK2 triggers colonoscopy from age 40 while noting the repeat interval is indeterminate in the supplied specification. This should be clarified so surveillance is neither under- nor over-performed.",
+          "patient_signals_used": [
+            "CHEK2 likely pathogenic variant",
+            "Normal colonoscopy 2024-06 with no polyps",
+            "Fixture next due 2034",
+            "Cancer model flags CHEK2 colorectal repeat interval as a data gap"
+          ],
+          "evidence_basis_prose": "Standard surveillance planning for hereditary or modestly elevated colorectal risk requires documenting the correct interval after a normal colonoscopy. When a genetic-risk pathway and a routine interval disagree or are ambiguous, record reconciliation and specialist/guideline interval clarification are standard monitoring tasks.",
+          "risk_interaction": "Prevents both missed colorectal surveillance and unnecessary early repeat colonoscopy.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-007",
+          "title": "Track waist circumference, weight trajectory, and BMI as metabolic surveillance markers",
+          "rationale": "Despite normal-range BMI, she has waist-to-height ratio above threshold and mild upward weight drift since menopause. Serial anthropometric monitoring is clinically relevant for metabolic risk.",
+          "patient_signals_used": [
+            "BMI 24.8",
+            "Waist 84 cm",
+            "Waist-to-height ratio 0.509",
+            "Weight increased from 66.0 kg to 67.5 kg over 12 months",
+            "Postmenopausal status",
+            "Metabolic model fired waist-to-height ratio modifier"
+          ],
+          "evidence_basis_prose": "Standard cardiometabolic monitoring includes weight and central adiposity measures, particularly when diabetes risk is elevated despite BMI not being in the obese range.",
+          "risk_interaction": "Central adiposity interacts with insulin resistance, blood pressure, lipids, and postmenopausal metabolic drift.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-014",
+          "title": "Monitor vitamin D status in the context of supplementation and bone-health evaluation",
+          "rationale": "She takes vitamin D3 2000 IU daily but 25-OH vitamin D is 28 ng/mL, and DEXA is due. Rechecking vitamin D after a supplementation plan or as part of bone-health monitoring is clinically coherent.",
+          "patient_signals_used": [
+            "Vitamin D3 2000 IU daily",
+            "25-OH vitamin D 28 ng/mL",
+            "Postmenopausal status",
+            "DEXA not done and marked due now"
+          ],
+          "evidence_basis_prose": "Standard bone-health care often includes assessment and follow-up of vitamin D status when levels are low or borderline and supplementation is being used.",
+          "risk_interaction": "Supports interpretation and management of bone density findings without substituting for DEXA.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-013",
+          "title": "Continue thyroid function monitoring for Hashimoto hypothyroidism on levothyroxine",
+          "rationale": "Her hypothyroidism is documented as controlled on levothyroxine, with current TSH and free T4 in the supplied labs. Ongoing periodic monitoring is needed to maintain euthyroid status and avoid under- or over-replacement.",
+          "patient_signals_used": [
+            "Hashimoto hypothyroidism diagnosed 2017",
+            "Levothyroxine 75 mcg daily",
+            "TSH 2.1",
+            "Free T4 1.2",
+            "Positive TPO antibody",
+            "Condition documented as controlled"
+          ],
+          "evidence_basis_prose": "Standard care for treated hypothyroidism includes periodic TSH monitoring, with reassessment after dose changes, symptoms, interacting medications, or physiologic changes.",
+          "risk_interaction": "Thyroid over- or under-treatment can affect weight, lipids, heart rhythm symptoms, bone health, and fatigue/sleep interpretation.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-015",
+          "title": "Repeat validated monitoring for sleep, stress, anxiety, mood, alcohol use, and OSA risk",
+          "rationale": "She has high perceived stress, mild anxiety, threshold AUDIT-C for women, sleep restriction, and poor sleep efficiency, while PHQ-9 and STOP-BANG are currently low. Periodic reassessment can detect worsening and guide whether diagnostic or behavioral pathways should open.",
+          "patient_signals_used": [
+            "PSS-10 score 19 moderate-to-high",
+            "GAD-7 score 6 mild",
+            "PHQ-9 score 4 minimal",
+            "AUDIT-C score 3 at threshold for women",
+            "STOP-BANG score 2 low risk",
+            "Wearable sleep average 6.4 hours",
+            "Sleep efficiency 84%",
+            "Neuro model fired poor sleep-quality modifier"
+          ],
+          "evidence_basis_prose": "Standard primary-care monitoring uses validated screeners for alcohol risk, mood/anxiety symptoms, sleep concerns, and sleep apnea risk when symptoms or risk signals are present.",
+          "risk_interaction": "Sleep and stress interact with glycemia, BP, autonomic tone, cognitive trajectory, alcohol intake, and weight drift.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-002",
+          "title": "Continue annual screening mammography with documentation of BIRADS and breast density",
+          "rationale": "Her last mammogram in 2026-01 was BIRADS 2 with annual frequency documented. Continued annual mammography remains part of her CHEK2-associated breast surveillance pathway.",
+          "patient_signals_used": [
+            "Mammogram 2026-01 BIRADS 2",
+            "Annual mammography frequency already documented",
+            "CHEK2 likely pathogenic variant",
+            "Breast density category C",
+            "No personal breast cancer history"
+          ],
+          "evidence_basis_prose": "Guideline-based breast screening for hereditary or elevated-risk patients generally retains mammography even when MRI is added, because the modalities provide complementary detection.",
+          "risk_interaction": "Maintains the established breast surveillance baseline while MRI closes the supplemental high-risk imaging gap.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        },
+        {
+          "id": "SOC-MON-004",
+          "title": "Maintain cervical cancer screening interval with next Pap/HPV due in 2029",
+          "rationale": "Her Pap/HPV test in 2024-09 was negative and HPV negative, with next due listed as 2029. This is a standard preventive surveillance item that should be kept on the monitoring plan rather than repeated early.",
+          "patient_signals_used": [
+            "Age 52 female",
+            "Pap/HPV 2024-09 negative",
+            "HPV negative",
+            "Next due listed as 2029"
+          ],
+          "evidence_basis_prose": "Standard cervical cancer screening uses extended intervals after negative HPV-based screening in appropriately eligible patients. The supplied record already defines the next due date.",
+          "risk_interaction": "Supports preventive cancer detection while avoiding over-screening.",
+          "lane_label": "SoC Monitoring",
+          "symptom_derived": false
+        }
+      ]
+    },
+    "SoC Risk Reduction": {
+      "lane_label": "SoC Risk Reduction",
+      "search_axes": [
+        {
+          "axis_id": "AX5",
+          "axis_name": "Prediabetes and high metabolic trajectory risk",
+          "patient_signal": "HbA1c 5.7%, fasting glucose 102 mg/dL, HOMA-IR 2.78, prior gestational diabetes, paternal type 2 diabetes, Asian ancestry, waist-to-height ratio 0.509, and metabolic model estimate of approximately 35% 10-year incident type 2 diabetes risk."
+        },
+        {
+          "axis_id": "AX6",
+          "axis_name": "Treated hypertension with borderline-above-optimal readings",
+          "patient_signal": "On lisinopril 10 mg daily; home BP average 131/80 and clinic BP 134/82; controlled enough to avoid uncontrolled-BP modifiers but not consistently below stricter optimal thresholds."
+        },
+        {
+          "axis_id": "AX7",
+          "axis_name": "Intermediate CVD risk and atherogenic lipid burden",
+          "patient_signal": "LDL-C 132 mg/dL, non-HDL-C 160 mg/dL, ApoB 102 mg/dL, Lp(a) 45 nmol/L, and CVD model estimate of approximately 7.5% 10-year total CVD risk."
+        },
+        {
+          "axis_id": "AX8",
+          "axis_name": "Currently normal kidney markers with cardiometabolic vulnerability",
+          "patient_signal": "eGFR 88, UACR 12 mg/g, no CKD, low estimated incident CKD risk, but treated hypertension and prediabetes create future kidney vulnerability."
+        },
+        {
+          "axis_id": "AX10",
+          "axis_name": "Sleep, stress, anxiety, and alcohol monitoring signals",
+          "patient_signal": "Wearable sleep average 6.4 hours, sleep efficiency 84%, PSS-10 19, GAD-7 6, AUDIT-C 3 at threshold for women, and alcohol intake of 5 drinks/week."
+        },
+        {
+          "axis_id": "AX1",
+          "axis_name": "CHEK2-associated hereditary cancer context",
+          "patient_signal": "Likely pathogenic heterozygous CHEK2 variant with cancer model mapping to hereditary moderate breast risk and modest colorectal risk."
+        },
+        {
+          "axis_id": "AX2",
+          "axis_name": "Dense breasts and family breast cancer history",
+          "patient_signal": "Breast density category C, mother with ER+ breast cancer at age 68, and no personal cancer history."
+        },
+        {
+          "axis_id": "AX4",
+          "axis_name": "Postmenopausal bone and body-composition transition",
+          "patient_signal": "Age 52, postmenopausal, mild upward weight drift since menopause, vitamin D 25-OH 28 ng/mL, and DEXA not done."
+        },
+        {
+          "axis_id": "AX9",
+          "axis_name": "Hashimoto hypothyroidism on replacement therapy",
+          "patient_signal": "Levothyroxine 75 mcg daily with TSH 2.1 and free T4 1.2; also taking magnesium and multivitamin, which can interfere with levothyroxine absorption depending on timing."
+        },
+        {
+          "axis_id": "AX11",
+          "axis_name": "Medication and supplement safety",
+          "patient_signal": "Uses lisinopril, levothyroxine, vitamin D3, magnesium glycinate, and multivitamin; serum potassium was not supplied."
+        }
+      ],
+      "candidates": [
+        {
+          "id": "RMA-003",
+          "title": "Enroll in or emulate a structured Diabetes Prevention Program",
+          "rationale": "Karen has prediabetes-range glycemia plus multiple amplifiers: prior gestational diabetes, Asian ancestry, paternal type 2 diabetes, elevated waist-to-height ratio, and high modeled 10-year diabetes risk. A structured diabetes prevention program is a direct risk-mitigation candidate.",
+          "patient_signals_used": [
+            "HbA1c 5.7%",
+            "Fasting glucose 102 mg/dL",
+            "HOMA-IR 2.78",
+            "Prior gestational diabetes",
+            "Father with type 2 diabetes",
+            "Asian ancestry",
+            "Waist-to-height ratio 0.509",
+            "Metabolic model estimate approximately 35% 10-year incident type 2 diabetes risk"
+          ],
+          "evidence_basis_prose": "Structured lifestyle programs for prediabetes are standard-of-care risk reduction, emphasizing activity, nutrition, weight/waist management, and behavioral support to reduce progression to type 2 diabetes.",
+          "risk_interaction": "Prevents the major upstream fork that would amplify future CVD and CKD risk and contribute to vascular cognitive risk.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-004",
+          "title": "Prevent further postmenopausal weight gain and reduce central adiposity",
+          "rationale": "Although BMI is in the normal range, waist-to-height ratio is elevated and weight has drifted upward since menopause. A waist-focused plan is more patient-specific than BMI-only weight loss because her metabolic risk is high despite BMI 24.8.",
+          "patient_signals_used": [
+            "BMI 24.8",
+            "Waist 84 cm",
+            "Height 165 cm",
+            "Waist-to-height ratio 0.509",
+            "Weight increased from 66.0 kg to 67.5 kg over 12 months",
+            "Postmenopausal status",
+            "Prediabetes-range glycemia"
+          ],
+          "evidence_basis_prose": "For people with prediabetes or central adiposity, standard lifestyle care supports preventing weight gain and reducing visceral adiposity through nutrition, activity, resistance training, and sleep optimization. Waist measures can be especially relevant in Asian populations and postmenopausal metabolic transition.",
+          "risk_interaction": "Targets metabolic risk directly and reduces downstream CVD, CKD, and potentially obesity-related cancer risk if weight gain were to progress.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-008",
+          "title": "Shift carbohydrate quality and meal composition for prediabetes",
+          "rationale": "Karen’s glycemic markers are in the prediabetes range with elevated insulin resistance despite normal BMI. A carbohydrate-quality intervention can target postprandial glucose and insulin demand without requiring extreme dieting.",
+          "patient_signals_used": [
+            "HbA1c 5.7%",
+            "Fasting glucose 102 mg/dL",
+            "Fasting insulin 11 µIU/mL",
+            "HOMA-IR 2.78",
+            "Diet described as moderate carbohydrate",
+            "Asian ancestry and prior gestational diabetes"
+          ],
+          "evidence_basis_prose": "Nutrition counseling for prediabetes commonly emphasizes high-fiber carbohydrates, reduced refined starches and added sugars, protein/fat/fiber pairing, and portion quality. These approaches have human evidence for improving glycemic markers and insulin sensitivity.",
+          "risk_interaction": "Directly targets type 2 diabetes progression and indirectly reduces future CVD, CKD, and neurovascular risk.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-006",
+          "title": "Add progressive resistance training 2 to 3 days per week",
+          "rationale": "Resistance training is not listed among her current exercise modalities, which are indoor cycling and hiking. It is a distinct intervention for postmenopausal muscle preservation, insulin sensitivity, central adiposity, and bone health.",
+          "patient_signals_used": [
+            "Postmenopausal status",
+            "Exercise modalities listed as indoor cycling and hiking",
+            "Prediabetes-range glycemia",
+            "Waist-to-height ratio 0.509",
+            "DEXA not done and fixture notes bone-health screening relevance"
+          ],
+          "evidence_basis_prose": "Standard exercise guidance supports muscle-strengthening activity for adults, with particular relevance after menopause. Resistance training improves glucose disposal, body composition, function, and skeletal loading.",
+          "risk_interaction": "Targets metabolic risk, fitness trajectory, weight drift, frailty prevention, and bone-risk context without duplicating aerobic fitness work.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-005",
+          "title": "Progressively increase cardiorespiratory fitness beyond current baseline",
+          "rationale": "Cardiorespiratory fitness was below average and fired modifiers in the CVD, metabolic, and neuro models. Karen reports some exercise but wearable active minutes are slightly below the common 150-minute target, and VO2max is at the 35th percentile.",
+          "patient_signals_used": [
+            "Apple Watch VO2max estimate 28 mL/kg/min",
+            "VO2max percentile age/sex 35th",
+            "Wearable active minutes approximately 130 minutes/week",
+            "Self-reported moderate exercise 150 minutes/week",
+            "CRF modifiers fired in CVD, metabolic, and neuro models"
+          ],
+          "evidence_basis_prose": "Regular aerobic activity and improved cardiorespiratory fitness are standard risk-reduction measures for cardiometabolic disease and are associated with better vascular and cognitive aging outcomes. Dose can be increased gradually based on symptoms, orthopedic tolerance, and clinician advice.",
+          "risk_interaction": "One of the clearest multi-domain levers: improves insulin sensitivity, BP reserve, lipid metabolism, vascular function, and long-term brain health.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-001",
+          "title": "Clinician shared decision on lipid-lowering therapy for intermediate CVD risk",
+          "rationale": "Karen has intermediate estimated 10-year total CVD risk with elevated LDL-C, non-HDL-C, ApoB, and modestly elevated Lp(a). A clinician-supervised discussion of moderate-intensity statin therapy, with attention to personal preferences and potential side effects, is a coherent risk-mitigation candidate.",
+          "patient_signals_used": [
+            "Age 52 female",
+            "LDL-C 132 mg/dL",
+            "Non-HDL-C 160 mg/dL",
+            "ApoB 102 mg/dL",
+            "Lp(a) 45 nmol/L",
+            "CVD model estimate approximately 7.5% 10-year total CVD risk",
+            "Father with MI at age 72"
+          ],
+          "evidence_basis_prose": "Guideline-based cardiovascular prevention commonly supports statin consideration for adults with intermediate estimated CVD risk and atherogenic lipid burden after shared decision-making. ApoB-containing particle reduction is a standard causal target for ASCVD risk reduction.",
+          "risk_interaction": "Primarily targets CVD risk, with secondary relevance to vascular brain and kidney health by reducing long-term atherosclerotic burden.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-002",
+          "title": "Optimize blood pressure toward consistently below 130/80 if clinically appropriate",
+          "rationale": "Her BP is treated and not frankly uncontrolled, but home and clinic values remain slightly above stricter optimal thresholds used across CVD, CKD, and neurovascular risk models. Candidate actions include reinforcing home BP technique, sodium reduction, exercise, sleep/stress work, and clinician-supervised medication adjustment if persistent.",
+          "patient_signals_used": [
+            "Hypertension diagnosed in 2023",
+            "Lisinopril 10 mg daily",
+            "Home BP average 131/80",
+            "Clinic BP 134/82",
+            "CVD, CKD, neuro, and systemic outputs identify BP as a cross-domain vascular driver"
+          ],
+          "evidence_basis_prose": "Blood pressure reduction is a standard, guideline-grade intervention for lowering stroke, coronary, kidney, and cognitive vascular risk. Treatment intensity should be individualized based on tolerability, home readings, electrolytes, kidney function, and clinician judgment.",
+          "risk_interaction": "Targets the shared vascular pathway connecting CVD, CKD, and neuro risk; also supports metabolic risk because BP is part of the cardiometabolic cluster.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-007",
+          "title": "Adopt a lipid-lowering dietary pattern focused on ApoB reduction",
+          "rationale": "Her atherogenic lipid burden is a major CVD driver. A specific lipid-focused nutrition action would emphasize replacing saturated fats with unsaturated fats, increasing soluble fiber, using nuts/legumes/soy or similar plant proteins, and reducing highly refined carbohydrates where relevant.",
+          "patient_signals_used": [
+            "LDL-C 132 mg/dL",
+            "Non-HDL-C 160 mg/dL",
+            "ApoB 102 mg/dL",
+            "Mostly home-cooked diet",
+            "Approximately 2 takeout meals/week",
+            "Intermediate modeled CVD risk"
+          ],
+          "evidence_basis_prose": "Dietary patterns lower in saturated fat and higher in unsaturated fats and soluble fiber are standard nonpharmacologic therapy for LDL-C and ApoB reduction. This can be used alone or alongside medication depending on clinician shared decision-making.",
+          "risk_interaction": "Primarily reduces CVD risk; also supports metabolic risk when carbohydrate quality and fiber intake improve.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-009",
+          "title": "Use a DASH-style sodium-reduction strategy for BP control",
+          "rationale": "BP is treated but remains slightly above optimal. A DASH-style sodium-reduction intervention is a distinct BP-focused dietary action and can be implemented without assuming medication changes.",
+          "patient_signals_used": [
+            "Home BP average 131/80",
+            "Clinic BP 134/82",
+            "Hypertension on lisinopril",
+            "Approximately 2 takeout meals/week",
+            "Serum potassium not supplied"
+          ],
+          "evidence_basis_prose": "DASH-style eating and sodium reduction are standard nonpharmacologic interventions for lowering blood pressure. Because she takes an ACE inhibitor and serum potassium was not supplied, high-potassium supplementation should not be assumed without clinician review.",
+          "risk_interaction": "Targets CVD, CKD, and neurovascular risk through BP lowering and may also support metabolic health if meals become less processed and more fiber-rich.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-010",
+          "title": "Reduce alcohol intake below current women’s AUDIT-C threshold pattern",
+          "rationale": "Her alcohol intake is not high enough to fire cancer or neuro alcohol modifiers, but AUDIT-C is at the threshold for women and systemic output notes possible interaction with sleep, BP, glycemia, triglycerides, and breast-risk context.",
+          "patient_signals_used": [
+            "Alcohol intake 5 drinks/week",
+            "AUDIT-C score 3 at threshold for women",
+            "Sleep efficiency 84%",
+            "High perceived stress",
+            "CHEK2 hereditary breast-risk context",
+            "Mother with ER+ breast cancer"
+          ],
+          "evidence_basis_prose": "Reducing alcohol is a standard harm-reduction and prevention action when intake is at a screening threshold or interacts with sleep, BP, metabolic risk, or cancer-risk context. Alcohol has dose-related associations with several health outcomes even below severe-use ranges.",
+          "risk_interaction": "May improve sleep quality, BP, glycemic control, triglyceride tendency, stress coping patterns, and breast-cancer risk context.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-011",
+          "title": "Implement a sleep-extension and sleep-efficiency improvement plan",
+          "rationale": "Sleep efficiency was poor enough to fire a neuro modifier, and sleep duration is short on work nights and by wearable average. Improving sleep is a risk-mitigation candidate because sleep interacts with insulin resistance, BP, stress physiology, appetite, and cognitive health.",
+          "patient_signals_used": [
+            "Wearable sleep average 6.4 hours",
+            "Weeknight self-reported sleep 6.25 hours",
+            "Sleep efficiency 84%",
+            "Neuro model C4 sleep-quality modifier fired",
+            "PSS-10 19",
+            "Prediabetes and borderline BP"
+          ],
+          "evidence_basis_prose": "Behavioral sleep interventions, consistent sleep scheduling, stimulus control, and CBT-I principles are standard approaches for insufficient or inefficient sleep. Better sleep supports cardiometabolic regulation and daytime function.",
+          "risk_interaction": "Targets neuro risk directly and may reduce metabolic and CVD risk through improved insulin sensitivity, autonomic balance, BP, and stress recovery.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-012",
+          "title": "Use a structured stress-reduction or behavioral health intervention",
+          "rationale": "Karen reports high perceived stress during a recent reorganization and family transition, with PSS-10 in the moderate-to-high range and mild anxiety symptoms. Stress management is a coherent risk-mitigation lever because stress may worsen sleep, BP, alcohol use, and glycemic control.",
+          "patient_signals_used": [
+            "Perceived stress self-report high",
+            "PSS-10 score 19",
+            "GAD-7 score 6",
+            "Sleep average 6.4 hours",
+            "BP 131/80 home average",
+            "Prediabetes-range glycemia"
+          ],
+          "evidence_basis_prose": "Structured behavioral interventions such as CBT-based stress management, mindfulness-based stress reduction, relaxation training, and coaching are commonly used to reduce stress symptoms and improve sleep and self-management behaviors.",
+          "risk_interaction": "Acts as an upstream adherence and physiology lever for sleep, BP, metabolic risk, alcohol moderation, and exercise consistency.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-013",
+          "title": "Adopt kidney-protective medication and dehydration safety practices",
+          "rationale": "Current kidney markers are reassuring, but hypertension and prediabetes create future vulnerability. A practical risk-mitigation action is to avoid chronic nephrotoxin exposure, especially chronic NSAID use, and to have clinician-guided sick-day guidance for dehydration or acute illness while on an ACE inhibitor.",
+          "patient_signals_used": [
+            "eGFR 88 mL/min/1.73m²",
+            "UACR 12 mg/g",
+            "No established CKD",
+            "Hypertension treated with lisinopril",
+            "Prediabetes-range glycemia",
+            "No chronic NSAID use documented"
+          ],
+          "evidence_basis_prose": "Avoiding chronic nephrotoxic medication exposure and preventing dehydration-related AKI are standard kidney-protection practices, especially in people with hypertension, ACE inhibitor use, or metabolic risk.",
+          "risk_interaction": "Protects kidney trajectory while also supporting safe BP treatment continuity; prevents acute kidney insults that could compound future CKD risk.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-014",
+          "title": "Correct borderline vitamin D insufficiency and ensure adequate calcium intake",
+          "rationale": "Vitamin D is below many commonly used sufficiency targets, and she is postmenopausal. She already takes vitamin D3, so the action is not to start blindly but to optimize dose, adherence, timing, and dietary calcium with clinician oversight.",
+          "patient_signals_used": [
+            "Vitamin D 25-OH 28 ng/mL",
+            "Cholecalciferol 2000 IU daily",
+            "Postmenopausal status",
+            "Age 52",
+            "DEXA not done"
+          ],
+          "evidence_basis_prose": "Maintaining adequate vitamin D and calcium intake is standard bone-health risk reduction, especially after menopause. Supplement dosing should avoid overtreatment and account for diet, labs, kidney function, and clinician guidance.",
+          "risk_interaction": "Primarily targets bone health and fall/fracture resilience; also complements resistance training and postmenopausal risk management.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        },
+        {
+          "id": "RMA-015",
+          "title": "Ensure levothyroxine is taken separately from mineral-containing supplements",
+          "rationale": "Her thyroid labs are currently controlled, but she takes magnesium and a multivitamin, which may contain minerals that can reduce levothyroxine absorption if taken too close together. A timing intervention can reduce future thyroid instability without changing the dose.",
+          "patient_signals_used": [
+            "Hashimoto hypothyroidism",
+            "Levothyroxine 75 mcg daily",
+            "TSH 2.1",
+            "Free T4 1.2",
+            "Magnesium glycinate nightly",
+            "Multivitamin women’s 50+ daily"
+          ],
+          "evidence_basis_prose": "Standard medication counseling for levothyroxine includes consistent administration and separation from calcium, iron, magnesium, and multivalent cation supplements because they can impair absorption.",
+          "risk_interaction": "Maintains thyroid stability, which can indirectly affect lipids, energy, weight trajectory, cardiac rhythm symptoms, and bone risk if under- or over-replacement occurs.",
+          "lane_label": "SoC Risk Reduction",
+          "symptom_derived": false
+        }
+      ]
+    },
+    "Adjunct Options": {
+      "lane_label": "Adjunct Options",
+      "search_axes": [
+        {
+          "axis_id": "AX5",
+          "axis_name": "Prediabetes and high metabolic trajectory risk",
+          "patient_signal": "HbA1c 5.7%, fasting glucose 102 mg/dL, HOMA-IR 2.78, prior gestational diabetes, paternal T2D, Asian ancestry, waist-to-height ratio 0.509, estimated 10-year incident T2D risk approximately 35%."
+        },
+        {
+          "axis_id": "AX6",
+          "axis_name": "Treated hypertension with borderline-above-optimal readings",
+          "patient_signal": "On lisinopril 10 mg daily; home BP average 131/80 and clinic BP 134/82; not uncontrolled but not consistently below stricter optimal thresholds."
+        },
+        {
+          "axis_id": "AX7",
+          "axis_name": "Intermediate CVD risk and atherogenic lipid burden",
+          "patient_signal": "LDL-C 132 mg/dL, non-HDL-C 160 mg/dL, ApoB 102 mg/dL, Lp(a) 45 nmol/L, estimated 10-year total CVD risk 7.5%."
+        },
+        {
+          "axis_id": "AX8",
+          "axis_name": "Currently normal kidney markers with cardiometabolic vulnerability",
+          "patient_signal": "eGFR 88, UACR 12 mg/g, no CKD, low estimated incident CKD risk, but treated hypertension and prediabetes create future monitoring relevance."
+        },
+        {
+          "axis_id": "AX10",
+          "axis_name": "Sleep, stress, anxiety, and alcohol monitoring signals",
+          "patient_signal": "Wearable sleep average 6.4 hours, sleep efficiency 84%; PSS-10 19 moderate-to-high; GAD-7 6 mild; AUDIT-C 3 at threshold for women; alcohol 5 drinks/week."
+        },
+        {
+          "axis_id": "AX2",
+          "axis_name": "Dense breasts and family breast cancer history",
+          "patient_signal": "Breast density category C; mother with ER+ breast cancer at age 68; mammogram BIRADS 2 in 2026-01; breast MRI not done."
+        },
+        {
+          "axis_id": "AX1",
+          "axis_name": "CHEK2-associated hereditary cancer surveillance",
+          "patient_signal": "Heterozygous likely pathogenic CHEK2 variant; cancer model maps this to hereditary moderate breast risk and modest colorectal risk."
+        },
+        {
+          "axis_id": "AX9",
+          "axis_name": "Hashimoto hypothyroidism on replacement therapy",
+          "patient_signal": "Levothyroxine 75 mcg daily; TSH 2.1, free T4 1.2, TPO antibody positive; condition documented as controlled."
+        }
+      ],
+      "candidates": [
+        {
+          "id": "ADJ-002",
+          "title": "Structured post-meal walking after higher-carbohydrate meals",
+          "rationale": "Add brief walking bouts after meals most likely to raise glucose, especially dinner or takeout meals. This is distinct from standard exercise counseling because the adjunct hypothesis is timing-specific postprandial glucose blunting rather than simply increasing weekly activity minutes.",
+          "patient_signals_used": [
+            "Prediabetes-range HbA1c and fasting glucose",
+            "HOMA-IR 2.78",
+            "moderate-carb diet",
+            "approximately 2 takeout meals per week",
+            "active minutes below self-reported exercise goal in wearable data",
+            "below-average CRF at 35th percentile"
+          ],
+          "evidence_basis_prose": "Human biomarker studies show that light activity soon after meals can reduce postprandial glucose and insulin exposure. The clinical outcome evidence is less definitive than for general physical activity, making this an adjunct optimization rather than a replacement for standard exercise guidance.",
+          "risk_interaction": "May improve glycemic variability while also supporting BP, triglyceride handling, and cardiorespiratory trajectory.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-001",
+          "title": "Short-term continuous glucose monitor experiment for post-meal pattern discovery",
+          "rationale": "Use a time-limited CGM trial as an optional risk-clarification tool to identify which meals, timing patterns, stress days, sleep-short nights, or alcohol-containing dinners are associated with larger glucose excursions. This is not standard-of-care diabetes management because she does not have diagnosed diabetes and no payload data shows hypoglycemia or medication need; it is an adjunct behavioral-feedback tool for prediabetes-risk personalization.",
+          "patient_signals_used": [
+            "HbA1c 5.7%",
+            "fasting glucose 102 mg/dL",
+            "HOMA-IR 2.78",
+            "prior gestational diabetes",
+            "paternal type 2 diabetes",
+            "Asian ancestry",
+            "waist-to-height ratio 0.509",
+            "sleep average 6.4 hours",
+            "high perceived stress"
+          ],
+          "evidence_basis_prose": "Human biomarker evidence supports that postprandial glucose responses vary between individuals and can be modified by meal composition, timing, sleep, and activity. In people without diabetes, CGM-guided behavior change is promising but below guideline-grade standard care for routine use.",
+          "risk_interaction": "Targets the metabolic upstream fork that could later amplify CVD, CKD, and neurovascular risk if prediabetes progresses.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-003",
+          "title": "Meal-sequencing experiment: vegetables and protein before starch",
+          "rationale": "Test a low-burden meal-order strategy at meals containing refined or higher-glycemic carbohydrates. This does not replace standard nutrition counseling; it is an optional behavioral micro-intervention to reduce glucose excursions without requiring major diet restructuring.",
+          "patient_signals_used": [
+            "HbA1c 5.7%",
+            "fasting glucose 102 mg/dL",
+            "HOMA-IR 2.78",
+            "moderate carbohydrate diet",
+            "Asian ancestry with high metabolic-risk estimate despite normal BMI"
+          ],
+          "evidence_basis_prose": "Small human feeding and biomarker studies suggest that consuming fiber-rich vegetables and protein before carbohydrate can reduce postprandial glucose and insulin spikes. Evidence is mainly surrogate-marker based rather than long-term outcome based.",
+          "risk_interaction": "Potentially reduces glycemic burden that links metabolic risk to future CVD, CKD, and vascular cognitive risk.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-008",
+          "title": "Resistance-training microcycle focused on postmenopausal central adiposity and insulin sensitivity",
+          "rationale": "Add a specific, progressive resistance-training block as an exercise-dose optimization candidate, separate from general physical-activity advice. The payload lists cycling and hiking but no resistance modality; this is adjunct because it refines exercise composition rather than establishing the standard recommendation to be physically active.",
+          "patient_signals_used": [
+            "postmenopausal status",
+            "waist-to-height ratio 0.509",
+            "mild upward weight drift of 1.5 kg/year",
+            "prediabetes-range glycemia",
+            "below-average CRF",
+            "exercise modalities list lacks resistance training"
+          ],
+          "evidence_basis_prose": "Human intervention evidence supports resistance training effects on lean mass, insulin sensitivity, functional reserve, and waist measures. The adjunct nature is the specific modality optimization for this patient’s risk pattern, not the general standard-care activity recommendation.",
+          "risk_interaction": "Targets postmenopausal body-composition shift, metabolic progression, BP resilience, and long-term function.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-004",
+          "title": "Viscous soluble fiber add-on, such as psyllium, if tolerated",
+          "rationale": "Consider a food-or-supplement soluble fiber intervention focused on LDL/non-HDL and postprandial glycemia. This is adjunct because it is an optional add-on to diet pattern work and does not substitute for standard lipid or diabetes-prevention decisions.",
+          "patient_signals_used": [
+            "LDL-C 132 mg/dL",
+            "non-HDL-C 160 mg/dL",
+            "ApoB 102 mg/dL",
+            "HbA1c 5.7%",
+            "fasting glucose 102 mg/dL",
+            "normal renal markers"
+          ],
+          "evidence_basis_prose": "Human biomarker evidence supports modest LDL-C lowering and improved postprandial glycemic response with viscous soluble fibers. Long-term hard-outcome evidence for psyllium specifically is less direct, so this remains adjunctive.",
+          "risk_interaction": "Links atherogenic lipid burden and insulin resistance through a low-systemic-absorption dietary mechanism, with possible benefits across CVD and metabolic trajectories.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-005",
+          "title": "Portfolio-style food substitution focused on plant sterols, viscous fiber, nuts, and soy protein",
+          "rationale": "Use a defined food-substitution pattern as an optional LDL/ApoB-lowering nutrition adjunct. This is not a medication-threshold decision and should not duplicate standard lipid management; it surfaces a food-based option for downstream evaluation.",
+          "patient_signals_used": [
+            "LDL-C 132 mg/dL",
+            "non-HDL-C 160 mg/dL",
+            "ApoB 102 mg/dL",
+            "intermediate estimated CVD risk",
+            "mostly home-cooked diet"
+          ],
+          "evidence_basis_prose": "Human dietary-intervention evidence shows that combinations of cholesterol-lowering foods can improve LDL-related biomarkers. The evidence is stronger for lipid biomarkers than for patient-specific event reduction, keeping it in the adjunct category.",
+          "risk_interaction": "Primarily targets CVD risk from ApoB-containing particles, with possible secondary metabolic benefits if substitutions replace refined carbohydrates or saturated-fat sources.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-007",
+          "title": "Nitrate-rich vegetable or beetroot trial for BP and exercise-response biomarkers",
+          "rationale": "A short, monitored trial of nitrate-rich foods could be considered for borderline-above-optimal BP and low CRF. This is adjunct because it is not a guideline-grade substitute for antihypertensive management or structured exercise.",
+          "patient_signals_used": [
+            "home BP average 131/80",
+            "clinic BP 134/82",
+            "treated hypertension",
+            "VO2max estimate 28 mL/kg/min",
+            "CRF 35th percentile"
+          ],
+          "evidence_basis_prose": "Human biomarker studies show that dietary nitrate can modestly influence nitric-oxide pathways, BP, and exercise efficiency in some populations. Clinical outcome evidence and individual response are variable.",
+          "risk_interaction": "Potentially intersects BP control, endothelial function, and fitness adaptation, which are shared CVD-neuro-CKD vulnerability pathways.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-009",
+          "title": "Higher-intensity interval exposure trial layered onto current cycling if safe and acceptable",
+          "rationale": "Evaluate a cautious interval-training option using her existing indoor cycling habit to improve VO2max. This is adjunct because standard care supports physical activity broadly, while this candidate is a dose/modality optimization for a specific low-CRF signal.",
+          "patient_signals_used": [
+            "Apple Watch VO2max estimate 28 mL/kg/min",
+            "CRF 35th percentile",
+            "no vigorous exercise minutes reported",
+            "current indoor cycling habit",
+            "intermediate CVD risk estimate"
+          ],
+          "evidence_basis_prose": "Human exercise studies show interval training can improve VO2max efficiently in many adults. The degree of benefit and safety depend on baseline status, symptoms, and progression; therefore it remains an optional optimization candidate for downstream review.",
+          "risk_interaction": "CRF modifiers fired in CVD, metabolic, and neuro models, so improving fitness could affect multiple risk curves simultaneously.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-013",
+          "title": "Alcohol-free sleep and glucose n-of-1 trial",
+          "rationale": "Run a defined alcohol-free or near-alcohol-free trial period with wearable sleep and, if available, glucose markers to see whether sleep efficiency, resting HR, HRV, BP, or next-day glucose patterns improve. This is adjunct because her current intake is below several formal disease-risk thresholds but is at the AUDIT-C threshold for women and may interact with sleep and breast-risk context.",
+          "patient_signals_used": [
+            "alcohol 5 drinks/week",
+            "AUDIT-C 3 at threshold for women",
+            "sleep efficiency 84%",
+            "sleep average 6.4 hours",
+            "dense breasts and CHEK2 hereditary breast-risk context",
+            "prediabetes-range labs",
+            "borderline-above-optimal BP"
+          ],
+          "evidence_basis_prose": "Human epidemiology and biomarker evidence links alcohol intake with sleep fragmentation, BP, triglycerides, glycemia, and breast cancer risk in dose-dependent ways. For this patient’s level, the intervention is preference-sensitive and below a strict standard-care mandate.",
+          "risk_interaction": "Could affect cancer-risk context, neuro sleep modifier, metabolic risk, and BP without adding medication burden.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-010",
+          "title": "Digital CBT-I or structured sleep-efficiency protocol",
+          "rationale": "Consider a structured behavioral sleep program to improve sleep efficiency and duration. This is adjunct because she has no diagnosed insomnia or OSA, STOP-BANG is low risk, and the payload shows suboptimal sleep metrics rather than a formal sleep disorder diagnosis.",
+          "patient_signals_used": [
+            "wearable sleep average 6.4 hours",
+            "sleep efficiency 84%",
+            "neuro model sleep-quality modifier fired",
+            "PSS-10 19 moderate-to-high",
+            "GAD-7 6 mild"
+          ],
+          "evidence_basis_prose": "Human evidence supports behavioral sleep interventions for improving sleep efficiency and insomnia symptoms, with downstream biomarker effects on mood, glucose regulation, and BP plausible but less definitive in this exact patient state.",
+          "risk_interaction": "Sleep improvement may reduce neuro risk modifier pressure and indirectly support insulin sensitivity, BP, appetite regulation, and stress recovery.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-011",
+          "title": "Morning bright-light and evening light-hygiene routine for circadian reinforcement",
+          "rationale": "A low-downside circadian intervention could be tested to support earlier sleep consolidation and improve sleep efficiency. This is adjunct because it is not a formal treatment for a diagnosed circadian rhythm disorder.",
+          "patient_signals_used": [
+            "sleep average 6.4 hours",
+            "sleep efficiency 84%",
+            "high perceived stress",
+            "occupation with likely high cognitive load",
+            "postmenopausal status"
+          ],
+          "evidence_basis_prose": "Human sleep and circadian biomarker evidence supports light timing as a regulator of circadian phase and sleep quality. Clinical outcome evidence for cardiometabolic prevention is indirect, so this is a low-downside adjunct.",
+          "risk_interaction": "Could interact with stress, glucose regulation, BP, and cognitive-risk pathways by improving sleep timing and consistency.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-012",
+          "title": "HRV biofeedback or paced-breathing stress-recovery practice",
+          "rationale": "Use a monitorable autonomic-regulation practice given high perceived stress, mild anxiety symptoms, and low-normal wearable HRV. This is adjunct because it is not treatment of a diagnosed anxiety disorder and does not replace standard BP, metabolic, or sleep management.",
+          "patient_signals_used": [
+            "PSS-10 19 moderate-to-high",
+            "GAD-7 6 mild",
+            "HRV SDNN 31 to 32 ms",
+            "treated hypertension",
+            "sleep efficiency 84%"
+          ],
+          "evidence_basis_prose": "Human biomarker studies suggest paced breathing and HRV biofeedback can influence autonomic measures, perceived stress, and sometimes BP. Evidence for hard cardiometabolic outcomes is limited.",
+          "risk_interaction": "May address the stress-sleep-autonomic pathway that connects neuro, metabolic, and CVD risk.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-006",
+          "title": "Food-first omega-3 assessment pathway with optional omega-3 index testing",
+          "rationale": "Consider measuring omega-3 index only if it would change behavior, such as increasing fatty fish intake or considering supplementation. This is adjunct because omega-3 index was a CVD model data gap but was not required for standard care, and supplementation is not automatically indicated from the provided payload.",
+          "patient_signals_used": [
+            "intermediate CVD risk estimate",
+            "triglycerides 140 mg/dL",
+            "omega-3 index not collected",
+            "ApoB 102 mg/dL",
+            "no documented fish intake data"
+          ],
+          "evidence_basis_prose": "Human biomarker evidence links omega-3 status to triglyceride and inflammatory pathways, but routine omega-3 index testing and supplement decisions for primary prevention are not universally standard-of-care. Food-first approaches have a lower downside than empiric high-dose supplementation.",
+          "risk_interaction": "Could refine dietary targeting for cardiometabolic risk while avoiding unnecessary supplement escalation.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-014",
+          "title": "Sauna or passive heat exposure protocol with BP precautions",
+          "rationale": "A carefully monitored passive heat exposure option could be considered if she is interested and has no contraindicating symptoms. This is adjunct because evidence is largely epidemiologic and physiologic, and it should not replace exercise, BP treatment, or lipid/metabolic care.",
+          "patient_signals_used": [
+            "intermediate CVD risk",
+            "treated hypertension",
+            "below-average CRF",
+            "high perceived stress",
+            "normal current kidney markers"
+          ],
+          "evidence_basis_prose": "Human epidemiologic and physiologic evidence associates sauna use with vascular, BP, and stress-response markers, but causality and patient-specific outcome benefit are uncertain. Hydration and hypotension risk require caution, especially with antihypertensive medication.",
+          "risk_interaction": "May overlap with vascular function, stress recovery, and BP resilience; downside relates to dehydration or symptomatic hypotension.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        },
+        {
+          "id": "ADJ-015",
+          "title": "H. pylori noninvasive testing as optional gastric-risk clarification",
+          "rationale": "Consider noninvasive H. pylori testing only if downstream review finds it appropriate for her ancestry/family-history context and if a positive result would lead to eradication discussion. This is adjunct because no gastric cancer family history or positive H. pylori result is present, and the cancer model lists H. pylori status as a data gap rather than a fired standard-care pathway.",
+          "patient_signals_used": [
+            "H. pylori status not collected",
+            "Asian ancestry",
+            "cancer model gastric exposure-based data gap",
+            "no documented gastric cancer family history",
+            "no documented H. pylori positivity"
+          ],
+          "evidence_basis_prose": "Human evidence links H. pylori infection with gastric cancer risk and eradication reduces risk in some populations, but broad asymptomatic testing strategies vary by population and guideline context. In this payload, it is a low-cost optional diagnostic gate rather than an established active surveillance pathway.",
+          "risk_interaction": "Primarily addresses a potentially modifiable infection-related cancer-risk axis while preserving the distinction from CHEK2-driven breast and colorectal surveillance.",
+          "lane_label": "Adjunct Options",
+          "symptom_derived": false
+        }
+      ]
+    },
+    "Excluded / Watchlist": {
+      "lane_label": "Excluded / Watchlist",
+      "search_axes": [
+        {
+          "axis_id": "AX1",
+          "axis_name": "CHEK2-associated hereditary cancer surveillance",
+          "patient_signal": "Heterozygous likely pathogenic CHEK2 variant; cancer domain maps this to moderate hereditary breast risk and modest colorectal risk."
+        },
+        {
+          "axis_id": "AX2",
+          "axis_name": "Dense breasts and family breast cancer history",
+          "patient_signal": "Breast density category C, mother with ER+ breast cancer at age 68, mammogram BIRADS 2 in 2026-01, breast MRI not done."
+        },
+        {
+          "axis_id": "AX3",
+          "axis_name": "Completed colorectal screening with hereditary-risk interval ambiguity",
+          "patient_signal": "Normal colonoscopy in 2024-06; fixture lists next due 2034, while CHEK2-specific repeat interval is indeterminate in supplied cancer model."
+        },
+        {
+          "axis_id": "AX5",
+          "axis_name": "Prediabetes and high metabolic trajectory risk",
+          "patient_signal": "HbA1c 5.7%, fasting glucose 102 mg/dL, HOMA-IR 2.78, prior gestational diabetes, paternal T2D, Asian ancestry, waist-to-height ratio 0.509, estimated 10-year incident T2D risk approximately 35%."
+        },
+        {
+          "axis_id": "AX7",
+          "axis_name": "Intermediate CVD risk and atherogenic lipid burden",
+          "patient_signal": "LDL-C 132 mg/dL, non-HDL-C 160 mg/dL, ApoB 102 mg/dL, Lp(a) 45 nmol/L, estimated 10-year total CVD risk 7.5%."
+        },
+        {
+          "axis_id": "AX8",
+          "axis_name": "Currently normal kidney markers with cardiometabolic vulnerability",
+          "patient_signal": "eGFR 88, UACR 12 mg/g, no CKD, low estimated incident CKD risk, but hypertension and prediabetes create future monitoring relevance."
+        },
+        {
+          "axis_id": "AX9",
+          "axis_name": "Hashimoto hypothyroidism on replacement therapy",
+          "patient_signal": "Levothyroxine 75 mcg daily; TSH 2.1 and free T4 1.2; TPO antibody positive; condition documented as controlled."
+        },
+        {
+          "axis_id": "AX10",
+          "axis_name": "Sleep, stress, anxiety, and alcohol monitoring signals",
+          "patient_signal": "Wearable sleep average 6.4 hours, sleep efficiency 84%, PSS-10 19, GAD-7 6, AUDIT-C 3 at threshold for women, alcohol 5 drinks/week."
+        },
+        {
+          "axis_id": "AX12",
+          "axis_name": "Preventive screening record reconciliation",
+          "patient_signal": "Cervical screening documented as up to date; lung screening not applicable; immunization records not supplied; several physiologic tests not done."
+        }
+      ],
+      "candidates": [
+        {
+          "id": "RE-001",
+          "title": "Routine ovarian cancer screening with CA-125 and transvaginal ultrasound",
+          "rationale": "Exclude as an active candidate. The payload documents a maternal grandmother with ovarian cancer but negative BRCA1/BRCA2 and Lynch genes, and the cancer model explicitly states that no effective ovarian screening protocol is triggered for family-history-only scenarios without an identified ovarian-risk pathogenic variant. Routine CA-125 or transvaginal ultrasound could create false positives and downstream procedures without a clear mortality benefit in this context.",
+          "patient_signals_used": [
+            "Maternal grandmother died of ovarian cancer",
+            "BRCA1 negative for P/LP",
+            "BRCA2 negative for P/LP",
+            "Lynch genes negative for P/LP",
+            "CHEK2 is not mapped to ovarian screening in the supplied cancer model"
+          ],
+          "evidence_basis_prose": "General screening evidence and guideline practice do not support routine ovarian cancer screening with CA-125 or transvaginal ultrasound for asymptomatic average-risk or family-history-only patients without a qualifying high-risk hereditary ovarian cancer variant. False-positive and procedural harms are a central concern.",
+          "risk_interaction": "Her family history raises understandable concern, but the available genetic findings do not open a standard ovarian surveillance pathway; using low-specificity screening could compete with higher-value CHEK2 breast surveillance closure.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-002",
+          "title": "Risk-reducing bilateral salpingo-oophorectomy solely for ovarian cancer family history",
+          "rationale": "Exclude unless new genetic or specialist risk information changes eligibility. The payload does not show a BRCA1, BRCA2, Lynch, RAD51C, RAD51D, or other ovarian-risk pathogenic variant, and the supplied cancer model does not map CHEK2 to ovarian cancer prevention surgery. Surgical menopause is already not the issue because she is postmenopausal, but oophorectomy still carries operative and long-term health tradeoffs and is not justified by the provided pathway.",
+          "patient_signals_used": [
+            "Postmenopausal age 52",
+            "Maternal grandmother with ovarian cancer",
+            "BRCA1/BRCA2 negative",
+            "Lynch genes negative",
+            "CHEK2 likely pathogenic variant present but not mapped to ovarian protocol in supplied model"
+          ],
+          "evidence_basis_prose": "Risk-reducing salpingo-oophorectomy is standard for specific high-risk hereditary ovarian cancer syndromes, not for an isolated second-degree ovarian cancer family history when qualifying pathogenic variants are absent in the supplied data.",
+          "risk_interaction": "A cancer-prevention surgery could introduce harm and anxiety-driven overtreatment while not addressing her clearly active hereditary breast surveillance gap.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-003",
+          "title": "Pancreatic MRI/MRCP or EUS surveillance",
+          "rationale": "Exclude as patient-state mismatched. The cancer model states pancreatic imaging is not applicable, CHEK2 is not mapped to pancreatic surveillance in the supplied specification, and no first-degree relatives with pancreatic cancer are reported.",
+          "patient_signals_used": [
+            "Pancreatic imaging MRI/MRCP/EUS marked not applicable",
+            "No pancreatic cancer family history reported",
+            "CHEK2 variant present but not mapped to pancreatic surveillance in supplied cancer output"
+          ],
+          "evidence_basis_prose": "Pancreatic surveillance is generally reserved for selected high-risk hereditary syndromes or strong pancreatic cancer family-history patterns. It is not supported by the patient’s supplied risk profile.",
+          "risk_interaction": "Low-yield pancreatic screening would add false-positive and procedural risk without addressing the higher-confidence cancer pathway: breast MRI completion for CHEK2 and dense breasts.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-004",
+          "title": "Low-dose CT lung cancer screening",
+          "rationale": "Exclude as not indicated. The payload states she is a never-smoker with 0 pack-years, and lung screening is marked not applicable.",
+          "patient_signals_used": [
+            "Never smoker",
+            "0 pack-years",
+            "LDCT lung screening status: not applicable"
+          ],
+          "evidence_basis_prose": "Lung cancer screening evidence and standard eligibility are tied to substantial smoking exposure. In never-smokers, routine LDCT screening has unfavorable false-positive and radiation tradeoffs.",
+          "risk_interaction": "Cancer anxiety from hereditary breast risk should not be generalized to lung screening when the smoking-driven risk signal is absent.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-005",
+          "title": "Whole-body MRI as broad cancer or longevity screening",
+          "rationale": "Exclude as over-screening and false-positive-prone. The payload contains specific high-value surveillance gaps, especially breast MRI in the CHEK2/dense-breast context, but does not provide a signal supporting whole-body imaging. Whole-body MRI could generate incidental findings, cascades, cost, and anxiety.",
+          "patient_signals_used": [
+            "CHEK2 likely pathogenic variant",
+            "Dense breasts",
+            "Breast MRI not done",
+            "No personal cancer history",
+            "No supplied whole-body imaging indication"
+          ],
+          "evidence_basis_prose": "Broad whole-body MRI screening is not a standard preventive pathway for asymptomatic adults and has uncertain net benefit because incidental findings and downstream testing are common.",
+          "risk_interaction": "It may distract from organ-specific, higher-yield surveillance already identified by the cancer model, particularly breast MRI.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-006",
+          "title": "Multi-cancer early detection blood test as a substitute for indicated screening",
+          "rationale": "Exclude as a substitute strategy. A multi-cancer blood test could be considered research-adjacent in some contexts, but it should not replace established screening or the CHEK2-triggered breast surveillance gap. The payload’s actionable cancer issue is not lack of a broad blood test; it is completion and interval management of established organ-specific screening.",
+          "patient_signals_used": [
+            "CHEK2-associated hereditary breast and colorectal risk",
+            "Breast MRI not done",
+            "Mammogram up to date",
+            "Colonoscopy normal in 2024",
+            "No personal cancer history"
+          ],
+          "evidence_basis_prose": "Multi-cancer early detection tests remain an evolving area. Their role in reducing mortality, managing false positives, and integrating with existing screening is still being defined; they are not replacements for guideline-supported screening.",
+          "risk_interaction": "A broad blood test could create false reassurance if negative or lead to ambiguous workups if positive, while her risk is already better addressed through defined breast and colorectal pathways.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-007",
+          "title": "Amyloid PET, brain MRI, or plasma neurodegeneration biomarkers for asymptomatic dementia screening",
+          "rationale": "Exclude as research-only or non-actionable in this payload. Neuro risk is estimated as relatively low, APOE is e3/e3, no dementia family history is reported, and no cognitive symptoms are documented. The neuro model lists p-tau217 and NfL as missing modifier inputs, but their absence does not itself justify screening in an asymptomatic person.",
+          "patient_signals_used": [
+            "Neuro final risk estimate approximately 4.4% 20-year all-cause dementia risk",
+            "APOE e3/e3",
+            "No first-degree dementia family history reported",
+            "No cognitive symptoms documented",
+            "p-tau217 and NfL not collected"
+          ],
+          "evidence_basis_prose": "Amyloid imaging and blood neurodegeneration biomarkers are clinically useful in selected diagnostic contexts but are not standard broad screening tools for asymptomatic, lower-risk adults. Downstream actionability and incidental findings are key limitations.",
+          "risk_interaction": "Her modifiable neuro interactions are vascular fitness, sleep efficiency, BP, glycemia, and lipids; biomarker screening would not directly modify those risks.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-008",
+          "title": "Carotid intima-media thickness screening as a CVD reclassifier",
+          "rationale": "Exclude or deprioritize compared with better-supported CVD risk clarification. The payload shows intermediate estimated CVD risk and no CAC score, while carotid IMT or plaque imaging is not done. However, carotid IMT is less clearly standardized for preventive decision-making and could duplicate or confuse risk clarification that would more directly be handled by accepted CVD risk tools.",
+          "patient_signals_used": [
+            "Estimated 10-year total CVD risk 7.5%",
+            "LDL-C 132 mg/dL",
+            "ApoB 102 mg/dL",
+            "Lp(a) 45 nmol/L",
+            "CAC not done",
+            "Carotid IMT/plaque not done"
+          ],
+          "evidence_basis_prose": "Carotid IMT has weaker and less standardized support as a routine preventive reclassification test than established CVD risk estimation approaches and selected coronary calcium assessment in appropriate patients.",
+          "risk_interaction": "Because CVD risk is intermediate, risk clarification may be reasonable, but this specific modality risks being a lower-yield duplicate rather than the clearest next diagnostic gate.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-009",
+          "title": "GLP-1 receptor agonist solely for prediabetes in normal-BMI patient",
+          "rationale": "Exclude as a non-indicated medication based on supplied data. She has high estimated diabetes risk and central adiposity, but BMI is 24.8, no type 2 diabetes is present, and no GLP-1 receptor agonist is listed. Starting a GLP-1 medication solely for prediabetes at normal BMI would be outside the clear standard pathway and carries cost, gastrointestinal effects, weight-loss overtreatment risk, and discontinuation issues.",
+          "patient_signals_used": [
+            "HbA1c 5.7%",
+            "Fasting glucose 102 mg/dL",
+            "HOMA-IR 2.78",
+            "BMI 24.8",
+            "Waist-to-height ratio 0.509",
+            "No type 2 diabetes",
+            "Estimated 10-year incident T2D risk approximately 35%"
+          ],
+          "evidence_basis_prose": "GLP-1 receptor agonists have strong roles in type 2 diabetes and obesity/overweight with qualifying indications, but the payload does not show those indications. For prediabetes at normal BMI, lifestyle and standard metabolic monitoring remain the clearer pathways.",
+          "risk_interaction": "Medication-first escalation could bypass the patient’s multi-domain levers of fitness, resistance training, sleep, and waist reduction, which also affect CVD and neuro risk.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        },
+        {
+          "id": "RE-010",
+          "title": "SGLT2 inhibitor for kidney or cardiovascular prevention without diabetes, CKD, or heart failure",
+          "rationale": "Exclude as non-indicated from the supplied facts. Kidney markers are currently normal, she has no type 2 diabetes, no CKD, and no heart failure documented. The CKD model classifies her as Stage A with low estimated incident CKD risk. An SGLT2 inhibitor would add medication risks without a qualifying disease state in the payload.",
+          "patient_signals_used": [
+            "No type 2 diabetes",
+            "No CKD",
+            "eGFR 88",
+            "UACR 12 mg/g",
+            "CKD Stage A, low estimated 5-year incident CKD risk",
+            "No heart failure documented"
+          ],
+          "evidence_basis_prose": "SGLT2 inhibitors are evidence-based in specific populations such as type 2 diabetes, CKD with qualifying features, and heart failure. The provided payload does not document those indications.",
+          "risk_interaction": "Her kidney vulnerability is future-facing through prediabetes and BP trajectory; current risk management should not be converted into disease-state pharmacotherapy absent an indication.",
+          "lane_label": "Excluded / Watchlist",
+          "symptom_derived": false
+        }
+      ]
+    }
+  },
+  "candidate_counts": {
+    "SoC Monitoring": 15,
+    "SoC Risk Reduction": 15,
+    "Adjunct Options": 15,
+    "Excluded / Watchlist": 10
+  },
+  "completed_at": "2026-05-12T14:13:22"
+}

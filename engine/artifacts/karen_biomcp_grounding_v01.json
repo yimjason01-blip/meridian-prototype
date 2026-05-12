@@ -1,0 +1,1353 @@
+{
+  "source": "biomcp_cli_pubtator",
+  "max_results_per_candidate": 4,
+  "candidates": {
+    "RMA-003": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Enroll in or emulate a structured Diabetes Prevention Program",
+      "query": "diabetes prevention program trial prediabetes",
+      "search": {
+        "query": "diabetes prevention program trial prediabetes",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "36176003",
+            "doi": null,
+            "title": "Testing a very low-carbohydrate adaption of the Diabetes Prevention Program among adults with prediabetes: study protocol for the Lifestyle Education about prediabetes (LEAP) trial",
+            "journal": "Trials",
+            "date": "2022-09-30",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "37955955",
+            "doi": null,
+            "title": "Telehealth Diabetes Prevention Program for Adults With Prediabetes in an Academic Medical Center Setting: Protocol for a Hybrid Type III Trial",
+            "journal": "JMIR Res Protoc",
+            "date": "2023-11-13",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "37770039",
+            "doi": null,
+            "title": "The Effectiveness of Shared Decision-making for Diabetes Prevention: 24- and 36-Month Results From the Prediabetes Informed Decision and Education (PRIDE) Trial",
+            "journal": "Diabetes Care",
+            "date": "2023-09-28",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36898949",
+            "doi": null,
+            "title": "Using Peer Support to Aid in Prevention and Treatment in Prediabetes (UPSTART): Results of a pragmatic randomized controlled trial",
+            "journal": "Am J Prev Med",
+            "date": "2023-03-08",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-004": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Prevent further postmenopausal weight gain and reduce central adiposity",
+      "query": "resistance training insulin sensitivity postmenopausal women trial",
+      "search": {
+        "query": "resistance training insulin sensitivity postmenopausal women trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "36700183",
+            "doi": null,
+            "title": "Examining the Role of Physical Activity Interventions in Modulating Androgens and Cardiovascular Health in Postmenopausal Women: A Narrative Review",
+            "journal": "CJC Open",
+            "date": "2022-11-09",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41731443",
+            "doi": null,
+            "title": "Effects of concurrent training on body composition, metabolic, and inflammatory in postmenopausal women: a meta-analysis",
+            "journal": "BMC Womens Health",
+            "date": "2026-02-24",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41723227",
+            "doi": null,
+            "title": "High intensity functional training versus traditional resistance training effects on inflammatory, metabolic, and physical outcomes in overweight men a randomized controlled trial",
+            "journal": "Sci Rep",
+            "date": "2026-02-21",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36678314",
+            "doi": null,
+            "title": "Adipocyte Metabolism and Health after the Menopause: The Role of Exercise",
+            "journal": "Nutrients",
+            "date": "2023-01-14",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-008": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Shift carbohydrate quality and meal composition for prediabetes",
+      "query": "Shift carbohydrate quality and meal composition for prediabetes guideline trial meta analysis",
+      "search": {
+        "query": "Shift carbohydrate quality and meal composition for prediabetes guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "35928840",
+            "doi": null,
+            "title": "Effect of high-protein vs. high-fat snacks before lunch on glycemic variability in prediabetes: A study protocol for a randomized controlled trial",
+            "journal": "Front Nutr",
+            "date": "2022-07-19",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39843443",
+            "doi": null,
+            "title": "A legume-enriched diet improves metabolic health in prediabetes mediated through gut microbiome: a randomized controlled trial",
+            "journal": "Nat Commun",
+            "date": "2025-01-22",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34684300",
+            "doi": null,
+            "title": "Alternative Dietary Patterns for Americans: Low-Carbohydrate Diets",
+            "journal": "Nutrients",
+            "date": "2021-09-22",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34071359",
+            "doi": null,
+            "title": "Expert Group Recommendations on the Effective Use of Bolus Insulin in the Management of Type 2 Diabetes Mellitus",
+            "journal": "Med Sci (Basel)",
+            "date": "2021-05-28",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-006": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Add progressive resistance training 2 to 3 days per week",
+      "query": "resistance training insulin sensitivity postmenopausal women trial",
+      "search": {
+        "query": "resistance training insulin sensitivity postmenopausal women trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "36700183",
+            "doi": null,
+            "title": "Examining the Role of Physical Activity Interventions in Modulating Androgens and Cardiovascular Health in Postmenopausal Women: A Narrative Review",
+            "journal": "CJC Open",
+            "date": "2022-11-09",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41731443",
+            "doi": null,
+            "title": "Effects of concurrent training on body composition, metabolic, and inflammatory in postmenopausal women: a meta-analysis",
+            "journal": "BMC Womens Health",
+            "date": "2026-02-24",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41723227",
+            "doi": null,
+            "title": "High intensity functional training versus traditional resistance training effects on inflammatory, metabolic, and physical outcomes in overweight men a randomized controlled trial",
+            "journal": "Sci Rep",
+            "date": "2026-02-21",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36678314",
+            "doi": null,
+            "title": "Adipocyte Metabolism and Health after the Menopause: The Role of Exercise",
+            "journal": "Nutrients",
+            "date": "2023-01-14",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-005": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Progressively increase cardiorespiratory fitness beyond current baseline",
+      "query": "cardiorespiratory fitness cardiovascular mortality cohort",
+      "search": {
+        "query": "cardiorespiratory fitness cardiovascular mortality cohort",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "38689681",
+            "doi": null,
+            "title": "Impact of cardiorespiratory fitness and diabetes status on cardiovascular disease and all-cause mortality: An NHANES retrospective cohort study.",
+            "journal": "Am Heart J Plus",
+            "date": "2024-04-17",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36875358",
+            "doi": null,
+            "title": "Cardiorespiratory fitness, body mass index, cardiovascular disease, and mortality in young men: A cohort study",
+            "journal": "Front Public Health",
+            "date": "2023-02-15",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34198307",
+            "doi": null,
+            "title": "Percentage of Age-Predicted Cardiorespiratory Fitness Is Inversely Associated with Cardiovascular Disease Mortality: A Prospective Cohort Study.",
+            "journal": "Cardiology",
+            "date": "2021-01-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39659290",
+            "doi": null,
+            "title": "Correction to \"Cardiovascular disease and all-cause mortality in male twins with discordant cardiorespiratory fitness: a nationwide cohort study\"",
+            "journal": "Am J Epidemiol",
+            "date": "2024-12-10",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-001": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Clinician shared decision on lipid-lowering therapy for intermediate CVD risk",
+      "query": "statin primary prevention intermediate risk LDL cholesterol trial",
+      "search": {
+        "query": "statin primary prevention intermediate risk LDL cholesterol trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "35447841",
+            "doi": null,
+            "title": "Lipid-Targeted Atherosclerotic Risk Reduction in Older Adults: A Review",
+            "journal": "Geriatrics (Basel)",
+            "date": "2022-03-25",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39679827",
+            "doi": null,
+            "title": "Current and emerging PCSK9-directed therapies to reduce LDL-C and ASCVD risk: A state-of-the-art review",
+            "journal": "Pharmacotherapy",
+            "date": "2024-12-16",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40579058",
+            "doi": null,
+            "title": "A Critical Appraisal of Lipid Management in the Post-Statin Era",
+            "journal": "JACC Adv",
+            "date": "2025-06-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41557222",
+            "doi": null,
+            "title": "2025 Egyptian guidelines for the management of dyslipidemia",
+            "journal": "Egypt Heart J",
+            "date": "2026-01-20",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-002": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Optimize blood pressure toward consistently below 130/80 if clinically appropriate",
+      "query": "blood pressure lowering cardiovascular outcomes meta analysis",
+      "search": {
+        "query": "blood pressure lowering cardiovascular outcomes meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "35916147",
+            "doi": null,
+            "title": "Higher Arm Versus Lower Arm Systolic Blood Pressure and Cardiovascular Outcomes: a Meta-Analysis of Individual Participant Data From the INTERPRESS-IPD Collaboration",
+            "journal": "Hypertension",
+            "date": "2022-10-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40772210",
+            "doi": null,
+            "title": "Impact of Intensive Blood Pressure Control Versus Standard Control on Cardiovascular Outcomes: A Systematic Review and Meta-Analysis of Randomized Controlled Trials",
+            "journal": "Cureus",
+            "date": "2025-07-07",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41292423",
+            "doi": null,
+            "title": "Dual-Targeted Therapy in Cardiometabolic Risk: A Meta-Analysis of Telmisartan-Based Combinations for Hypertension and Dyslipidemia Dual-Targeted Therapy in Cardiometabolic Risk: A Meta-analysis of Telmisartan-Based Combinations for Hypertension and Dyslipidemia",
+            "journal": "Clin Cardiol",
+            "date": "2025-12-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "35978373",
+            "doi": null,
+            "title": "Long-term effects of intensive multifactorial treatment on aortic stiffness and central hemodynamics after 13 years with screen-detected type 2 diabetes: the ADDITION-Denmark trial",
+            "journal": "Diabetol Metab Syndr",
+            "date": "2022-08-17",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-007": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Adopt a lipid-lowering dietary pattern focused on ApoB reduction",
+      "query": "statin primary prevention intermediate risk LDL cholesterol trial",
+      "search": {
+        "query": "statin primary prevention intermediate risk LDL cholesterol trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "35447841",
+            "doi": null,
+            "title": "Lipid-Targeted Atherosclerotic Risk Reduction in Older Adults: A Review",
+            "journal": "Geriatrics (Basel)",
+            "date": "2022-03-25",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39679827",
+            "doi": null,
+            "title": "Current and emerging PCSK9-directed therapies to reduce LDL-C and ASCVD risk: A state-of-the-art review",
+            "journal": "Pharmacotherapy",
+            "date": "2024-12-16",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40579058",
+            "doi": null,
+            "title": "A Critical Appraisal of Lipid Management in the Post-Statin Era",
+            "journal": "JACC Adv",
+            "date": "2025-06-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41557222",
+            "doi": null,
+            "title": "2025 Egyptian guidelines for the management of dyslipidemia",
+            "journal": "Egypt Heart J",
+            "date": "2026-01-20",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-009": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Use a DASH-style sodium-reduction strategy for BP control",
+      "query": "blood pressure lowering cardiovascular outcomes meta analysis",
+      "search": {
+        "query": "blood pressure lowering cardiovascular outcomes meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "35916147",
+            "doi": null,
+            "title": "Higher Arm Versus Lower Arm Systolic Blood Pressure and Cardiovascular Outcomes: a Meta-Analysis of Individual Participant Data From the INTERPRESS-IPD Collaboration",
+            "journal": "Hypertension",
+            "date": "2022-10-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40772210",
+            "doi": null,
+            "title": "Impact of Intensive Blood Pressure Control Versus Standard Control on Cardiovascular Outcomes: A Systematic Review and Meta-Analysis of Randomized Controlled Trials",
+            "journal": "Cureus",
+            "date": "2025-07-07",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41292423",
+            "doi": null,
+            "title": "Dual-Targeted Therapy in Cardiometabolic Risk: A Meta-Analysis of Telmisartan-Based Combinations for Hypertension and Dyslipidemia Dual-Targeted Therapy in Cardiometabolic Risk: A Meta-analysis of Telmisartan-Based Combinations for Hypertension and Dyslipidemia",
+            "journal": "Clin Cardiol",
+            "date": "2025-12-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "35978373",
+            "doi": null,
+            "title": "Long-term effects of intensive multifactorial treatment on aortic stiffness and central hemodynamics after 13 years with screen-detected type 2 diabetes: the ADDITION-Denmark trial",
+            "journal": "Diabetol Metab Syndr",
+            "date": "2022-08-17",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-010": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Reduce alcohol intake below current women’s AUDIT-C threshold pattern",
+      "query": "Reduce alcohol intake below current women s AUDIT-C threshold pattern guideline trial meta analysis",
+      "search": {
+        "query": "Reduce alcohol intake below current women s AUDIT-C threshold pattern guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "35333364",
+            "doi": null,
+            "title": "Association of Habitual Alcohol Intake With Risk of Cardiovascular Disease",
+            "journal": "JAMA Netw Open",
+            "date": "2022-03-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40179033",
+            "doi": null,
+            "title": "MetALD: New Perspectives on an Old Overlooked Disease",
+            "journal": "Liver Int",
+            "date": "2025-05-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40921943",
+            "doi": null,
+            "title": "The 2024 UK clinical guideline for the prevention and treatment of osteoporosis",
+            "journal": "Arch Osteoporos",
+            "date": "2025-09-08",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "35378630",
+            "doi": null,
+            "title": "UK clinical guideline for the prevention and treatment of osteoporosis",
+            "journal": "Arch Osteoporos",
+            "date": "2022-04-05",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-011": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Implement a sleep-extension and sleep-efficiency improvement plan",
+      "query": "cognitive behavioral therapy insomnia randomized trial",
+      "search": {
+        "query": "cognitive behavioral therapy insomnia randomized trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "39316400",
+            "doi": null,
+            "title": "Voice-Activated Cognitive Behavioral Therapy for Insomnia: A Randomized Clinical Trial.",
+            "journal": "JAMA Netw Open",
+            "date": "2024-09-03",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39023982",
+            "doi": null,
+            "title": "Acceptance and commitment therapy versus cognitive behavioral therapy for insomnia: A randomized controlled trial.",
+            "journal": "J Consult Clin Psychol",
+            "date": "2024-06-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40681664",
+            "doi": null,
+            "title": "A randomized controlled trial of a digital cognitive behavioral therapy for insomnia for older adults",
+            "journal": "NPJ Digit Med",
+            "date": "2025-07-19",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40575624",
+            "doi": null,
+            "title": "Cognitive behavioral therapy for insomnia among heavy-drinking veterans: a randomized pilot trial",
+            "journal": "Sleep Adv",
+            "date": "2025-06-10",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-012": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Use a structured stress-reduction or behavioral health intervention",
+      "query": "Use a structured stress-reduction or behavioral health intervention guideline trial meta analysis",
+      "search": {
+        "query": "Use a structured stress-reduction or behavioral health intervention guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "34638360",
+            "doi": null,
+            "title": "Psychosocial Care for Adult Cancer Patients: Guidelines of the Italian Medical Oncology Association",
+            "journal": "Cancers (Basel)",
+            "date": "2021-09-29",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34300237",
+            "doi": null,
+            "title": "Cardiac Rehabilitation in German Speaking Countries of Europe:Evidence-Based Guidelines from Germany, Austria and Switzerland LLKardReha-DACH:Part 2",
+            "journal": "J Clin Med",
+            "date": "2021-07-12",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "38304165",
+            "doi": null,
+            "title": "Foundations of Lifestyle Medicine and its Evolution",
+            "journal": "Mayo Clin Proc Innov Qual Outcomes",
+            "date": "2024-01-20",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39822128",
+            "doi": null,
+            "title": "Canadian Stroke Best Practice Recommendations: Vascular cognitive impairment, 7th edition practice guidelines update, 2024",
+            "journal": "Alzheimers Dement",
+            "date": "2025-01-16",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-013": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Adopt kidney-protective medication and dehydration safety practices",
+      "query": "Adopt kidney-protective medication and dehydration safety practices guideline trial meta analysis",
+      "search": {
+        "query": "Adopt kidney-protective medication and dehydration safety practices guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "40241469",
+            "doi": null,
+            "title": "Diabetes medication management recommendations for older adults: A systematic review of the Western Pacific region",
+            "journal": "Geriatr Gerontol Int",
+            "date": "2025-04-17",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36961036",
+            "doi": null,
+            "title": "Sodium-Glucose Cotransporter-2 (SGLT-2) Inhibitors Use among Heart Failure Patients and the Role of Pharmacists in Early Initiation of Therapy",
+            "journal": "Pharmacy (Basel)",
+            "date": "2023-03-17",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40420813",
+            "doi": null,
+            "title": "Overcoming Disparities in Using SGLT2 Inhibitors for Cardiorenal Protection in Persons With and Without Type 2 Diabetes",
+            "journal": "J Clin Endocrinol Metab",
+            "date": "2025-05-27",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40458885",
+            "doi": null,
+            "title": "Semaglutide: a key medication for managing cardiovascular-kidney-metabolic syndrome",
+            "journal": "Future Cardiol",
+            "date": "2025-07-01",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-014": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Correct borderline vitamin D insufficiency and ensure adequate calcium intake",
+      "query": "resistance training insulin sensitivity postmenopausal women trial",
+      "search": {
+        "query": "resistance training insulin sensitivity postmenopausal women trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "36700183",
+            "doi": null,
+            "title": "Examining the Role of Physical Activity Interventions in Modulating Androgens and Cardiovascular Health in Postmenopausal Women: A Narrative Review",
+            "journal": "CJC Open",
+            "date": "2022-11-09",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41731443",
+            "doi": null,
+            "title": "Effects of concurrent training on body composition, metabolic, and inflammatory in postmenopausal women: a meta-analysis",
+            "journal": "BMC Womens Health",
+            "date": "2026-02-24",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41723227",
+            "doi": null,
+            "title": "High intensity functional training versus traditional resistance training effects on inflammatory, metabolic, and physical outcomes in overweight men a randomized controlled trial",
+            "journal": "Sci Rep",
+            "date": "2026-02-21",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36678314",
+            "doi": null,
+            "title": "Adipocyte Metabolism and Health after the Menopause: The Role of Exercise",
+            "journal": "Nutrients",
+            "date": "2023-01-14",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "RMA-015": {
+      "lane_label": "SoC Risk Reduction",
+      "title": "Ensure levothyroxine is taken separately from mineral-containing supplements",
+      "query": "Ensure levothyroxine is taken separately from mineral-containing supplements guideline trial meta analysis",
+      "search": {
+        "query": "Ensure levothyroxine is taken separately from mineral-containing supplements guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "40618386",
+            "doi": null,
+            "title": "Diet in Pregnancy: A Review of Current Challenges and Recommendations. A British Nutrition Foundation Briefing Paper",
+            "journal": "Nutr Bull",
+            "date": "2025-07-06",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "38838713",
+            "doi": null,
+            "title": "Prader-Willi syndrome: guidance for children and transition into adulthood",
+            "journal": "Endocr Connect",
+            "date": "2024-06-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39587337",
+            "doi": null,
+            "title": "Preliminary investigations of plasma lipidome and selenium levels in adults with treated hypothyroidism and in healthy individuals without selenium deficiency",
+            "journal": "Sci Rep",
+            "date": "2024-11-25",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41474492",
+            "doi": null,
+            "title": "2025 Update to the Female Athlete Triad Coalition Consensus Statement Part 2: Clinical Guidelines for Screening, Diagnosis, Treatment, and Return to Play for Adolescents and Adults",
+            "journal": "Sports Med",
+            "date": "2025-12-31",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-002": {
+      "lane_label": "Adjunct Options",
+      "title": "Structured post-meal walking after higher-carbohydrate meals",
+      "query": "postprandial walking glucose randomized trial",
+      "search": {
+        "query": "postprandial walking glucose randomized trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "40246606",
+            "doi": null,
+            "title": "Hourly 4-minute walking breaks from sitting following aerobic exercise reduce postprandial non-HDL cholesterol in healthy young adults - A randomized crossover trial.",
+            "journal": "J Clin Lipidol",
+            "date": "2025-03-21",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34721064",
+            "doi": null,
+            "title": "Accuracy of Flash Glucose Monitoring During Postprandial Rest and Different Walking Conditions in Overweight or Obese Young Adults",
+            "journal": "Front Physiol",
+            "date": "2021-10-15",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41459183",
+            "doi": null,
+            "title": "Assessing the Impact of Arm Rotation with Walking Exercise on Blood Glucose and HbA1c Levels in Patients with Diabetes Mellitus: A Hospital Based Study.",
+            "journal": "EJIFCC",
+            "date": "2025-12-05",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39523789",
+            "doi": null,
+            "title": "Light Walking Patterns and Postprandial Cardiometabolic Responses in Young Obese Adults: A Randomized Crossover Study.",
+            "journal": "J Clin Endocrinol Metab",
+            "date": "2024-11-11",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-001": {
+      "lane_label": "Adjunct Options",
+      "title": "Short-term continuous glucose monitor experiment for post-meal pattern discovery",
+      "query": "Short-term continuous glucose monitor experiment for post-meal pattern discovery guideline trial meta analysis",
+      "search": {
+        "query": "Short-term continuous glucose monitor experiment for post-meal pattern discovery guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "38264192",
+            "doi": null,
+            "title": "Continuous glucose monitoring for automatic real-time assessment of eating events and nutrition: a scoping review",
+            "journal": "Front Nutr",
+            "date": "2024-01-08",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "33068776",
+            "doi": null,
+            "title": "GLP-1 receptor agonists in the treatment of type 2 diabetes - state-of-the-art",
+            "journal": "Mol Metab",
+            "date": "2021-04-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41272493",
+            "doi": null,
+            "title": "Nutrigenomics meets multi-omics: integrating genetic, metabolic, and microbiome data for personalized nutrition strategies",
+            "journal": "Genes Nutr",
+            "date": "2025-11-21",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41656244",
+            "doi": null,
+            "title": "Multiomics: the intersection of personalized nutrition in cardiometabolic diseases",
+            "journal": "J Transl Med",
+            "date": "2026-02-09",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-003": {
+      "lane_label": "Adjunct Options",
+      "title": "Meal-sequencing experiment: vegetables and protein before starch",
+      "query": "food order vegetables protein before carbohydrate glucose trial",
+      "search": {
+        "query": "food order vegetables protein before carbohydrate glucose trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "41837403",
+            "doi": null,
+            "title": "Effects of meal sequence intervention on blood glucose response in healthy adults: a systematic review",
+            "journal": "Clin Nutr Res",
+            "date": "2026-01-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "38068801",
+            "doi": null,
+            "title": "A Narrative Review on Strategies for the Reversion of Prediabetes to Normoglycemia: Food Pyramid, Physical Activity, and Self-Monitoring Innovative Glucose Devices",
+            "journal": "Nutrients",
+            "date": "2023-11-28",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41156447",
+            "doi": null,
+            "title": "Dietary Modification with Food Order and Divided Carbohydrate Intake Improves Glycemic Excursions in Healthy Young Women.",
+            "journal": "Nutrients",
+            "date": "2025-10-10",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39777075",
+            "doi": null,
+            "title": "Food order affects blood glucose and insulin levels in women with gestational diabetes.",
+            "journal": "Front Nutr",
+            "date": "2024-12-24",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-008": {
+      "lane_label": "Adjunct Options",
+      "title": "Resistance-training microcycle focused on postmenopausal central adiposity and insulin sensitivity",
+      "query": "resistance training insulin sensitivity postmenopausal women trial",
+      "search": {
+        "query": "resistance training insulin sensitivity postmenopausal women trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "36700183",
+            "doi": null,
+            "title": "Examining the Role of Physical Activity Interventions in Modulating Androgens and Cardiovascular Health in Postmenopausal Women: A Narrative Review",
+            "journal": "CJC Open",
+            "date": "2022-11-09",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41731443",
+            "doi": null,
+            "title": "Effects of concurrent training on body composition, metabolic, and inflammatory in postmenopausal women: a meta-analysis",
+            "journal": "BMC Womens Health",
+            "date": "2026-02-24",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "41723227",
+            "doi": null,
+            "title": "High intensity functional training versus traditional resistance training effects on inflammatory, metabolic, and physical outcomes in overweight men a randomized controlled trial",
+            "journal": "Sci Rep",
+            "date": "2026-02-21",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36678314",
+            "doi": null,
+            "title": "Adipocyte Metabolism and Health after the Menopause: The Role of Exercise",
+            "journal": "Nutrients",
+            "date": "2023-01-14",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-004": {
+      "lane_label": "Adjunct Options",
+      "title": "Viscous soluble fiber add-on, such as psyllium, if tolerated",
+      "query": "psyllium LDL cholesterol meta analysis",
+      "search": {
+        "query": "psyllium LDL cholesterol meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "41366295",
+            "doi": null,
+            "title": "Psyllium supplementation and lipid profiles: systematic review and dose-response meta-analysis of randomized controlled trials",
+            "journal": "Genes Nutr",
+            "date": "2025-12-09",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "37163454",
+            "doi": null,
+            "title": "Psyllium is a natural nonfermented gel-forming fiber that is effective for weight loss: A comprehensive review and meta-analysis",
+            "journal": "J Am Assoc Nurse Pract",
+            "date": "2023-05-10",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36811560",
+            "doi": null,
+            "title": "Galactomannans are the most effective soluble dietary fibers in type 2 diabetes: a systematic review and network meta-analysis.",
+            "journal": "Am J Clin Nutr",
+            "date": "2023-02-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "35252385",
+            "doi": null,
+            "title": "Relationships Between Bronchodilators, Steroids, Antiarrhythmic Drugs, Antidepressants, and Benzodiazepines and Heart Disease and Ischemic Stroke in Patients With Predominant Bronchiectasis and Asthma",
+            "journal": "Front Cardiovasc Med",
+            "date": "2022-02-17",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-005": {
+      "lane_label": "Adjunct Options",
+      "title": "Portfolio-style food substitution focused on plant sterols, viscous fiber, nuts, and soy protein",
+      "query": "Portfolio-style food substitution focused on plant sterols  viscous fiber  nuts  and soy protein guideline trial meta analysis",
+      "search": {
+        "query": "Portfolio-style food substitution focused on plant sterols  viscous fiber  nuts  and soy protein guideline trial meta analysis",
+        "count": 2,
+        "results": [
+          {
+            "pmid": "40152922",
+            "doi": null,
+            "title": "Acceptability of a Web-Based Health App (PortfolioDiet.app) to Translate a Nutrition Therapy for Cardiovascular Disease in High-Risk Adults: Mixed Methods Randomized Ancillary Pilot Study",
+            "journal": "JMIR Cardio",
+            "date": "2025-03-28",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40879583",
+            "doi": null,
+            "title": "Diet and Prevention of Cardiovascular Disease and Cancer",
+            "journal": "JACC CardioOncol",
+            "date": "2025-08-27",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-007": {
+      "lane_label": "Adjunct Options",
+      "title": "Nitrate-rich vegetable or beetroot trial for BP and exercise-response biomarkers",
+      "query": "Nitrate-rich vegetable or beetroot trial for BP and exercise-response biomarkers guideline trial meta analysis",
+      "search": {
+        "query": "Nitrate-rich vegetable or beetroot trial for BP and exercise-response biomarkers guideline trial meta analysis",
+        "count": 1,
+        "results": [
+          {
+            "pmid": "41469734",
+            "doi": null,
+            "title": "Improvements in competition performance of national-level track and field athletes following a personalized nutrition intervention: a mixed methods approach",
+            "journal": "BMC Sports Sci Med Rehabil",
+            "date": "2025-12-30",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-009": {
+      "lane_label": "Adjunct Options",
+      "title": "Higher-intensity interval exposure trial layered onto current cycling if safe and acceptable",
+      "query": "Higher-intensity interval exposure trial layered onto current cycling if safe and acceptable guideline trial meta analysis",
+      "search": {
+        "query": "Higher-intensity interval exposure trial layered onto current cycling if safe and acceptable guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "41622107",
+            "doi": null,
+            "title": "Low intensity transcranial electric stimulation: Safety, ethical, legal regulatory and application guidelines (2017-2025: An update) - endorsed by the European Society for Brain Stimulation (ESBS) and by the International Federation for Clinical Neurophysiology (IFCN)",
+            "journal": "Clin Neurophysiol",
+            "date": "2025-11-23",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34684080",
+            "doi": null,
+            "title": "Evaluation and Predictive Factors of Complete Response in Rectal Cancer after Neoadjuvant Chemoradiation Therapy",
+            "journal": "Medicina (Kaunas)",
+            "date": "2021-09-30",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "38633823",
+            "doi": null,
+            "title": "A Systematic Guideline by the ASPN Workgroup on the Evidence, Education, and Treatment Algorithm for Painful Diabetic Neuropathy: SWEET",
+            "journal": "J Pain Res",
+            "date": "2024-04-13",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40035661",
+            "doi": null,
+            "title": "Concise Guidelines of the European Cardiac Arrhythmias Society (ECAS) on \"Catheter Ablation of Atrial Fibrillation\"",
+            "journal": "J Cardiovasc Electrophysiol",
+            "date": "2025-03-04",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-013": {
+      "lane_label": "Adjunct Options",
+      "title": "Alcohol-free sleep and glucose n-of-1 trial",
+      "query": "Alcohol-free sleep and glucose n-of-1 trial guideline trial meta analysis",
+      "search": {
+        "query": "Alcohol-free sleep and glucose n-of-1 trial guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "34984504",
+            "doi": null,
+            "title": "Guidelines for Perioperative Care in Bariatric Surgery: Enhanced Recovery After Surgery (ERAS) Society Recommendations: A 2021 Update",
+            "journal": "World J Surg",
+            "date": "2022-04-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "33856043",
+            "doi": null,
+            "title": "Abstracts from 11th George Rajka International Symposium on Atopic Dermatitis",
+            "journal": "Acta Derm Venereol",
+            "date": "2021-04-19",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "38713253",
+            "doi": null,
+            "title": "Essential points from evidence-based clinical practice guideline for chronic kidney disease 2023",
+            "journal": "Clin Exp Nephrol",
+            "date": "2024-05-07",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36647089",
+            "doi": null,
+            "title": "Lifestyle management in polycystic ovary syndrome - beyond diet and physical activity",
+            "journal": "BMC Endocr Disord",
+            "date": "2023-01-16",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-010": {
+      "lane_label": "Adjunct Options",
+      "title": "Digital CBT-I or structured sleep-efficiency protocol",
+      "query": "cognitive behavioral therapy insomnia randomized trial",
+      "search": {
+        "query": "cognitive behavioral therapy insomnia randomized trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "39316400",
+            "doi": null,
+            "title": "Voice-Activated Cognitive Behavioral Therapy for Insomnia: A Randomized Clinical Trial.",
+            "journal": "JAMA Netw Open",
+            "date": "2024-09-03",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39023982",
+            "doi": null,
+            "title": "Acceptance and commitment therapy versus cognitive behavioral therapy for insomnia: A randomized controlled trial.",
+            "journal": "J Consult Clin Psychol",
+            "date": "2024-06-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40681664",
+            "doi": null,
+            "title": "A randomized controlled trial of a digital cognitive behavioral therapy for insomnia for older adults",
+            "journal": "NPJ Digit Med",
+            "date": "2025-07-19",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "40575624",
+            "doi": null,
+            "title": "Cognitive behavioral therapy for insomnia among heavy-drinking veterans: a randomized pilot trial",
+            "journal": "Sleep Adv",
+            "date": "2025-06-10",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-011": {
+      "lane_label": "Adjunct Options",
+      "title": "Morning bright-light and evening light-hygiene routine for circadian reinforcement",
+      "query": "Morning bright-light and evening light-hygiene routine for circadian reinforcement guideline trial meta analysis",
+      "search": {
+        "query": "Morning bright-light and evening light-hygiene routine for circadian reinforcement guideline trial meta analysis",
+        "count": 2,
+        "results": [
+          {
+            "pmid": "37754349",
+            "doi": null,
+            "title": "34th Annual Meeting of the Society for Light Treatment and Biological Rhythms (SLTBR), 30 May-1 June, Lausanne, Switzerland",
+            "journal": "Clocks Sleep",
+            "date": "2023-08-24",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "23372241",
+            "doi": null,
+            "title": "Behavioral interventions for insomnia: Theory and practice",
+            "journal": "Indian J Psychiatry",
+            "date": "2012-10-01",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-012": {
+      "lane_label": "Adjunct Options",
+      "title": "HRV biofeedback or paced-breathing stress-recovery practice",
+      "query": "HRV biofeedback or paced-breathing stress-recovery practice guideline trial meta analysis",
+      "search": {
+        "query": "HRV biofeedback or paced-breathing stress-recovery practice guideline trial meta analysis",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "36917418",
+            "doi": null,
+            "title": "Methods for Heart Rate Variability Biofeedback (HRVB): A Systematic Review and Guidelines",
+            "journal": "Appl Psychophysiol Biofeedback",
+            "date": "2023-03-14",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36831799",
+            "doi": null,
+            "title": "Breathwork Interventions for Adults with Clinically Diagnosed Anxiety Disorders: A Scoping Review",
+            "journal": "Brain Sci",
+            "date": "2023-02-02",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39484656",
+            "doi": null,
+            "title": "Psychological and physiological health outcomes of virtual reality-based mindfulness interventions: A systematic review and evidence mapping of empirical studies",
+            "journal": "Digit Health",
+            "date": "2024-10-25",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36412084",
+            "doi": null,
+            "title": "Long COVID: mechanisms, risk factors and recovery",
+            "journal": "Exp Physiol",
+            "date": "2023-01-01",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-006": {
+      "lane_label": "Adjunct Options",
+      "title": "Food-first omega-3 assessment pathway with optional omega-3 index testing",
+      "query": "omega 3 index cardiovascular risk randomized trial",
+      "search": {
+        "query": "omega 3 index cardiovascular risk randomized trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "34680583",
+            "doi": null,
+            "title": "Essential Fatty Acids as Biomedicines in Cardiac Health",
+            "journal": "Biomedicines",
+            "date": "2021-10-14",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34911587",
+            "doi": null,
+            "title": "Effect of omega-3 supplementation on cardiometabolic indices in diabetic patients with non-alcoholic fatty liver disease: a randomized controlled trial",
+            "journal": "BMC Nutr",
+            "date": "2021-12-15",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "35362878",
+            "doi": null,
+            "title": "Omega-3 fatty acids in bipolar patients with a low omega-3 index and reduced heart rate variability: the \"BIPO-3\" trial",
+            "journal": "Int J Bipolar Disord",
+            "date": "2022-04-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "33445534",
+            "doi": null,
+            "title": "An Update on Omega-3 Polyunsaturated Fatty Acids and Cardiovascular Health",
+            "journal": "Nutrients",
+            "date": "2021-01-12",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-014": {
+      "lane_label": "Adjunct Options",
+      "title": "Sauna or passive heat exposure protocol with BP precautions",
+      "query": "sauna cardiovascular mortality cohort blood pressure",
+      "search": {
+        "query": "sauna cardiovascular mortality cohort blood pressure",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "38577299",
+            "doi": null,
+            "title": "The multifaceted benefits of passive heat therapies for extending the healthspan: A comprehensive review with a focus on Finnish sauna",
+            "journal": "Temperature (Austin)",
+            "date": "2024-02-25",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "37248758",
+            "doi": null,
+            "title": "The Interplay between Systolic Blood Pressure, Sauna Bathing, and Cardiovascular Mortality in Middle-Aged and Older Finnish Men: A Cohort Study",
+            "journal": "J Nutr Health Aging",
+            "date": "2023-01-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "36255556",
+            "doi": null,
+            "title": "Inflammation, sauna bathing, and all-cause mortality in middle-aged and older Finnish men: a cohort study",
+            "journal": "Eur J Epidemiol",
+            "date": "2022-12-01",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "33426640",
+            "doi": null,
+            "title": "High fitness levels, frequent sauna bathing and risk of pneumonia in a cohort study: Are there potential implications for COVID-19?",
+            "journal": "Eur J Clin Invest",
+            "date": "2021-03-01",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    },
+    "ADJ-015": {
+      "lane_label": "Adjunct Options",
+      "title": "H. pylori noninvasive testing as optional gastric-risk clarification",
+      "query": "Helicobacter pylori gastric cancer screening eradication trial",
+      "search": {
+        "query": "Helicobacter pylori gastric cancer screening eradication trial",
+        "count": 4,
+        "results": [
+          {
+            "pmid": "34976604",
+            "doi": null,
+            "title": "The role of the occupational physician in controlling gastric cancer attributable to Helicobacter pylori infection: A review",
+            "journal": "Prev Med Rep",
+            "date": "2021-08-18",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "39286646",
+            "doi": null,
+            "title": "Helicobacter pylori eradication following endoscopic resection might prevent metachronous gastric cancer: a systematic review and meta-analysis of studies from Japan and Korea.",
+            "journal": "Front Med (Lausanne)",
+            "date": "2024-09-02",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "38787244",
+            "doi": null,
+            "title": "Helicobacter pylori Outer Membrane Proteins and Virulence Factors: Potential Targets for Novel Therapies and Vaccines",
+            "journal": "Pathogens",
+            "date": "2024-05-08",
+            "source": "pubtator",
+            "is_retracted": null
+          },
+          {
+            "pmid": "34411037",
+            "doi": null,
+            "title": "The prevention of gastric cancer by Helicobacter pylori eradication.",
+            "journal": "Curr Opin Gastroenterol",
+            "date": "2021-11-01",
+            "source": "pubtator",
+            "is_retracted": null
+          }
+        ]
+      }
+    }
+  }
+}
