@@ -1531,7 +1531,7 @@
 
     <!-- Trace footer -->
     <div class="cp-trace">
-      Vitality v0.9+v0.2 · Risk v1.1+v0.5 domain-opportunity · 2026-05-12 · 15 SoC Monitoring · 15 SoC Risk Reduction · 15 Adjunct · 15 Excluded/Watchlist
+      Vitality v0.9+v0.2 · Risk v1.1+v0.5 domain-opportunity · 2026-05-12 · 18 SoC Monitoring · 12 SoC Risk Reduction · 15 Adjunct · 15 Excluded/Watchlist
     </div>
 
     <!-- Aria-live region for reorder announcements -->
@@ -6854,81 +6854,81 @@ if (sleepBars) {
     "symptom_derived": true,
     "domain": "Neurocognitive, psychosocial, and sexual-health preferences",
     "domain_rank": 1
-  }
-];
-
-  // ---- SoC Risk Reduction · v0.5 domain-opportunity engine output ----
-  const SOC_RISK_REDUCTION = [
+  },
   {
-    "id": "SOCR-015",
-    "lane": "socRiskReduction",
-    "originalRank": 1,
+    "id": "SOCM-016",
+    "lane": "soc",
+    "originalRank": 16,
     "title": "Check hepatitis B immunity and vaccinate if nonimmune",
-    "severity": "SoC Risk Reduction",
-    "timing": "Domain #1 · Cancer / hereditary genetics prevention and screening",
-    "do": "<strong>Check hepatitis B immunity and vaccinate if nonimmune</strong>. If anti-HBs or vaccination record shows nonimmunity, complete hepatitis B vaccination.",
-    "why": "Domain-first rank. HBsAg is negative, but immunity/vaccination status is not documented. A missing fact directly blocks a standard modeled-risk-lowering vaccination decision.",
-    "goal": "Prevent hepatitis B infection and downstream liver cancer risk.",
+    "severity": "SoC Monitoring",
+    "timing": "newly indicated | Check hepatitis B immunity/vaccine record; vaccinate only if nonimmune.",
+    "do": "<strong>Check hepatitis B immunity and vaccinate if nonimmune</strong>. Check anti-HBs or vaccine record first; complete hepatitis B vaccination only if nonimmune.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. Missing immunity is an eligibility gate, not active risk reduction until nonimmunity is confirmed.",
+    "goal": "If nonimmune, complete hepatitis B vaccination; if immune, close the record.",
     "orders": [
       {
         "glyph": "✚",
         "label": "Check hepatitis B immunity and vaccinate if nonimmune"
       }
     ],
-    "evidence": "Hepatitis B vaccination is standard prevention for susceptible adults and reduces hepatitis B-related liver disease risk.",
-    "author": "meridian",
+    "evidence": "Hepatitis B vaccination is standard prevention for susceptible adults; immunity status must be confirmed before treating this as an active intervention.",
+    "author": "meridian-v0.5",
     "symptom_derived": false,
     "domain": "Cancer / hereditary genetics prevention and screening",
-    "domain_rank": 1
+    "domain_rank": 6
   },
   {
-    "id": "SOCR-013",
-    "lane": "socRiskReduction",
-    "originalRank": 2,
-    "title": "Keep alcohol intake low and avoid binge patterns",
-    "severity": "SoC Risk Reduction",
-    "timing": "Domain #2 · Cancer / hereditary genetics prevention and screening",
-    "do": "<strong>Keep alcohol intake low and avoid binge patterns</strong>. Maintain low intake and avoid binge drinking, especially around poor sleep, dehydration, or orthostatic symptoms.",
-    "why": "Domain-first rank. Alcohol is currently moderate at about 3 drinks/week; higher intake would increase cancer, BP, sleep, and metabolic risk. Prevents worsening of multiple modeled risk domains.",
-    "goal": "Prevent alcohol-related cancer, BP, sleep, liver, and injury risk.",
+    "id": "SOCM-017",
+    "lane": "soc",
+    "originalRank": 17,
+    "title": "Alcohol pattern status closure",
+    "severity": "SoC Monitoring",
+    "timing": "routine on cadence | Confirm pattern at preventive visits; intervene only if intake rises or binge pattern appears.",
+    "do": "<strong>Alcohol pattern status closure</strong>. Keep alcohol intake low and avoid binge patterns.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. Current low alcohol intake is protective-state context, not a new risk-reduction intervention.",
+    "goal": "If heavy use or binge pattern is present, open a risk-reduction action; otherwise document and close.",
     "orders": [
       {
         "glyph": "✚",
-        "label": "Keep alcohol intake low and avoid binge patterns"
+        "label": "Alcohol pattern status closure"
       }
     ],
     "evidence": "Limiting alcohol is standard preventive care for cancer and cardiometabolic risk reduction.",
-    "author": "meridian",
+    "author": "meridian-v0.5",
     "symptom_derived": false,
     "domain": "Cancer / hereditary genetics prevention and screening",
-    "domain_rank": 2
+    "domain_rank": 7
   },
   {
-    "id": "SOCR-014",
-    "lane": "socRiskReduction",
-    "originalRank": 3,
-    "title": "Continue complete tobacco and nicotine avoidance",
-    "severity": "SoC Risk Reduction",
-    "timing": "Domain #3 · Cancer / hereditary genetics prevention and screening",
-    "do": "<strong>Continue complete tobacco and nicotine avoidance</strong>. Avoid smoking, vaping, nicotine products, and meaningful secondhand smoke exposure.",
-    "why": "Domain-first rank. Never-smoker status is highly protective; ATM carrier context makes avoidable carcinogen exposure especially important. Directly maintains a major risk-lowering exposure profile.",
-    "goal": "Maintain zero tobacco exposure.",
+    "id": "SOCM-018",
+    "lane": "soc",
+    "originalRank": 18,
+    "title": "Tobacco/nicotine exposure status closure",
+    "severity": "SoC Monitoring",
+    "timing": "routine on cadence | Confirm tobacco/nicotine status at preventive visits; intervene only if exposure is present.",
+    "do": "<strong>Tobacco/nicotine exposure status closure</strong>. Continue complete tobacco and nicotine avoidance.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. Never-smoker status is protective-state context, not a new risk-reduction intervention.",
+    "goal": "If tobacco/nicotine exposure is present, open cessation intervention; otherwise document and close.",
     "orders": [
       {
         "glyph": "✚",
-        "label": "Continue complete tobacco and nicotine avoidance"
+        "label": "Tobacco/nicotine exposure status closure"
       }
     ],
     "evidence": "Tobacco avoidance is a core standard-care risk-reduction action for cancer, cardiovascular, pulmonary, and pancreatic risk.",
-    "author": "meridian",
+    "author": "meridian-v0.5",
     "symptom_derived": false,
     "domain": "Cancer / hereditary genetics prevention and screening",
-    "domain_rank": 3
-  },
+    "domain_rank": 7
+  }
+];
+
+  // ---- SoC Risk Reduction · v0.5 domain-opportunity engine output ----
+  const SOC_RISK_REDUCTION = [
   {
     "id": "SOCR-006",
     "lane": "socRiskReduction",
-    "originalRank": 4,
+    "originalRank": 1,
     "title": "Start physical therapy-guided low-back and hip tendon rehab",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #1 · Musculoskeletal pain and activity-continuity preservation",
@@ -6950,7 +6950,7 @@ if (sleepBars) {
   {
     "id": "SOCR-007",
     "lane": "socRiskReduction",
-    "originalRank": 5,
+    "originalRank": 2,
     "title": "Use training load management and cross-training during pain flares",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #2 · Musculoskeletal pain and activity-continuity preservation",
@@ -6972,7 +6972,7 @@ if (sleepBars) {
   {
     "id": "SOCR-003",
     "lane": "socRiskReduction",
-    "originalRank": 6,
+    "originalRank": 3,
     "title": "Add viscous fiber and plant-forward lipid lowering foods",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #3 · Musculoskeletal pain and activity-continuity preservation",
@@ -6994,7 +6994,7 @@ if (sleepBars) {
   {
     "id": "SOCR-004",
     "lane": "socRiskReduction",
-    "originalRank": 7,
+    "originalRank": 4,
     "title": "Preserve high cardiorespiratory fitness without adding load",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #4 · Musculoskeletal pain and activity-continuity preservation",
@@ -7016,7 +7016,7 @@ if (sleepBars) {
   {
     "id": "SOCR-005",
     "lane": "socRiskReduction",
-    "originalRank": 8,
+    "originalRank": 5,
     "title": "Use progressive resistance training for metabolic and musculoskeletal resilience",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #5 · Musculoskeletal pain and activity-continuity preservation",
@@ -7038,7 +7038,7 @@ if (sleepBars) {
   {
     "id": "SOCR-010",
     "lane": "socRiskReduction",
-    "originalRank": 9,
+    "originalRank": 6,
     "title": "Maintain normotension with BP-protective lifestyle",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #6 · Musculoskeletal pain and activity-continuity preservation",
@@ -7060,7 +7060,7 @@ if (sleepBars) {
   {
     "id": "SOCR-011",
     "lane": "socRiskReduction",
-    "originalRank": 10,
+    "originalRank": 7,
     "title": "Maintain healthy weight and waist trajectory",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #7 · Musculoskeletal pain and activity-continuity preservation",
@@ -7082,7 +7082,7 @@ if (sleepBars) {
   {
     "id": "SOCR-012",
     "lane": "socRiskReduction",
-    "originalRank": 11,
+    "originalRank": 8,
     "title": "Preserve consistent 7–8 hour sleep opportunity",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #8 · Musculoskeletal pain and activity-continuity preservation",
@@ -7104,7 +7104,7 @@ if (sleepBars) {
   {
     "id": "SOCR-001",
     "lane": "socRiskReduction",
-    "originalRank": 12,
+    "originalRank": 9,
     "title": "Use an LDL/apoB-lowering dietary pattern",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #1 · Orthostatic symptoms / autonomic safety",
@@ -7126,7 +7126,7 @@ if (sleepBars) {
   {
     "id": "SOCR-009",
     "lane": "socRiskReduction",
-    "originalRank": 13,
+    "originalRank": 10,
     "title": "Use orthostatic safety behaviors",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #2 · Orthostatic symptoms / autonomic safety",
@@ -7148,7 +7148,7 @@ if (sleepBars) {
   {
     "id": "SOCR-002",
     "lane": "socRiskReduction",
-    "originalRank": 14,
+    "originalRank": 11,
     "title": "Replace saturated fat with unsaturated fat",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #3 · Orthostatic symptoms / autonomic safety",
@@ -7170,7 +7170,7 @@ if (sleepBars) {
   {
     "id": "SOCR-008",
     "lane": "socRiskReduction",
-    "originalRank": 15,
+    "originalRank": 12,
     "title": "Avoid chronic NSAID exposure for musculoskeletal pain",
     "severity": "SoC Risk Reduction",
     "timing": "Domain #1 · Renal, gout-history closure, and medication safety",
@@ -7699,17 +7699,26 @@ if (sleepBars) {
     return SOC_MON_SECTIONS[socMonitoringTier(item)].key;
   }
   function socMonitoringFamily(item){
-    const hay = ((item && item.title) ? item.title : '').toLowerCase() + ' ' + ((item && item.why) ? item.why : '').toLowerCase();
+    const domain = ((item && item.domain) ? item.domain : '').toLowerCase();
+    if (/cancer|genetic|hereditary/.test(domain)) return 'Cancer / genetics surveillance';
+    if (/cardiometabolic|ascvd|renal|gout|medication safety/.test(domain)) return 'Cardiometabolic / renal monitoring';
+    if (/musculoskeletal|activity-continuity|function/.test(domain)) return 'Musculoskeletal / function monitoring';
+    if (/orthostatic|autonomic/.test(domain)) return 'Autonomic / BP-pattern monitoring';
+    const hay = ((item && item.title) ? item.title : '').toLowerCase();
     if (/atm|pancrea|colorectal|colon|prostate|psa|skin|dermatology|cascade|genetic|cancer/.test(hay)) return 'Cancer / genetics surveillance';
     if (/lipid|apob|ldl|lp\(a\)|blood pressure|\bbp\b|hba1c|insulin|uric acid|sua|egfr|kidney|uacr|creatinine|cystatin/.test(hay)) return 'Cardiometabolic / renal monitoring';
+    if (/musculoskeletal|low back|hip|glute|function|pain/.test(hay)) return 'Musculoskeletal / function monitoring';
+    if (/orthostatic|autonomic|lightheaded/.test(hay)) return 'Autonomic / BP-pattern monitoring';
     if (/immunization|tdap|influenza|covid|hpv|hearing|vision|eye|iop|audiology|ophthalmology/.test(hay)) return 'Preventive cadence / sensory screening';
     return 'Other monitoring';
   }
   const SOC_MON_FAMILY_ORDER = {
     'Cancer / genetics surveillance': 0,
     'Cardiometabolic / renal monitoring': 1,
-    'Preventive cadence / sensory screening': 2,
-    'Other monitoring': 3
+    'Musculoskeletal / function monitoring': 2,
+    'Autonomic / BP-pattern monitoring': 3,
+    'Preventive cadence / sensory screening': 4,
+    'Other monitoring': 5
   };
   // v0.5 engine order is already domain-first; family grouping preserves clinical similarity.
   const SOC_MON_PRIORITY = {};

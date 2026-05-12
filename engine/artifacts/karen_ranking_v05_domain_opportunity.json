@@ -860,6 +860,6 @@
     "source_summary_artifact": "/tmp/karen_run/karen_pipeline_summary.json",
     "ranking_objective": "domain_opportunity * relative_effect_size * evidence_confidence",
     "ranking_architecture": "domain-first: order domains by patient-specific absolute opportunity; order actions within domain by expected effect; effort/urgency are metadata",
-    "completed_at": "2026-05-12T14:13:22"
+    "completed_at": "2026-05-12T14:28:19"
   }
 }

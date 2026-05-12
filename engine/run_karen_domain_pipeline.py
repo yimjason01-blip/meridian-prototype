@@ -251,7 +251,21 @@ def first_sentence(s):
     parts = re.split(r'(?<=[.!?])\s+', s)
     return parts[0] if parts and parts[0] else s
 
+CONDITIONAL_MISSING_RE = re.compile(r'\b(missing|unknown|not documented|not collected|check .*immunity|if nonimmune|vaccinate if|confirm .*status)\b', re.I)
+
+
+def validate_no_missing_data_as_risk_reduction(lanes):
+    bad = []
+    for it in lanes['SoC Risk Reduction']['candidates']:
+        text = ' '.join(str(it.get(k, '')) for k in ['title', 'rationale', 'candidate_action', 'evidence_basis_prose', 'implementation_note'])
+        if CONDITIONAL_MISSING_RE.search(text):
+            bad.append((it['id'], it['title']))
+    if bad:
+        raise RuntimeError('Conditional/missing-data candidates must stay in SoC Monitoring, not SoC Risk Reduction: ' + repr(bad))
+
+
 def make_ranking(lanes, grounding, summary):
+    validate_no_missing_data_as_risk_reduction(lanes)
     monitoring = []
     for rank, it in enumerate(lanes['SoC Monitoring']['candidates'], 1):
         monitoring.append({
