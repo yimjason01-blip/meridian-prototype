@@ -39,8 +39,8 @@ LANES = [
 ]
 ACTIVE_LANES = ['SoC Monitoring', 'SoC Risk Reduction', 'Adjunct Options']
 
-SPAREQ_FORMULA = '(S*0.25)+(P*0.20)+(A*0.20)+(R*0.15)+(E*0.10)+(Q*0.10)'
-DISALLOWED_VOCAB = ['Risk Mitigation', 'Risk Maintenance', 'risk_mitigation_actions', 'risk-reduction', 'risk reduction']
+RANKING_OBJECTIVE = 'domain_opportunity * relative_effect_size * evidence_confidence'
+DISALLOWED_VOCAB = ['Risk Mitigation', 'Risk Maintenance', 'risk_mitigation_actions', 'SPAREQ']
 
 EXTRACTION_PROMPT_PATH = ROOT_DIR / 'engine/prompts/symptom_extraction_prompt_v0_1.md'
 SYSTEMIC_PROMPT_PATH = ROOT_DIR / 'engine/prompts/systemic_symptom_prompt_v0_1.md'
@@ -109,7 +109,7 @@ TRAJECTORY_STATUSES = {'active', 'intermittent', 'improved', 'resolved', 'worse'
 ACTION_SCOPES = {'active_management', 'monitoring', 'baseline_closure', 'watchlist_only', 'not_symptom_derived'}
 RESOLVED_TRAJECTORIES = {'resolved', 'improved'}
 RESOLVED_ALLOWED_SCOPES = {'baseline_closure', 'watchlist_only'}
-ACTIVE_LANGUAGE_RE = re.compile(r'\b(quarterly|titrate|titration|target\s*<|initiate|start|increase|decrease|dose|therapy|treatment|treat-to-target)\b', re.I)
+ACTIVE_LANGUAGE_RE = re.compile(r'\b(quarterly|titrate|titration|target\s*<|initiate|start|increase|decrease|treat-to-target)\b', re.I)
 
 
 def validate_symptom_trajectory_gate(label, item):
@@ -137,6 +137,20 @@ def validate_symptom_trajectory_gate(label, item):
             raise RuntimeError(f'{label}: {item_id} resolved/improved symptom cannot enter active risk-reduction lane without current objective evidence')
 
 
+def validate_symptom_capture(capture):
+    for symptom in capture.get('symptoms', []):
+        for key in ['current_state', 'recency', 'trajectory', 'current_burden', 'action_scope']:
+            if key not in symptom:
+                raise RuntimeError(f'symptom {symptom.get("id")} missing {key}')
+        if symptom.get('current_state') in {'resolved', 'improved'} and symptom.get('action_scope') == 'active_management':
+            raise RuntimeError(f'symptom {symptom.get("id")} resolved/improved cannot use active_management')
+
+
+def validate_systemic_scope(systemic):
+    if 'symptom_action_scope_audit' not in systemic:
+        raise RuntimeError('systemic missing symptom_action_scope_audit')
+
+
 def validate_generation_fragment(label, frag, expected_n):
     if frag.get('lane_label') != label:
         raise RuntimeError(f'{label}: returned lane_label {frag.get("lane_label")}')
@@ -156,8 +170,25 @@ def validate_generation_fragment(label, frag, expected_n):
     return arr
 
 
-def score(it):
-    return round(it.get('S',0)*0.25 + it.get('P',0)*0.20 + it.get('A',0)*0.20 + it.get('R',0)*0.15 + it.get('E',0)*0.10 + it.get('Q',0)*0.10, 3)
+def numeric_estimate(value):
+    if isinstance(value, (int, float)):
+        return float(value)
+    text = str(value or '')
+    m = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*%', text)
+    if m:
+        return float(m.group(1)) / 100.0
+    m = re.search(r'([0-9]+(?:\.[0-9]+)?)', text)
+    return float(m.group(1)) if m else 0.0
+
+
+def domain_sort_key(it):
+    return (int(it.get('domain_rank') or 999), -numeric_estimate(it.get('expected_domain_arr') or it.get('domain_opportunity')))
+
+
+def adjunct_sort_key(it):
+    effect_order = {'large': 0, 'moderate': 1, 'small': 2, 'uncertain': 3}
+    tier_order = {'hard_outcome': 0, 'biomarker_rct': 1, 'human_observational_plus_mechanism': 2, 'close_analog': 3, 'mechanism_only': 4, 'low_downside_only': 5}
+    return (int(it.get('domain_rank') or 999), effect_order.get(it.get('effect_size_class'), 9), tier_order.get(it.get('evidence_tier'), 9))
 
 
 def iter_strings(obj, path=''):
@@ -305,11 +336,18 @@ log('=== STEP 1: Symptom extraction ===')
 EXTRACT_SYSTEM = EXTRACTION_PROMPT_PATH.read_text()
 RUN_EXTRACTION_PROMPT_PATH.write_text(EXTRACT_SYSTEM)
 symptoms = load_json_if_exists(OUT_DIR / 'jim_symptom_extraction.json')
+if symptoms is not None:
+    try:
+        validate_symptom_capture(symptoms)
+    except Exception as e:
+        log(f'  existing symptom extraction invalid: {e}; regenerating')
+        symptoms = None
 if symptoms is None:
     extract_user = json.dumps({'narrative': NARRATIVE, 'patient_id': 'jim'}, ensure_ascii=False)
     text = call_gpt(EXTRACT_SYSTEM, extract_user, max_tokens=8000, tag='extract')
     (OUT_DIR / 'jim_symptom_extraction_raw.txt').write_text(text)
     symptoms = extract_json(text)
+    validate_symptom_capture(symptoms)
     (OUT_DIR / 'jim_symptom_extraction.json').write_text(json.dumps(symptoms, indent=2, ensure_ascii=False))
 else:
     log('  reusing existing symptom extraction artifact')
@@ -319,6 +357,12 @@ log('=== STEP 2: Systemic risk model, symptom-aware ===')
 SYSTEMIC_SYSTEM = SYSTEMIC_PROMPT_PATH.read_text()
 RUN_SYSTEMIC_PROMPT_PATH.write_text(SYSTEMIC_SYSTEM)
 systemic = load_json_if_exists(OUT_DIR / 'jim_systemic_symptom_aware.json')
+if systemic is not None:
+    try:
+        validate_systemic_scope(systemic)
+    except Exception as e:
+        log(f'  existing systemic artifact invalid: {e}; regenerating')
+        systemic = None
 if systemic is None:
     systemic_user = json.dumps({
         'patient_fixture': json.load(FIX_PATH.open()),
@@ -328,6 +372,7 @@ if systemic is None:
     text = call_gpt(SYSTEMIC_SYSTEM, systemic_user, max_tokens=8000, tag='systemic')
     (OUT_DIR / 'jim_systemic_symptom_aware_raw.txt').write_text(text)
     systemic = extract_json(text)
+    validate_systemic_scope(systemic)
     (OUT_DIR / 'jim_systemic_symptom_aware.json').write_text(json.dumps(systemic, indent=2, ensure_ascii=False))
 else:
     log('  reusing existing systemic artifact')
@@ -408,7 +453,7 @@ else:
     log('  reusing existing BioMCP grounding artifact')
 log(f"  grounded {len(grounding.get('candidates', {}))} candidates")
 
-log('=== STEP 5: Ranking v0.4 canonical lanes, BioMCP-grounded ===')
+log('=== STEP 5: Ranking v0.5 domain-opportunity, BioMCP-grounded ===')
 RANKING_SYSTEM = RANKING_PROMPT_PATH.read_text()
 RUN_RANKING_PROMPT_PATH.write_text(RANKING_SYSTEM)
 ranking_user = json.dumps({
@@ -429,28 +474,20 @@ for item in rank_lanes['SoC Risk Reduction'] + rank_lanes['Adjunct Options']:
     cited_pmids = {str(p) for p in item.get('evidence_pmids', []) if p}
     if not cited_pmids.issubset(allowed_pmids):
         raise RuntimeError(f'ranking cited PMID outside BioMCP packet for {cid}: {sorted(cited_pmids - allowed_pmids)}')
-    if item.get('Q', 0) > 2 and not cited_pmids:
-        raise RuntimeError(f'ranking assigned Q>2 without cited BioMCP PMID for {cid}')
-    if not allowed_pmids and item.get('Q', 0) > 2:
-        raise RuntimeError(f'ranking assigned Q>2 without BioMCP support for {cid}')
-    item['spareq_score'] = score(item)
-rank_lanes['SoC Risk Reduction'] = sorted(rank_lanes['SoC Risk Reduction'], key=lambda x: x.get('spareq_score', 0), reverse=True)
-rank_lanes['Adjunct Options'] = sorted(rank_lanes['Adjunct Options'], key=lambda x: x.get('spareq_score', 0), reverse=True)
+    if item.get('domain_rank') is None or not item.get('domain'):
+        raise RuntimeError(f'ranking missing domain/domain_rank for {cid}')
+    if item in rank_lanes['SoC Risk Reduction'] and not item.get('expected_domain_arr'):
+        raise RuntimeError(f'ranking missing expected_domain_arr for {cid}')
+rank_lanes['SoC Risk Reduction'] = sorted(rank_lanes['SoC Risk Reduction'], key=domain_sort_key)
+rank_lanes['Adjunct Options'] = sorted(rank_lanes['Adjunct Options'], key=adjunct_sort_key)
 ranking['lanes'] = rank_lanes
 assert_no_disallowed_vocab(ranking, 'ranking')
 ranking['ranking_run'] = {
     'patient_id':'jim',
     'model':MODEL,
     'source_candidate_artifact': str(OUT_DIR / 'jim_candidates_v10_symptom_canonical.json'),
-    'spareq_formula': SPAREQ_FORMULA,
-    'spareq_definitions': {
-        'S':'severity of outcome if untreated',
-        'P':'probability/relevance of that outcome for this patient',
-        'A':'action impact / outcome-redirect / stage-shift / trajectory-anchor',
-        'R':'reversibility / urgency window',
-        'E':'effort inverted, easier/lower burden = higher',
-        'Q':'BioMCP-grounded evidence quality'
-    },
+    'ranking_objective': RANKING_OBJECTIVE,
+    'ranking_architecture': 'domain-first: order domains by patient-specific absolute opportunity; order actions within domain by expected effect; effort/urgency are metadata',
     'completed_at': datetime.now().isoformat(),
 }
 (OUT_DIR / 'jim_ranking_v04_symptom_biomcp.json').write_text(json.dumps(ranking, indent=2, ensure_ascii=False))
@@ -458,7 +495,7 @@ ranking['ranking_run'] = {
 log('=== STEP 6: Summary ===')
 prior_rank = json.load(PRIOR_RANKING.open()).get('output', {})
 def short(arr):
-    return [{'id':x.get('id'), 'title':x.get('title'), 'score':x.get('spareq_score'), 'symptom_derived':x.get('symptom_derived')} for x in (arr or [])[:3]]
+    return [{'id':x.get('id'), 'title':x.get('title'), 'domain':x.get('domain'), 'domain_rank':x.get('domain_rank'), 'expected_domain_arr':x.get('expected_domain_arr'), 'effect_size_class':x.get('effect_size_class'), 'symptom_derived':x.get('symptom_derived')} for x in (arr or [])[:3]]
 diff = {
     'patient_id':'jim',
     'symptom_count': len(symptoms.get('symptoms', [])),

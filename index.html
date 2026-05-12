@@ -1452,7 +1452,7 @@
     <!-- Plan header -->
     <div class="cp-plan-header">
       <div class="cp-plan-header-left">
-        <div class="cp-plan-header-eyebrow">Run #133 · Vitality Ranking v0.2 + Risk Ranking v0.2 · Risk v0.9 + Vitality v0.9 · 2026-05-10</div>
+        <div class="cp-plan-header-eyebrow">Run #134 · Risk Ranking v0.5 domain-opportunity · Risk v1.1 trajectory-gated · 2026-05-12</div>
         <div class="cp-plan-header-title">Care plan. <span id="cpHeaderSocCount">15</span> SoC Monitoring · <span id="cpHeaderRiskCount">15</span> SoC Risk Reduction · <span id="cpHeaderAdjCount">15</span> Adjunct Options.</div>
       </div>
     </div>
@@ -1531,7 +1531,7 @@
 
     <!-- Trace footer -->
     <div class="cp-trace">
-      Vitality v0.9+v0.2 · Risk v0.9+v0.2 · 2026-05-10 · 15 SoC Monitoring · 15 SoC Risk Reduction · 15 Adjunct · 15 Excluded/Watchlist
+      Vitality v0.9+v0.2 · Risk v1.1+v0.5 domain-opportunity · 2026-05-12 · 15 SoC Monitoring · 15 SoC Risk Reduction · 15 Adjunct · 15 Excluded/Watchlist
     </div>
 
     <!-- Aria-live region for reorder announcements -->
@@ -6523,114 +6523,1099 @@ if (sleepBars) {
   // 1) SoC Monitoring = defensive cadence / modality / interval / escalation.
   // 2) SoC Risk Reduction = offensive guideline-grade intervention / target / threshold.
   // 3) Adjunct Options = optional non-SoC actions one evidence tier below SoC, no duplicates.
-  // ---- SoC Monitoring · v0.9 candidates, v0.2 downstream order ----
+  // ---- SoC Monitoring · v0.5 domain-opportunity engine output ----
   const ITEMS = [
-  {"id": "SOC-MON-001", "lane": "soc", "originalRank": 1, "title": "Pancreatic surveillance discussion (MRI/MRCP plus EUS) for ATM+ with confirmed fhx of pancreatic cancer in a first/second-degree relative", "severity": "SoC Monitoring", "timing": "newly indicated | Annual MRI/MRCP starting age 50, or 10 years younger than the earliest affected relative, per CAPS consortium and NCCN Genetic/Familial High-Risk Assessment.", "do": "<strong>Pancreatic surveillance discussion (MRI/MRCP plus EUS) for ATM+ with confirmed fhx of pancreatic cancer in a first/second-degree relative</strong>. Confirm paternal grandfather primary site via records or family interview. If pancreatic, initiate annual surveillance per CAPS at age 50 (3 years from now).", "why": "Category: newly_indicated. Patient signal: ATM heterozygote (c.8147T&gt;C). Paternal grandfather GI cancer, primary site not confirmed. Harm of delay: Window of opportunity for early-stage detection is the entire rationale; missing the start age erodes benefit.", "goal": "Cadence: Annual MRI/MRCP starting age 50, or 10 years younger than the earliest affected relative, per CAPS consortium and NCCN Genetic/Familial High-Risk Assessment.. Guideline: NCCN Genetic/Familial High-Risk Assessment: Pancreatic v1.2025; CAPS Consortium Goggins et al. Gut 2020", "orders": [{"glyph": "✚", "label": "Pancreatic surveillance discussion (MRI/MRCP plus EUS) for A"}], "evidence": "Guideline: NCCN Genetic/Familial High-Risk Assessment: Pancreatic v1.2025; CAPS Consortium Goggins et al. Gut 2020", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-002", "lane": "soc", "originalRank": 2, "title": "Annual full-skin examination by dermatology", "severity": "SoC Monitoring", "timing": "newly indicated | Annual", "do": "<strong>Annual full-skin examination by dermatology</strong>. Dermatology referral for baseline full-body skin exam; lock annual cadence.", "why": "Category: newly_indicated. Patient signal: ATM heterozygote; baseline skin exam not on file in fixture. Harm of delay: Low per visit, cumulative over decades.", "goal": "Cadence: Annual. Guideline: AAD/ACS adult skin cancer screening guidance; NCCN Melanoma v3.2024", "orders": [{"glyph": "✚", "label": "Annual full-skin examination by dermatology"}], "evidence": "Guideline: AAD/ACS adult skin cancer screening guidance; NCCN Melanoma v3.2024", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-003", "lane": "soc", "originalRank": 3, "title": "Colorectal cancer screening (colonoscopy preferred; FIT acceptable) starting age 45", "severity": "SoC Monitoring", "timing": "due now | Colonoscopy every 10 years if normal, or FIT annually.", "do": "<strong>Colorectal cancer screening (colonoscopy preferred; FIT acceptable) starting age 45</strong>. Order colonoscopy. If patient declines, FIT annually.", "why": "Category: due_now. Patient signal: Age 47M, no prior screening on file. Paternal-side GI cancer history adds an additional reason not to defer. Harm of delay: Polyp-to-cancer transition window is years; delay materially erodes benefit at this age band.", "goal": "Cadence: Colonoscopy every 10 years if normal, or FIT annually.. Guideline: USPSTF 2021 Grade A (age 45-49) and Grade A (age 50-75) for CRC screening; ACS 2018 endorses age 45 start.", "orders": [{"glyph": "✚", "label": "Colorectal cancer screening (colonoscopy preferred; FIT acce"}], "evidence": "Guideline: USPSTF 2021 Grade A (age 45-49) and Grade A (age 50-75) for CRC screening; ACS 2018 endorses age 45 start.", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-004", "lane": "soc", "originalRank": 4, "title": "Repeat lipid panel including ApoB at 6-12 month cadence on stable lifestyle", "severity": "SoC Monitoring", "timing": "routine on cadence | Every 6-12 months while on lifestyle-only management.", "do": "<strong>Repeat lipid panel including ApoB at 6-12 month cadence on stable lifestyle</strong>. Order fasting lipid panel plus ApoB at next visit.", "why": "Category: routine_on_cadence. Patient signal: ApoB 96 mg/dL, LDL 121 mg/dL. Harm of delay: Low per cycle; trend matters for therapy decisions.", "goal": "Cadence: Every 6-12 months while on lifestyle-only management.. Guideline: ACC/AHA 2018 Cholesterol Guideline; NLA 2024; AACE 2023", "orders": [{"glyph": "✚", "label": "Repeat lipid panel including ApoB at 6-12 month cadence on s"}], "evidence": "Guideline: ACC/AHA 2018 Cholesterol Guideline; NLA 2024; AACE 2023", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-005", "lane": "soc", "originalRank": 5, "title": "Lp(a) confirmation once in lifetime (already measured at 72 nmol/L, OPTIMAL <75 nmol/L)", "severity": "SoC Monitoring", "timing": "routine on cadence | One-time, complete.", "do": "<strong>Lp(a) confirmation once in lifetime (already measured at 72 nmol/L, OPTIMAL &lt;75 nmol/L)</strong>. Document as final. Do not reorder.", "why": "Category: routine_on_cadence. Patient signal: Lp(a) 72 nmol/L (OPTIMAL). Harm of delay: Not applicable.", "goal": "Cadence: One-time, complete.. Guideline: EAS 2022 Lp(a) Consensus; NLA 2024 Lp(a) Scientific Statement", "orders": [{"glyph": "✚", "label": "Lp(a) confirmation once in lifetime (already measured at 72 "}], "evidence": "Guideline: EAS 2022 Lp(a) Consensus; NLA 2024 Lp(a) Scientific Statement", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-006", "lane": "soc", "originalRank": 6, "title": "eGFR plus urine albumin-creatinine ratio (uACR) annual cadence", "severity": "SoC Monitoring", "timing": "routine on cadence | Annual.", "do": "<strong>eGFR plus urine albumin-creatinine ratio (uACR) annual cadence</strong>. Order serum creatinine, cystatin C, and uACR at next annual visit.", "why": "Category: routine_on_cadence. Patient signal: eGFR 72 mL/min/1.73m^2. Harm of delay: Low per cycle.", "goal": "Cadence: Annual.. Guideline: KDIGO 2024 CKD Evaluation and Management Guideline", "orders": [{"glyph": "✚", "label": "eGFR plus urine albumin-creatinine ratio (uACR) annual caden"}], "evidence": "Guideline: KDIGO 2024 CKD Evaluation and Management Guideline", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-007", "lane": "soc", "originalRank": 7, "title": "Serum uric acid (sUA) monitoring quarterly until target <6.0 mg/dL achieved, then every 6-12 months", "severity": "SoC Monitoring", "timing": "due now | Quarterly during titration, then 6-12 months on stable therapy.", "do": "<strong>Serum uric acid (sUA) monitoring quarterly until target &lt;6.0 mg/dL achieved, then every 6-12 months</strong>. Order sUA next visit; compare to &lt;6.0 mg/dL target.", "why": "Category: due_now. Patient signal: Gout history. Harm of delay: Recurrent gout flares; cumulative joint damage.", "goal": "Cadence: Quarterly during titration, then 6-12 months on stable therapy.. Guideline: ACR 2020 Gout Management Guideline", "orders": [{"glyph": "✚", "label": "Serum uric acid (sUA) monitoring quarterly until target <6.0"}], "evidence": "Guideline: ACR 2020 Gout Management Guideline", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-008", "lane": "soc", "originalRank": 8, "title": "BP measurement at every clinical encounter, plus home BP cuff for monthly logs", "severity": "SoC Monitoring", "timing": "routine on cadence | Every encounter (office); monthly home log.", "do": "<strong>BP measurement at every clinical encounter, plus home BP cuff for monthly logs</strong>. Continue current cadence. Confirm home cuff cuff-size validated.", "why": "Category: routine_on_cadence. Patient signal: BP 116/76 mmHg. Harm of delay: Low.", "goal": "Cadence: Every encounter (office); monthly home log.. Guideline: ACC/AHA 2017 BP Guideline; USPSTF 2021 BP screening Grade A", "orders": [{"glyph": "✚", "label": "BP measurement at every clinical encounter, plus home BP cuf"}], "evidence": "Guideline: ACC/AHA 2017 BP Guideline; USPSTF 2021 BP screening Grade A", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-009", "lane": "soc", "originalRank": 9, "title": "HbA1c plus fasting insulin annual", "severity": "SoC Monitoring", "timing": "routine on cadence | Annual.", "do": "<strong>HbA1c plus fasting insulin annual</strong>. Annual draw at next visit.", "why": "Category: routine_on_cadence. Patient signal: A1c 5.3%. Harm of delay: Very low for this band.", "goal": "Cadence: Annual.. Guideline: ADA Standards of Care 2025; USPSTF 2021 Diabetes Screening Grade B age 35-70 with overweight", "orders": [{"glyph": "✚", "label": "HbA1c plus fasting insulin annual"}], "evidence": "Guideline: ADA Standards of Care 2025; USPSTF 2021 Diabetes Screening Grade B age 35-70 with overweight", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-010", "lane": "soc", "originalRank": 10, "title": "Prostate cancer screening discussion (shared decision making, PSA) future cadence: USPSTF shared decision-making age 55-69", "severity": "SoC Monitoring", "timing": "future cadence | USPSTF shared decision-making age 55-69 (Grade C). No prostate cancer family history; revisit at age 50 given ATM+ status.", "do": "<strong>Prostate cancer screening discussion (shared decision making, PSA) future cadence: USPSTF shared decision-making age 55-69</strong>. Defer baseline PSA; revisit at age 50 to consider ATM-informed earlier start.", "why": "Category: future_cadence. Patient signal: Age 47M, no prostate cancer family history, ATM heterozygote. USPSTF assigns Grade C (shared decision-making) for ages 55-69; ATM+ carriers may consider earlier start but evidence for benefit before age 50 is limited. Harm of delay at age 47 with no fhx: Low.", "goal": "Cadence: Defer baseline; revisit at age 50. Guideline: USPSTF 2018 Prostate Cancer Screening Grade C age 55-69; NCCN Prostate Cancer Early Detection v2.2025 notes ATM/BRCA2/CHEK2 carriers may consider earlier start.", "orders": [{"glyph": "✚", "label": "Prostate cancer screening discussion (shared decision making"}], "evidence": "Guideline: NCCN Prostate Cancer Early Detection v2.2025 (BRCA2/ATM/CHEK2 carriers); Philadelphia Prostate Cancer Consensus 2019", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-011", "lane": "soc", "originalRank": 11, "title": "Cascade genetic testing offered to first-degree relatives for ATM c.8147T>C", "severity": "SoC Monitoring", "timing": "newly indicated | One-time per relative.", "do": "<strong>Cascade genetic testing offered to first-degree relatives for ATM c.8147T&gt;C</strong>. Genetic counselor referral for cascade outreach to siblings and adult children.", "why": "Category: newly_indicated. Patient signal: ATM het pathogenic. Harm of delay: Relatives may miss early surveillance windows.", "goal": "Cadence: One-time per relative.. Guideline: NCCN Genetic/Familial High-Risk Assessment: Breast, Ovarian, and Pancreatic v1.2025; ACMG cascade testing position", "orders": [{"glyph": "✚", "label": "Cascade genetic testing offered to first-degree relatives fo"}], "evidence": "Guideline: NCCN Genetic/Familial High-Risk Assessment: Breast, Ovarian, and Pancreatic v1.2025; ACMG cascade testing position", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-012", "lane": "soc", "originalRank": 12, "title": "Hearing screen baseline plus 5-year cadence; vision/IOP screen every 2 years", "severity": "SoC Monitoring", "timing": "routine on cadence | Hearing every 5 years; eye exam every 2 years.", "do": "<strong>Hearing screen baseline plus 5-year cadence; vision/IOP screen every 2 years</strong>. Refer audiology baseline; ophthalmology routine.", "why": "Category: routine_on_cadence. Patient signal: None specific; routine adult cadence. Harm of delay: Low.", "goal": "Cadence: Hearing every 5 years; eye exam every 2 years.. Guideline: USPSTF age-based screening recommendations; AAO comprehensive eye exam cadence", "orders": [{"glyph": "✚", "label": "Hearing screen baseline plus 5-year cadence; vision/IOP scre"}], "evidence": "Guideline: USPSTF age-based screening recommendations; AAO comprehensive eye exam cadence", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-MON-013", "lane": "soc", "originalRank": 13, "title": "Adult immunization cadence (Tdap booster every 10 years, annual influenza, COVID per CDC, HPV catch-up if eligible up to 45)", "severity": "SoC Monitoring", "timing": "routine on cadence | Per CDC ACIP schedule.", "do": "<strong>Adult immunization cadence (Tdap booster every 10 years, annual influenza, COVID per CDC, HPV catch-up if eligible up to 45)</strong>. Confirm Tdap and influenza dates at next visit.", "why": "Category: routine_on_cadence. Patient signal: Routine adult. Harm of delay: Low.", "goal": "Cadence: Per CDC ACIP schedule.. Guideline: CDC ACIP Adult Immunization Schedule 2025", "orders": [{"glyph": "✚", "label": "Adult immunization cadence (Tdap booster every 10 years, ann"}], "evidence": "Guideline: CDC ACIP Adult Immunization Schedule 2025", "author": "meridian", "symptom_derived": false}
+  {
+    "id": "SOCM-001",
+    "lane": "soc",
+    "originalRank": 1,
+    "title": "Schedule baseline colorectal cancer screening",
+    "severity": "SoC Monitoring",
+    "timing": "due now | Per chosen modality and findings.",
+    "do": "<strong>Schedule baseline colorectal cancer screening</strong>. Age 47 with colonoscopy status not collected.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. This closes a standard screening gap, not an active treatment decision.",
+    "goal": "Positive stool test, abnormal colonoscopy, high-risk polyp, or clarified high-risk family history.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Schedule baseline colorectal cancer screening"
+      }
+    ],
+    "evidence": "Age-based colorectal screening is standard preventive care beginning in midlife.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCM-002",
+    "lane": "soc",
+    "originalRank": 2,
+    "title": "Obtain baseline PSA for ATM-associated prostate surveillance",
+    "severity": "SoC Monitoring",
+    "timing": "due now | Typically annual if enhanced surveillance is confirmed.",
+    "do": "<strong>Obtain baseline PSA for ATM-associated prostate surveillance</strong>. Pathogenic ATM variant with PSA not collected.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. This is surveillance and baseline closure.",
+    "goal": "Abnormal PSA velocity, elevated PSA, abnormal DRE, or urinary/red-flag symptoms.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Obtain baseline PSA for ATM-associated prostate surveillan"
+      }
+    ],
+    "evidence": "ATM carrier status supports enhanced prostate screening consideration in men.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCM-003",
+    "lane": "soc",
+    "originalRank": 3,
+    "title": "Refer for hereditary cancer genetics follow-up",
+    "severity": "SoC Monitoring",
+    "timing": "due now | One-time reassessment, then update when family history changes.",
+    "do": "<strong>Refer for hereditary cancer genetics follow-up</strong>. Known pathogenic ATM variant with incomplete screening and family-history details.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. Referral supports eligibility and record closure.",
+    "goal": "New cancer diagnoses in relatives or clarified pancreatic/prostate/breast cancer pattern.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Refer for hereditary cancer genetics follow-up"
+      }
+    ],
+    "evidence": "Pathogenic hereditary cancer variants warrant counseling, pedigree review, and screening-plan documentation.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 3
+  },
+  {
+    "id": "SOCM-004",
+    "lane": "soc",
+    "originalRank": 4,
+    "title": "Set pancreatic surveillance reminder for age 50",
+    "severity": "SoC Monitoring",
+    "timing": "newly indicated | Reassess at age 50 or earlier if family history clarifies higher-risk pattern.",
+    "do": "<strong>Set pancreatic surveillance reminder for age 50</strong>. ATM carrier with paternal GI cancer history; pancreatic imaging not collected; patient age 47.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. This is eligibility tracking and future surveillance planning.",
+    "goal": "Pancreatic cancer in close relative, concerning symptoms, or genetics recommendation.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Set pancreatic surveillance reminder for age 50"
+      }
+    ],
+    "evidence": "ATM status can make pancreatic surveillance relevant when family-history criteria are met.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 4
+  },
+  {
+    "id": "SOCM-005",
+    "lane": "soc",
+    "originalRank": 5,
+    "title": "Clarify paternal grandfather GI cancer details",
+    "severity": "SoC Monitoring",
+    "timing": "due now | Update whenever new family records become available.",
+    "do": "<strong>Clarify paternal grandfather GI cancer details</strong>. Family history lists GI cancer with unknown primary and unknown age at diagnosis.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. This is record-quality closure.",
+    "goal": "Pancreatic, colorectal, gastric, early-onset, or multiple related cancers identified.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Clarify paternal grandfather GI cancer details"
+      }
+    ],
+    "evidence": "Cancer surveillance eligibility depends on cancer type, degree of relation, and age at diagnosis.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 5
+  },
+  {
+    "id": "SOCM-006",
+    "lane": "soc",
+    "originalRank": 6,
+    "title": "Document male breast symptom awareness for ATM carrier",
+    "severity": "SoC Monitoring",
+    "timing": "newly indicated | Reinforce periodically or if symptoms arise.",
+    "do": "<strong>Document male breast symptom awareness for ATM carrier</strong>. Male ATM carrier; no male breast imaging indication documented.",
+    "why": "Domain: Cancer / hereditary genetics prevention and screening. This is monitoring-oriented education, not treatment.",
+    "goal": "Any new breast or nipple symptom.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Document male breast symptom awareness for ATM carrier"
+      }
+    ],
+    "evidence": "Male ATM carriers may benefit from awareness even when routine imaging is not indicated.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 6
+  },
+  {
+    "id": "SOCM-011",
+    "lane": "soc",
+    "originalRank": 7,
+    "title": "Screen active low back pain for red flags",
+    "severity": "SoC Monitoring",
+    "timing": "due now | At initial evaluation and with any worsening/change.",
+    "do": "<strong>Screen active low back pain for red flags</strong>. Current worsening chronic low back pain.",
+    "why": "Domain: Musculoskeletal pain and activity-continuity preservation. This is diagnostic safety triage before management.",
+    "goal": "Any red flag or progressive neurologic deficit.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Screen active low back pain for red flags"
+      }
+    ],
+    "evidence": "Red-flag screening is standard for active or worsening low back pain.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCM-012",
+    "lane": "soc",
+    "originalRank": 8,
+    "title": "Create musculoskeletal functional baseline",
+    "severity": "SoC Monitoring",
+    "timing": "due now | Recheck after any care plan or if symptoms change.",
+    "do": "<strong>Create musculoskeletal functional baseline</strong>. Active low back and hip/glute insertion pain may affect training and function.",
+    "why": "Domain: Musculoskeletal pain and activity-continuity preservation. This monitors active burden without prescribing treatment.",
+    "goal": "Declining function, inability to train, sleep disruption, or new neurologic features.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Create musculoskeletal functional baseline"
+      }
+    ],
+    "evidence": "Functional tracking helps distinguish benign mechanical pain from worsening or complicated patterns.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCM-007",
+    "lane": "soc",
+    "originalRank": 9,
+    "title": "Track CAC=0 report and future CVD imaging cadence",
+    "severity": "SoC Monitoring",
+    "timing": "routine on cadence | Future repeat only if risk discussion or clinician judgment supports it.",
+    "do": "<strong>Track CAC=0 report and future CVD imaging cadence</strong>. CAC=0 is completed, but exact report/date details should be durably recorded.",
+    "why": "Domain: Orthostatic symptoms / autonomic safety. This is surveillance record reconciliation.",
+    "goal": "New symptoms, diabetes, major lipid change, or nonzero future CAC.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Track CAC=0 report and future CVD imaging cadence"
+      }
+    ],
+    "evidence": "CAC=0 lowers near-term calcified plaque concern and should anchor future risk framing.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCM-010",
+    "lane": "soc",
+    "originalRank": 10,
+    "title": "Perform orthostatic BP and heart-rate protocol",
+    "severity": "SoC Monitoring",
+    "timing": "routine on cadence | One protocol; repeat if frequency or severity changes.",
+    "do": "<strong>Perform orthostatic BP and heart-rate protocol</strong>. Intermittent standing lightheadedness, improving but still current.",
+    "why": "Domain: Orthostatic symptoms / autonomic safety. Current symptom supports monitoring and gatekeeping, not disease labeling.",
+    "goal": "Syncope, falls, chest pain, palpitations, dyspnea, neurologic symptoms, or abnormal orthostatic vitals.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Perform orthostatic BP and heart-rate protocol"
+      }
+    ],
+    "evidence": "Orthostatic vitals are standard evaluation for positional lightheadedness.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCM-009",
+    "lane": "soc",
+    "originalRank": 11,
+    "title": "Add home blood pressure baseline series",
+    "severity": "SoC Monitoring",
+    "timing": "newly indicated | One baseline series, then repeat if BP changes or symptoms worsen.",
+    "do": "<strong>Add home blood pressure baseline series</strong>. Clinic BP normal but home BP stream is not collected; orthostatic symptoms exist.",
+    "why": "Domain: Orthostatic symptoms / autonomic safety. This is measurement and monitoring, not treatment.",
+    "goal": "Elevated average BP, very low symptomatic BP, or large variability.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Add home blood pressure baseline series"
+      }
+    ],
+    "evidence": "Home BP improves classification beyond a single clinic reading.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 3
+  },
+  {
+    "id": "SOCM-008",
+    "lane": "soc",
+    "originalRank": 12,
+    "title": "Continue annual cardiometabolic lab surveillance",
+    "severity": "SoC Monitoring",
+    "timing": "routine on cadence | About annually unless treatment or risk status changes.",
+    "do": "<strong>Continue annual cardiometabolic lab surveillance</strong>. Modest LDL-C/apoB burden with otherwise favorable cardiometabolic profile.",
+    "why": "Domain: Orthostatic symptoms / autonomic safety. This tracks risk factors without initiating treatment.",
+    "goal": "Rising apoB/LDL-C, new hypertension, prediabetes, diabetes, or ASCVD symptoms.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Continue annual cardiometabolic lab surveillance"
+      }
+    ],
+    "evidence": "Periodic cardiometabolic surveillance is standard preventive care in midlife.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 4
+  },
+  {
+    "id": "SOCM-013",
+    "lane": "soc",
+    "originalRank": 13,
+    "title": "Close resolved gout-history baseline",
+    "severity": "SoC Monitoring",
+    "timing": "due now | One-time baseline closure; repeat uric acid only if clinically indicated.",
+    "do": "<strong>Close resolved gout-history baseline</strong>. Prior recurrent big-toe gout attacks now resolved; key details missing.",
+    "why": "Domain: Renal, gout-history closure, and medication safety. Resolved symptom history is limited to baseline closure.",
+    "goal": "Recurrent flare, uric acid elevation, kidney stones, tophi, or CKD evidence.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Close resolved gout-history baseline"
+      }
+    ],
+    "evidence": "Resolved gout history is relevant to metabolic/renal context but does not justify active treatment without current evidence.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Renal, gout-history closure, and medication safety",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCM-014",
+    "lane": "soc",
+    "originalRank": 14,
+    "title": "Continue routine kidney surveillance",
+    "severity": "SoC Monitoring",
+    "timing": "routine on cadence | About annually.",
+    "do": "<strong>Continue routine kidney surveillance</strong>. Creatinine-cystatin discordance with normal UACR and urinalysis; low CKD risk.",
+    "why": "Domain: Renal, gout-history closure, and medication safety. This is surveillance, not nephrology escalation.",
+    "goal": "Falling eGFR, UACR elevation, hematuria/proteinuria, hypertension, stones, or recurrent gout.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Continue routine kidney surveillance"
+      }
+    ],
+    "evidence": "Routine annual kidney markers are appropriate when baseline is reassuring but not longitudinally established.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Renal, gout-history closure, and medication safety",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCM-015",
+    "lane": "soc",
+    "originalRank": 15,
+    "title": "Add mood, anxiety, and preference screen",
+    "severity": "SoC Monitoring",
+    "timing": "newly indicated | At routine preventive visits or if symptoms change.",
+    "do": "<strong>Add mood, anxiety, and preference screen</strong>. Resolved prior severe stress and current low-burden sexual/relationship dissatisfaction; PHQ-9/GAD-7 not collected.",
+    "why": "Domain: Neurocognitive, psychosocial, and sexual-health preferences. This is screening and preference clarification.",
+    "goal": "Positive depression/anxiety screen, distress, relationship safety concern, or patient request for help.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Add mood, anxiety, and preference screen"
+      }
+    ],
+    "evidence": "Brief validated mood/anxiety screening is standard intake monitoring; preference-sensitive sexual concerns require patient opt-in.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Neurocognitive, psychosocial, and sexual-health preferences",
+    "domain_rank": 1
+  }
 ];
 
-  // ---- SOC RISK REDUCTION · canonical SPAREQ v0.1 ----
+  // ---- SoC Risk Reduction · v0.5 domain-opportunity engine output ----
   const SOC_RISK_REDUCTION = [
-  {"id": "SOC-RR-001", "lane": "socRiskReduction", "originalRank": 1, "title": "Lifestyle-first ApoB lowering protocol (saturated fat reduction, soluble fiber +10-15 g/day, plant sterols 2 g/day, weight stability)", "severity": "SoC Risk Reduction", "timing": "QALY 0.20 QALY gained (AI-ESTIMATED) | AI-ESTIMATED", "do": "<strong>Lifestyle-first ApoB lowering protocol (saturated fat reduction, soluble fiber +10-15 g/day, plant sterols 2 g/day, weight stability)</strong>. Dietitian referral with explicit ApoB target (&lt;80 mg/dL on retest at 6 months).", "why": "QALY: 0.20 QALY gained (AI-ESTIMATED) | Source: AI-ESTIMATED | Applicability: in-population. Patient signal: ApoB 96 mg/dL, LDL 121 mg/dL, currently lifestyle-only management.", "goal": "Reasoning: Assumed inputs: baseline 30-year ASCVD risk for 47M with ApoB 96 mg/dL, CAC 0, Lp(a) 72 nmol/L (optimal) approximated at 8-10%. Lifestyle-driven 10-15% ApoB reduction maps to ~5-8% relative ASCVD risk reduction. Time horizon 40 years to age 87, 3% discount, age-band QoL weights 0.85-0.92. Yields ~0.15-0.25 QALY gained; midpoint 0.20.", "orders": [{"glyph": "✚", "label": "Lifestyle-first ApoB lowering protocol (saturated fat reduct"}], "evidence": "Guideline: ACC/AHA 2018 Cholesterol Guideline class I lifestyle; NLA 2024 dietary patterns position; AHA Dietary Recommendations 2021. QALY 0.20 QALY gained (AI-ESTIMATED) (AI-ESTIMATED, in-population).", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-RR-002", "lane": "socRiskReduction", "originalRank": 2, "title": "Aerobic plus resistance exercise prescription (>=150 min/week moderate aerobic, 2 sessions/week resistance)", "severity": "SoC Risk Reduction", "timing": "QALY 0.18 QALY gained | published", "do": "<strong>Aerobic plus resistance exercise prescription (&gt;=150 min/week moderate aerobic, 2 sessions/week resistance)</strong>. Lock 2x/week resistance protocol around current aerobic plan.", "why": "QALY: 0.18 QALY gained | Source: published | Applicability: in-population. Patient signal: VO2max 54 mL/kg/min; MSK symptoms; aerobic-skewed athlete.", "goal": "Reasoning: Tufts CEA Registry entries for physical activity interventions in midlife primary prevention typically range 0.10-0.30 incremental QALY vs sedentary baseline. Jim already achieves elite aerobic capacity (VO2max 54 mL/kg/min); incremental gain is the resistance/durability component plus injury prevention. Midpoint 0.18.", "orders": [{"glyph": "✚", "label": "Aerobic plus resistance exercise prescription (>=150 min/wee"}], "evidence": "Guideline: USPSTF 2020 Behavioral Counseling Grade B (CVD prevention); ACC/AHA 2019 Primary Prevention; ACSM 2022; WHO Physical Activity 2020. QALY 0.18 QALY gained (published, in-population).", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-RR-003", "lane": "socRiskReduction", "originalRank": 3, "title": "Allopurinol urate-lowering therapy treat-to-target sUA <6.0 mg/dL", "severity": "SoC Risk Reduction", "timing": "QALY 0.15 QALY gained | published", "do": "<strong>Allopurinol urate-lowering therapy treat-to-target sUA &lt;6.0 mg/dL</strong>. Initiate allopurinol 100 mg daily, HLA-B*5801 screen if Asian ancestry, titrate to sUA &lt;6.0 mg/dL.", "why": "QALY: 0.15 QALY gained | Source: published | Applicability: in-population. Patient signal: Active gout history.", "goal": "Reasoning: Published CEAs of allopurinol vs no ULT in recurrent gout report 0.08-0.20 QALY gain per patient over 20-year horizon, driven by flare reduction and tophaceous-joint preservation. Midpoint 0.15. Jim's gout history places him squarely in the studied population.", "orders": [{"glyph": "✚", "label": "Allopurinol urate-lowering therapy treat-to-target sUA <6.0 "}], "evidence": "Guideline: ACR 2020 Gout Management Guideline (strong recommendation, treat-to-target). QALY 0.15 QALY gained (published, in-population).", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-RR-004", "lane": "socRiskReduction", "originalRank": 4, "title": "Tobacco-status confirmation and counseling protocol (USPSTF Grade A)", "severity": "SoC Risk Reduction", "timing": "QALY 0.10 QALY gained (AI-ESTIMATED, contingent on positive status) | AI-ESTIMATED", "do": "<strong>Tobacco-status confirmation and counseling protocol (USPSTF Grade A)</strong>. Document tobacco status at next visit. If positive, USPSTF counseling plus pharmacotherapy.", "why": "QALY: 0.10 QALY gained (AI-ESTIMATED, contingent on positive status) | Source: AI-ESTIMATED | Applicability: extrapolation. Patient signal: Status not specified in fixture.", "goal": "Reasoning: Tufts CEA Registry: smoking cessation interventions in adult primary prevention often yield 1.0-3.0 QALY for active smokers. Jim's fixture does not specify smoking status. AI-ESTIMATED to 0.10 QALY as expected-value across a low prior of active smoking in this profile times the large gain if positive. Flag as extrapolation; true gain is bimodal (near-zero if non-smoker, very large if active smoker).", "orders": [{"glyph": "✚", "label": "Tobacco-status confirmation and counseling protocol (USPSTF "}], "evidence": "Guideline: USPSTF 2021 Tobacco Cessation Grade A; ACC/AHA 2019 Primary Prevention. QALY 0.10 QALY gained (AI-ESTIMATED, contingent on positive status) (AI-ESTIMATED, extrapolation).", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-RR-005", "lane": "socRiskReduction", "originalRank": 5, "title": "Alcohol-use brief intervention (USPSTF Grade B)", "severity": "SoC Risk Reduction", "timing": "QALY 0.08 QALY gained (AI-ESTIMATED, contingent on positive screen) | AI-ESTIMATED", "do": "<strong>Alcohol-use brief intervention (USPSTF Grade B)</strong>. AUDIT-C at next visit. If positive, brief counseling.", "why": "QALY: 0.08 QALY gained (AI-ESTIMATED, contingent on positive screen) | Source: AI-ESTIMATED | Applicability: extrapolation. Patient signal: Status not specified in fixture.", "goal": "Reasoning: Published USPSTF modeling estimates 0.02-0.15 QALY for adults screening positive on AUDIT-C. Jim's fixture does not specify alcohol intake. AI-ESTIMATED to 0.08 QALY as expected value pending screening.", "orders": [{"glyph": "✚", "label": "Alcohol-use brief intervention (USPSTF Grade B)"}], "evidence": "Guideline: USPSTF 2018 Unhealthy Alcohol Use in Adults Grade B. QALY 0.08 QALY gained (AI-ESTIMATED, contingent on positive screen) (AI-ESTIMATED, extrapolation).", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-RR-006", "lane": "socRiskReduction", "originalRank": 6, "title": "ATM-specific chemoprevention discussion (currently no FDA-approved indication for ATM+ males)", "severity": "SoC Risk Reduction", "timing": "QALY 0.02 QALY gained (AI-ESTIMATED) | AI-ESTIMATED", "do": "<strong>ATM-specific chemoprevention discussion (currently no FDA-approved indication for ATM+ males)</strong>. Genetic counseling visit; document absence of approved chemoprevention; revisit annually.", "why": "QALY: 0.02 QALY gained (AI-ESTIMATED) | Source: AI-ESTIMATED | Applicability: extrapolation. Patient signal: ATM heterozygote (c.8147T&gt;C).", "goal": "Reasoning: No approved chemopreventive agent exists for ATM+ males. SoC action is the discussion plus surveillance escalation. AI-ESTIMATED QALY is small (0.02) because the action is largely informational; true risk reduction comes from surveillance items SOC-MON-001 and SOC-MON-010 plus offensive lifestyle items above. Included in this lane because the discussion itself is standard-of-care for a confirmed pathogenic carrier.", "orders": [{"glyph": "✚", "label": "ATM-specific chemoprevention discussion (currently no FDA-ap"}], "evidence": "Guideline: NCCN Genetic/Familial High-Risk Assessment v1.2025 notes absence of approved chemoprevention for ATM+ males. QALY 0.02 QALY gained (AI-ESTIMATED) (AI-ESTIMATED, extrapolation).", "author": "meridian", "symptom_derived": false},
-  {"id": "SOC-RR-007", "lane": "socRiskReduction", "originalRank": 7, "title": "Aspirin for primary prevention (NOT recommended for this patient)", "severity": "SoC Risk Reduction", "timing": "QALY 0.00 QALY gained (net neutral or negative) | published", "do": "<strong>Aspirin for primary prevention (NOT recommended for this patient)</strong>. Document non-indication. Do not prescribe.", "why": "QALY: 0.00 QALY gained (net neutral or negative) | Source: published | Applicability: in-population. Patient signal: CAC 0, ApoB 96 mg/dL, Lp(a) 72 nmol/L (OPTIMAL), no diabetes, BP 116/76 mmHg.", "goal": "Reasoning: USPSTF 2022 modeling: aspirin for primary prevention in adults &lt;60 with &lt;10% 10y ASCVD risk is net neutral or harmful due to bleeding offset. Jim has CAC 0 and optimal Lp(a); his 10y ASCVD risk is well below threshold. Listed here so the lane shows the SoC rule fired and was correctly excluded.", "orders": [{"glyph": "✚", "label": "Aspirin for primary prevention (NOT recommended for this pat"}], "evidence": "Guideline: USPSTF 2022 Aspirin Use for Primary Prevention of CVD Grade D for adults 60+, Grade C 40-59 with low bleeding risk and >=10% 10y ASCVD risk. QALY 0.00 QALY gained (net neutral or negative) (published, in-population).", "author": "meridian", "symptom_derived": false}
+  {
+    "id": "SOCR-015",
+    "lane": "socRiskReduction",
+    "originalRank": 1,
+    "title": "Check hepatitis B immunity and vaccinate if nonimmune",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #1 · Cancer / hereditary genetics prevention and screening",
+    "do": "<strong>Check hepatitis B immunity and vaccinate if nonimmune</strong>. If anti-HBs or vaccination record shows nonimmunity, complete hepatitis B vaccination.",
+    "why": "Domain-first rank. HBsAg is negative, but immunity/vaccination status is not documented. A missing fact directly blocks a standard modeled-risk-lowering vaccination decision.",
+    "goal": "Prevent hepatitis B infection and downstream liver cancer risk.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Check hepatitis B immunity and vaccinate if nonimmune"
+      }
+    ],
+    "evidence": "Hepatitis B vaccination is standard prevention for susceptible adults and reduces hepatitis B-related liver disease risk.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCR-013",
+    "lane": "socRiskReduction",
+    "originalRank": 2,
+    "title": "Keep alcohol intake low and avoid binge patterns",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #2 · Cancer / hereditary genetics prevention and screening",
+    "do": "<strong>Keep alcohol intake low and avoid binge patterns</strong>. Maintain low intake and avoid binge drinking, especially around poor sleep, dehydration, or orthostatic symptoms.",
+    "why": "Domain-first rank. Alcohol is currently moderate at about 3 drinks/week; higher intake would increase cancer, BP, sleep, and metabolic risk. Prevents worsening of multiple modeled risk domains.",
+    "goal": "Prevent alcohol-related cancer, BP, sleep, liver, and injury risk.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Keep alcohol intake low and avoid binge patterns"
+      }
+    ],
+    "evidence": "Limiting alcohol is standard preventive care for cancer and cardiometabolic risk reduction.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCR-014",
+    "lane": "socRiskReduction",
+    "originalRank": 3,
+    "title": "Continue complete tobacco and nicotine avoidance",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #3 · Cancer / hereditary genetics prevention and screening",
+    "do": "<strong>Continue complete tobacco and nicotine avoidance</strong>. Avoid smoking, vaping, nicotine products, and meaningful secondhand smoke exposure.",
+    "why": "Domain-first rank. Never-smoker status is highly protective; ATM carrier context makes avoidable carcinogen exposure especially important. Directly maintains a major risk-lowering exposure profile.",
+    "goal": "Maintain zero tobacco exposure.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Continue complete tobacco and nicotine avoidance"
+      }
+    ],
+    "evidence": "Tobacco avoidance is a core standard-care risk-reduction action for cancer, cardiovascular, pulmonary, and pancreatic risk.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 3
+  },
+  {
+    "id": "SOCR-006",
+    "lane": "socRiskReduction",
+    "originalRank": 4,
+    "title": "Start physical therapy-guided low-back and hip tendon rehab",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #1 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Start physical therapy-guided low-back and hip tendon rehab</strong>. Referral to physical therapy for diagnosis-informed loading, mobility, trunk/hip strengthening, and return-to-sport plan.",
+    "why": "Domain-first rank. Current worsening low back pain and hip/glute tendon insertion tenderness threaten activity, sleep, and quality of life. Treating the active pain driver can materially protect long-term activity and cardiometabolic risk reduction.",
+    "goal": "Reduce pain and preserve training capacity.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Start physical therapy-guided low-back and hip tendon reha"
+      }
+    ],
+    "evidence": "Exercise-based rehabilitation and activity guidance are standard first-line care for most non-red-flag low-back and tendon pain.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCR-007",
+    "lane": "socRiskReduction",
+    "originalRank": 5,
+    "title": "Use training load management and cross-training during pain flares",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #2 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Use training load management and cross-training during pain flares</strong>. Temporarily substitute lower-irritation aerobic modes and adjust intensity, volume, hills, impacts, or BJJ/snowboard load during flares.",
+    "why": "Domain-first rank. High activity load may be interacting with active tendon/back symptoms. Protects the patient’s main cross-domain risk-reducing behavior.",
+    "goal": "Avoid deconditioning while preventing symptom escalation.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Use training load management and cross-training during pai"
+      }
+    ],
+    "evidence": "Load modification is standard management for overuse and tendon-related pain while maintaining physical activity benefits.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCR-003",
+    "lane": "socRiskReduction",
+    "originalRank": 6,
+    "title": "Add viscous fiber and plant-forward lipid lowering foods",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #3 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Add viscous fiber and plant-forward lipid lowering foods</strong>. Increase oats/barley, beans/lentils, psyllium if tolerated, vegetables, fruit, nuts, and soy or other plant proteins.",
+    "why": "Domain-first rank. Modest LDL-C/apoB burden and long-term cardiometabolic prevention. Targets measured lipid risk and future diabetes prevention.",
+    "goal": "Lower LDL-C/non-HDL-C and support glycemic stability.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Add viscous fiber and plant-forward lipid lowering foods"
+      }
+    ],
+    "evidence": "Soluble fiber and plant-forward dietary patterns are standard nonpharmacologic tools for LDL and metabolic risk reduction.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 3
+  },
+  {
+    "id": "SOCR-004",
+    "lane": "socRiskReduction",
+    "originalRank": 7,
+    "title": "Preserve high cardiorespiratory fitness without adding load",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #4 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Preserve high cardiorespiratory fitness without adding load</strong>. Maintain aerobic training consistency while reducing pain-provoking intensity, volume, or terrain as needed.",
+    "why": "Domain-first rank. Active back/hip tendon pain could erode the high-fitness state that lowers cardiometabolic and neurocognitive risk. Preserves a major current risk-reducing asset.",
+    "goal": "Sustain high CRF and weekly activity without worsening pain.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Preserve high cardiorespiratory fitness without adding loa"
+      }
+    ],
+    "evidence": "Regular aerobic activity and high CRF are standard protective factors for CVD, diabetes, and cognitive health.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 4
+  },
+  {
+    "id": "SOCR-005",
+    "lane": "socRiskReduction",
+    "originalRank": 8,
+    "title": "Use progressive resistance training for metabolic and musculoskeletal resilience",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #5 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Use progressive resistance training for metabolic and musculoskeletal resilience</strong>. Continue or implement structured resistance training with pain-aware progression.",
+    "why": "Domain-first rank. Need to preserve lean mass, insulin sensitivity, bone/tendon capacity, and exercise continuity. Expected to reduce metabolic and functional risk while supporting the protective activity phenotype.",
+    "goal": "Maintain strength and lean mass while reducing injury recurrence risk.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Use progressive resistance training for metabolic and musc"
+      }
+    ],
+    "evidence": "Resistance training is standard prevention for metabolic health, functional capacity, and musculoskeletal durability.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 5
+  },
+  {
+    "id": "SOCR-010",
+    "lane": "socRiskReduction",
+    "originalRank": 9,
+    "title": "Maintain normotension with BP-protective lifestyle",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #6 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Maintain normotension with BP-protective lifestyle</strong>. Continue regular activity, high-potassium whole foods, prudent sodium intake, healthy weight, and alcohol moderation.",
+    "why": "Domain-first rank. Blood pressure is currently favorable at 116/76; preserving it lowers CVD, CKD, and neurocognitive risk. Preserves a strong protective risk factor.",
+    "goal": "Sustain clinic and home BP in normotensive range.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Maintain normotension with BP-protective lifestyle"
+      }
+    ],
+    "evidence": "Maintaining normal BP is a core standard-care lever for reducing cardiovascular, renal, and cognitive risk.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 6
+  },
+  {
+    "id": "SOCR-011",
+    "lane": "socRiskReduction",
+    "originalRank": 10,
+    "title": "Maintain healthy weight and waist trajectory",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #7 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Maintain healthy weight and waist trajectory</strong>. Maintain BMI/waist stability through protein adequacy, resistance training, fiber-rich diet, and activity continuity.",
+    "why": "Domain-first rank. Diabetes risk is currently low, but East Asian ancestry can confer metabolic risk at lower BMI. Targets future metabolic risk in a patient with currently favorable markers.",
+    "goal": "Prevent central adiposity, insulin resistance, and diabetes onset.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Maintain healthy weight and waist trajectory"
+      }
+    ],
+    "evidence": "Weight stability, resistance training, and diet quality are standard diabetes and cardiometabolic prevention tools.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 7
+  },
+  {
+    "id": "SOCR-012",
+    "lane": "socRiskReduction",
+    "originalRank": 11,
+    "title": "Preserve consistent 7–8 hour sleep opportunity",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #8 · Musculoskeletal pain and activity-continuity preservation",
+    "do": "<strong>Preserve consistent 7–8 hour sleep opportunity</strong>. Maintain regular sleep schedule, sufficient sleep opportunity, and recovery routines around training and pain flares.",
+    "why": "Domain-first rank. Sleep duration is currently about 7.1 hours with good efficiency; preserving sleep supports metabolic, cardiovascular, and neurocognitive risk reduction. Preserves an existing protective factor across modeled domains.",
+    "goal": "Sustain restorative sleep and avoid chronic sleep restriction.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Preserve consistent 7–8 hour sleep opportunity"
+      }
+    ],
+    "evidence": "Adequate, regular sleep is standard prevention support for cardiometabolic and cognitive health.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 8
+  },
+  {
+    "id": "SOCR-001",
+    "lane": "socRiskReduction",
+    "originalRank": 12,
+    "title": "Use an LDL/apoB-lowering dietary pattern",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #1 · Orthostatic symptoms / autonomic safety",
+    "do": "<strong>Use an LDL/apoB-lowering dietary pattern</strong>. Adopt a Mediterranean/DASH-style pattern emphasizing unsaturated fats, minimally processed foods, legumes, nuts, vegetables, and fish.",
+    "why": "Domain-first rank. Modest atherogenic particle burden despite CAC=0 and non-elevated Lp(a). This is a standard-care lifestyle intervention expected to reduce modeled ASCVD risk.",
+    "goal": "Lower LDL-C, non-HDL-C, and apoB from current baseline.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Use an LDL/apoB-lowering dietary pattern"
+      }
+    ],
+    "evidence": "Standard dietary patterns that replace saturated fat and refined foods with unsaturated fats and high-fiber whole foods lower atherogenic lipids and CVD risk.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 1
+  },
+  {
+    "id": "SOCR-009",
+    "lane": "socRiskReduction",
+    "originalRank": 13,
+    "title": "Use orthostatic safety behaviors",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #2 · Orthostatic symptoms / autonomic safety",
+    "do": "<strong>Use orthostatic safety behaviors</strong>. Rise slowly, hydrate, avoid abrupt standing after heat/exertion/alcohol, and use counter-pressure or sitting when symptoms start.",
+    "why": "Domain-first rank. Intermittent standing lightheadedness sometimes requires sitting down. Directly reduces injury risk from a current symptom.",
+    "goal": "Prevent presyncope, falls, and injury.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Use orthostatic safety behaviors"
+      }
+    ],
+    "evidence": "Conservative orthostatic precautions are standard first-line safety measures for intermittent low-burden orthostatic symptoms.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 2
+  },
+  {
+    "id": "SOCR-002",
+    "lane": "socRiskReduction",
+    "originalRank": 14,
+    "title": "Replace saturated fat with unsaturated fat",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #3 · Orthostatic symptoms / autonomic safety",
+    "do": "<strong>Replace saturated fat with unsaturated fat</strong>. Reduce butter, high-fat dairy, processed meats, and coconut/palm fats; use olive oil, nuts, seeds, avocado, and fish.",
+    "why": "Domain-first rank. LDL-C 121 mg/dL and apoB 96 mg/dL leave room for lipid risk reduction. Directly targets a measured modeled CVD risk driver.",
+    "goal": "Lower LDL-C and apoB without reducing overall diet quality.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Replace saturated fat with unsaturated fat"
+      }
+    ],
+    "evidence": "Standard lipid prevention advice supports unsaturated-fat substitution to lower LDL-C and apoB-containing particles.",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 3
+  },
+  {
+    "id": "SOCR-008",
+    "lane": "socRiskReduction",
+    "originalRank": 15,
+    "title": "Avoid chronic NSAID exposure for musculoskeletal pain",
+    "severity": "SoC Risk Reduction",
+    "timing": "Domain #1 · Renal, gout-history closure, and medication safety",
+    "do": "<strong>Avoid chronic NSAID exposure for musculoskeletal pain</strong>. Prefer rehab, topical options, short courses only when appropriate, and clinician guidance rather than chronic oral NSAIDs.",
+    "why": "Domain-first rank. Active pain could lead to repeated NSAID use; kidney markers show creatinine-cystatin discordance though albuminuria is normal. Reduces iatrogenic renal and cardiovascular risk while managing active pain.",
+    "goal": "Reduce avoidable kidney, blood pressure, GI, and cardiovascular adverse effects.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Avoid chronic NSAID exposure for musculoskeletal pain"
+      }
+    ],
+    "evidence": "Standard safety practice limits chronic NSAID exposure, especially when renal or cardiovascular tradeoffs are relevant.",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Renal, gout-history closure, and medication safety",
+    "domain_rank": 1
+  }
 ];
 
-  // ---- ADJUNCT OPTIONS · canonical SPAREQ with adjunct-calibrated Q v0.1 ----
+  // ---- Adjunct Options · v0.5 domain-opportunity engine output ----
   const ADJUNCTS = [
-  {"id": "ADJ-012", "lane": "adjuncts", "originalRank": 1, "title": "Protein-distribution and resistance-load protocol for sarcopenia/bone runway", "severity": "Adjunct", "timing": "T1 | within-tier sort effect size x confidence", "do": "<strong>Protein-distribution and resistance-load protocol for sarcopenia/bone runway</strong>", "why": "Tier: T1. Patient signal: Multi-decade sarcopenia and bone-loss trajectory is a high-severity, high-probability runway for a lean 47M endurance-skewed athlete; combined per-meal protein distribution at ~1.6 g/kg with progressi", "goal": "Evidence basis: ~1.6 g/kg protein + progressive resistance — meta-analyses + guideline endorsement (DVO) for fracture prevention.", "orders": [{"glyph": "✚", "label": "Protein-distribution and resistance-load protocol for sarcop"}], "evidence": "T1. ~1.6 g/kg protein + progressive resistance — meta-analyses + guideline endorsement (DVO) for fracture prevention.", "evidence_grade": "t1", "primary_axis": "sarcopenia", "author": "meridian"},
-  {"id": "ADJ-011", "lane": "adjuncts", "originalRank": 2, "title": "Vitamin K2 (MK-7) supplementation as bone and vascular calcification adjunct", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Vitamin K2 (MK-7) supplementation as bone and vascular calcification adjunct</strong>", "why": "Tier: T2. Patient signal: MK-7 has consistent biomarker effects (lowers dp-ucMGP, increases osteocalcin carboxylation) with modest signals on arterial stiffness and BMD, but hard-outcome data for CV events or fracture are lack", "goal": "Evidence basis: K2 MK-7 — RCTs on arterial stiffness, dp-ucMGP; coronary calc progression mixed.", "orders": [{"glyph": "✚", "label": "Vitamin K2 (MK-7) supplementation as bone and vascular calci"}], "evidence": "T2. K2 MK-7 — RCTs on arterial stiffness, dp-ucMGP; coronary calc progression mixed.", "evidence_grade": "t2", "primary_axis": "bone_vascular", "author": "meridian"},
-  {"id": "ADJ-013", "lane": "adjuncts", "originalRank": 3, "title": "Indoor air-quality optimization: HEPA filtration, gas-stove ventilation, AQI-triggered mask use", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Indoor air-quality optimization: HEPA filtration, gas-stove ventilation, AQI-triggered mask use</strong>", "why": "Tier: T2. Patient signal: PM2.5 reduction via HEPA filtration and N95 use during wildfire/high-AQI events has SR/MA-level human evidence for biomarker and respiratory benefit, plus mechanistic dose-response links to CV events ", "goal": "Evidence basis: HEPA filtration + N95 — SR/MA for indoor PM2.5 reduction; biomarker RCTs (AHA) for CV markers.", "orders": [{"glyph": "✚", "label": "Indoor air-quality optimization: HEPA filtration, gas-stove "}], "evidence": "T2. HEPA filtration + N95 — SR/MA for indoor PM2.5 reduction; biomarker RCTs (AHA) for CV markers.", "evidence_grade": "t2", "primary_axis": "cancer_offense", "author": "meridian"},
-  {"id": "ADJ-009", "lane": "adjuncts", "originalRank": 4, "title": "Tart cherry intake as adjunct urate-lowering nutritional lever", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Tart cherry intake as adjunct urate-lowering nutritional lever</strong>", "why": "Tier: T2. Patient signal: Tart cherry has plausible mechanism (anthocyanin-mediated xanthine oxidase inhibition) and supportive but methodologically weak evidence for modest serum urate reduction and reduced gout flare frequen", "goal": "Evidence basis: Tart cherry urate-lowering — small RCTs with biomarker (serum urate) endpoint.", "orders": [{"glyph": "✚", "label": "Tart cherry intake as adjunct urate-lowering nutritional lev"}], "evidence": "T2. Tart cherry urate-lowering — small RCTs with biomarker (serum urate) endpoint.", "evidence_grade": "t2", "primary_axis": "gout_urate", "author": "meridian"},
-  {"id": "ADJ-001", "lane": "adjuncts", "originalRank": 5, "title": "Raise omega-3 index toward ≥8% via oily-fish frequency or EPA/DHA supplementation", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Raise omega-3 index toward ≥8% via oily-fish frequency or EPA/DHA supplementation</strong>", "why": "Tier: T2. Patient signal: Raising omega-3 index via fish or modest EPA/DHA is a low-burden adjunct with consistent TG-lowering and plausible CV-mechanism benefit; in a low-risk, CAC=0, fit 47M with measured low omega-3 index, ", "goal": "Evidence basis: Omega-3 index ≥8% via fish/EPA-DHA — biomarker RCTs (ApoB/oxLDL); mixed hard-outcome data (REDUCE-IT, STRENGTH).", "orders": [{"glyph": "✚", "label": "Raise omega-3 index toward ≥8% via oily-fish frequency or EP"}], "evidence": "T2. Omega-3 index ≥8% via fish/EPA-DHA — biomarker RCTs (ApoB/oxLDL); mixed hard-outcome data (REDUCE-IT, STRENGTH).", "evidence_grade": "t2", "primary_axis": "lipid_apoB", "author": "meridian"},
-  {"id": "ADJ-002", "lane": "adjuncts", "originalRank": 6, "title": "Add viscous soluble fiber (psyllium or oat beta-glucan) targeting ApoB reduction", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Add viscous soluble fiber (psyllium or oat beta-glucan) targeting ApoB reduction</strong>", "why": "Tier: T2. Patient signal: Viscous soluble fiber (psyllium/beta-glucan) has consistent meta-analytic evidence for modest LDL-C and ApoB reduction (~5-10%) in adults, supporting a real but small action effect on a patient with b", "goal": "Evidence basis: Psyllium/oat β-glucan — biomarker meta-analyses for ApoB/LDL reduction; modest effect.", "orders": [{"glyph": "✚", "label": "Add viscous soluble fiber (psyllium or oat beta-glucan) targ"}], "evidence": "T2. Psyllium/oat β-glucan — biomarker meta-analyses for ApoB/LDL reduction; modest effect.", "evidence_grade": "t2", "primary_axis": "lipid_apoB", "author": "meridian"},
-  {"id": "ADJ-010", "lane": "adjuncts", "originalRank": 7, "title": "Extra-virgin olive oil substitution as primary fat source for oxLDL and ApoB context", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Extra-virgin olive oil substitution as primary fat source for oxLDL and ApoB context</strong>", "why": "Tier: T2. Patient signal: Patient has elevated ApoB (96) and oxLDL (54 U/L) with Lp(a) 72 nmol/L on an otherwise clean CV phenotype; substituting high-polyphenol EVOO as principal added fat has consistent human RCT/meta-analyt", "goal": "Evidence basis: High-phenolic EVOO — RCTs with oxLDL/ApoB biomarker endpoints; EFSA health claim.", "orders": [{"glyph": "✚", "label": "Extra-virgin olive oil substitution as primary fat source fo"}], "evidence": "T2. High-phenolic EVOO — RCTs with oxLDL/ApoB biomarker endpoints; EFSA health claim.", "evidence_grade": "t2", "primary_axis": "lipid_apoB", "author": "meridian"},
-  {"id": "ADJ-014", "lane": "adjuncts", "originalRank": 8, "title": "Structured fermentable-fiber and fermented-food load for ApoB, inflammation, and microbiome diversity", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Structured fermentable-fiber and fermented-food load for ApoB, inflammation, and microbiome diversity</strong>", "why": "Tier: T2. Patient signal: In a 47M with ApoB 96, oxLDL 54, and mildly elevated hs-CRP, structured high-fiber plus fermented-food intake has consistent human-trial evidence for modest ApoB/LDL reductions (≈5–10%) via soluble fi", "goal": "Evidence basis: Fiber + fermented foods — biomarker RCTs (ApoB, microbiome diversity, hs-CRP).", "orders": [{"glyph": "✚", "label": "Structured fermentable-fiber and fermented-food load for Apo"}], "evidence": "T2. Fiber + fermented foods — biomarker RCTs (ApoB, microbiome diversity, hs-CRP).", "evidence_grade": "t2", "primary_axis": "lipid_apoB", "author": "meridian"},
-  {"id": "ADJ-007", "lane": "adjuncts", "originalRank": 9, "title": "Tendon-insertion remodeling protocol: heavy slow resistance and isometric loading for hip-flexor/glute enthesopathy", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Tendon-insertion remodeling protocol: heavy slow resistance and isometric loading for hip-flexor/glute enthesopathy</strong>", "why": "Tier: T2. Patient signal: Heavy slow resistance and isometric loading have RCT and systematic review support in patellar and Achilles tendinopathy and are extrapolated to hip-region enthesopathy with reasonable analog strength", "goal": "Evidence basis: HSR/isometric tendon loading — biomarker RCTs for tendinopathy resolution; well-studied.", "orders": [{"glyph": "✚", "label": "Tendon-insertion remodeling protocol: heavy slow resistance "}], "evidence": "T2. HSR/isometric tendon loading — biomarker RCTs for tendinopathy resolution; well-studied.", "evidence_grade": "t2", "primary_axis": "msk_tendon", "author": "meridian"},
-  {"id": "ADJ-006", "lane": "adjuncts", "originalRank": 10, "title": "Orthostatic countermeasures and sodium/fluid pre-loading routine", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Orthostatic countermeasures and sodium/fluid pre-loading routine</strong>", "why": "Tier: T2. Patient signal: Counter-pressure maneuvers and modest fluid/sodium pre-loading have direct human evidence for reducing orthostatic/vasovagal symptoms, are essentially zero-cost, and fully reversible. In a lean athlet", "goal": "Evidence basis: Orthostatic countermeasures + sodium/fluid — biomarker RCT-level for symptom reduction; not hard outcome.", "orders": [{"glyph": "✚", "label": "Orthostatic countermeasures and sodium/fluid pre-loading rou"}], "evidence": "T2. Orthostatic countermeasures + sodium/fluid — biomarker RCT-level for symptom reduction; not hard outcome.", "evidence_grade": "t2", "primary_axis": "orthostatic", "author": "meridian"},
-  {"id": "ADJ-015", "lane": "adjuncts", "originalRank": 11, "title": "Light, temperature, and alcohol-timing protocol to lift sleep efficiency toward ≥92%", "severity": "Adjunct", "timing": "T2 | within-tier sort effect size x confidence", "do": "<strong>Light, temperature, and alcohol-timing protocol to lift sleep efficiency toward ≥92%</strong>", "why": "Tier: T2. Patient signal: Each component (morning bright light, evening dim light, cool bedroom ~18–19°C, no late alcohol) has independent human-biomarker support for improving sleep efficiency and circadian alignment in healt", "goal": "Evidence basis: Sleep efficiency tuning (light/temp/alcohol-timing) — biomarker RCT-level (sleep architecture markers).", "orders": [{"glyph": "✚", "label": "Light, temperature, and alcohol-timing protocol to lift slee"}], "evidence": "T2. Sleep efficiency tuning (light/temp/alcohol-timing) — biomarker RCT-level (sleep architecture markers).", "evidence_grade": "t2", "primary_axis": "sleep_recovery", "author": "meridian"},
-  {"id": "ADJ-004", "lane": "adjuncts", "originalRank": 12, "title": "Establish ALARA imaging preference and lifetime dose log for ATM carrier", "severity": "Adjunct", "timing": "T3 | within-tier sort effect size x confidence", "do": "<strong>Establish ALARA imaging preference and lifetime dose log for ATM carrier</strong>", "why": "Tier: T3. Patient signal: ATM heterozygotes have biologically plausible elevated sensitivity to ionizing radiation, and human data in DNA-repair mutation carriers show measurable radiation-associated secondary cancer signals; ", "goal": "Evidence basis: ALARA imaging stewardship — mechanism (DSB load in ATM) + epidemiological signal (lifetime radiation dose and cancer).", "orders": [{"glyph": "✚", "label": "Establish ALARA imaging preference and lifetime dose log for"}], "evidence": "T3. ALARA imaging stewardship — mechanism (DSB load in ATM) + epidemiological signal (lifetime radiation dose and cancer).", "evidence_grade": "t3", "primary_axis": "cancer_offense", "author": "meridian"},
-  {"id": "ADJ-005", "lane": "adjuncts", "originalRank": 13, "title": "Reduce alcohol below current ~3 drinks/week or implement alcohol-free weeks", "severity": "Adjunct", "timing": "T3 | within-tier sort effect size x confidence", "do": "<strong>Reduce alcohol below current ~3 drinks/week or implement alcohol-free weeks</strong>", "why": "Tier: T3. Patient signal: At ~3 drinks/week, baseline absolute risk contributions to cancer, urate, HRV, and sleep are modest but non-zero; reduction is low-cost, dose-responsive across multiple axes (urate, sleep/HR, acetalde", "goal": "Evidence basis: Alcohol reduction — mechanism (acetaldehyde DSB) + extensive epi for alcohol/cancer/all-cause mortality.", "orders": [{"glyph": "✚", "label": "Reduce alcohol below current ~3 drinks/week or implement alc"}], "evidence": "T3. Alcohol reduction — mechanism (acetaldehyde DSB) + extensive epi for alcohol/cancer/all-cause mortality.", "evidence_grade": "t3", "primary_axis": "cancer_offense", "author": "meridian"},
-  {"id": "ADJ-008", "lane": "adjuncts", "originalRank": 14, "title": "Collagen peptide + vitamin C dosed 30–60 minutes before tendon loading sessions", "severity": "Adjunct", "timing": "T4 | within-tier sort effect size x confidence", "do": "<strong>Collagen peptide + vitamin C dosed 30–60 minutes before tendon loading sessions</strong>", "why": "Tier: T4. Patient signal: For a 47M with chronic hip-flexor/glute/low-back tendon symptoms in an active loading-rehab phase, pre-loading collagen + vitamin C is a low-burden adjunct with plausible mechanism (Shaw-type gelatin ", "goal": "Evidence basis: Collagen + vit C peri-loading — small RCT signal in close-analog populations (tendon synthesis markers).", "orders": [{"glyph": "✚", "label": "Collagen peptide + vitamin C dosed 30–60 minutes before tend"}], "evidence": "T4. Collagen + vit C peri-loading — small RCT signal in close-analog populations (tendon synthesis markers).", "evidence_grade": "t4", "primary_axis": "msk_tendon", "author": "meridian"},
-  {"id": "ADJ-003", "lane": "adjuncts", "originalRank": 15, "title": "Daily cruciferous vegetable intake for ATM-context DNA-damage biomarker support", "severity": "Adjunct", "timing": "T5 | within-tier sort effect size x confidence", "do": "<strong>Daily cruciferous vegetable intake for ATM-context DNA-damage biomarker support</strong>", "why": "Tier: T5. Patient signal: Cruciferous vegetable intake has robust human mechanistic and biomarker evidence (Nrf2 induction, phase-II enzymes, oxidative DNA-damage marker shifts) and is low-burden, broadly aligned with healthy-", "goal": "Evidence basis: Cruciferous for DDR support in ATM context — mechanism only; no human outcome data in DDR-impaired carriers.", "orders": [{"glyph": "✚", "label": "Daily cruciferous vegetable intake for ATM-context DNA-damag"}], "evidence": "T5. Cruciferous for DDR support in ATM context — mechanism only; no human outcome data in DDR-impaired carriers.", "evidence_grade": "t5", "primary_axis": "cancer_offense", "author": "meridian"}
+  {
+    "id": "ADJ-013",
+    "lane": "adjuncts",
+    "originalRank": 1,
+    "title": "High-salt smoked/preserved food exposure audit",
+    "severity": "Adjunct",
+    "timing": "Domain #1 · Cancer / hereditary genetics prevention and screening · epidemiology_plus_mechanism",
+    "do": "<strong>High-salt smoked/preserved food exposure audit</strong>. Review intake of heavily salted, smoked, cured, and processed meats/foods; reduce if frequent.",
+    "why": "Domain-first adjunct. Korean ancestry, ATM pathogenic variant, and paternal grandfather with GI cancer of unknown primary. Patient-specific genetic/family-history context makes a low-downside audit plausible.",
+    "goal": "Diet log, BP, adherence, GI symptoms if any.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "High-salt smoked/preserved food exposure audit"
+      }
+    ],
+    "evidence": "Salt-preserved, smoked, or processed foods have epidemiologic links to some GI cancer risks.",
+    "evidence_grade": "epidemiology_plus_mechanism",
+    "primary_axis": "cancer_genetics",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cancer / hereditary genetics prevention and screening",
+    "domain_rank": 1
+  },
+  {
+    "id": "ADJ-001",
+    "lane": "adjuncts",
+    "originalRank": 2,
+    "title": "Professional bike-fit and saddle/cleat/hip-angle audit",
+    "severity": "Adjunct",
+    "timing": "Domain #1 · Musculoskeletal pain and activity-continuity preservation · close_analog_human",
+    "do": "<strong>Professional bike-fit and saddle/cleat/hip-angle audit</strong>. Use a sports PT, bike fitter, or coach to assess reach, saddle height, cleat position, cadence, and pain triggers.",
+    "why": "Domain-first adjunct. Cycling-heavy activity profile plus active worsening low back and hip/glute insertion pain. Patient-specific active pain plus high cycling exposure makes this a plausible adjunct.",
+    "goal": "Pain during/after rides, next-day stiffness, training continuity.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Professional bike-fit and saddle/cleat/hip-angle audit"
+      }
+    ],
+    "evidence": "Reducing repeated lumbar/hip mechanical load may lower symptom provocation while preserving aerobic training.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "musculoskeletal_activity",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 1
+  },
+  {
+    "id": "ADJ-002",
+    "lane": "adjuncts",
+    "originalRank": 3,
+    "title": "Time-limited isometric-to-eccentric tendon loading trial",
+    "severity": "Adjunct",
+    "timing": "Domain #2 · Musculoskeletal pain and activity-continuity preservation · close_analog_human",
+    "do": "<strong>Time-limited isometric-to-eccentric tendon loading trial</strong>. Trial clinician-guided isometrics, then slow eccentrics, 2-3 days/week with pain-limited progression.",
+    "why": "Domain-first adjunct. Patient localizes pain to hip-flexor/glute tendon insertion points rather than muscle soreness. Active tendon-specific symptom signal supports optional targeted loading.",
+    "goal": "Insertion-point pain, morning stiffness, sitting/walking tolerance.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Time-limited isometric-to-eccentric tendon loading trial"
+      }
+    ],
+    "evidence": "Progressive tendon loading can improve tendon tolerance when dosed below flare threshold.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "musculoskeletal_activity",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 2
+  },
+  {
+    "id": "ADJ-003",
+    "lane": "adjuncts",
+    "originalRank": 4,
+    "title": "Core motor-control or Pilates-style back program",
+    "severity": "Adjunct",
+    "timing": "Domain #3 · Musculoskeletal pain and activity-continuity preservation · close_analog_human",
+    "do": "<strong>Core motor-control or Pilates-style back program</strong>. Add 15-25 minutes, 2-4 times/week, focused on trunk endurance, hip control, and graded range.",
+    "why": "Domain-first adjunct. Active worsening chronic low back pain with hip/glute soreness. Supports activity preservation without adding endurance volume.",
+    "goal": "Back pain score, perceived stability, missed workouts.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Core motor-control or Pilates-style back program"
+      }
+    ],
+    "evidence": "Motor-control and trunk endurance work may reduce recurrent mechanical low-back pain burden.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "musculoskeletal_activity",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 3
+  },
+  {
+    "id": "ADJ-006",
+    "lane": "adjuncts",
+    "originalRank": 5,
+    "title": "Short trial of manual therapy or sports massage",
+    "severity": "Adjunct",
+    "timing": "Domain #4 · Musculoskeletal pain and activity-continuity preservation · close_analog_human",
+    "do": "<strong>Short trial of manual therapy or sports massage</strong>. Use a 2-4 session trial as an adjunct to active rehab, not as stand-alone care.",
+    "why": "Domain-first adjunct. Active back/hip pain in a high-training-load context. May help active symptoms while preserving exercise trajectory.",
+    "goal": "Pain, range of motion, function, reliance on repeated sessions.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Short trial of manual therapy or sports massage"
+      }
+    ],
+    "evidence": "Manual therapy may provide short-term pain relief and improve tolerance for rehab exercise.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "musculoskeletal_activity",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 4
+  },
+  {
+    "id": "ADJ-005",
+    "lane": "adjuncts",
+    "originalRank": 6,
+    "title": "Local heat therapy for low-back symptom flares",
+    "severity": "Adjunct",
+    "timing": "Domain #5 · Musculoskeletal pain and activity-continuity preservation · close_analog_human",
+    "do": "<strong>Local heat therapy for low-back symptom flares</strong>. Use heat wrap or heating pad for short sessions during non-red-flag flares.",
+    "why": "Domain-first adjunct. Active chronic low back pain with current moderate burden. Low-cost optional support for active back pain.",
+    "goal": "Short-term pain relief and mobility after use.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Local heat therapy for low-back symptom flares"
+      }
+    ],
+    "evidence": "Superficial heat can reduce muscle guarding and short-term pain perception.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "musculoskeletal_activity",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 5
+  },
+  {
+    "id": "ADJ-004",
+    "lane": "adjuncts",
+    "originalRank": 7,
+    "title": "Mindfulness-based pain coping trial",
+    "severity": "Adjunct",
+    "timing": "Domain #6 · Musculoskeletal pain and activity-continuity preservation · close_analog_human",
+    "do": "<strong>Mindfulness-based pain coping trial</strong>. Try an 8-week app, class, or clinician-guided mindfulness pain program.",
+    "why": "Domain-first adjunct. Chronic active low back pain is the main current symptom burden. Targets pain burden and function with low physiologic downside.",
+    "goal": "Pain interference, sleep disruption, training avoidance.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Mindfulness-based pain coping trial"
+      }
+    ],
+    "evidence": "Attention regulation and pain reappraisal can reduce pain interference even when structural drivers persist.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "musculoskeletal_activity",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Musculoskeletal pain and activity-continuity preservation",
+    "domain_rank": 6
+  },
+  {
+    "id": "ADJ-007",
+    "lane": "adjuncts",
+    "originalRank": 8,
+    "title": "Hydration and electrolyte timing experiment for orthostatic episodes",
+    "severity": "Adjunct",
+    "timing": "Domain #1 · Orthostatic symptoms / autonomic safety · very_low_downside",
+    "do": "<strong>Hydration and electrolyte timing experiment for orthostatic episodes</strong>. Track episodes while testing fluids/electrolytes before heat exposure, long rides, or rapid standing.",
+    "why": "Domain-first adjunct. Intermittent standing lightheadedness in athletic low-resting-heart-rate phenotype with normal clinic BP. Current low-burden intermittent symptom with plausible low-risk mitigation.",
+    "goal": "Episode frequency, near-syncope, BP if available.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Hydration and electrolyte timing experiment for orthostati"
+      }
+    ],
+    "evidence": "Plasma-volume support may reduce orthostatic symptoms in susceptible contexts such as heat, exercise, or dehydration.",
+    "evidence_grade": "very_low_downside",
+    "primary_axis": "orthostatic_autonomic",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 1
+  },
+  {
+    "id": "ADJ-009",
+    "lane": "adjuncts",
+    "originalRank": 9,
+    "title": "Counter-pressure and slow-transition routine",
+    "severity": "Adjunct",
+    "timing": "Domain #2 · Orthostatic symptoms / autonomic safety · close_analog_human",
+    "do": "<strong>Counter-pressure and slow-transition routine</strong>. Use slow sit-to-stand, calf pumps, and brief pause before walking when rising quickly.",
+    "why": "Domain-first adjunct. Lightheadedness occurs when standing quickly. Directly targets the described trigger with low downside.",
+    "goal": "Need to sit down, near-faint sensations, falls.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Counter-pressure and slow-transition routine"
+      }
+    ],
+    "evidence": "Leg crossing, calf contraction, and staged standing can blunt transient orthostatic drops.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "orthostatic_autonomic",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 2
+  },
+  {
+    "id": "ADJ-008",
+    "lane": "adjuncts",
+    "originalRank": 10,
+    "title": "Graduated compression garment trial on trigger days",
+    "severity": "Adjunct",
+    "timing": "Domain #3 · Orthostatic symptoms / autonomic safety · close_analog_human",
+    "do": "<strong>Graduated compression garment trial on trigger days</strong>. Trial waist-high or thigh-high compression during long standing, travel, heat, or post-exercise periods.",
+    "why": "Domain-first adjunct. Occasional orthostatic lightheadedness sometimes requiring sitting down. Matches intermittent orthostatic phenotype without implying active cardiac disease.",
+    "goal": "Lightheaded episodes and tolerability.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Graduated compression garment trial on trigger days"
+      }
+    ],
+    "evidence": "Lower-body compression can reduce venous pooling and support orthostatic tolerance.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "orthostatic_autonomic",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Orthostatic symptoms / autonomic safety",
+    "domain_rank": 3
+  },
+  {
+    "id": "ADJ-010",
+    "lane": "adjuncts",
+    "originalRank": 11,
+    "title": "Psyllium soluble-fiber add-on",
+    "severity": "Adjunct",
+    "timing": "Domain #1 · Cardiometabolic / ASCVD risk optimization · human_biomarker",
+    "do": "<strong>Psyllium soluble-fiber add-on</strong>. Consider psyllium with water, titrated slowly, separated from medications/supplements.",
+    "why": "Domain-first adjunct. LDL-C 121 mg/dL and apoB 96 mg/dL with CAC=0 and otherwise low near-term CVD framing. Patient has modest lipid biomarker signal but not high-risk escalation.",
+    "goal": "LDL-C, apoB, GI tolerance.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Psyllium soluble-fiber add-on"
+      }
+    ],
+    "evidence": "Viscous soluble fiber can modestly lower LDL-C by reducing intestinal cholesterol reabsorption.",
+    "evidence_grade": "human_biomarker",
+    "primary_axis": "cardiometabolic_ascvd",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cardiometabolic / ASCVD risk optimization",
+    "domain_rank": 1
+  },
+  {
+    "id": "ADJ-014",
+    "lane": "adjuncts",
+    "originalRank": 12,
+    "title": "Optional APOE genotyping with pretest counseling",
+    "severity": "Adjunct",
+    "timing": "Domain #2 · Cardiometabolic / ASCVD risk optimization · mechanism_plus_human_signal",
+    "do": "<strong>Optional APOE genotyping with pretest counseling</strong>. Offer only with discussion of limits, privacy, anxiety risk, and lack of deterministic prediction.",
+    "why": "Domain-first adjunct. APOE genotype not collected; neuro model otherwise low risk but notes APOE as high-value optional stratifier. Preference-sensitive optional risk stratification fits adjunct lane.",
+    "goal": "Patient preference, understanding, and downstream behavior changes.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Optional APOE genotyping with pretest counseling"
+      }
+    ],
+    "evidence": "APOE status can materially alter dementia risk interpretation and may affect preferences for prevention intensity.",
+    "evidence_grade": "mechanism_plus_human_signal",
+    "primary_axis": "cardiometabolic_ascvd",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cardiometabolic / ASCVD risk optimization",
+    "domain_rank": 2
+  },
+  {
+    "id": "ADJ-011",
+    "lane": "adjuncts",
+    "originalRank": 13,
+    "title": "Plant sterol or stanol food trial",
+    "severity": "Adjunct",
+    "timing": "Domain #3 · Cardiometabolic / ASCVD risk optimization · human_biomarker",
+    "do": "<strong>Plant sterol or stanol food trial</strong>. Use fortified foods or sterol products as a defined trial if compatible with diet preferences.",
+    "why": "Domain-first adjunct. Modest LDL/apoB burden with low near-term plaque signal from CAC=0. Fits modest lipid optimization without over-escalation.",
+    "goal": "LDL-C and apoB after dietary trial.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Plant sterol or stanol food trial"
+      }
+    ],
+    "evidence": "Plant sterols reduce intestinal cholesterol absorption and can improve LDL-C biomarkers.",
+    "evidence_grade": "human_biomarker",
+    "primary_axis": "cardiometabolic_ascvd",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cardiometabolic / ASCVD risk optimization",
+    "domain_rank": 3
+  },
+  {
+    "id": "ADJ-012",
+    "lane": "adjuncts",
+    "originalRank": 14,
+    "title": "Fatty-fish or EPA/DHA trial to raise omega-3 index",
+    "severity": "Adjunct",
+    "timing": "Domain #4 · Cardiometabolic / ASCVD risk optimization · human_biomarker",
+    "do": "<strong>Fatty-fish or EPA/DHA trial to raise omega-3 index</strong>. Increase low-mercury fatty fish or consider EPA/DHA supplement with clinician review.",
+    "why": "Domain-first adjunct. Omega-3 index is 5.1%. Specific biomarker signal supports an optional monitored trial.",
+    "goal": "Omega-3 index, triglycerides, bleeding/bruising symptoms if high dose.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Fatty-fish or EPA/DHA trial to raise omega-3 index"
+      }
+    ],
+    "evidence": "Marine omega-3 intake raises omega-3 index and can improve triglyceride/inflammatory biomarker patterns in some people.",
+    "evidence_grade": "human_biomarker",
+    "primary_axis": "cardiometabolic_ascvd",
+    "author": "meridian",
+    "symptom_derived": false,
+    "domain": "Cardiometabolic / ASCVD risk optimization",
+    "domain_rank": 4
+  },
+  {
+    "id": "ADJ-015",
+    "lane": "adjuncts",
+    "originalRank": 15,
+    "title": "Optional couples or sex-therapy referral",
+    "severity": "Adjunct",
+    "timing": "Domain #1 · Neurocognitive, psychosocial, and sexual-health preferences · close_analog_human",
+    "do": "<strong>Optional couples or sex-therapy referral</strong>. Offer referral only if patient wants support; clarify goals and partner involvement.",
+    "why": "Domain-first adjunct. Sexual-frequency dissatisfaction and relationship attraction uncertainty with preserved libido and testosterone 620. Active psychosocial signal with preserved libido makes counseling preference-sensitive.",
+    "goal": "Distress level, relationship satisfaction, sexual-function concerns if present.",
+    "orders": [
+      {
+        "glyph": "✚",
+        "label": "Optional couples or sex-therapy referral"
+      }
+    ],
+    "evidence": "Structured communication and sex therapy can improve relationship and sexual satisfaction when distress is preference-sensitive.",
+    "evidence_grade": "close_analog_human",
+    "primary_axis": "neuro_psych_sexual",
+    "author": "meridian",
+    "symptom_derived": true,
+    "domain": "Neurocognitive, psychosocial, and sexual-health preferences",
+    "domain_rank": 1
+  }
 ];
 
   // ---- EXCLUDED / WATCHLIST · audit only, not active actions ----
   const ADJUNCTS_CONTRAINDICATED = [
   {
-    "name": "Do not repeat or escalate management from superseded elevated Lp(a) value",
-    "reason": "Current authoritative Lp(a) is already completed and recorded as 72 nmol/L, marked optimal; payload explicitly warns not to use the superseded 62 mg/dL value. Status change: A verified new Lp(a) result from a reliable lab showing elevation in correct units, or documentation that the current value was erroneous."
+    "name": "Lipid-clinic referral solely for elevated Lp(a)",
+    "reason": "Current authoritative Lp(a) is 72 nmol/L and should not be treated as elevated. Status change: Confirmed repeat Lp(a) in an elevated range or new high-risk ASCVD finding. Could create unnecessary escalation from superseded data."
   },
   {
-    "name": "Whole-body MRI or whole-body CT screening in an asymptomatic adult",
-    "reason": "No symptom, focal abnormality, or defined hereditary syndrome pathway in the supplied payload supports whole-body imaging; CAC=0 and quiet systemic signals reduce the rationale for broad exploratory imaging. Status change: New focal symptoms, abnormal exam/labs, a syndrome-specific surveillance indication, or clinician-documented diagnostic question that a targeted imaging test would answer."
+    "name": "PCSK9 inhibitor for primary prevention based on stale Lp(a)",
+    "reason": "No ASCVD, CAC=0, and current Lp(a) is not elevated; LDL-C/ApoB are moderate, not a standalone trigger here. Status change: Clinical ASCVD, markedly higher LDL/ApoB, high-risk imaging, or specialist indication. Cost, injection burden, and overtreatment risk."
   },
   {
-    "name": "Immediate CCTA or carotid IMT after CAC=0 without symptoms",
-    "reason": "Additional vascular imaging is not supported as an immediate next step because CAC=0 is already available and the patient lacks ASCVD history, diabetes, hypertension, smoking, elevated Lp(a), or anginal symptoms in the payload. Status change: New exertional chest symptoms, abnormal stress testing, major risk reclassification, strong clinician concern, or elapsed CAC interval sufficient to reopen imaging discussion."
+    "name": "Aspirin for primary prevention due to presumed high Lp(a)",
+    "reason": "The presumed high-Lp(a) trigger is invalid; CAC=0 and low-risk context do not support routine aspirin. Status change: New ASCVD diagnosis or clinician-directed indication after bleeding-risk review. Bleeding risk without clear patient-specific benefit."
   },
   {
-    "name": "Curiosity-based APOE, Alzheimer blood biomarkers, amyloid PET, or brain MRI",
-    "reason": "The supplied data show no cognitive symptoms, no first-degree dementia family history, high fitness, and neuro imaging marked as not standard onboarding; testing would not currently unlock a standard clinical action. Status change: Cognitive symptoms, abnormal cognitive screening, strong family history, enrollment in a research protocol with counseling, or validated clinical pathway where the result changes management."
+    "name": "Repeat CAC scan now",
+    "reason": "CAC has already been completed and is 0; immediate repeat would not resolve a current decision. Status change: Appropriate interval reassessment or major change in risk status. Unnecessary radiation, cost, and duplicate testing."
   },
   {
-    "name": "Aspirin or metformin solely for primary prevention/longevity",
-    "reason": "Patient has no ASCVD, no diabetes, no hypertension, BMI 23, HbA1c 5.3%, fasting glucose 88 mg/dL, CAC=0, and no current medication indication in the payload. Status change: A new standard indication such as diagnosed diabetes/prediabetes meeting treatment criteria, ASCVD, substantially changed vascular risk, or clinician-documented indication after shared decision-making."
+    "name": "CCTA screening solely to look for plaque despite CAC=0",
+    "reason": "No symptoms, CAC=0, and low near-term risk framing; CCTA is not needed as routine screening here. Status change: Exertional chest pain, concerning symptoms, abnormal stress testing, or specialist rationale. Radiation, contrast exposure, incidental findings, and downstream testing."
   },
   {
-    "name": "Non-prescribed lipid-lowering supplement stack for modest LDL-C/ApoB",
-    "reason": "Rejected because the patient’s lipid signal is modest and contextualized by CAC=0, optimal Lp(a), normal BP, normal glycemia, no smoking, and high fitness. Supplement stacks such as red yeast rice or high-dose niacin are not the appropriate substitute for standard lipid risk management and may add avoidable adverse-effect or product-quality risk. Status change: A clinician-documented indication for lipid-lowering therapy or a patient preference discussion that still favors regulated, evidence-based options over unregulated supplement products."
+    "name": "LDCT lung cancer screening",
+    "reason": "Never-smoker with 0 pack-years; LDCT screening eligibility is not met. Status change: A qualifying smoking exposure history or separate diagnostic indication. False positives, radiation, and unnecessary follow-up."
   },
   {
-    "name": "Kidney-stressor exposure as if creatinine-cystatin mismatch were irrelevant",
-    "reason": "Rejected as an action candidate because the creatinine-cystatin discordance should not be used to justify avoidable kidney stressors such as casual frequent NSAID use, dehydration-tolerant endurance training, or elective contrast exposure without ordinary precautions. Status change: A medically necessary NSAID or contrast exposure with clinician-directed risk mitigation, or serial renal data confirming stable kidney function while still following standard safety precautions."
+    "name": "Routine mammogram or breast MRI for ATM carrier status",
+    "reason": "Patient is male; routine breast imaging surveillance is not indicated from the provided facts. Status change: Breast mass, nipple changes, strong male-breast-cancer family history, or genetics specialist direction. False positives and inappropriate sex-specific screening."
   },
   {
-    "name": "Low-dose CT lung cancer screening despite never-smoker status",
-    "reason": "Rejected because the payload documents never smoker, 0 pack-years, and LDCT marked not applicable. No lung-cancer symptom, occupational exposure, or smoking-history eligibility signal is supplied. Status change: New documentation of qualifying smoking exposure, major occupational carcinogen exposure, concerning pulmonary symptoms, or abnormal diagnostic imaging requiring clinical follow-up."
+    "name": "Pap or HPV cervical screening",
+    "reason": "Not applicable to this male patient. Status change: Change in anatomic eligibility or documentation error. Invalid care-plan item."
   },
   {
-    "name": "Pancreatic MRI/MRCP or EUS solely from ATM plus nonspecific grandfather GI cancer",
-    "reason": "Watchlisted rather than advanced because the family history is too nonspecific: paternal grandfather had GI cancer of unknown primary and unknown age at diagnosis, with no documented pancreatic cancer in the family. ATM status is real, but the supplied phenotype does not by itself establish a pancreatic surveillance pathway. Status change: Confirmation that the grandfather’s primary cancer was pancreatic, discovery of additional qualifying pancreatic cancer family history, or specialist genetics/gastroenterology documentation that surveillance criteria are met."
+    "name": "Start pancreatic MRI/MRCP or EUS surveillance immediately",
+    "reason": "At age 47, current model output frames pancreatic surveillance as future age-50 planning unless family history changes. Status change: Clarified pancreatic cancer in family history, earlier-onset relevant family cancer, symptoms, or genetics specialist recommendation. Incidental findings, procedural burden, anxiety, and premature surveillance."
   },
   {
-    "name": "Broad tumor-marker or multi-cancer biomarker screening in an asymptomatic adult",
-    "reason": "Rejected because the patient has no supplied symptoms, quiet CBC/liver/inflammation signals, negative H. pylori/HBV/HCV markers, and standard screening/genetics-informed surveillance pathways are more appropriate than broad nonspecific biomarker screening. Status change: A validated indication, abnormal standard screening result, concerning symptom complex, or clinician-directed diagnostic workup for a specific suspected malignancy."
+    "name": "Amyloid PET for asymptomatic neuro risk assessment",
+    "reason": "No cognitive symptoms or strong family-history trigger is present; amyloid PET is not standard onboarding. Status change: Objective cognitive decline, neurologic evaluation trigger, or specialist-directed workup. Cost, incidental/ambiguous results, and anxiety."
   },
   {
-    "name": "Ambulatory BP or autonomic BP-pattern testing solely because home BP data are absent",
-    "reason": "Normal clinic BP, no hypertension diagnosis, no antihypertensive use, and favorable cardiometabolic context make escalation to ABPM or specialized BP-pattern testing low yield when the only driver is missing home BP data. Status change: Repeated elevated clinic readings, discrepant reliable home readings, symptoms suggestive of hypotension/autonomic dysfunction, target-organ findings, or a clinical decision that specifically depends on confirming masked/white-coat hypertension."
+    "name": "Routine p-tau217, NfL, or GFAP testing now",
+    "reason": "Neuro risk is low and asymptomatic; these biomarkers are future/escalation tools, not current standard actions. Status change: Cognitive symptoms, abnormal cognitive screening, or specialist use case. Uncertain interpretation in an asymptomatic low-risk context."
   },
   {
-    "name": "Sleep or neuro-recovery diagnostics from transient HRV dip or consumer sleep-stage estimates alone",
-    "reason": "The payload shows adequate sleep duration and efficiency, high baseline HRV and fitness, and no corroborating symptoms; a transient wearable HRV dip or consumer sleep-stage estimate is not enough to justify diagnostic escalation. Status change: Persistent excessive daytime sleepiness, loud snoring/witnessed apneas, resistant hypertension, arrhythmia signal, unexplained cognitive or mood symptoms, recurrent nonrestorative sleep, or a sustained multi-source physiologic deterioration."
+    "name": "APOL1 genotyping for kidney-risk refinement",
+    "reason": "Korean ancestry makes APOL1 high-risk genotype testing low-yield and not a true data gap here. Status change: Relevant African ancestry, family history, or nephrology-directed indication. Low-value testing and possible confusion from non-actionable results."
   },
   {
-    "name": "ATM-targeted DNA-repair or radioprotective supplement protocol",
-    "reason": "ATM biology is mechanistically relevant, but the payload provides no current disease state, deficiency, or patient-matched human evidence that a DNA-repair, antioxidant, NAD-boosting, or radioprotective supplement protocol reduces risk in an asymptomatic heterozygous ATM carrier. Status change: A specific deficiency, a clinician-directed indication, a validated human prevention trial in ATM carriers, or enrollment in a monitored research protocol with clear safety oversight."
+    "name": "Start urate-lowering therapy without current urate or active flare data",
+    "reason": "Past gout is resolved and serum urate/recent flare status is missing; monitoring data should come first. Status change: Recurrent current flares, elevated serum urate with clinical indication, tophi, stones, or clinician diagnosis. Medication adverse effects and treating an unconfirmed current target."
   },
   {
-    "name": "Broad GI cancer search with PET/CT, capsule endoscopy, or serial upper endoscopy from ATM plus unknown-primary grandfather GI cancer",
-    "reason": "The family history signal is nonspecific: a paternal grandfather with GI cancer of unknown primary and unknown age at diagnosis, dying at 82. This does not define a targeted syndrome-specific pathway for broad GI surveillance beyond standard screening and phenotype clarification. Status change: Confirmation of a specific high-risk primary site, younger age at diagnosis, multiple affected relatives, symptoms, abnormal labs, or a guideline-supported hereditary-cancer surveillance indication."
+    "name": "SGLT2 inhibitor or GLP-1 receptor agonist for metabolic prevention",
+    "reason": "No diabetes, obesity, established CKD indication, or metabolic-risk trigger is present. Status change: New diabetes, obesity indication, CKD indication, or cardiometabolic specialist rationale. Side effects, cost, and overtreatment."
   },
   {
-    "name": "Routine CGM, repeated OGTT, or insulin-response testing despite normal glycemic phenotype",
-    "reason": "Current glycemic and metabolic inputs are favorable: HbA1c 5.3%, fasting glucose 88 mg/dL, fasting insulin 7.8 uIU/mL, HOMA-IR 1.7, BMI 23, triglycerides 65 mg/dL, high activity, and no diabetes diagnosis. Intensive testing is not justified solely by absent longitudinal data. Status change: Rising HbA1c or fasting glucose, symptoms of dysglycemia, weight gain, medication exposure that increases diabetes risk, strong family history, or a clinician-defined diagnostic question not answerable by standard periodic labs."
+    "name": "Testosterone therapy for sexual frequency dissatisfaction",
+    "reason": "Libido is preserved and total testosterone is 620 ng/dL; signal is not hypogonadism from provided data. Status change: Low repeated morning testosterone plus compatible symptoms or endocrine evaluation indication. Hormonal adverse effects and misdirecting a relational/QoL concern."
   }
 ];
 
@@ -6726,15 +7711,8 @@ if (sleepBars) {
     'Preventive cadence / sensory screening': 2,
     'Other monitoring': 3
   };
-  // due_now: CRC before sUA (cancer over flare-management).
-  // newly_indicated: ATM+ pancreatic and derm follow CRC, then cascade testing.
-  const SOC_MON_PRIORITY = {
-    'SOC-MON-003': 0,  // CRC due now
-    'SOC-MON-007': 1,  // sUA due now
-    'SOC-MON-001': 2,  // pancreatic surveillance (ATM)
-    'SOC-MON-002': 3,  // derm (ATM-associated, baseline)
-    'SOC-MON-011': 4,  // cascade testing (ATM)
-  };
+  // v0.5 engine order is already domain-first; family grouping preserves clinical similarity.
+  const SOC_MON_PRIORITY = {};
   function socMonitoringSort(a, b){
     const ta = socMonitoringTier(a), tb = socMonitoringTier(b);
     if (ta !== tb) return ta - tb;
@@ -7042,8 +8020,8 @@ if (sleepBars) {
     const caption = document.getElementById('cpLaneCaption');
     if (caption) {
       if (lane === 'soc')        caption.textContent = 'grouped: due now / overdue → newly indicated → routine cadence';
-      else if (lane === 'socRiskReduction') caption.textContent = 'offensive standard-care · targets / thresholds / follow-up';
-      else if (lane === 'adjuncts') caption.textContent = 'offensive optional · one evidence tier below SoC';
+      else if (lane === 'socRiskReduction') caption.textContent = 'domain-first opportunity · actions within highest-opportunity domains';
+      else if (lane === 'adjuncts') caption.textContent = 'domain-first adjuncts · evidence-tiered within domain';
       else                       caption.textContent = 'vitality-model-seeded · N-of-1 lifecycle · single ranked list';
     }
     renderTop3();
